@@ -1,0 +1,62 @@
+import requests
+
+url = 'https://graph.facebook.com/v17.0/17841402050732962?fields=business_discovery.username(_won_hee_)%7Bbiography%2Cname%2Cusername%2Cfollows_count%2Cprofile_picture_url%2Cwebsite%2Cig_id%2Cfollowers_count%2Cmedia_count%2Cmedia.limit(5)%7Bcaption%2Ccomments_count%2Cid%2Cchildren%7Bmedia_url%2Cmedia_type%7D%2Clike_count%2Cmedia_product_type%2Cmedia_type%2Cmedia_url%2Cowner%2Cpermalink%2Ctimestamp%2Cusername%7D%7D&access_token=EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD'
+
+try:
+    response = requests.get(url)
+    response.raise_for_status()  # Raises an exception for 4xx or 5xx status codes
+    data = response.json()
+
+    # 출력할 정보 추출
+    biography = data.get('business_discovery').get('biography')
+    name = data.get('business_discovery').get('name')
+    username = data.get('business_discovery').get('username')
+    follows_count = data.get('business_discovery').get('follows_count')
+    profile_picture_url = data.get('business_discovery').get('profile_picture_url')
+    website = data.get('business_discovery').get('website')
+    ig_id = data.get('business_discovery').get('ig_id')
+    followers_count = data.get('business_discovery').get('followers_count')
+    media_count = data.get('business_discovery').get('media_count')
+
+    # 출력
+    print("Biography:", biography)
+    print("Name:", name)
+    print("Username:", username)
+    print("Follows Count:", follows_count)
+    print("Profile Picture URL:", profile_picture_url)
+    print("Website:", website)
+    print("Instagram ID:", ig_id)
+    print("Followers Count:", followers_count)
+    print("Media Count:", media_count)
+
+    # 최근 5개 게시물 출력
+    media_data = data.get('business_discovery').get('media').get('data')
+    print("최근 5개 게시물:")
+    for media in media_data:
+        caption = media.get('caption')
+        comments_count = media.get('comments_count')
+        media_id = media.get('id')
+        like_count = media.get('like_count')
+        media_product_type = media.get('media_product_type')
+        media_type = media.get('media_type')
+        media_url = media.get('media_url')
+        owner = media.get('owner')
+        permalink = media.get('permalink')
+        timestamp = media.get('timestamp')
+        username = media.get('username')
+
+        print("-" * 30)
+        print("Caption:", caption)
+        print("Comments Count:", comments_count)
+        print("Media ID:", media_id)
+        print("Like Count:", like_count)
+        print("Media Product Type:", media_product_type)
+        print("Media Type:", media_type)
+        print("Media URL:", media_url)
+        print("Owner:", owner)
+        print("Permalink:", permalink)
+        print("Timestamp:", timestamp)
+        print("Username:", username)
+
+except requests.exceptions.RequestException as e:
+    print(f"Error: {e}")
