@@ -1,4 +1,5 @@
 from django.http.response import HttpResponse
+from django.shortcuts import render
 
 def home_view(request):
-    return HttpResponse("Home view 입니다람쥐")
+    return render(request,'Cos_tard/home_page.html')

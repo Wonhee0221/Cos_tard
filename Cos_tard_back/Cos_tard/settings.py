@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'analysis.apps.AnalysisConfig',
+    'InfluencerList.apps.InfluencerlistConfig',
+    'recommend.apps.RecommendConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = 'InfluencerList'
+
 urlpatterns = [
-    #path('',views.index,name='index')
-    path('<key>/',views.index, name='InfluencerList-page')
+    path('',views.index, name='InfluencerList-page')
 ]
