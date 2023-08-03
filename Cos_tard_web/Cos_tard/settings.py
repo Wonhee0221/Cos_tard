@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(^$4qv0opf3==_webl(srahc=zmj3i8hb@*d1##vt#7c$(e906
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -82,7 +82,7 @@ DATABASES = {
         "NAME": "bootcampDB",
         "USER": "postgres",
         "PASSWORD": "2286",
-        "HOST": "10.221.251.126",
+        "HOST": "10.221.251.180", #connection timed out 오류 여기 ip 바꾸세요
         "PORT": "5432",
     }
 }

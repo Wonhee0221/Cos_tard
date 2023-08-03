@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request): 
-    return render(request,'recommend/example.html')
+    return render(request,'recommend/recommend.html')
 
 #
 #
