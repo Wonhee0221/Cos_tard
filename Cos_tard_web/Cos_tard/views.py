@@ -6,3 +6,6 @@ def home_view(request):
 
 def about_view(request):
     return render(request,'Cos_tard/about.html')
+
+def home_view2(request):
+    return render(request, 'Cos_tard/home.html')
