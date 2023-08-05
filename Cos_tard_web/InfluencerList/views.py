@@ -16,5 +16,5 @@ def index(request):
 
 }
 
-    return render(request,'InfluencerList/InfluencerList.html',context=influencer_dic)
+    return render(request,'InfluencerList/influencerList.html',context=influencer_dic)
 

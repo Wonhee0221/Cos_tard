@@ -33,7 +33,7 @@
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link fw-bold" href="home.html">메인</a></li>
                             <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'about-page' %}">팀소개</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold" href="contact.html">연락</a></li>
+                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'list-page' %}">리스트</a></li>
                             <li class="nav-item"><a class="nav-link fw-bold" href="pricing.html">가격</a></li>
                             <li class="nav-item"><a class="nav-link fw-bold" href="faq.html">FAQ</a></li>
                             <li class="nav-item dropdown">
@@ -81,7 +81,7 @@
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
                                 <div class="col mb-5 h-100">
                                     <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-people-fill"></i></div>
-                                    <h2 class="h4"><a id="link" href="{% url 'InfluencerList:InfluencerList-page' %}">다양한 인스타그램 인플루언서 셋업</a></h2>
+                                    <h2 class="h4"><a id="link" href="{% url 'InfluencerList:list-page' %}">다양한 인스타그램 인플루언서 셋업</a></h2>
                                     <p class="mb-0">솔루션 제공이 가능한 인플루언서 리스트를 소개합니다.</p>
                                 </div>
                                 <div class="col mb-5 h-100">
@@ -141,7 +141,7 @@
                                 <img class="card-img-top" src=" {% static 'assets/ex_image1.jpg' %}" alt="..." />
                                 <div class="card-body p-4">
                                     <div class="badge bg-warning bg-gradient rounded-pill mb-2">Update!</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3 fw-bold">솔루션 분석 가능한 인플루언서</h5></a>
+                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'list-page' %}"><h5 class="card-title mb-3 fw-bold">솔루션 분석 가능한 인플루언서</h5></a>
                                     <p class="card-text mb-0">Cos-tard의 데이터베이스에 저장되어 있는 모든 인플루언서들을 소개합니다. 어떤 인플루언서가 있는지 확인해 보세요!</p>
                                 </div>
                                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">

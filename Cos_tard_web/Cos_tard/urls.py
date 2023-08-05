@@ -30,5 +30,8 @@ urlpatterns = [
 
     # 8/5 추가한 코드 by.조민환
     path('home.html',views.home_view,name='home-page'),
-    path('about/about.html',views.about_view,name='about-page')
+    path('about.html',views.about_view,name='about-page'),
+
+    # 8/6 추가한 코드 by.조민환
+    path('InfluencerList/influencerList.html',views.influencerList_view,name='list-page')
 ]
