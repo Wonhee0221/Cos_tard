@@ -27,7 +27,8 @@ urlpatterns = [
     path('recommend/',include('recommend.urls')),
     path('media4/',include('media4.urls')),
     path('admin/', admin.site.urls),
-    path('about/home.html',views.home_view2,name='home-page'),
-    path('about/about.html',views.about_view,name='about-page'),
-    path('home.html',views.home_view,name='home-page')
+
+    # 8/5 추가한 코드 by.조민환
+    path('home.html',views.home_view,name='home-page'),
+    path('about/about.html',views.about_view,name='about-page')
 ]
