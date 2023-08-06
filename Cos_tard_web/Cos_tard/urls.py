@@ -33,5 +33,7 @@ urlpatterns = [
     path('about.html',views.about_view,name='about-page'),
 
     # 8/6 추가한 코드 by.조민환
-    path('InfluencerList/influencerList.html',views.influencerList_view,name='list-page')
+    path('InfluencerList/influencerList.html',views.influencerList_view,name='list-page'),
+    path('recommend/recommend.html',views.recommend_view,name='recommend-page'),
+    path('analysis/analysis.html',views.analysis_view,name="analysis-page")
 ]

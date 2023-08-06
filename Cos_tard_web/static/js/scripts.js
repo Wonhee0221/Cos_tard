@@ -23,19 +23,3 @@ $(function() {
         return false;
     });
 });
-
-// 타이핑 효과로 h1태그 내용 보여주는 자바스크립트인데 적용이 안됨..
-
-// var text="Cos-tard의 인스타그램 인플루언서 자동추천 시스템을 사용해보세요";
-// var count=0;
-// function showText() {
-//     count++;
-//     var typing = document.getElementById("typingEffect");
-//     if (count > text.length) {
-//         typing.innerText="";
-//         count=0;
-//     } else {
-//         typing.innerText=text.substr(0,count);
-//     }
-//     setTimeout(showText, 150)
-// }
