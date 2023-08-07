@@ -22,7 +22,7 @@ class Users_info(models.Model):
 
     class Meta:
         #managed=False
-        db_table = "Users_info"
+        db_table = "Users_date"
 
 class Media_fix(models.Model):
     ig_id=models.ForeignKey(Users_fix,on_delete=models.CASCADE)
@@ -44,5 +44,5 @@ class Media_info(models.Model):
 
     class Meta:
         #managed=False
-        db_table = "Media_info"
+        db_table = "Media_date"
 
