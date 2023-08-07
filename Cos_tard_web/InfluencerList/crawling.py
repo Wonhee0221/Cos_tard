@@ -2,9 +2,9 @@ import requests
 import unicodedata
 import pandas as pd
 
-"""user_id테이블"""
+"""Users_fix테이블"""
 
-def crawl_users(admin_id, token, username):
+def crawl_users_fix(admin_id, token, username):
     import requests
     url = f'https://graph.facebook.com/v17.0/{admin_id}?fields=business_discovery.username({username})%7Bbiography%2Cname%2Cusername%2Cfollows_count%2Cprofile_picture_url%2Cwebsite%2Cig_id%2Cfollowers_count%2Cmedia_count%2Cmedia.limit(5)%7Bcaption%2Ccomments_count%2Cid%2Cchildren%7Bmedia_url%2Cmedia_type%7D%2Clike_count%2Cmedia_product_type%2Cmedia_type%2Cmedia_url%2Cowner%2Cpermalink%2Ctimestamp%2Cusername%7D%7D&access_token={token}'
 
@@ -35,15 +35,15 @@ if __name__ == "__main__":
 
     # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
     username = 'makeup_maker_'
-    users = crawl_users(admin_id, token, username)
+    users_fix = crawl_users_fix(admin_id, token, username)
 
     # 이제 필요한대로 사용자 정보(사용자_정보)를 활용하면 됩니다.
 
 #users
 
-"""user_info"""
+"""Users_info테이블"""
 
-def crawl_user_info(admin_id, token, username):
+def crawl_users_info(admin_id, token, username):
     import requests
     from datetime import datetime
     url = f'https://graph.facebook.com/v17.0/{admin_id}?fields=business_discovery.username({username})%7Bbiography%2Cname%2Cusername%2Cfollows_count%2Cprofile_picture_url%2Cwebsite%2Cig_id%2Cfollowers_count%2Cmedia_count%2Cmedia.limit(5)%7Bcaption%2Ccomments_count%2Cid%2Cchildren%7Bmedia_url%2Cmedia_type%7D%2Clike_count%2Cmedia_product_type%2Cmedia_type%2Cmedia_url%2Cowner%2Cpermalink%2Ctimestamp%2Cusername%7D%7D&access_token={token}'
@@ -76,13 +76,13 @@ if __name__ == "__main__":
     token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
     # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
     username = 'makeup_maker_'
-    user_info = crawl_user_info(admin_id, token, username)
+    users_info = crawl_users_info(admin_id, token, username)
 
     # 이제 필요한대로 사용자 정보(user_info)를 활용하면 됩니다.
 
-#user_info
+#users_info
 
-"""media_fix"""
+"""media_fix테이블"""
 
 def crawl_media_fix(admin_id, token, username):
     import requests
@@ -129,11 +129,12 @@ if __name__ == "__main__":
 
     # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
     username = 'makeup_maker_'
-    media = crawl_user_info(admin_id, token, username)
+    media_fix = crawl_media_fix(admin_id, token, username)
 
     # 이제 필요한대로 사용자 정보(media)를 활용하면 됩니다.
 
-"""media_info"""
+
+"""media_info테이블"""
 
 def crawl_media_info(admin_id, token, username):
     import requests
@@ -174,6 +175,6 @@ if __name__ == "__main__":
 
     # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
     username = 'makeup_maker_'
-    media_info = crawl_user_info(admin_id, token, username)
+    media_info = crawl_media_info(admin_id, token, username)
 
     # 이제 필요한대로 사용자 정보(media_info)를 활용하면 됩니다.

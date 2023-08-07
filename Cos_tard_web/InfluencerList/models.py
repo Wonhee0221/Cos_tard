@@ -2,21 +2,11 @@ from django.db import models
 
 # Create your models here.
 
-#
-#test table 입니다람쥐
-# class Menu(models.Model):
-#     name = models.CharField(max_length=45)
-
-#     class Meta:
-#         #managed=False auto migration 방지
-#         db_table = "menu"
-#
-
 class Users_fix(models.Model):
     ig_id=models.BigIntegerField(primary_key=True, null=False, unique=True)
     user_id=models.CharField()
     username=models.CharField()
-    website=models.URLField()
+    website=models.TextField()
     biography=models.TextField()
 
     class Meta:
@@ -35,8 +25,8 @@ class Users_info(models.Model):
 class Media_fix(models.Model):
     media_id=models.IntegerField(primary_key=True, null=False, unique=True)
     caption=models.TextField()
-    media_url=models.URLField()
-    permalink=models.URLField()
+    media_url=models.TextField()
+    permalink=models.TextField()
     timestamp=models.DateTimeField()
 
     class Meta:
