@@ -10,9 +10,11 @@ class Users_fix(models.Model):
     biography=models.TextField()
 
     class Meta:
+        #managed=False
         db_table = "Users_fix"
 
 class Users_info(models.Model):
+    key=models.AutoField(primary_key=True)
     ig_id=models.ForeignKey(Users_fix, on_delete=models.CASCADE)
     date=models.DateField()
     follows_count=models.IntegerField()
@@ -20,9 +22,11 @@ class Users_info(models.Model):
     media_count=models.IntegerField()
 
     class Meta:
+        #managed=False
         db_table = "Users_info"
 
 class Media_fix(models.Model):
+    ig_id=models.ForeignKey(Users_fix, on_delete=models.CASCADE)
     media_id=models.IntegerField(primary_key=True, null=False, unique=True)
     caption=models.TextField()
     media_url=models.TextField()
@@ -30,14 +34,17 @@ class Media_fix(models.Model):
     timestamp=models.DateTimeField()
 
     class Meta:
+        #managed=False
         db_table = "Media_fix"
 
 class Media_info(models.Model):
+    key=models.AutoField(primary_key=True)
     media_id=models.ForeignKey(Media_fix, on_delete=models.CASCADE)
     date=models.DateField()
     like_count=models.IntegerField(null=True)
     comments_count=models.IntegerField(null=True)
 
     class Meta:
+        #managed=False
         db_table = "Media_info"
 

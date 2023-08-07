@@ -19,8 +19,8 @@ def crawl_users_fix(admin_id, token, username):
                 user_info.get('ig_id'),
                 user_info.get('name'),
                 user_info.get('username'),
-                user_info.get('biography'),
                 user_info.get('website'),
+                user_info.get('biography'),
             ]
             return users_data
 
@@ -28,18 +28,11 @@ def crawl_users_fix(admin_id, token, username):
         print(f"에러: {e}")
         return None, None
 
-
-if __name__ == "__main__":
-    admin_id = 17841402050732962
-    token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
-
-    # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
-    username = 'makeup_maker_'
-    users_fix = crawl_users_fix(admin_id, token, username)
+   # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
+    #username = 'makeup_maker_'
+    #users_fix = crawl_users_fix(admin_id, token, username)
 
     # 이제 필요한대로 사용자 정보(사용자_정보)를 활용하면 됩니다.
-
-#users
 
 """Users_info테이블"""
 
@@ -70,18 +63,6 @@ def crawl_users_info(admin_id, token, username):
         print(f"에러: {e}")
         return None, None
 
-
-if __name__ == "__main__":
-    admin_id = 17841402050732962
-    token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
-    # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
-    username = 'makeup_maker_'
-    users_info = crawl_users_info(admin_id, token, username)
-
-    # 이제 필요한대로 사용자 정보(user_info)를 활용하면 됩니다.
-
-#users_info
-
 """media_fix테이블"""
 
 def crawl_media_fix(admin_id, token, username):
@@ -110,8 +91,8 @@ def crawl_media_fix(admin_id, token, username):
 
             media_list.append([
                 ig_id,
-                caption,
                 media_id,
+                caption,
                 media_url,
                 permalink,
                 formatted_datetime,
@@ -121,18 +102,6 @@ def crawl_media_fix(admin_id, token, username):
     except requests.exceptions.RequestException as e:
         print(f"에러: {e}")
         return None, None
-
-
-if __name__ == "__main__":
-    admin_id = 17841402050732962
-    token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
-
-    # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
-    username = 'makeup_maker_'
-    media_fix = crawl_media_fix(admin_id, token, username)
-
-    # 이제 필요한대로 사용자 정보(media)를 활용하면 됩니다.
-
 
 """media_info테이블"""
 
@@ -150,7 +119,7 @@ def crawl_media_info(admin_id, token, username):
         formatted_date = now.strftime('%Y-%m-%d')
 
         media_list = []
-        ig_id = user_info.get('ig_id')
+        #ig_id = user_info.get('ig_id')
         media_data = user_info.get('media').get('data')
         for media in media_data:
             comments_count = media.get('comments_count')
@@ -159,22 +128,12 @@ def crawl_media_info(admin_id, token, username):
 
             media_list.append([
                 media_id,
+                formatted_date,
                 like_count,
-                comments_count,
-                formatted_date
+                comments_count
             ])
         return media_list
 
     except requests.exceptions.RequestException as e:
         print(f"에러: {e}")
         return None, None
-
-if __name__ == "__main__":
-    admin_id = 17841402050732962
-    token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
-
-    # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
-    username = 'makeup_maker_'
-    media_info = crawl_media_info(admin_id, token, username)
-
-    # 이제 필요한대로 사용자 정보(media_info)를 활용하면 됩니다.
