@@ -1,97 +1,179 @@
-# from django.db import models
-# #from . import Users_fix
+import requests
+import unicodedata
+import pandas as pd
 
-# instar_data= [
-#   "a_arang_",
-#   "doublesoup",
-#   "calarygirl_a",
-#   "yulri_0i",
-#   "yeondukong",
-#   "lamuqe_magicup",
-#   "fallininm",
-#   "im_jella_",
-#   "hamnihouse",
-#   "ssinnim",
-#   "yu__hyewon",
-#   "hyojinc_",
-#   "leojmakeup",
-#   "2__yun__2",
-#   "areumsongee",
-#   "makeup_maker_",
-#   "r_yuhyeju",
-#   "vivamoon",
-#   "risabae_art",
-#   "yujin_so",
-#   "kisy0729",
-#   "ponysmakeup",
-# ]
-# user_columns= ['ig_id', 'username', 'name', 'website']
-# #user_columns= ['biography', 'name', 'username', 'follows_count', 'profile_picture_url', 'website', 'ig_id', 'followers_count', 'media_count']
+"""user_id테이블"""
 
-# import requests
-# import unicodedata
-# import pandas as pd
+def crawl_users(admin_id, token, username):
+    import requests
+    url = f'https://graph.facebook.com/v17.0/{admin_id}?fields=business_discovery.username({username})%7Bbiography%2Cname%2Cusername%2Cfollows_count%2Cprofile_picture_url%2Cwebsite%2Cig_id%2Cfollowers_count%2Cmedia_count%2Cmedia.limit(5)%7Bcaption%2Ccomments_count%2Cid%2Cchildren%7Bmedia_url%2Cmedia_type%7D%2Clike_count%2Cmedia_product_type%2Cmedia_type%2Cmedia_url%2Cowner%2Cpermalink%2Ctimestamp%2Cusername%7D%7D&access_token={token}'
 
-# def crawl_user_info(username,limit):
-#     admin_id=17841402050732962
-#     #17841460966522233
-#     token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
-#     #"EAALHVkEeHV8BO4wwsy6ZAwa8QYO0FT0MRrO8xxM9029LI5xJFs7iiNSZB3o4rBTnqwZCY1ww1utoRXLp0pqvtVlEXpyNFP0gZAmQExyGDMZC9Kji2obXLmp0O4l0Q98VQda3k3rcUIQCQojxZCbfOwunJD3bUeQjxzNezDY8vjLPOM3ZAVC4I0dsstXSC9PvMCf"
-#     url = f'https://graph.facebook.com/v17.0/{admin_id}?fields=business_discovery.username({username})%7Bbiography%2Cname%2Cusername%2Cfollows_count%2Cprofile_picture_url%2Cwebsite%2Cig_id%2Cfollowers_count%2Cmedia_count%2Cmedia.limit({limit})%7Bcaption%2Ccomments_count%2Cid%2Cchildren%7Bmedia_url%2Cmedia_type%7D%2Clike_count%2Cmedia_product_type%2Cmedia_type%2Cmedia_url%2Cowner%2Cpermalink%2Ctimestamp%2Cusername%7D%7D&access_token={token}'
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # 4xx 또는 5xx 상태 코드에 대해 예외 발생
+        data = response.json()
+        user_info = data.get('business_discovery')
+
+        if user_info:
+            users_data = [
+                user_info.get('ig_id'),
+                user_info.get('name'),
+                user_info.get('username'),
+                user_info.get('biography'),
+                user_info.get('website'),
+            ]
+            return users_data
+
+    except requests.exceptions.RequestException as e:
+        print(f"에러: {e}")
+        return None, None
 
 
-#     try:
-#         response = requests.get(url)
-#         response.raise_for_status()  # 4xx 또는 5xx 상태 코드에 대해 예외 발생
-#         data = response.json()
+if __name__ == "__main__":
+    admin_id = 17841402050732962
+    token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
 
-#         return data.get('business_discovery')
+    # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
+    username = 'makeup_maker_'
+    users = crawl_users(admin_id, token, username)
 
-#         # user_data_list= []
+    # 이제 필요한대로 사용자 정보(사용자_정보)를 활용하면 됩니다.
 
-#         # if user_info:
-#         #   # 사용자 정보를 리스트에 저장
-#         #   user_data = [
-#         #           user_info.get('biography'),
-#         #           user_info.get('name'),
-#         #           user_info.get('username'),
-#         #           user_info.get('follows_count'),
-#         #           user_info.get('profile_picture_url'),
-#         #           user_info.get('website'),
-#         #           user_info.get('ig_id'),
-#         #           user_info.get('followers_count'),
-#         #           user_info.get('media_count')
-#         #       ]
+#users
 
-#         #   user_data_list.append(user_data)
+"""user_info"""
+
+def crawl_user_info(admin_id, token, username):
+    import requests
+    from datetime import datetime
+    url = f'https://graph.facebook.com/v17.0/{admin_id}?fields=business_discovery.username({username})%7Bbiography%2Cname%2Cusername%2Cfollows_count%2Cprofile_picture_url%2Cwebsite%2Cig_id%2Cfollowers_count%2Cmedia_count%2Cmedia.limit(5)%7Bcaption%2Ccomments_count%2Cid%2Cchildren%7Bmedia_url%2Cmedia_type%7D%2Clike_count%2Cmedia_product_type%2Cmedia_type%2Cmedia_url%2Cowner%2Cpermalink%2Ctimestamp%2Cusername%7D%7D&access_token={token}'
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # 4xx 또는 5xx 상태 코드에 대해 예외 발생
+        data = response.json()
+        user_info = data.get('business_discovery')
+        now = datetime.now().date()
+        formatted_date = now.strftime('%Y-%m-%d')
+
+        if user_info:
+            user_data = [
+                user_info.get('ig_id'),
+                formatted_date,
+                user_info.get('follows_count'),
+                user_info.get('followers_count'),
+                user_info.get('media_count')
+            ]
+            return user_data
+
+    except requests.exceptions.RequestException as e:
+        print(f"에러: {e}")
+        return None, None
 
 
-#     except requests.exceptions.RequestException as e:
-#         print(f"에러: {e}")
-#         return None
+if __name__ == "__main__":
+    admin_id = 17841402050732962
+    token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
+    # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
+    username = 'makeup_maker_'
+    user_info = crawl_user_info(admin_id, token, username)
 
-# #user_data_list = []
-# for i in range(len(instar_data)):
-#   user_info = crawl_user_info(instar_data[i],1)
-#   if user_info:
-#       # 얻은 사용자 정보를 기반으로 미디어 콘텐츠 가져오기
-#       user_data = [
-#             #user_info.get('biography'),
-#             user_info.get('name'),
-#             user_info.get('username'),
-#             #user_info.get('follows_count'),
-#             #user_info.get('profile_picture_url'),
-#             user_info.get('website'),
-#             user_info.get('ig_id'),
-#             #user_info.get('followers_count'),
-#             #user_info.get('media_count')
-#         ]
-#       #user_data_list.append(user_data)
-#       Users_fix.objects.create(user_id = user_data[3], ig_id =user_data[1], username =user_data[0], website=user_data[2])
+    # 이제 필요한대로 사용자 정보(user_info)를 활용하면 됩니다.
 
-#   else:
-#       print("사용자 정보를 가져오는데 실패했습니다.")
+#user_info
 
-# #user_df = pd.DataFrame(user_data_list,columns=user_columns )
+"""media_fix"""
 
-# #print(user_df)
+def crawl_media_fix(admin_id, token, username):
+    import requests
+    from datetime import datetime
+    url = f'https://graph.facebook.com/v17.0/{admin_id}?fields=business_discovery.username({username})%7Bbiography%2Cname%2Cusername%2Cfollows_count%2Cprofile_picture_url%2Cwebsite%2Cig_id%2Cfollowers_count%2Cmedia_count%2Cmedia.limit(5)%7Bcaption%2Ccomments_count%2Cid%2Cchildren%7Bmedia_url%2Cmedia_type%7D%2Clike_count%2Cmedia_product_type%2Cmedia_type%2Cmedia_url%2Cowner%2Cpermalink%2Ctimestamp%2Cusername%7D%7D&access_token={token}'
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # 4xx 또는 5xx 상태 코드에 대해 예외 발생
+        data = response.json()
+        user_info = data.get('business_discovery')
+
+        media_list = []
+        ig_id = user_info.get('ig_id')
+        media_data = user_info.get('media').get('data')
+        for media in media_data:
+            caption = media.get('caption')
+            media_id = media.get('id')
+            media_url = media.get('media_url')
+            permalink = media.get('permalink')
+            timestamp = media.get('timestamp')
+            dt_object = datetime.strptime(timestamp, '%Y-%m-%dT%H:%M:%S%z')
+            # Extract the date and time in the desired format (combined)
+            formatted_datetime = dt_object.strftime('%Y-%m-%d %H:%M:%S')
+
+            media_list.append([
+                ig_id,
+                caption,
+                media_id,
+                media_url,
+                permalink,
+                formatted_datetime,
+            ])
+        return media_list
+
+    except requests.exceptions.RequestException as e:
+        print(f"에러: {e}")
+        return None, None
+
+
+if __name__ == "__main__":
+    admin_id = 17841402050732962
+    token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
+
+    # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
+    username = 'makeup_maker_'
+    media = crawl_user_info(admin_id, token, username)
+
+    # 이제 필요한대로 사용자 정보(media)를 활용하면 됩니다.
+
+"""media_info"""
+
+def crawl_media_info(admin_id, token, username):
+    import requests
+    from datetime import datetime
+    url = f'https://graph.facebook.com/v17.0/{admin_id}?fields=business_discovery.username({username})%7Bbiography%2Cname%2Cusername%2Cfollows_count%2Cprofile_picture_url%2Cwebsite%2Cig_id%2Cfollowers_count%2Cmedia_count%2Cmedia.limit(5)%7Bcaption%2Ccomments_count%2Cid%2Cchildren%7Bmedia_url%2Cmedia_type%7D%2Clike_count%2Cmedia_product_type%2Cmedia_type%2Cmedia_url%2Cowner%2Cpermalink%2Ctimestamp%2Cusername%7D%7D&access_token={token}'
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # 4xx 또는 5xx 상태 코드에 대해 예외 발생
+        data = response.json()
+        user_info = data.get('business_discovery')
+        now = datetime.now().date()
+        formatted_date = now.strftime('%Y-%m-%d')
+
+        media_list = []
+        ig_id = user_info.get('ig_id')
+        media_data = user_info.get('media').get('data')
+        for media in media_data:
+            comments_count = media.get('comments_count')
+            media_id = media.get('id')
+            like_count = media.get('like_count')
+
+            media_list.append([
+                media_id,
+                like_count,
+                comments_count,
+                formatted_date
+            ])
+        return media_list
+
+    except requests.exceptions.RequestException as e:
+        print(f"에러: {e}")
+        return None, None
+
+if __name__ == "__main__":
+    admin_id = 17841402050732962
+    token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
+
+    # 예시: 특정 사용자명에 대한 사용자 정보 크롤링
+    username = 'makeup_maker_'
+    media_info = crawl_user_info(admin_id, token, username)
+
+    # 이제 필요한대로 사용자 정보(media_info)를 활용하면 됩니다.
