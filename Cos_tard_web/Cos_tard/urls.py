@@ -27,4 +27,13 @@ urlpatterns = [
     path('recommend/',include('recommend.urls')),
     path('media4/',include('media4.urls')),
     path('admin/', admin.site.urls),
+
+    # 8/5 추가한 코드 by.조민환
+    path('home.html',views.home_view,name='home-page'),
+    path('about.html',views.about_view,name='about-page'),
+
+    # 8/6 추가한 코드 by.조민환
+    path('InfluencerList/influencerList.html',views.influencerList_view,name='list-page'),
+    path('recommend/recommend.html',views.recommend_view,name='recommend-page'),
+    path('analysis/analysis.html',views.analysis_view,name="analysis-page")
 ]

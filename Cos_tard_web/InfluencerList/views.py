@@ -14,7 +14,7 @@ def index(request):
 
 }
 
-    return render(request,'InfluencerList/InfluencerList.html',context=influencer_dic)
+    return render(request,'InfluencerList/influencerList.html',context=influencer_dic)
 
 admin_id = 17841402050732962
 token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
