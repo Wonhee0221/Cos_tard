@@ -14,7 +14,7 @@ class Users_fix(models.Model):
         db_table = "Users_fix"
 
 class Users_info(models.Model):
-    ig_id=models.ForeignKey(Users_fix,on_delete=models.CASCADE)
+    user_id=models.BigIntegerField()
     date=models.DateField()
     follows_count=models.IntegerField()
     followers_count=models.IntegerField()
