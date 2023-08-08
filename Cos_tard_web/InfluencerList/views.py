@@ -28,6 +28,9 @@ def index(request):
 
 # print(ui)
 
+#Users_fix.objects.all().delete()
+#Users_info.objects.all().delete()
+
     ##저장##
 #Users_fix.objects.create(ig_id=uf[0], user_id=uf[1], username= uf[2], website=uf[3], biography=uf[4])
 #Users_info.objects.create(ig_id=ui[0], date=ui[1], follows_count= ui[2], followers_count=ui[3], media_count=ui[4])
