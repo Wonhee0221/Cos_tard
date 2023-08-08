@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+        <script>
+            $(document).ready(function(){
+                $('#getButton').click(function(){
+                    $.ajax({
+                        type:'POST',
+                        url:'save_name',
+                        dataType:'json',
+                        contentType : 'application/json',
+                        data : JSON.stringify({
+                            username : $('#username').val()
+                        }),
+                        success:function(result){
+                            alert(result.msg)
+                        }
+                    })
+                });
+            });
+        </script>
+    </head>
+<body>
+
+<h1>My First Heading</h1>
+<p>My first paragraph.</p>
+
+<!--
+<form method="post" action="save_name">
+    {% csrf_token %}
+    <label for="username">Name:</label>
+    <input type="text" id="username" username = "username" placehold="입력하세요">
+    <button id="getButton">크롤링하기</button>
+</form>
+-->
+    <label for="username">Name:</label>
+    <input type="text" id="username" username = "username" placehold="입력하세요">
+    <button id="getButton">크롤링하기</button>
+</body>
+</html>
+

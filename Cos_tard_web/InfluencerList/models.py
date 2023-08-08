@@ -10,7 +10,7 @@ class Users_fix(models.Model):
     biography=models.CharField()
 
     class Meta:
-        #managed=False
+        managed=False
         db_table = "users_fix"
 
 
@@ -23,20 +23,21 @@ class Users_info(models.Model):
     media_count=models.CharField()
 
     class Meta:
-        #managed=False
+        managed=False
         db_table = "users_info"
 
 
 class Media_fix(models.Model):
+    uid=models.CharField(primary_key=True)
     owner_id=models.CharField()
-    media_id=models.CharField(primary_key=True)
+    media_id=models.CharField()
     caption=models.CharField()
     media_url=models.CharField()
     permalink=models.CharField()
     timestamp=models.CharField()
 
     class Meta:
-        #managed=False
+        managed=False
         db_table = "media_fix"
 
 
@@ -48,7 +49,7 @@ class Media_info(models.Model):
     comments_count=models.CharField()
 
     class Meta:
-        #managed=False
+        managed=False
         db_table = "media_info"
 
 
