@@ -3,51 +3,53 @@ from django.db import models
 # Create your models here.
 
 class Users_fix(models.Model):
-    users_fix_id=models.BigIntegerField(primary_key=True, null=False)
+    ig_id=models.CharField(primary_key=True)
     user_id=models.CharField()
     username=models.CharField()
-    website=models.URLField(null=True)
-    biography=models.TextField()
+    website=models.CharField()
+    biography=models.CharField()
 
     class Meta:
         #managed=False
-        db_table = "Users_fix"
+        db_table = "users_fix"
 
 
 class Users_info(models.Model):
-    users_info_id=models.BigIntegerField()
-    date=models.DateField()
-    follows_count=models.IntegerField()
-    followers_count=models.IntegerField()
-    media_count=models.IntegerField()
+    uid=models.CharField(primary_key=True)
+    ig_id=models.CharField()
+    date=models.CharField()
+    follows_count=models.CharField()
+    followers_count=models.CharField()
+    media_count=models.CharField()
 
     class Meta:
         #managed=False
-        db_table = "Users_info"
+        db_table = "users_info"
 
 
 class Media_fix(models.Model):
-    owner_id=models.BigIntegerField()
-    media_fix_id=models.TextField(primary_key=True, null=False)
-    caption=models.TextField(null=True)
-    media_url=models.URLField()
-    permalink=models.URLField()
-    timestamp=models.DateTimeField()
+    owner_id=models.CharField()
+    media_id=models.CharField(primary_key=True)
+    caption=models.CharField()
+    media_url=models.CharField()
+    permalink=models.CharField()
+    timestamp=models.CharField()
 
     class Meta:
         #managed=False
-        db_table = "Media_fix"
+        db_table = "media_fix"
 
 
 class Media_info(models.Model):
-    media_info_id=models.BigIntegerField()
-    date=models.DateField()
-    like_count=models.IntegerField(null=True)
-    comments_count=models.IntegerField(null=True)
+    uid=models.CharField(primary_key=True)
+    media_id=models.CharField()
+    date=models.CharField()
+    like_count=models.CharField()
+    comments_count=models.CharField()
 
     class Meta:
         #managed=False
-        db_table = "Media_info"
+        db_table = "media_info"
 
 
 
