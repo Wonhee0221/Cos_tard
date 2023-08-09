@@ -5,7 +5,7 @@ class testTable(models.Model):
     id=models.CharField(primary_key=True)
     name=models.CharField(max_length=100)
     age=models.IntegerField()
-    followerCount=models.IntegerField()
+    followercount=models.IntegerField()
 
     class Meta:
         managed=False

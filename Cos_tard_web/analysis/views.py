@@ -33,6 +33,6 @@ def get_influencer(request):
     influencer_data = {
         'name': influencer.name,
         'age': influencer.age,
-        'followerCount': influencer.followerCount
+        'followerCount': influencer.followercount
     }
     return JsonResponse(influencer_data,safe=False)
