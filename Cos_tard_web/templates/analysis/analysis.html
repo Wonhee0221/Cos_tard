@@ -58,9 +58,9 @@
             </nav>
             <!-- Page content-->
             <section class="py-5 bg-dark">
-                <div class="container px-5">
+                <div class="container px-2">
                     <!-- Contact form-->
-                    <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5">
+                    <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5" style="height: 1000px">
                         <div class="text-center mb-5">
                             <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-clipboard-data"></i></div>
                             <h1 class="fw-bolder">인플루언서 분석</h1>
@@ -79,29 +79,17 @@
                                     </div>
                                     <div class="small text-white-50">인스타그램 이름을 입력해주세요..</div>
                                 </div>
-                                {% comment %} 결과 출력하는 화면 {% endcomment %}
-                                <div id="searchResults" style="width:500px; height:500px; background-color:gray;">
-                                    
-                                    <div id="influencerResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
-                                    {% comment %}
-                                    <ul>
-                                        {% for item in results %}
-                                            <li>{{ item.some_field }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                    {% endcomment %}
-                                </div>
                             </div>
                         </div>
-                        <div class="row gx-5 justify-content-center" style="height: 700px">
+                        <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
-
-                                <h1>analysis html</h1>
-                                
+                                <div class="mt-3 text-center rounded-3 bg-dark text-white" id="searchResults" style="background-color:gray; padding: 50px">
+                                    <div id="influencerResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
                             </div>
                         </div>
                     </div>
                     <!-- Contact cards-->
+                    {% comment %}  
                     <div class="row gx-5 row-cols-2 row-cols-lg-4 py-5">
                         <div class="col">
                             <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-chat-dots"></i></div>
@@ -124,6 +112,7 @@
                             <p class="text-muted mb-0">Call us during normal business hours at (555) 892-9403.</p>
                         </div>
                     </div>
+                    {% endcomment %}
                 </div>
             </section>
             <div class="move_to_top_btn">
