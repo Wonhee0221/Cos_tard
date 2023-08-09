@@ -73,3 +73,75 @@ def save_name(request):
 
     return JsonResponse({'msg' : 'success'}, safe=False)
 
+@csrf_exempt
+def save_name_user_info(request):
+    data = json.loads(request.body)
+    user_info_id = data.get('user_info_id')
+
+        ##크롤링##
+
+    admin_id = 17841402050732962
+    token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
+
+    ui = crawl_users_info(admin_id, token, user_info_id)
+   
+    # print(uf,ui,mf,mi)
+
+        ##중복으로 insert 전 삭제 코드##
+
+    #Users_fix.objects.filter().delete() 
+    #Users_info.objects.filter().delete()
+
+        ##저장##
+    users_info = Users_info()
+    users_info.uid=uuid.uuid4()
+    users_info.ig_id=ui[0]
+    users_info.date=ui[1]
+    users_info.follows_count=ui[2]
+    users_info.followers_count=ui[3]
+    users_info.media_count=ui[4]
+    users_info.save(force_insert=True)
+
+    return JsonResponse({'msg' : 'success'}, safe=False)
+
+@csrf_exempt
+def all_user_info(request):
+    data = json.loads(request.body)
+    password = data.get('password')
+
+        ##크롤링##
+
+    admin_id = 17841402050732962
+    token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
+    username=["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
+            "hamnihouse", "ssinnim", "yu__hyewon", "hyojinc_", "leojmakeup", "2__yun__2", "areumsongee", "makeup_maker_",
+            "r_yuhyeju", "vivamoon", "risabae_art", "yujin_so", "kisy0729", "ponysmakeup"]
+
+    for i in username:
+        ui = crawl_users_info(admin_id, token, i)
+   
+        # print(uf,ui,mf,mi)
+
+            ##중복으로 insert 전 삭제 코드##
+
+        #Users_fix.objects.filter().delete() 
+        #Users_info.objects.filter().delete()
+
+            ##저장##
+        users_info = Users_info()
+        users_info.uid=uuid.uuid4()
+        users_info.ig_id=ui[0]
+        users_info.date=ui[1]
+        users_info.follows_count=ui[2]
+        users_info.followers_count=ui[3]
+        users_info.media_count=ui[4]
+        users_info.save(force_insert=True)
+
+    return JsonResponse({'msg' : 'success'}, safe=False)
+
+
+
+
+
+
+

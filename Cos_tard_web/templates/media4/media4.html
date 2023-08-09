@@ -41,7 +41,38 @@
                         }
                     })
                 });
+
+                $('#getButtonuserinfo').click(function(){
+                    $.ajax({
+                        type:'POST',
+                        url:'save_name_user_info',
+                        dataType:'json',
+                        contentType : 'application/json',
+                        data : JSON.stringify({
+                            user_info_id : $('#user_info_id').val()
+                        }),
+                        success:function(result){
+                            alert(result.msg)
+                        }
+                    })
+                });
+
+                $('#getButtonalluserinfo').click(function(){
+                    $.ajax({
+                        type:'POST',
+                        url:'all_user_info',
+                        dataType:'json',
+                        contentType : 'application/json',
+                        data : JSON.stringify({
+                            password : $('#password').val()
+                        }),
+                        success:function(result){
+                            alert(result.msg)
+                        }
+                    })
+                });
             });
+
         </script>
     </head>
 <body class="d-flex flex-column">
@@ -88,8 +119,20 @@
                     <div class="row gx-5 justify-content-center" style="height: 700px">
                         <div class="col-lg-8 col-xl-6">
                             <label for="username">instagram id:</label>
-                            <input type="text" id="username" username = "username" placehold="입력하세요">
+                            <input type="text" id="username" placehold="입력하세요">
                             <button id="getButton">크롤링하기</button>
+                        </div>
+                    
+                        <div class="col-lg-8 col-xl-6">
+                            <label for="user_info_id">user_info instagram id:</label>
+                            <input type="text" id="user_info_id" placehold="입력하세요">
+                            <button id="getButtonuserinfo">user_info 크롤링하기</button>
+                        </div>
+
+                        <div class="col-lg-8 col-xl-6">
+                            <label for="password">password:</label>
+                            <input type="text" id="password" placehold="입력하세요">
+                            <button id="getButtonalluserinfo">user_info 단체 크롤링하기</button>
                         </div>
                     </div>
                 </div>
