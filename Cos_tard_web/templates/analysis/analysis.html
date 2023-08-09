@@ -66,6 +66,33 @@
                             <h1 class="fw-bolder">인플루언서 분석</h1>
                             <p class="lead fw-normal text-muted mb-0">어떤 인플루언서가 궁금하신가요?<br>특정 인플루언서를 분석하여 키워드 및 연관 컬러 등의 정보를 시각화하여 보여줍니다</p>
                         </div>
+                        <div class="bg-dark bg-gradient rounded-4 p-4 p-sm-5 mt-5">
+                            <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
+                                <div class="mb-4 mb-xl-0">
+                                    <div class="fs-3 fw-bold text-white">인플루언서를 검색하세요</div>
+                                    <div class="text-white-50">Cos_tard가 저장하고 있는 인플루언서를 깊이 분석해보고<br>싶다면 여기에 이름을 넣어서 검색해보세요!</div>
+                                </div>
+                                <div class="ms-xl-4">
+                                    <div class="input-group mb-2">
+                                        <input class="form-control" type="text" id="influencerName" placeholder="이름을 입력하세요" />
+                                        <button class="btn btn-outline-danger fw-bold" type="button" id="getInfluencerButton">검색</button>
+                                    </div>
+                                    <div class="small text-white-50">인스타그램 이름을 입력해주세요..</div>
+                                </div>
+                                {% comment %} 결과 출력하는 화면 {% endcomment %}
+                                <div id="searchResults" style="width:500px; height:500px; background-color:gray;">
+                                    
+                                    <div id="influencerResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
+                                    {% comment %}
+                                    <ul>
+                                        {% for item in results %}
+                                            <li>{{ item.some_field }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
                         <div class="row gx-5 justify-content-center" style="height: 700px">
                             <div class="col-lg-8 col-xl-6">
 
@@ -118,6 +145,57 @@
                 </div>
             </div>
         </footer>
-        
+
+        <script>
+            $(document).ready(function() {
+                $("#getInfluencerButton").click(function() {
+                    var influencerName = $("#influencerName").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/analysis/get_influencer",  // 서버의 URL 설정
+                        dataType:'json',
+                        contentType:'application/json',
+                        data: JSON.stringify({
+                            influencer_name: influencerName
+                        }),
+                        success: function(data) {
+                            console.log(data);
+                            var resultHTML = "인플루언서 정보:<br>";
+                            resultHTML += "이름: " + data.name + "<br>";
+                            resultHTML += "나이: " + data.age + "<br>";
+                            resultHTML += "팔로워 수: " + data.followerCount;
+                            $("#influencerResult").html(resultHTML);  // 결과 표시
+                        },
+                        error: function() {
+                            $("#influencerResult").text("오류가 발생했습니다.");
+                        }
+                    });
+                });
+            });
+            </script>
+            
+{% comment %}
+        <script> // Ajax 요청을 보내고 결과를 처리하는 함수
+            function performSearch() {
+                const inputText = document.getElementById("searchInput").value;
+                $.ajax({
+                    url: "/search/",
+                    method: "POST",
+                    data: { search_text: inputText },
+                    success: function (data) {
+                        // 서버로부터 받은 결과를 처리하여 searchResults 영역에 표시
+                        $("#searchResults").html(data);
+                    },
+                    error: function (error) {
+                        console.log("Error:", error);
+                    }
+                });
+            }
+            // 검색 버튼 클릭 시 검색 수행
+            $("#searchButton").click(function () {
+                performSearch();
+            });
+        </script>
+{% endcomment %}
     </body>
 </html>

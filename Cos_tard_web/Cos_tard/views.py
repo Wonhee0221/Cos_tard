@@ -1,6 +1,9 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render
 
+from django.http import JsonResponse
+from InfluencerList.models import *
+
 def home_view(request):
     return render(request,'Cos_tard/home.html')
 
