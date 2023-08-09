@@ -70,22 +70,26 @@
                             <div class="col-lg-8 col-xl-6">
 
 
-                                <h1>
+                                {% comment %} <h1>
                                     num 1의 url : {{num1}}
-                                </h1>
-                            
-                                <h2>
-                                    num 2의 url : {{num2}}
-                                </h2>
-                            
-                                
-                            
-                                {% comment %} <ul>
-                                    {% for i in User %}
-                                    <li>{{ Users.user_id }} - {{ Users.username }}</li>
-                                    {% endfor %}
-                                </ul> {% endcomment %}
+                                </h1> {% endcomment %}
 
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>instagram id</th>
+                                            <th>username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for row in selected_users_fix %}
+                                            <tr>
+                                                <td>{{ row.user_id }}</td>
+                                                <td>{{ row.username }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                                 
                             </div>
                         </div>
