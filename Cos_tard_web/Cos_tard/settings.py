@@ -80,11 +80,11 @@ WSGI_APPLICATION = 'Cos_tard.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "bootcampDB2",
-        "USER": "postgres",
-        "PASSWORD": "2286",
-        "HOST": "10.221.251.142", #connection timed out 오류 여기 ip 바꾸세요
-        "PORT": "5432"
+        "NAME": "cos_tard",
+        "USER": "cos_tard",
+        "PASSWORD": "1234",
+        "HOST": "121.140.47.102", #connection timed out 오류 여기 ip 바꾸세요
+        "PORT": "35432"
     }
 }
 

@@ -15,7 +15,6 @@ class Users_fix(models.Model):
         managed=False
         db_table = "users_fix"
 
-
 class Users_info(models.Model):
     uid=models.CharField(primary_key=True)
     ig_id=models.CharField()
@@ -27,7 +26,6 @@ class Users_info(models.Model):
     class Meta:
         managed=False
         db_table = "users_info"
-
 
 class Media_fix(models.Model):
     uid=models.CharField(primary_key=True)
@@ -41,7 +39,6 @@ class Media_fix(models.Model):
     class Meta:
         managed=False
         db_table = "media_fix"
-
 
 class Media_info(models.Model):
     uid=models.CharField(primary_key=True)
