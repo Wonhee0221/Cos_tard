@@ -111,8 +111,8 @@ def all_user_info(request):
 
         ##크롤링##
 
-    admin_id = 17841402050732962
-    token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
+    admin_id = 17841400029634031
+    token = "EAAKoyNOZAm4UBOZB2IZAQBu91Nq3vZBZCwpSsemWPYkcvEJdiXVLAUOF1M2eKnGABbVFtvYzipJjITU7oJqospRiQrFdPjRr51OQd2p8T4dBfbueEzJKuPxAO1iKHoQjF39LGmzGiL2ReNsqC3iOBMd4KDZBh7oFijQkElaelLSkOOUlKrmLIRw6oH"
     username=["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
             "hamnihouse", "ssinnim", "yu__hyewon", "hyojinc_", "leojmakeup", "2__yun__2", "areumsongee", "makeup_maker_",
             "r_yuhyeju", "vivamoon", "risabae_art", "yujin_so", "kisy0729", "ponysmakeup"]
