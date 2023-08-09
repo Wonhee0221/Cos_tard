@@ -53,7 +53,6 @@ def save_name(request):
 
     media_fix = Media_fix()
     for i in mf:
-        media_fix.uid=uuid.uuid4()
         media_fix.owner_id=i[0]
         media_fix.media_id=i[1]
         media_fix.caption=i[2]

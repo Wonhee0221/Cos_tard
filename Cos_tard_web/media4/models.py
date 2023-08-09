@@ -28,9 +28,8 @@ class Users_info(models.Model):
         db_table = "users_info"
 
 class Media_fix(models.Model):
-    uid=models.CharField(primary_key=True)
     owner_id=models.CharField()
-    media_id=models.CharField()
+    media_id=models.CharField(primary_key=True)
     caption=models.CharField()
     media_url=models.CharField()
     permalink=models.CharField()
