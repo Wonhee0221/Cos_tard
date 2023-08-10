@@ -86,12 +86,12 @@
                                 </div>
                                 <div class="col mb-5 h-100">
                                     <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-search"></i></div>
-                                    <h2 class="h4"><a id="link" href="{% url 'recommend:recommend-page' %}">제품에 적합한 인플루언서 추천</a></h2>
+                                    <h2 class="h4"><a id="link" href="{% url 'recommend-page' %}">제품에 적합한 인플루언서 추천</a></h2>
                                     <p class="mb-0">마케팅하고자 하는 제품을 입력하면 가장 적합한 인플루언서를 추천해드립니다.</p>
                                 </div>
                                 <div class="col mb-5 mb-md-0 h-100">
                                     <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-clipboard-data"></i></div>
-                                    <h2 class="h4"><a id="link" href="{% url 'analysis:analysis-page' %}">인플루언서의 특징 시각화</a></h2>
+                                    <h2 class="h4"><a id="link" href="{% url 'analysis-page' %}">인플루언서의 특징 시각화</a></h2>
                                     <p class="mb-0">인플루언서의 키워드와 이미지 및 컬러, 게시하는 컨텐츠의 주된 토픽을 시각화하여 제공해드립니다.</p>
                                 </div>
                                 <div class="col h-100">
@@ -104,8 +104,8 @@
                     </div>
                 </div>
             </section>
-            <!-- Testimonial section-->
-            <div class="py-5 bg-light">
+            <!-- mention section-->
+            <section class="py-5 bg-light">
                 <div class="container px-5 my-5">
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-10 col-xl-7">
@@ -123,8 +123,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Site program preview section-->
+            </section>
+            <!-- feature grid section-->
             <section class="py-5">
                 <div class="container px-5 my-5">
                     <div class="row gx-5 justify-content-center">
@@ -137,8 +137,10 @@
                     </div>
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5">
-                            <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src=" {% static 'assets/ex_image1.jpg' %}" alt="..." />
+                            <div class="card h-100 shadow border-0 hoverEffect">
+                                <img class="card-img-top" src=" {% static 'assets/featureGridimage1.png' %}" alt="..." />
+                                <!-- 추가 요소로 마우스를 올려놓으면 흐려지는 효과를 구현 -->
+                                <div class="blur-overlay card shadow border-0 justify-content-center text-center">인플루언서 리스트 보기</div>
                                 <div class="card-body p-4">
                                     <div class="badge bg-warning bg-gradient rounded-pill mb-2">Update!</div>
                                     <a class="text-decoration-none link-dark stretched-link" href="{% url 'list-page' %}"><h5 class="card-title mb-3 fw-bold">솔루션 분석 가능한 인플루언서</h5></a>
@@ -158,8 +160,10 @@
                             </div>
                         </div>
                         <div class="col-lg-4 mb-5">
-                            <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="{% static 'assets/ex_image2.png' %}" alt="..." />
+                            <div class="card h-100 shadow border-0 hoverEffect">
+                                <img class="card-img-top" src="{% static 'assets/featureGridImage2.png' %}" alt="..." />
+                                <!-- 추가 요소로 마우스를 올려놓으면 흐려지는 효과를 구현 -->
+                                <div class="blur-overlay card shadow border-0 justify-content-center text-center">프로덕트 & 인플루언서 매칭</div>
                                 <div class="card-body p-4">
                                     <div class="badge bg-danger bg-gradient rounded-pill mb-2">New!</div>
                                     <a class="text-decoration-none link-dark stretched-link" href="{% url 'recommend-page' %}"><h5 class="card-title mb-3 fw-bold">프로덕트 & 인플루언서 매칭</h5></a>
@@ -179,8 +183,10 @@
                             </div>
                         </div>
                         <div class="col-lg-4 mb-5">
-                            <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="{% static 'assets/ex_image3.png' %}" alt="..." />
+                            <div class="card h-100 shadow border-0 hoverEffect">
+                                <img class="card-img-top" src="{% static 'assets/featureGridImage3.png' %}" alt="..." />
+                                <!-- 추가 요소로 마우스를 올려놓으면 흐려지는 효과를 구현 -->
+                                <div class="blur-overlay card shadow border-0 justify-content-center text-center">인플루언서 심층 분석</div>
                                 <div class="card-body p-4">
                                     <div class="badge bg-danger bg-gradient rounded-pill mb-2">New!</div>
                                     <a class="text-decoration-none link-dark stretched-link" href="{% url 'analysis-page' %}"><h5 class="card-title mb-3 fw-bold">인플루언서 심층 분석</h5></a>
