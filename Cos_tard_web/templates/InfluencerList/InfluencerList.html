@@ -73,13 +73,20 @@
                                         <tr>
                                             <th>instagram id</th>
                                             <th>username</th>
+                                            <th>follows_count</th>
+                                            <th>followers_count</th>
+                                            <th>media_count</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for row in selected_users_fix %}
+                                        {% for row in joined_query %}
                                             <tr>
                                                 <td>{{ row.user_id }}</td>
                                                 <td>{{ row.username }}</td>
+                                                <td>{{ row.follows_count }}</td>
+                                                <td>{{ row.followers_count }}</td>
+                                                <td>{{ row.media_count }}</td>
+
                                             </tr>
                                         {% endfor %}
                                     </tbody>
