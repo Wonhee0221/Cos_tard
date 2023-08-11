@@ -65,6 +65,7 @@
                             <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-person-lines-fill"></i></div>
                             <h1 class="fw-bolder">인플루언서 리스트</h1>
                             <p class="lead fw-normal text-muted mb-0">Cos-tard가 수집한 인스타그램 인플루언서 리스트를 살펴보세요</p>
+                            <p class="lead fw-normal text-muted mb-0">* {{date}} 기준</p>
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
@@ -76,6 +77,7 @@
                                             <th>follows_count</th>
                                             <th>followers_count</th>
                                             <th>media_count</th>
+                                            <th>website</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -91,6 +93,8 @@
                                                 <td>{{ row.follows_count }}</td>
                                                 <td>{{ row.followers_count }}</td>
                                                 <td>{{ row.media_count }}</td>
+                                                <td>{{ row.website }}</td>
+
                                             </tr>
                                         {% endfor %}
                                     </tbody>
