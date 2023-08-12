@@ -60,7 +60,7 @@
             <section class="py-5 bg-dark">
                 <div class="container px-2">
                     <!-- Contact form-->
-                    <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5" style="height: 1000px">
+                    <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5">
                         <div class="text-center mb-5">
                             <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-person-lines-fill"></i></div>
                             <h1 class="fw-bolder">인플루언서 리스트</h1>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
-                                <table>
+                                <table class="custom-table col-lg-8 col-xl-6">
                                     <thead>
                                         <tr>
                                             <th>instagram id</th>
@@ -82,8 +82,13 @@
                                     </thead>
                                     <tbody>
                                         {% for row in joined_query %}
-                                            <tr>
-                                                <td>{{ row.user_id }}</td>
+                                            <tr class="alert" role="alert">
+                                                <td class="d-flex2 align-items-center2">
+                                                    <div class="img2" style="background-image: url(https://via.placeholder.com/50x50); width: 50px; height: 50px;"></div>
+                                                    <div class="pl-3 email">
+                                                        <span>{{ row.user_id }}</span>
+                                                    </div>
+                                                </td>
                                                 <td>{{ row.username }}</td>
                                                 <td>{{ row.follows_count }}</td>
                                                 <td>{{ row.followers_count }}</td>
@@ -141,6 +146,5 @@
                 </div>
             </div>
         </footer>
-        
     </body>
 </html>
