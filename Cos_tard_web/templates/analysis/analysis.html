@@ -23,6 +23,8 @@
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
     </head>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
@@ -60,7 +62,7 @@
             <section class="py-5 bg-dark">
                 <div class="container px-2">
                     <!-- Contact form-->
-                    <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5" style="height: 1000px">
+                    <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5">
                         <div class="text-center mb-5">
                             <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-clipboard-data"></i></div>
                             <h1 class="fw-bolder">인플루언서 분석</h1>
@@ -89,6 +91,35 @@
                                 <div class="mt-3 text-center rounded-3 bg-dark text-white" id="searchResults" style="background-color:gray; padding: 50px">
                                     <div id="influencerResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
                                 </div>
+                                <div class="mt-3 text-center rounded-3 bg-dark text-white" id="searchResults" style="background-color:gray; padding: 50px">
+                                    <div id="chart-container-01"></div>
+                                    <!-- <script>
+                                         Highcharts.chart('chart-container-01', {
+                                            
+                                            title: {
+                                                text: 'follower trend'
+                                            },
+                                            xAxis: {
+                                                title: {
+                                                    text: 'X Value'
+                                                }
+                                            },
+                                            yAxis: {
+                                                title: {
+                                                    text: 'Y Value'
+                                                }
+                                            },
+                                            series: [{
+                                                name: '# of followers',
+                                                // data: data.map(item => [item.x_value, item.y_value])
+                                                data: [0,1,2,3,4]
+                                            }]
+                                        });
+                                    </script> -->
+                                </div>
+                                    
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -194,6 +225,49 @@
                     });
                 });
                 </script>
+
+            <script> // graph part
+                $(document).ready(function() {
+                    $("#getInfluencerButton").click(function() {
+                        var influencerName = $("#influencerName").val();
+                        $.ajax({
+                            type: "POST",
+                            url: "/analysis/get_influencer",  // 서버의 URL 설정
+                            dataType:'json',
+                            contentType:'application/json',
+                            data: JSON.stringify({
+                                influencerName : influencerName
+                            }),
+                            success: function(context) {
+                                $("#chart-container-01").Highcharts.chart('chart-container-01', {
+                                            
+                                            title: {
+                                                text: 'follower trend'
+                                            },
+                                            xAxis: {
+                                                title: {
+                                                    text: 'X Value'
+                                                }
+                                            },
+                                            yAxis: {
+                                                title: {
+                                                    text: 'Y Value'
+                                                }
+                                            },
+                                            series: [{
+                                                name: '# of followers',
+                                                // data: data.map(item => [item.x_value, item.y_value])
+                                                data: [0,1,2,3,4]
+                                            }]
+                                        });
+                            },
+                            error: function() {
+                                // $("#influencerinfoResult").text("오류가 발생했습니다.");
+                            }
+                        });
+                    });
+                });
+            </script>
             
 {% comment %}
         <script> // Ajax 요청을 보내고 결과를 처리하는 함수

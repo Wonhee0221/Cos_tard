@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from media4.models import *
 from analysis.models import *
+from analysis.processing import *
 import json
-from media4.models import Users_fix, Users_info
-from django.db.models import Subquery, OuterRef
 from django.views.decorators.csrf import csrf_exempt
+import json
+
 
 # Create your views here.
 @csrf_exempt
@@ -60,3 +61,14 @@ def get_influencer_info(request):
 #         return render(request, 'search_results.html', {'results': results})
 
 #     return render(request, 'analysis.html')
+
+@csrf_exempt
+def get_influencer(request):
+    data = json.loads(request.body)
+    influencerName= data.get('influencerName')
+    ig_id = Users_fix.objects.get(user_id=influencerName)
+    follower_trend = follower_graph(ig_id)
+    context = {
+        'follower_trend' : follower_trend 
+    }
+    return render(request, 'analysis/analysis.html', context)
