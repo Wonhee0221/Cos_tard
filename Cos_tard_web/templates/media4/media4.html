@@ -57,6 +57,36 @@
                         }
                     })
                 });
+
+                $('#getButtonmediafix').click(function(){
+                    $.ajax({
+                        type:'POST',
+                        url:'update_media_fix',
+                        dataType:'json',
+                        contentType : 'application/json',
+                        data : JSON.stringify({
+                            passowrd : $('#password').val()
+                        }),
+                        success:function(result){
+                            alert(result.msg)
+                        }
+                    })
+                });
+
+                $('#getButtonmediainfo').click(function(){
+                    $.ajax({
+                        type:'POST',
+                        url:'update_media_info',
+                        dataType:'json',
+                        contentType : 'application/json',
+                        data : JSON.stringify({
+                            passowrd : $('#password').val()
+                        }),
+                        success:function(result){
+                            alert(result.msg)
+                        }
+                    })
+                });
             });
 
         </script>
@@ -94,7 +124,7 @@
         </nav>
         <!-- Page content-->
         <section class="py-5 bg-dark">
-            <div class="container px-5">
+            <div class="container px-2">
                 <!-- Contact form-->
                 <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5" style="height: 1000px">
                     <div class="text-center mb-5">
@@ -124,8 +154,15 @@
                     <div class="bg-dark bg-gradient rounded-4 p-4 p-sm-5 mt-5">
                         <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
                             <div class="mb-4 mb-xl-0">
+<<<<<<< HEAD
                                 <div class="fs-3 fw-bold text-white">UPTATE</div>
                                 <div class="text-white-50">user info 데이터를 매일 업데이트 합니다.</div>
+=======
+
+                                <div class="fs-3 fw-bold text-white">UPDATE User Info</div>
+                                <div class="text-white-50">전체 인플루언서의 user info 데이터를 매일 업데이트 합니다.</div>
+
+>>>>>>> 0861fb0c181ffceb3858c2dc2dc146c2b67cace5
                             </div>
                             <div class="ms-xl-4">
                                 <div class="input-group mb-2">
@@ -134,11 +171,46 @@
                                 </div>
                                 <!-- <div class="small text-white-50">인스타그램 이름을 입력해주세요..</div> -->
                             </div>
+<<<<<<< HEAD
+=======
+                        </div>
+                    </div>
+
+                    <div class="bg-dark bg-gradient rounded-4 p-4 p-sm-5 mt-5">
+                        <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
+                            <div class="mb-4 mb-xl-0">
+                                <div class="fs-3 fw-bold text-white">UPDATE Media Fix</div>
+                                <div class="text-white-50">전체 인플루언서의 최신 게시물 media fix 데이터를 매일 업데이트 합니다.</div>
+                            </div>
+                            <div class="ms-xl-4">
+                                <div class="input-group mb-2">
+                                    <input class="form-control" type="text" id="password" placeholder="password" />
+                                    <button class="btn btn-outline-danger fw-bold" type="button" id="getButtonmediafix">전체 크롤링</button>
+                                </div>
+                                <!-- <div class="small text-white-50">인스타그램 이름을 입력해주세요..</div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-dark bg-gradient rounded-4 p-4 p-sm-5 mt-5">
+                        <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
+                            <div class="mb-4 mb-xl-0">
+                                <div class="fs-3 fw-bold text-white">UPDATE Media Info</div>
+                                <div class="text-white-50">전체 인플루언서의 media info 데이터를 매일 업데이트 합니다.</div>
+                            </div>
+                            <div class="ms-xl-4">
+                                <div class="input-group mb-2">
+                                    <input class="form-control" type="text" id="password" placeholder="password" />
+                                    <button class="btn btn-outline-danger fw-bold" type="button" id="getButtonmediainfo">전체 크롤링</button>
+                                </div>
+                                <!-- <div class="small text-white-50">인스타그램 이름을 입력해주세요..</div> -->
+                            </div>
+>>>>>>> 0861fb0c181ffceb3858c2dc2dc146c2b67cace5
                         </div>
                     </div>
                 </div>
                 <!-- Contact cards-->
-                <div class="row gx-5 row-cols-2 row-cols-lg-4 py-5">
+                <div class="row  row-cols-2 row-cols-lg-4 py-5">
                     <div class="col">
                         <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-chat-dots"></i></div>
                         <div class="h5 mb-2 text-white">Chat with us</div>
@@ -169,4 +241,3 @@
         
 </body>
 </html>
-
