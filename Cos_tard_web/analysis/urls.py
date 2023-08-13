@@ -4,10 +4,6 @@ from . import views
 app_name = 'analysis'
 
 urlpatterns = [
-    path('',views.get_influencer_infofix,name='analysis-page'),
-    path('get_influencer_infofix',views.get_influencer_infofix,name="getinfluencerinfo"),
-    path('',views.get_influencer_info,name='analysis-page'),
-    path('get_influencer_info',views.get_influencer_info,name="getinfluencerinfo"),
-    path('',views.get_influencer,name='get_influencer'),
-    path('get_influencer',views.get_influencer,name='get_influencer')
+    path('',views.get_influencer,name='analysis-page'),
+    path('get_influencer',views.get_influencer,name='analysis-page')
 ]

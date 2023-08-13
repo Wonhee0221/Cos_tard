@@ -86,10 +86,10 @@
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-12 col-xl-12">
                                 <div class="mt-3 text-center rounded-3 bg-dark text-white" id="searchResults" style="background-color:gray; padding: 50px">
-                                    <div id="influencerinfoResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
+                                    <div id="influencerfixResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
                                 </div>
                                 <div class="mt-3 text-center rounded-3 bg-dark text-white" id="searchResults" style="background-color:gray; padding: 50px">
-                                    <div id="influencerResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
+                                    <div id="influencerinfoResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
                                 </div>
                                 <div class="mt-3 text-center rounded-3 bg-dark text-white" id="searchResults" style="background-color:gray; padding: 50px">
                                     <div id="chart-container-01" style="width:100%; height: 400px;"  ></div>
@@ -154,7 +154,7 @@
                     var influencerName = $("#influencerName").val();
                     $.ajax({
                         type: "POST",
-                        url: "/analysis/get_influencer_infofix",  // 서버의 URL 설정
+                        url: "/analysis/get_influencer",  
                         dataType:'json',
                         contentType:'application/json',
                         data: JSON.stringify({
@@ -162,12 +162,45 @@
                         }),
                         success: function(data) {
                             console.log(data);
-                            var resultHTML = "인플루언서 정보:<br>";
-                            resultHTML += "닉네임: " + data.userid + "<br>";
-                            resultHTML += "이름: " + data.username + "<br>";
-                            resultHTML += "웹사이트: " + data.website + "<br>";
-                            resultHTML += "소개글: " + data.biography;
-                            $("#influencerinfoResult").html(resultHTML);  // 결과 표시
+                            var userfix = data.influencer_data;
+                            var userinfo = data.influencer_data_details;
+                            var follower_trend= data.follower_trend
+
+                            var fixHTML = "인플루언서 정보:<br>"
+                            fixHTML += "닉네임: " + userfix.userid + "<br>";
+                            fixHTML += "이름: " + userfix.username + "<br>";
+                            fixHTML += "웹사이트: " + userfix.website + "<br>";
+                            fixHTML += "소개글: " + userfix.biography;
+                            $("#influencerfixResult").html(fixHTML);  
+
+                            var infoHTML = "인플루언서 정보:<br>";
+                            infoHTML += "게시물 수: " + userinfo.media_count + "<br>";
+                            infoHTML += "팔로워 수: " + userinfo.followers_count + "<br>";
+                            infoHTML += "팔로잉 수: " + userinfo.follows_count;
+                            $("#influencerinfoResult").html(infoHTML);
+
+                            // 팔로워 그래프
+                        
+                            Highcharts.chart('chart-container-01', {
+                                            
+                                            title: {
+                                                text: 'follower trend'
+                                            },
+                                            xAxis: {
+                                                catagories: follower_trend.xData
+                                            },
+                                            yAxis: {
+                                                title: {
+                                                    text: 'Total # of followers'
+                                                }
+                                            },
+                                            series: [{
+                                                name: '# of followers',
+                                                data: follower_trend.yData
+                                            }]
+                                        });
+
+
                         },
                         error: function() {
                             $("#influencerinfoResult").text("오류가 발생했습니다.");
@@ -176,76 +209,7 @@
                 });
             });
             </script>
-            <script>
-                $(document).ready(function() {
-                    $("#getInfluencerButton").click(function() {
-                        var influencerName = $("#influencerName").val();
-                        $.ajax({
-                            type: "POST",
-                            url: "/analysis/get_influencer_info",  // 서버의 URL 설정
-                            dataType:'json',
-                            contentType:'application/json',
-                            data: JSON.stringify({
-                                influencer_name: influencerName
-                            }),
-                            success: function(data) {
-                                console.log(data);
-                                var resultHTML = "인플루언서 정보:<br>";
-                                resultHTML += "게시물 수: " + data.media_count + "<br>";
-                                resultHTML += "팔로워 수: " + data.followers_count + "<br>";
-                                resultHTML += "팔로잉 수: " + data.follows_count;
-                                $("#influencerResult").html(resultHTML);  // 결과 표시
-                            },
-                            error: function() {
-                                $("#influencerResult").text("오류가 발생했습니다.");
-                            }
-                        });
-                    });
-                });
-                </script>
-
-            <script> // graph part
-                $(document).ready(function() {
-                    $("#getInfluencerButton").click(function() {
-                        var influencerName = $("#influencerName").val();
-                        $.ajax({
-                            type: "POST",
-                            url: "/analysis/get_influencer",  // 서버의 URL 설정
-                            dataType:'json',
-                            contentType:'application/json',
-                            data: JSON.stringify({
-                                influencerName : influencerName
-                            }),
-                            success: function(context) {
-                                $("#chart-container-01").Highcharts.chart('chart-container-01', {
-                                            
-                                            title: {
-                                                text: 'follower trend'
-                                            },
-                                            xAxis: {
-                                                title: {
-                                                    text: 'X Value'
-                                                }
-                                            },
-                                            yAxis: {
-                                                title: {
-                                                    text: 'Y Value'
-                                                }
-                                            },
-                                            series: [{
-                                                name: '# of followers',
-                                                // data: data.map(item => [item.x_value, item.y_value])
-                                                data: [0,1,2,3,4]
-                                            }]
-                                        });
-                            },
-                            error: function() {
-                                // $("#influencerinfoResult").text("오류가 발생했습니다.");
-                            }
-                        });
-                    });
-                });
-            </script>
+        
             
 {% comment %}
         <script> // Ajax 요청을 보내고 결과를 처리하는 함수
