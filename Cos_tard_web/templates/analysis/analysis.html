@@ -92,7 +92,7 @@
                                     <div id="influencerResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
                                 </div>
                                 <div class="mt-3 text-center rounded-3 bg-dark text-white" id="searchResults" style="background-color:gray; padding: 50px">
-                                    <div id="chart-container-01"></div>
+                                    <div id="chart-container-01" style="width: 100%; height: 400px;"></div>
                                     <!-- <script>
                                          Highcharts.chart('chart-container-01', {
                                             
@@ -230,39 +230,46 @@
                 $(document).ready(function() {
                     $("#getInfluencerButton").click(function() {
                         var influencerName = $("#influencerName").val();
+                        
                         $.ajax({
                             type: "POST",
-                            url: "/analysis/get_influencer",  // 서버의 URL 설정
-                            dataType:'json',
-                            contentType:'application/json',
+                            url: "/analysis/get_influencer_info",  // 서버의 URL 설정
+                            dataType: 'json',
+                            contentType: 'application/json',
                             data: JSON.stringify({
-                                influencerName : influencerName
+                                influencer_name: influencerName
                             }),
-                            success: function(context) {
-                                $("#chart-container-01").Highcharts.chart('chart-container-01', {
-                                            
-                                            title: {
-                                                text: 'follower trend'
-                                            },
-                                            xAxis: {
-                                                title: {
-                                                    text: 'X Value'
-                                                }
-                                            },
-                                            yAxis: {
-                                                title: {
-                                                    text: 'Y Value'
-                                                }
-                                            },
-                                            series: [{
-                                                name: '# of followers',
-                                                // data: data.map(item => [item.x_value, item.y_value])
-                                                data: [0,1,2,3,4]
-                                            }]
-                                        });
+                            success: function(data) {
+                                // 가상의 데이터로 대체해보겠습니다.
+                                var fakeData = [20, 10, 25, 50, 70, 90, 120];
+                                
+                                if (data && Array.isArray(data)) {
+                                    // 실제 데이터를 사용하도록 수정해야 함
+                                    fakeData = data;
+                                }
+                                
+                                Highcharts.chart('chart-container-01', {
+                                    title: {
+                                        text: 'Follower Trend for ' + influencerName
+                                    },
+                                    xAxis: {
+                                        title: {
+                                            text: 'Time'
+                                        }
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: 'Followers'
+                                        }
+                                    },
+                                    series: [{
+                                        name: 'Followers',
+                                        data: fakeData
+                                    }]
+                                });
                             },
                             error: function() {
-                                // $("#influencerinfoResult").text("오류가 발생했습니다.");
+                                $("#chart-container-01").html("An error occurred while fetching data.");
                             }
                         });
                     });
