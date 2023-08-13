@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from media4.models import *
 from analysis.models import *
-import json
+from analysis.processing import *
 from django.views.decorators.csrf import csrf_exempt
+import json
+
 
 # Create your views here.
 def index(request): 
@@ -28,11 +30,11 @@ def index(request):
 @csrf_exempt
 def get_influencer(request):
     data = json.loads(request.body)
-    influencer_name= data.get('influencer_name')
-    influencer = testTable.objects.get(name=influencer_name)
-    influencer_data = {
-        'name': influencer.name,
-        'age': influencer.age,
-        'followerCount': influencer.followercount
+    influencer_name = data.get('influencer_name')
+    ig_id = Users_fix.objects.filter(ig_id=influencer_name).values('ig_id')
+    follower_trend = follower_graph(ig_id) #from function in processing file
+
+    context = {
+        'follower_trend' : follower_trend
     }
-    return JsonResponse(influencer_data,safe=False)
+    return render(request,'analysis/analysis.html',context)
