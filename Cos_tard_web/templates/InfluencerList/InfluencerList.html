@@ -77,35 +77,23 @@
                                             <th>follows_count</th>
                                             <th>followers_count</th>
                                             <th>media_count</th>
-<<<<<<< HEAD
-=======
                                             <th>website</th>
->>>>>>> 0861fb0c181ffceb3858c2dc2dc146c2b67cace5
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for row in joined_query %}
-<<<<<<< HEAD
-                                            <tr>
-                                                <td>{{ row.user_id }}</td>
-=======
                                             <tr class="alert2" role="alert2">
                                                 <td class="d-flex2 align-items-center2">
                                                     <div class="img2 img50x50" style="background-image: url(https://via.placeholder.com/50x50);"></div>
                                                     <div class="pl-3 email"><span>{{ row.user_id }}</span></div>
                                                 </td>
->>>>>>> 0861fb0c181ffceb3858c2dc2dc146c2b67cace5
                                                 <td>{{ row.username }}</td>
                                                 <td>{{ row.follows_count }}</td>
                                                 <td>{{ row.followers_count }}</td>
                                                 <td>{{ row.media_count }}</td>
-<<<<<<< HEAD
-
-=======
                                                 <td><a href="" style="margin-right: 5px;"><img src="{% static 'assets/instaLogo.png' %}"></img></a>
                                                     <a href="{{ row.website }}"><img src="{% static 'assets/linkLogo.png' %}"></a>
                                                 </td>
->>>>>>> 0861fb0c181ffceb3858c2dc2dc146c2b67cace5
                                             </tr>
                                         {% endfor %}
                                     </tbody>
