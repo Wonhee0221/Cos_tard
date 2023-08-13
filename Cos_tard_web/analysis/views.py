@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from media4.models import *
 from analysis.models import *
+from analysis.processing import *
 import json
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -64,11 +65,10 @@ def get_influencer_info(request):
 @csrf_exempt
 def get_influencer(request):
     data = json.loads(request.body)
-    influencer_name= data.get('influencer_name')
-    influencer = testTable.objects.get(name=influencer_name)
-    influencer_data = {
-        'name': influencer.name,
-        'age': influencer.age,
-        'followerCount': influencer.followercount
+    influencerName= data.get('influencerName')
+    ig_id = Users_fix.objects.get(user_id=influencerName)
+    follower_trend = follower_graph(ig_id)
+    context = {
+        'follower_trend' : follower_trend 
     }
-    return JsonResponse(influencer_data,safe=False)
+    return JsonResponse(context, safe=False)
