@@ -164,7 +164,7 @@
                             console.log(data);
                             var userfix = data.influencer_data;
                             var userinfo = data.influencer_data_details;
-                            var follower_trend= data.follower_trend
+                            var follower_trend= data.follower_trend;
 
                             var fixHTML = "인플루언서 정보:<br>"
                             fixHTML += "닉네임: " + userfix.userid + "<br>";
@@ -184,7 +184,7 @@
                             Highcharts.chart('chart-container-01', {
                                             
                                             title: {
-                                                text: 'follower trend'
+                                                text: 'Follower trend'
                                             },
                                             xAxis: {
                                                 categories: follower_trend.xData

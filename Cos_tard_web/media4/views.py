@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import testmodel, Users_fix, Users_info, Media_fix, Media_info
+from .models import testmodel, Users_fix, Users_info, Media_fix, Media_info, Hashtags
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .crawling import *
 from django.db import models
 import uuid
 import json
+import re
 
 # Create your views here.
 def index(request): 
@@ -111,6 +112,9 @@ def update_media_fix(request):
     username=["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
             "hamnihouse", "ssinnim", "yu__hyewon", "hyojinc_", "leojmakeup", "2__yun__2", "areumsongee", "makeup_maker_",
             "r_yuhyeju", "vivamoon", "risabae_art", "yujin_so", "kisy0729", "ponysmakeup"]
+    
+    pattern = '#([0-9a-zA-Z가-힣_]+)'  # 수정된 패턴
+    hash_w = re.compile(pattern)
 
     for i in username:
         mf = crawl_media_fix(admin_id, token, i)
@@ -120,6 +124,7 @@ def update_media_fix(request):
 
             ##저장##
         media_fix = Media_fix()
+        hashtags = Hashtags()
         for j in mf:
 
             if j[1] == current_media['media_id']:
@@ -133,6 +138,13 @@ def update_media_fix(request):
             media_fix.permalink=j[4]
             media_fix.timestamp=j[5]
             media_fix.save(force_insert=True)
+
+            tag = hash_w.findall(j[2])
+             
+            hashtags.owner_id= j[0]
+            hashtags.media_id= j[1]
+            hashtags.tags= ",".join(tag)
+            hashtags.save(force_insert=True)
 
     return JsonResponse({'msg' : 'success'}, safe=False)
 
@@ -165,6 +177,7 @@ def update_media_info(request):
             media_info.save(force_insert=True)
 
     return JsonResponse({'msg' : 'success'}, safe=False)
+
 
 
 
