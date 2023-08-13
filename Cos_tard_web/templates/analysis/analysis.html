@@ -83,9 +83,13 @@
                             </div>
                         </div>
                         <div class="row gx-5 justify-content-center">
-                            <div class="col-lg-8 col-xl-6">
+                            <div class="col-lg-12 col-xl-12">
+                                <div class="mt-3 text-center rounded-3 bg-dark text-white" id="searchResults" style="background-color:gray; padding: 50px">
+                                    <div id="influencerinfoResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
+                                </div>
                                 <div class="mt-3 text-center rounded-3 bg-dark text-white" id="searchResults" style="background-color:gray; padding: 50px">
                                     <div id="influencerResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -142,7 +146,7 @@
                     var influencerName = $("#influencerName").val();
                     $.ajax({
                         type: "POST",
-                        url: "/analysis/get_influencer",  // 서버의 URL 설정
+                        url: "/analysis/get_influencer_infofix",  // 서버의 URL 설정
                         dataType:'json',
                         contentType:'application/json',
                         data: JSON.stringify({
@@ -151,18 +155,46 @@
                         success: function(data) {
                             console.log(data);
                             var resultHTML = "인플루언서 정보:<br>";
-                            resultHTML += "이름: " + data.name + "<br>";
-                            resultHTML += "나이: " + data.age + "<br>";
-                            resultHTML += "팔로워 수: " + data.followerCount;
-                            $("#influencerResult").html(resultHTML);  // 결과 표시
+                            resultHTML += "닉네임: " + data.userid + "<br>";
+                            resultHTML += "이름: " + data.username + "<br>";
+                            resultHTML += "웹사이트: " + data.website + "<br>";
+                            resultHTML += "소개글: " + data.biography;
+                            $("#influencerinfoResult").html(resultHTML);  // 결과 표시
                         },
                         error: function() {
-                            $("#influencerResult").text("오류가 발생했습니다.");
+                            $("#influencerinfoResult").text("오류가 발생했습니다.");
                         }
                     });
                 });
             });
             </script>
+            <script>
+                $(document).ready(function() {
+                    $("#getInfluencerButton").click(function() {
+                        var influencerName = $("#influencerName").val();
+                        $.ajax({
+                            type: "POST",
+                            url: "/analysis/get_influencer_info",  // 서버의 URL 설정
+                            dataType:'json',
+                            contentType:'application/json',
+                            data: JSON.stringify({
+                                influencer_name: influencerName
+                            }),
+                            success: function(data) {
+                                console.log(data);
+                                var resultHTML = "인플루언서 정보:<br>";
+                                resultHTML += "게시물 수: " + data.media_count + "<br>";
+                                resultHTML += "팔로워 수: " + data.followers_count + "<br>";
+                                resultHTML += "팔로잉 수: " + data.follows_count;
+                                $("#influencerResult").html(resultHTML);  // 결과 표시
+                            },
+                            error: function() {
+                                $("#influencerResult").text("오류가 발생했습니다.");
+                            }
+                        });
+                    });
+                });
+                </script>
             
 {% comment %}
         <script> // Ajax 요청을 보내고 결과를 처리하는 함수
