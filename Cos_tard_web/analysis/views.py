@@ -71,4 +71,4 @@ def get_influencer(request):
     context = {
         'follower_trend' : follower_trend 
     }
-    return JsonResponse(context, safe=False)
+    return render(request, 'analysis/analysis.html', context)
