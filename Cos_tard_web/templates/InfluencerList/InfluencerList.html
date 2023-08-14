@@ -83,16 +83,25 @@
                                     <tbody>
                                         {% for row in joined_query %}
                                             <tr class="alert2" role="alert2">
-                                                <td class="d-flex2 align-items-center2">
-                                                    <div class="img2 img50x50" style="background-image: url(https://via.placeholder.com/50x50);"></div>
-                                                    <div class="pl-3 email"><span>{{ row.user_id }}</span></div>
+                                                <td>
+                                                    <div class="d-flex2 align-items-center2">
+                                                        <div class="img2 img50x50" style="background-image: url(https://via.placeholder.com/50x50);"></div>
+                                                        <div class="pl-3"><span>{{ row.user_id }}</span></div>
+                                                    </div>
                                                 </td>
                                                 <td>{{ row.username }}</td>
                                                 <td>{{ row.follows_count }}</td>
                                                 <td>{{ row.followers_count }}</td>
                                                 <td>{{ row.media_count }}</td>
-                                                <td><a href="" style="margin-right: 5px;"><img src="{% static 'assets/instaLogo.png' %}"></img></a>
-                                                    <a href="{{ row.website }}"><img src="{% static 'assets/linkLogo.png' %}"></a>
+                                                <td>
+                                                    <div class="d-flex2 align-items-center2">
+                                                        <div>
+                                                            <a href="https://instagram.com/{{ row.user_id }}" style="margin-right: 5px;"><img src="{% static 'assets/instaLogo.png' %}"></img></a>
+                                                        </div>
+                                                        <div>
+                                                            <a href="{{ row.website }}"><img src="{% static 'assets/linkLogo.png' %}"></a>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         {% endfor %}
