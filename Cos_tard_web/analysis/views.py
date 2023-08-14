@@ -42,7 +42,25 @@ def get_influencer_info(request):
     except Users_fix.DoesNotExist:
         return JsonResponse({'error': 'Influencer not found'}, status=404)
     
+@csrf_exempt
+def get_influencer_follower(request):
+    data = json.loads(request.body)
+    influencerName= data.get('influencerName')
+    try:
+        influencer = Users_fix.objects.get(user_id=influencerName)
+        influencer_details = Users_info.objects.filter(ig_id=influencer.ig_id).order_by('date').values('date', 'followers_count')
 
+        follower_trend = []
+        print('influencer_details')
+        for detail in influencer_details:
+            follower_trend.append([detail['date'].strftime('%Y-%m-%d'), detail['followers_count']])
+
+        influencer_data = {
+            'follower_trend': follower_trend
+        }
+        return JsonResponse(influencer_data, safe=False)
+    except Users_fix.DoesNotExist:
+        return JsonResponse({'error': 'Influencer not found'}, status=404)
     
 
 
@@ -62,13 +80,3 @@ def get_influencer_info(request):
 
 #     return render(request, 'analysis.html')
 
-@csrf_exempt
-def get_influencer(request):
-    data = json.loads(request.body)
-    influencerName= data.get('influencerName')
-    ig_id = Users_fix.objects.get(user_id=influencerName)
-    follower_trend = follower_graph(ig_id)
-    context = {
-        'follower_trend' : follower_trend 
-    }
-    return JsonResponse(context, safe=False)
