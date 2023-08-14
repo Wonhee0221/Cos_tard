@@ -225,56 +225,55 @@
                     });
                 });
                 </script>
-
-            <script> // graph part
-                $(document).ready(function() {
-                    $("#getInfluencerButton").click(function() {
-                        var influencerName = $("#influencerName").val();
-                        
-                        $.ajax({
-                            type: "POST",
-                            url: "/analysis/get_influencer_info",  // 서버의 URL 설정
-                            dataType: 'json',
-                            contentType: 'application/json',
-                            data: JSON.stringify({
-                                influencer_name: influencerName
-                            }),
-                            success: function(data) {
-                                // 가상의 데이터로 대체해보겠습니다.
-                                var fakeData = [20, 10, 25, 50, 70, 90, 120];
-                                
-                                if (data && Array.isArray(data)) {
-                                    // 실제 데이터를 사용하도록 수정해야 함
-                                    fakeData = data;
+                <script> // graph part
+                    $(document).ready(function() {
+                        $("#getInfluencerButton").click(function() {
+                            var influencerName = $("#influencerName").val();
+                            
+                            $.ajax({
+                                type: "POST",
+                                url: "/analysis/get_influencer_follower",  // 서버의 URL 설정
+                                dataType: 'json',
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                    influencer_name: influencerName
+                                }),
+                                success: function(data) {
+                                    // 가상의 데이터로 대체해보겠습니다.
+                                    var fakeData = [20, 10, 25, 50, 70, 90, 120];
+                                    
+                                    if (data && Array.isArray(data)) {
+                                        // 실제 데이터를 사용하도록 수정해야 함
+                                        fakeData = data.follower_trend; // data.followers_count
+                                    }
+                                    
+                                    Highcharts.chart('chart-container-01', {
+                                        title: {
+                                            text: 'Follower Trend for ' + influencerName
+                                        },
+                                        xAxis: {
+                                            title: {
+                                                text: 'Time'
+                                            }
+                                        },
+                                        yAxis: {
+                                            title: {
+                                                text: 'Followers'
+                                            }
+                                        },
+                                        series: [{
+                                            name: 'Followers',
+                                            data: fakeData
+                                        }]
+                                    });
+                                },
+                                error: function() {
+                                    $("#chart-container-01").html("An error occurred while fetching data.");
                                 }
-                                
-                                Highcharts.chart('chart-container-01', {
-                                    title: {
-                                        text: 'Follower Trend for ' + influencerName
-                                    },
-                                    xAxis: {
-                                        title: {
-                                            text: 'Time'
-                                        }
-                                    },
-                                    yAxis: {
-                                        title: {
-                                            text: 'Followers'
-                                        }
-                                    },
-                                    series: [{
-                                        name: 'Followers',
-                                        data: fakeData
-                                    }]
-                                });
-                            },
-                            error: function() {
-                                $("#chart-container-01").html("An error occurred while fetching data.");
-                            }
+                            });
                         });
                     });
-                });
-            </script>
+                </script>
             
 {% comment %}
         <script> // Ajax 요청을 보내고 결과를 처리하는 함수
