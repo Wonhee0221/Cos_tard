@@ -10,7 +10,7 @@ import json
 
 # Create your views here.
 @csrf_exempt
-def get_influencer_infofix(request):
+def get_influencer(request):
     data = json.loads(request.body)
     influencer_name = data.get('influencer_name')
     try:
@@ -21,46 +21,32 @@ def get_influencer_infofix(request):
             'website': influencer.website,
             'biography': influencer.biography,
         }
-        return JsonResponse(influencer_data, safe=False)
-    except Users_fix.DoesNotExist:
-        return JsonResponse({'error': 'Influencer not found'}, status=404)
-
-@csrf_exempt
-def get_influencer_info(request):
-    data = json.loads(request.body)
-    influencer_name = data.get('influencer_name')
-    try:
-        influencer = Users_fix.objects.get(user_id=influencer_name)
         influencer_details = list(Users_info.objects.filter(ig_id=influencer.ig_id).order_by('-date')[:1].values())[0]
-        influencer_data = {
+        influencer_data_details = {
             'follows_count': influencer_details.get('follows_count'),
             'followers_count': influencer_details.get('followers_count'),
             'media_count': influencer_details.get('media_count')
             # 다른 필요한 정보들도 추가할 수 있음
         }
-        return JsonResponse(influencer_data, safe=False)
+
+        #팔로워 부분
+        follower_trend = follower_graph(influencer.ig_id)
+
+        context = {
+
+            'influencer_data' : influencer_data,
+            'influencer_data_details' : influencer_data_details,
+            'follower_trend' : follower_trend
+
+        }
+
+
+        return JsonResponse(context, safe=False)
+    
     except Users_fix.DoesNotExist:
         return JsonResponse({'error': 'Influencer not found'}, status=404)
     
-@csrf_exempt
-def get_influencer_follower(request):
-    data = json.loads(request.body)
-    influencerName= data.get('influencerName')
-    try:
-        influencer = Users_fix.objects.get(user_id=influencerName)
-        influencer_details = Users_info.objects.filter(ig_id=influencer.ig_id).order_by('date').values('date', 'followers_count')
 
-        follower_trend = []
-        print('influencer_details')
-        for detail in influencer_details:
-            follower_trend.append([detail['date'].strftime('%Y-%m-%d'), detail['followers_count']])
-
-        influencer_data = {
-            'follower_trend': follower_trend
-        }
-        return JsonResponse(influencer_data, safe=False)
-    except Users_fix.DoesNotExist:
-        return JsonResponse({'error': 'Influencer not found'}, status=404)
     
 
 
@@ -80,3 +66,13 @@ def get_influencer_follower(request):
 
 #     return render(request, 'analysis.html')
 
+@csrf_exempt
+def get_influencer(request):
+    data = json.loads(request.body)
+    influencerName= data.get('influencerName')
+    ig_id = Users_fix.objects.get(user_id=influencerName)
+    follower_trend = follower_graph(ig_id)
+    context = {
+        'follower_trend' : follower_trend 
+    }
+    return JsonResponse(context, safe=False)
