@@ -10959,6 +10959,7 @@ html {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  border-radius: 50%;
 }
 
 .d-flex2 {
@@ -10989,7 +10990,10 @@ html {
 /* .table>tbody>tr>td {
   border: 2px solid red; } 셀 별로 영역 확인용*/
 .table tbody tr:nth-child(2n) {
-  background-color:#dfe0e1
+  background-color:#dfe0e1;
+}
+.table tbody tr:nth-child(2n+1) {
+  background-color:#f9fafb;
 }
 
 .table-sm th,
