@@ -5,9 +5,7 @@ from recommend.models import *
 from recommend.utils import *
 #from .models import Users
 
-# Create your views here.
-def index(request): 
-    # followers = Users_info.objects.order_by('date').values('followers_count')[0]
+# followers = Users_info.objects.order_by('date').values('followers_count')[0]
     # print(11111)
     # testrow=Comment.objects.values('totalcomment')
     # print(Users_fix.objects.filter(user_id='hamnihouse').first())
@@ -21,6 +19,9 @@ def index(request):
     # firstdata = testrow[0]
     # context = {'followers' : firstdata}
 
+
+# Create your views here.
+def index(request): 
     scores = {}
     username = ["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
             "hamnihouse", "ssinnim", "yu__hyewon", "hyojinc_", "leojmakeup", "2__yun__2", "areumsongee", "makeup_maker_",
@@ -32,8 +33,10 @@ def index(request):
         score = scoring(ig_ids)
         scores[user] = score  # Store score in the dictionary with the username as the key
 
-    print(scores)
-    context = {'followers' : scores}
+    print(score)
+
+    sorted_data = sorted(scores.items(), key=lambda item: item[1], reverse=True)
+    context = {'sorted_data': sorted_data}
     
     return render(request,'recommend/recommend.html', context)
 
