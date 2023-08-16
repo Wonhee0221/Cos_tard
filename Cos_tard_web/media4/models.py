@@ -45,6 +45,7 @@ class Media_info(models.Model):
     date=models.CharField()
     like_count=models.CharField()
     comments_count=models.CharField()
+    media_url=models.CharField()
 
     class Meta:
         managed=False
