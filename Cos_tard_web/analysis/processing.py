@@ -70,7 +70,11 @@ def follower_graph(ig_id):
 def get_image(ig_id): 
     media_id = Media_fix.objects.filter(owner_id=ig_id).order_by('-timestamp').values('media_id')[:5]
     media_id=list(media_id)
-    return (media_id)
+    media_link=[]
+    for i in media_id:
+        link = Media_info.objects.filter(media_link=i).order_by('-timestamp').values('media_url')[0]
+        media_link.append(link)
+    return (media_link)
 
 
 
