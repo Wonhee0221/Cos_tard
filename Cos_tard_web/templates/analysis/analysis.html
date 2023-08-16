@@ -97,6 +97,7 @@
                                     <div id="chart-container-01" style="width: 100%; height: 400px;"><!-- 차트가 이곳에 표시됩니다 --></div>
                                 </div>
                                 <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults" style="padding: 50px">
+
                                     <div id="chart-container-02" style="width: 100%; height: 400px;"><!-- 차트가 이곳에 표시됩니다 --></div>
                                 </div>
                                 <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults" style="padding: 30px; flex: 2; margin-right: 20px;">
@@ -104,6 +105,12 @@
                                 </div>
                                 <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults" style="padding: 30px; flex: 2; margin-right: 20px;">
                                     <div id="feedResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
+
+                                    <div id="influencercount_textResult" style="width: 50%; height: 200px;"><!-- 차트가 이곳에 표시됩니다 --></div>
+                                </div>
+                                <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults" style="padding: 50px">
+                                    <div id="influencercounthashResult" style="width: 50%; height: 200px;"><!-- 차트가 이곳에 표시됩니다 --></div>
+
                                 </div>
                             </div>
                         </div>
@@ -147,7 +154,12 @@
                             var userfix = data.influencer_data;
                             var userinfo = data.influencer_data_details;
                             var follower_trend= data.follower_trend;
+
                             var image_link= data.image_link;
+                            var count_text= data.count_text;
+                            var count_hashtag= data.count_hashtag;
+
+
 
                             var fixHTML = "인플루언서 정보:<br>";
                             fixHTML += "닉네임: " + userfix.userid + "<br>";
@@ -161,6 +173,8 @@
                             infoHTML += "팔로워 수: " + userinfo.followers_count + "<br>";
                             infoHTML += "팔로잉 수: " + userinfo.follows_count;
                             $("#influencerinfoResult").html(infoHTML);
+
+
 
                             // 팔로워 그래프
                         
@@ -182,6 +196,7 @@
                                                 data: follower_trend.yData
                                             }]
                                         });
+
                             
                             Highcharts.chart('chart-container-02', {
                                 
@@ -234,6 +249,24 @@
                                 imageHTML += '<img src="' + image_link[i] + '" alt="Instagram Image ' + (i + 1) + '"><br>';
                             }
                             $("#feedResult").html(imageHTML);
+
+                            var countHTML = "인플루언서 게시글 토픽:<br>";
+                            countHTML += "TOP 1: " + count_text.count_cap1 + "<br>";
+                            countHTML += "TOP 2: " + count_text.count_cap2 + "<br>";
+                            countHTML += "TOP 3: " + count_text.count_cap3 + "<br>";
+                            countHTML += "TOP 4: " + count_text.count_cap4 + "<br>";
+                            countHTML += "TOP 5: " + count_text.count_cap5;
+                            $("#influencercount_textResult").html(countHTML);
+                            
+                            var hashHTML = "인플루언서 해쉬태그 토픽:<br>";
+                            hashHTML += "TOP 1: " + count_hashtag.tags1 + "<br>";
+                            hashHTML += "TOP 2: " + count_hashtag.tags2 + "<br>";
+                            hashHTML += "TOP 3: " + count_hashtag.tags3 + "<br>";
+                            hashHTML += "TOP 4: " + count_hashtag.tags4 + "<br>";
+                            hashHTML += "TOP 5: " + count_hashtag.tags5;
+                            $("#influencercounthashResult").html(hashHTML);
+
+
 
 
                         },
