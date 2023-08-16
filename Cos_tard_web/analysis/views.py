@@ -8,6 +8,8 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+def index(request): 
+    return render(request,'analysis/analysis.html')
 
 # Create your views here.
 @csrf_exempt

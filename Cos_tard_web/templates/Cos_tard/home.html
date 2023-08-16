@@ -27,15 +27,15 @@
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-black">
                 <div class="container px-5">
-                    <a class="navbar-brand fw-bold" href="home.html">Cos-tard</a>
+                    <a class="navbar-brand fw-bold" href="{% url 'home-page' %}">Cos-tard</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link fw-bold" href="home.html">메인</a></li>
+                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'home-page' %}">메인</a></li>
                             <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'about-page' %}">팀소개</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'list-page' %}">리스트</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'recommend-page' %}">추천</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'analysis-page' %}">분석</a></li>
+                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'InfluencerList:list-page' %}">리스트</a></li>
+                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'recommend:recommend-page' %}">추천</a></li>
+                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'analysis:analysis-page' %}">분석</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
@@ -86,12 +86,12 @@
                                 </div>
                                 <div class="col mb-5 h-100">
                                     <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-search"></i></div>
-                                    <h2 class="h4"><a id="link" href="{% url 'recommend-page' %}">제품에 적합한 인플루언서 추천</a></h2>
+                                    <h2 class="h4"><a id="link" href="{% url 'recommend:recommend-page' %}">제품에 적합한 인플루언서 추천</a></h2>
                                     <p class="mb-0">마케팅하고자 하는 제품을 입력하면 가장 적합한 인플루언서를 추천해드립니다.</p>
                                 </div>
                                 <div class="col mb-5 mb-md-0 h-100">
                                     <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-clipboard-data"></i></div>
-                                    <h2 class="h4"><a id="link" href="{% url 'analysis-page' %}">인플루언서의 특징 시각화</a></h2>
+                                    <h2 class="h4"><a id="link" href="{% url 'analysis:analysis-page' %}">인플루언서의 특징 시각화</a></h2>
                                     <p class="mb-0">인플루언서의 키워드와 이미지 및 컬러, 게시하는 컨텐츠의 주된 토픽을 시각화하여 제공해드립니다.</p>
                                 </div>
                                 <div class="col h-100">
@@ -143,7 +143,7 @@
                                 <div class="blur-overlay card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>인플루언서 리스트 보기</div>
                                 <div class="card-body p-4">
                                     <div class="badge bg-warning bg-gradient rounded-pill mb-2">Update!</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'list-page' %}"><h5 class="card-title mb-3 fw-bold">솔루션 분석 가능한 인플루언서</h5></a>
+                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'InfluencerList:list-page' %}"><h5 class="card-title mb-3 fw-bold">솔루션 분석 가능한 인플루언서</h5></a>
                                     <p class="card-text mb-0">Cos-tard의 데이터베이스에 저장되어 있는 모든 인플루언서들을 소개합니다. 어떤 인플루언서가 있는지 확인해 보세요!</p>
                                 </div>
                                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
@@ -166,7 +166,7 @@
                                 <div class="blur-overlay card shadow border-0 justify-content-center text-center"><i class="bi bi-search"></i>프로덕트 & 인플루언서 매칭</div>
                                 <div class="card-body p-4">
                                     <div class="badge bg-danger bg-gradient rounded-pill mb-2">New!</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'recommend-page' %}"><h5 class="card-title mb-3 fw-bold">프로덕트 & 인플루언서 매칭</h5></a>
+                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'recommend:recommend-page' %}"><h5 class="card-title mb-3 fw-bold">프로덕트 & 인플루언서 매칭</h5></a>
                                     <p class="card-text mb-0">효과적인 마케팅 효과를 원하시나요? 제품에 가장 적합한 인플루언서를 추천해드립니다!</p>
                                 </div>
                                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
@@ -189,7 +189,7 @@
                                 <div class="blur-overlay card shadow border-0 justify-content-center text-center"><i class="bi bi-clipboard-data"></i>인플루언서 심층 분석</div>
                                 <div class="card-body p-4">
                                     <div class="badge bg-danger bg-gradient rounded-pill mb-2">New!</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'analysis-page' %}"><h5 class="card-title mb-3 fw-bold">인플루언서 심층 분석</h5></a>
+                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'analysis:analysis-page' %}"><h5 class="card-title mb-3 fw-bold">인플루언서 심층 분석</h5></a>
                                     <p class="card-text mb-0">어느 한 인플루언서를 심층적으로 분석해보고 싶으신가요? 인플루언서의 주요 피드 토픽, 이미지 컬러, 키워드를 분석하여 보여드립니다!</p>
                                 </div>
                                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">

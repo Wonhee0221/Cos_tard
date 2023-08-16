@@ -22,18 +22,18 @@ from . import views
 urlpatterns = [
     path('',views.home_view,name='home-page'),
     path('about/',views.about_view,name='about-page'),
-    path('InfluencerList/',include('InfluencerList.urls')),
-    path('analysis/',include('analysis.urls')),
-    path('recommend/',include('recommend.urls')),
+    path('InfluencerList/',include('InfluencerList.urls'),name='list-page'),
+    path('analysis/',include('analysis.urls'),name="analysis-page"),
+    path('recommend/',include('recommend.urls'),name='recommend-page'),
     path('media4/',include('media4.urls')),
     path('admin/', admin.site.urls),
 
     # 8/5 추가한 코드 by.조민환
-    path('home.html',views.home_view,name='home-page'),
-    path('about.html',views.about_view,name='about-page'),
+    #path('home/',views.home_view,name='home-page'),
+    #path('about/',views.about_view,name='about-page'),
 
     # 8/6 추가한 코드 by.조민환
-    path('InfluencerList/',views.influencerList_view,name='list-page'),
-    path('recommend/recommend.html',views.recommend_view,name='recommend-page'),
-    path('analysis/analysis.html',views.analysis_view,name="analysis-page")
+    # path('InfluencerList/',views.influencerList_view,name='list-page'),
+    # path('recommend/',views.recommend_view,name='recommend-page'),
+    # path('analysis/',views.analysis_view,name="analysis-page"),
 ]
