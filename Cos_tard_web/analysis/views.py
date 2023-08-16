@@ -62,14 +62,14 @@ def get_influencer_info(request):
 
 #     return render(request, 'analysis.html')
 
-# @csrf_exempt
-# def get_influencer(request):
-#     data = json.loads(request.body)
-#     influencerName= data.get('influencerName')
-#     ig_id = Users_fix.objects.get(user_id=influencerName)
-#     follower_trend = follower_graph(ig_id)
-#     context = {
-#         'follower_trend' : follower_trend,
-#         'test_data' : [1,2,3,4]
-#     }
-#     return JsonResponse(context, safe=False)
+@csrf_exempt
+def get_influencer(request):
+    data = json.loads(request.body)
+    influencer_name= data.get('influencer_name')
+    ig_id = Users_fix.objects.get(user_id=influencer_name)
+    follower_trend = follower_graph(ig_id)
+    context = {
+        # 'follower_trend' : follower_trend,
+        'fake_data':[0,1,2,3]
+    }
+    return JsonResponse(context, safe=False)
