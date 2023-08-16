@@ -31,12 +31,14 @@ def get_influencer(request):
 
         #팔로워 부분
         follower_trend = follower_graph(influencer.ig_id)
+        image_link = get_image(influencer.ig_id)
 
         context = {
 
             'influencer_data' : influencer_data,
             'influencer_data_details' : influencer_data_details,
-            'follower_trend' : follower_trend
+            'follower_trend' : follower_trend,
+            'image_link' : image_link
 
         }
 

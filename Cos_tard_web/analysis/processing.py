@@ -67,6 +67,11 @@ def follower_graph(ig_id):
     }
     return (follower_trend)
 
+def get_image(ig_id): 
+    media_id = Media_fix.objects.filter(owner_id=ig_id).order_by('-timestamp').values('media_id')[:5]
+    media_id=list(media_id)
+    return (media_id)
+
 
 
 

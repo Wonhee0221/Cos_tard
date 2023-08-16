@@ -125,12 +125,14 @@ def crawl_media_info(admin_id, token, username):
             comments_count = media.get('comments_count')
             media_id = media.get('id')
             like_count = media.get('like_count')
+            media_url = media.get('media_url')
 
             media_list.append([
                 media_id,
                 formatted_date,
                 like_count,
-                comments_count
+                comments_count,
+                media_url
             ])
         return media_list
 
