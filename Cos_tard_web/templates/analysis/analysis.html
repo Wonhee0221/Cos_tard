@@ -157,6 +157,12 @@
                         data: JSON.stringify({
                             influencer_name: influencerName
                         }),
+                        beforeSend: function() {
+                            $('html').css("cursor", "wait"); //마우스 커서를 로딩 중 커서로 변경
+                        },
+                        complete: function() {
+                            $('html').css("cursor", "auto"); //마우스 커서를 원래 기본 커서로 변경
+                        },
                         success: function(data) {
                             console.log(data);
                             var userfix = data.influencer_data;
