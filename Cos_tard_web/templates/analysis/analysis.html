@@ -25,6 +25,13 @@
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <style>
+            .small-image {
+                width: 150px;  /* Adjust the width as needed */
+                height: auto;  /* Automatically adjust the height to maintain the aspect ratio */
+                margin: 10px;  /* Add some spacing between images */
+            }
+        </style>
     </head>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
@@ -271,8 +278,9 @@
                             $("#followerResult").html(followerHTML);
 
                             var imageHTML = "피드 미리보기:<br>";
-                            imageHTML += "팔로워 증가율 평균: " + image_url[0] + " <br>";
-                            var imageHTML = "<img src='" + image_url[0] + "' alt='Instagram Image'>";
+                            for (var i = 0; i < image_link.length; i++) {
+                                imageHTML += "<img src='" + image_link[i] + "' alt='Instagram Image' class='small-image'>";
+                            }
                             $("#feedResult").html(imageHTML);
 
                             var countHTML = "인플루언서 게시글 토픽:<br>";

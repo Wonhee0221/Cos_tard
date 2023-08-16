@@ -46,7 +46,8 @@ class Media_info(models.Model):
     like_count=models.CharField()
     comments_count=models.CharField()
     media_url=models.CharField()
-
+    owner_id=models.CharField()
+    
     class Meta:
         managed=False
         db_table = "media_info"
