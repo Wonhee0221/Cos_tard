@@ -85,16 +85,16 @@
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-12 col-xl-12" style="display: flex; justify-content: center;">
-                                <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults" style="padding: 30px; flex: 2; margin-right: 10px;">
-                                    <div id="influencerfixResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
+                                <div class="mt-3 text-start rounded-3 text-white bg-gradient fw-bold shadow-lg" id="searchResults1">
+                                    <div id="influencerfixResult" style="line-height: 250%"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
                                 </div>
-                                <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults" style="padding: 30px; flex: 1;">
-                                    <div id="influencerinfoResult" style="height: 100%; line-height: 250%"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
+                                <div class="mt-3 text-center rounded-3 text-white bg-gradient fw-bold shadow-lg" id="searchResults2" style="position: relative;">
+                                    <div id="influencerinfoResult" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); line-height: 200%;"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-xl-12">
-                                <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults" style="padding: 50px">
-                                    <div id="chart-container-01" style="width: 100%; height: 400px;"><!-- 차트가 이곳에 표시됩니다 --></div>
+                                <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults3">
+                                    <div id="chart-container-01" class="shadow-lg"><!-- 차트가 이곳에 표시됩니다 --></div>
                                 </div>
                             </div>
                         </div>
@@ -139,21 +139,33 @@
                             var userinfo = data.influencer_data_details;
                             var follower_trend= data.follower_trend;
 
-                            var fixHTML = "인플루언서 정보:<br>"
+                            var fixHTML = "<인플루언서 정보><br>"
                             fixHTML += "닉네임: " + userfix.userid + "<br>";
                             fixHTML += "이름: " + userfix.username + "<br>";
                             fixHTML += "웹사이트: " + userfix.website + "<br>";
                             fixHTML += "소개글: " + userfix.biography;
                             $("#influencerfixResult").html(fixHTML);  
 
-                            var infoHTML = "인플루언서 정보:<br>";
+                            var infoHTML = "<인플루언서 정보><br>";
                             infoHTML += "게시물 수: " + userinfo.media_count + "<br>";
                             infoHTML += "팔로워 수: " + userinfo.followers_count + "<br>";
                             infoHTML += "팔로잉 수: " + userinfo.follows_count;
                             $("#influencerinfoResult").html(infoHTML);
 
+                            // 검색 결과(왼쪽그리드) 띄울때 DOM 객체 이용해서 css 조정
+                            var searchResults1 = document.getElementById('searchResults1');
+                            searchResults1.style.padding = "30px 70px 30px 70px";
+                            searchResults1.style.flex = "2";
+                            searchResults1.style.marginRight = "10px";
+                            searchResults1.style.backgroundColor = "#9a68af";
+
+                            // 검색 결과(오른쪽그리드) 띄울때 DOM 객체 이용해서 css 조정
+                            var searchResults2 = document.getElementById('searchResults2');
+                            searchResults2.style.padding = "50px";
+                            searchResults2.style.flex = "1";
+                            searchResults2.style.backgroundColor = "#9a68af";
+
                             // 팔로워 그래프
-                        
                             Highcharts.chart('chart-container-01', {
                                             
                                             title: {
@@ -172,8 +184,10 @@
                                                 data: follower_trend.yData
                                             }]
                                         });
-
-
+                                // 검색 결과 그래프 띄울때 DOM 객체 이용해서 css 조정
+                                document.getElementById('chart-container-01').style.width = "100%";
+                                document.getElementById('chart-container-01').style.height = "500px";
+                                document.getElementById('chart-container-01').style.padding = "50px";
                         },
                         error: function() {
                             $("#influencerinfoResult").text("오류가 발생했습니다.");
