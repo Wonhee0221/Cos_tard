@@ -101,7 +101,7 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'home-page' %}">메인</a></li>
                         <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'about-page' %}">팀소개</a></li>
-                        <li class="nav-item"><a class="nav-link fw-bold" href="influencerList.html">리스트</a></li>
+                        <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'list-page' %}">리스트</a></li>
                         <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'recommend-page' %}">추천</a></li>
                         <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'analysis-page' %}">분석</a></li>
                         <li class="nav-item dropdown">
@@ -126,7 +126,7 @@
         <section class="py-5 bg-dark">
             <div class="container px-2">
                 <!-- Contact form-->
-                <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5" style="height: 1000px">
+                <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5">
                     <div class="text-center mb-5">
                         <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-person-lines-fill"></i></div>
                         <h1 class="fw-bolder">인플루언서 데이터 수집</h1>
@@ -145,8 +145,6 @@
                                     <input class="form-control" type="text" id="username" placeholder="instagram id" />
                                     <button class="btn btn-outline-danger fw-bold" type="button" id="getButton">크롤링</button>
                                 </div>
-                                <!-- <div class="small text-white-50">인스타그램 이름을 입력해주세요..</div> -->
-
                             </div>                          
                         </div>
                     </div>
@@ -164,7 +162,6 @@
                                     <input class="form-control" type="text" id="password" placeholder="password" />
                                     <button class="btn btn-outline-danger fw-bold" type="button" id="getButtonalluserinfo">전체 크롤링</button>
                                 </div>
-                                <!-- <div class="small text-white-50">인스타그램 이름을 입력해주세요..</div> -->
                             </div>
                         </div>
                     </div>
@@ -180,7 +177,6 @@
                                     <input class="form-control" type="text" id="password" placeholder="password" />
                                     <button class="btn btn-outline-danger fw-bold" type="button" id="getButtonmediafix">전체 크롤링</button>
                                 </div>
-                                <!-- <div class="small text-white-50">인스타그램 이름을 입력해주세요..</div> -->
                             </div>
                         </div>
                     </div>
@@ -196,7 +192,6 @@
                                     <input class="form-control" type="text" id="password" placeholder="password" />
                                     <button class="btn btn-outline-danger fw-bold" type="button" id="getButtonmediainfo">전체 크롤링</button>
                                 </div>
-                                <!-- <div class="small text-white-50">인스타그램 이름을 입력해주세요..</div> -->
                             </div>
                         </div>
                     </div>
@@ -230,6 +225,5 @@
             <a href="#"><i class="bi bi-caret-up-fill"></i></a>
         </div>
     </main>
-        
 </body>
 </html>
