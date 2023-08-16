@@ -96,6 +96,22 @@
                                 <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults3">
                                     <div id="chart-container-01" class="shadow-lg"><!-- 차트가 이곳에 표시됩니다 --></div>
                                 </div>
+                                <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults" style="padding: 50px">
+
+                                    <div id="chart-container-02" style="width: 100%; height: 400px;"><!-- 차트가 이곳에 표시됩니다 --></div>
+                                </div>
+                                <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults" style="padding: 30px; flex: 2; margin-right: 20px;">
+                                    <div id="followerResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
+                                </div>
+                                <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults" style="padding: 30px; flex: 2; margin-right: 20px;">
+                                    <div id="feedResult"><!-- 검색 결과가 이곳에 표시됩니다 --></div>
+
+                                    <div id="influencercount_textResult" style="width: 50%; height: 200px;"><!-- 차트가 이곳에 표시됩니다 --></div>
+                                </div>
+                                <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults" style="padding: 50px">
+                                    <div id="influencercounthashResult" style="width: 50%; height: 200px;"><!-- 차트가 이곳에 표시됩니다 --></div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -138,8 +154,14 @@
                             var userfix = data.influencer_data;
                             var userinfo = data.influencer_data_details;
                             var follower_trend= data.follower_trend;
+                            var image_link= data.image_link;
+                            var count_text= data.count_text;
+                            var count_hashtag= data.count_hashtag;
+                          
+                          
+                          
+                            var fixHTML = "<인플루언서 정보><br>";
 
-                            var fixHTML = "<인플루언서 정보><br>"
                             fixHTML += "닉네임: " + userfix.userid + "<br>";
                             fixHTML += "이름: " + userfix.username + "<br>";
                             fixHTML += "웹사이트: " + userfix.website + "<br>";
@@ -165,6 +187,7 @@
                             searchResults2.style.flex = "1";
                             searchResults2.style.backgroundColor = "#9a68af";
 
+
                             // 팔로워 그래프
                             Highcharts.chart('chart-container-01', {
                                             
@@ -184,10 +207,82 @@
                                                 data: follower_trend.yData
                                             }]
                                         });
+
                                 // 검색 결과 그래프 띄울때 DOM 객체 이용해서 css 조정
                                 document.getElementById('chart-container-01').style.width = "100%";
                                 document.getElementById('chart-container-01').style.height = "500px";
                                 document.getElementById('chart-container-01').style.padding = "50px";
+                            },
+
+
+                            
+                            Highcharts.chart('chart-container-02', {
+                                
+                                            title: {
+                                                text: 'Follower increase'
+                                            },
+                                            xAxis: {
+                                                categories: follower_trend.xData
+                                            },
+                                            yAxis: {
+                                                title: {
+                                                    text: 'Growth rate of followers'
+                                                }
+                                            },
+                                            plotOptions: {
+                                                area: {
+                                                    fillOpacity: 0.2, 
+                                                    threshold: 0,  
+                                                    marker: {
+                                                        enabled: false
+                                                    }
+                                                }},
+                                            series: [{
+                                                name: 'followers increase rate',
+                                                data: follower_trend.growth_rates
+                                            },
+                                            {
+                                                name: '비교군 데이터임',
+                                                type : 'area',
+                                                color: 'grey', 
+                                                fillColor: 'rgba(192, 192, 192, 0.2)',
+                                                data: follower_trend.growth_rate_average
+                                            }
+                                        ]
+                                        });
+
+                            var followerHTML = "팔로워 정보:<br>";
+                            followerHTML += "팔로워 증가율 평균: " + follower_trend.average_growth.toFixed(3) + "% <br>";
+                            followerHTML += "대조군 팔로워 증가율 평균: " + follower_trend.average_average_growth.toFixed(3) + "% <br>";
+                            if (follower_trend.average_growth > follower_trend.average_average_growth) {
+                                followerHTML += "다른 인플루언서들 보다 팔로워 증가율이 높습니다! " + "<br>";
+                            } else {
+                                followerHTML += "다른 인플루언서들 보다 팔로워 증가율이 낮습니다.. " + "<br>";
+                            }
+                            followerHTML += "팔로워가 가장 많이 증가한 날: " + follower_trend.max_growth_date + "<br>";
+                            $("#followerResult").html(followerHTML);
+
+                            var imageHTML = "피드 미리보기 이긴한데 아직 깨지네요 이제 안깨지게 해야지..ㅋ:<br>";
+                            for (var i = 0; i < image_link.length; i++) {
+                                imageHTML += '<img src="' + image_link[i] + '" alt="Instagram Image ' + (i + 1) + '"><br>';
+                            }
+                            $("#feedResult").html(imageHTML);
+
+                            var countHTML = "인플루언서 게시글 토픽:<br>";
+                            countHTML += "TOP 1: " + count_text.count_cap1 + "<br>";
+                            countHTML += "TOP 2: " + count_text.count_cap2 + "<br>";
+                            countHTML += "TOP 3: " + count_text.count_cap3 + "<br>";
+                            countHTML += "TOP 4: " + count_text.count_cap4 + "<br>";
+                            countHTML += "TOP 5: " + count_text.count_cap5;
+                            $("#influencercount_textResult").html(countHTML);
+                            
+                            var hashHTML = "인플루언서 해쉬태그 토픽:<br>";
+                            hashHTML += "TOP 1: " + count_hashtag.tags1 + "<br>";
+                            hashHTML += "TOP 2: " + count_hashtag.tags2 + "<br>";
+                            hashHTML += "TOP 3: " + count_hashtag.tags3 + "<br>";
+                            hashHTML += "TOP 4: " + count_hashtag.tags4 + "<br>";
+                            hashHTML += "TOP 5: " + count_hashtag.tags5;
+                            $("#influencercounthashResult").html(hashHTML);
                         },
                         error: function() {
                             $("#influencerinfoResult").text("오류가 발생했습니다.");
@@ -205,8 +300,7 @@
                 }
             });
             </script>
-        
-            
+                     
 {% comment %}
         <script> // Ajax 요청을 보내고 결과를 처리하는 함수
             function performSearch() {

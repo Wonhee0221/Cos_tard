@@ -139,12 +139,16 @@ def update_media_fix(request):
             media_fix.timestamp=j[5]
             media_fix.save(force_insert=True)
 
-            tag = hash_w.findall(j[2])
-             
-            hashtags.owner_id= j[0]
-            hashtags.media_id= j[1]
-            hashtags.tags= ",".join(tag)
-            hashtags.save(force_insert=True)
+            try:
+                tag = hash_w.findall(j[2])
+                
+                hashtags.owner_id= j[0]
+                hashtags.media_id= j[1]
+                hashtags.tags= ",".join(tag)
+                hashtags.save(force_insert=True)
+            
+            except Exception as e:
+                next
 
     return JsonResponse({'msg' : 'success'}, safe=False)
 
@@ -174,6 +178,7 @@ def update_media_info(request):
             media_info.date=i[1]
             media_info.like_count=i[2]
             media_info.comments_count=i[3]
+            media_info.media_url=i[4]
             media_info.save(force_insert=True)
 
     return JsonResponse({'msg' : 'success'}, safe=False)
