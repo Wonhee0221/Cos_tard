@@ -138,6 +138,16 @@
         </footer>
 
         <script>
+            // 검색창에서 클릭 안하고 엔터해도 검색되게.
+            var input = document.getElementById("influencerName");
+            input.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("getInfluencerButton").click();
+                }
+            });
+        </script>
+        <script>
             $(document).ready(function() {
                 $("#getInfluencerButton").click(function() {
                     var influencerName = $("#influencerName").val();
@@ -212,8 +222,7 @@
                                 document.getElementById('chart-container-01').style.width = "100%";
                                 document.getElementById('chart-container-01').style.height = "500px";
                                 document.getElementById('chart-container-01').style.padding = "50px";
-                            },
-
+                            
 
                             
                             Highcharts.chart('chart-container-02', {
@@ -290,39 +299,7 @@
                     });
                 });
             });
-
-            // 검색창에서 클릭 안하고 엔터해도 검색되게.
-            var input = document.getElementById("influencerName");
-            input.addEventListener("keyup", function (event) {
-            if (event.keyCode === 13) {
-                event.preventDefault();
-                document.getElementById("getInfluencerButton").click();
-                }
-            });
-            </script>
-                     
-{% comment %}
-        <script> // Ajax 요청을 보내고 결과를 처리하는 함수
-            function performSearch() {
-                const inputText = document.getElementById("searchInput").value;
-                $.ajax({
-                    url: "/search/",
-                    method: "POST",
-                    data: { search_text: inputText },
-                    success: function (data) {
-                        // 서버로부터 받은 결과를 처리하여 searchResults 영역에 표시
-                        $("#searchResults").html(data);
-                    },
-                    error: function (error) {
-                        console.log("Error:", error);
-                    }
-                });
-            }
-            // 검색 버튼 클릭 시 검색 수행
-            $("#searchButton").click(function () {
-                performSearch();
-            });
         </script>
-{% endcomment %}
+
     </body>
 </html>
