@@ -26,7 +26,3 @@ def follower_graph(ig_id):
 
     }
     return (follower_trend)
-
-
-
-

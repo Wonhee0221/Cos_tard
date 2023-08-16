@@ -3,6 +3,7 @@ from django.http import JsonResponse, HttpResponse
 from media4.models import *
 from analysis.models import *
 from analysis.processing import *
+from analysis.hashtag import *
 import json
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -31,48 +32,19 @@ def get_influencer(request):
 
         #팔로워 부분
         follower_trend = follower_graph(influencer.ig_id)
+        count_text = count_text_token(influencer.ig_id)
+        count_hashtag=count_hashtags(influencer.ig_id)
 
         context = {
-
             'influencer_data' : influencer_data,
             'influencer_data_details' : influencer_data_details,
-            'follower_trend' : follower_trend
-
-        }
+            'follower_trend' : follower_trend,
+            'count_text' : count_text,
+            'count_hashtag' : count_hashtag
+            }
 
 
         return JsonResponse(context, safe=False)
     
     except Users_fix.DoesNotExist:
         return JsonResponse({'error': 'Influencer not found'}, status=404)
-    
-
-    
-
-
-
-# DB에서 검색해서 웹페이지에 결과 띄우는거 시험해보는중..
-# def search_view(request):
-#     if request.method == 'POST':
-#         input_text = request.POST.get('search_text')
-#         results = testTable.objects.filter(some_field__icontains=input_text)
-
-#         # 검색 결과를 JSON 형식으로 반환하는 경우
-#         # results_data = [{'some_field': item.some_field} for item in results]
-#         # return JsonResponse(results_data, safe=False)
-
-#         # 검색 결과를 HTML로 렌더링하여 반환하는 경우
-#         return render(request, 'search_results.html', {'results': results})
-
-#     return render(request, 'analysis.html')
-
-@csrf_exempt
-def get_influencer(request):
-    data = json.loads(request.body)
-    influencerName= data.get('influencerName')
-    ig_id = Users_fix.objects.get(user_id=influencerName)
-    follower_trend = follower_graph(ig_id)
-    context = {
-        'follower_trend' : follower_trend 
-    }
-    return JsonResponse(context, safe=False)
