@@ -50,5 +50,15 @@ class Media_info(models.Model):
         managed=False
         db_table = "media_info"
 
+class Hashtags(models.Model):
+    media_id=models.CharField(primary_key=True)
+    tags=models.CharField()
+    owner_id=models.CharField()
+
+    class Meta:
+        managed=False
+        db_table = "hashtags"
+
+
 
 

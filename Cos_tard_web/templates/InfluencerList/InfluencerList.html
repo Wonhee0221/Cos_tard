@@ -68,8 +68,8 @@
                             <p class="lead fw-normal text-muted mb-0">* {{date}} 기준</p>
                         </div>
                         <div class="row gx-5 justify-content-center">
-                            <div class="col-lg-8 col-xl-6">
-                                <table class="custom-table col-lg-8 col-xl-6">
+                            <div class="col-lg-11 col-xl-11">
+                                <table class="table table-responsive-xl col-lg-11 col-xl-11">
                                     <thead>
                                         <tr>
                                             <th>instagram id</th>
@@ -82,19 +82,18 @@
                                     </thead>
                                     <tbody>
                                         {% for row in joined_query %}
-                                            <tr class="alert" role="alert">
+                                            <tr class="alert2" role="alert2">
                                                 <td class="d-flex2 align-items-center2">
-                                                    <div class="img2" style="background-image: url(https://via.placeholder.com/50x50); width: 50px; height: 50px;"></div>
-                                                    <div class="pl-3 email">
-                                                        <span>{{ row.user_id }}</span>
-                                                    </div>
+                                                    <div class="img2 img50x50" style="background-image: url(https://via.placeholder.com/50x50);"></div>
+                                                    <div class="pl-3 email"><span>{{ row.user_id }}</span></div>
                                                 </td>
                                                 <td>{{ row.username }}</td>
                                                 <td>{{ row.follows_count }}</td>
                                                 <td>{{ row.followers_count }}</td>
                                                 <td>{{ row.media_count }}</td>
-                                                <td>{{ row.website }}</td>
-
+                                                <td><a href="" style="margin-right: 5px;"><img src="{% static 'assets/instaLogo.png' %}"></img></a>
+                                                    <a href="{{ row.website }}"><img src="{% static 'assets/linkLogo.png' %}"></a>
+                                                </td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>
@@ -103,7 +102,7 @@
                         </div>
                     </div>
                     <!-- Contact cards-->
-                    <div class="row gx-5 row-cols-2 row-cols-lg-4 py-5">
+                    <div class="row  row-cols-2 row-cols-lg-4 py-5">
                         <div class="col">
                             <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-chat-dots"></i></div>
                             <div class="h5 mb-2 text-white">Chat with us</div>
