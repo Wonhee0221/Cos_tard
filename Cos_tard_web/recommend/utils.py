@@ -4,16 +4,16 @@ import statistics
 from datetime import datetime, timedelta
 
 def cal_engagement(ig_id):
-    media_ids = Media_fix.objects.filter(ig_id=ig_id).values_list('media_id', flat=True)
+    media_ids = list(Media_fix.objects.filter(owner_id=ig_id).values_list('media_id', flat=True))
     # media_id에 해당하는 like_count 가져오기
-    likes = Media_info.objects.filter(media_id__in=media_ids).values('like_count', flat=True)
-    comments = Media_info.objects.filter(media_id__in=media_ids).values('comments_count', flat=True)
-    followers = Users_info.objects.filter(ig_id=ig_id).order_by('date').values('followers_count').first()
+    likes = list(Media_info.objects.filter(media_id__in=media_ids, like_count__isnull=False).values_list('like_count', flat=True))
+    comments = list(Media_info.objects.filter(media_id__in=media_ids, like_count__isnull=False).values_list('comments_count', flat=True))
+    followers = Users_info.objects.filter(ig_id=ig_id).order_by('date').values_list('followers_count').first()[0]
 
-    if followers is None or followers['followers_count'] == 0:
+    if followers is None or followers == 0:
         return None # 유효성 검사
 
-    engagement = [(like + comment) / followers['followers_count'] for like, comment in zip(likes, comments)]
+    engagement = [(like + comment) / followers for like, comment in zip(likes, comments)]
     
     avg_engagement = statistics.mean(engagement)
 
@@ -41,18 +41,20 @@ def followerslevel(ig_id):
 
 
 def activities(ig_id):
-    mediatime = Media_fix.objects.filter(ig_id=ig_id).order_by('-timestamp')[:14].values('timestamp')
+    mediatime = Media_fix.objects.filter(owner_id=ig_id).order_by('-timestamp')[:14].values('timestamp')
 
-    date_format = "%Y-%m-%dT%H:%M:%S%z"
+    date_format = "%Y-%m-%d %H:%M:%S"
     parsed_dates = [datetime.strptime(item['timestamp'], date_format) for item in mediatime]
 
-    # 기록 간격 계산
-    intervals = [parsed_dates[i] - parsed_dates[i-1] for i in range(1, len(parsed_dates))]
+    date_intervals = []
+    for i in range(1, len(parsed_dates)):
+        interval = abs((parsed_dates[i].date() - parsed_dates[i - 1].date()).days)
+        date_intervals.append(interval)
 
-    # 평균 기록 간격 계산
-    average_interval = sum(intervals, timedelta(0)) / len(intervals)
+    average_interval = sum(date_intervals) / len(date_intervals)
 
     return average_interval
+
 
 
 def scaler(value, min_value, max_value, new_min, new_max):
@@ -68,13 +70,13 @@ def scaler(value, min_value, max_value, new_min, new_max):
 
 def scoring(ig_id):
     followerslev = followerslevel(ig_id=ig_id)
-    expert = Comment.objects.filter(ig_id=ig_id).values('domain')
-    info = Comment.objects.filter(ig_id=ig_id).values('inforate')
+    expert = Comment.objects.filter(ig_id=ig_id).values_list('domain').first()[0]
+    info = Comment.objects.filter(ig_id=ig_id).values_list('inforate').first()[0]
     engage = cal_engagement(ig_id=ig_id)
-    act = activities(ig_id=ig_id)
-    scaled_act = scaler(act, 1, 14, 15, 1)
+    # act = activities(ig_id=ig_id)
+    # scaled_act = scaler(act, 1, 14, 15, 1)
 
-    score = (followerslev * 5) + (sum([item['domain'] for item in expert]) * 10) + (sum([item['inforate'] for item in info]) * 0.2) + (engage * 0.2) + scaled_act
+    score = (followerslev * 5) + (expert * 10) + (info * 0.2) + (engage * 0.2) # + scaled_act
 
     return score
 
