@@ -49,7 +49,6 @@ def get_influencer(request):
             'count_hashtag' : count_hashtag
             }
 
-
         return JsonResponse(context, safe=False)
     
     except Users_fix.DoesNotExist:
