@@ -22,7 +22,8 @@ from recommend.utils import *
 
 # Create your views here.
 def index(request): 
-    scores = {}
+    # scores = {}
+    scores = []
     username = ["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
             "hamnihouse", "ssinnim", "yu__hyewon", "hyojinc_", "leojmakeup", "2__yun__2", "areumsongee", "makeup_maker_",
             "r_yuhyeju", "vivamoon", "risabae_art", "yujin_so", "kisy0729", "ponysmakeup"]
@@ -31,11 +32,14 @@ def index(request):
         id_object = Users_fix.objects.filter(user_id=user).first()
         ig_ids = id_object.ig_id
         score = scoring(ig_ids)
-        scores[user] = score  # Store score in the dictionary with the username as the key
+        scores.append(score)
 
-    print(score)
+    print(scores)
 
-    sorted_data = sorted(scores.items(), key=lambda item: item[1], reverse=True)
-    context = {'sorted_data': sorted_data}
+    scaled_score = scale_list(scores, 1, 100)
+    context = {
+        'username' : username,
+        'scaled_score': scaled_score
+        }
     
     return render(request,'recommend/recommend.html', context)
