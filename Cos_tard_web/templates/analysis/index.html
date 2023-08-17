@@ -18,6 +18,14 @@
     <link rel="stylesheet" href="../../static/templates/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../static/templates/assets/images/favicon.ico" />
+    <style>
+      .small-image {
+          width: 280px;  /* Adjust the width as needed */
+          height: auto;  /* Automatically adjust the height to maintain the aspect ratio */
+          margin: 0px;  /* Add some spacing between images */
+      }
+      
+  </style>
   </head>
   <body>
     <div class="container-scroller">
@@ -315,14 +323,13 @@
                       </div>
                     </div>
                     <div class="row mt-3">
-                      <div class="col-6 pe-1">
-                        <img src="../../static/templates/assets/images/dashboard/img_1.jpg" class="mb-2 mw-100 w-100 rounded" alt="image">
-                        <img src="../../static/templates/assets/images/dashboard/img_4.jpg" class="mw-100 w-100 rounded" alt="image">
+                      <div class="col-12 pe-1">
+                        {% for image in image_link %}
+                              <img src="{{ image }}" alt='Instagram Image' class='small-image'>
+                          {% endfor %}
                       </div>
-                      <div class="col-6 ps-1">
-                        <img src="../../static/templates/assets/images/dashboard/img_2.jpg" class="mb-2 mw-100 w-100 rounded" alt="image">
-                        <img src="../../static/templates/assets/images/dashboard/img_3.jpg" class="mw-100 w-100 rounded" alt="image">
-                      </div>
+                          
+                    </div>                    
                     </div>
                   </div>
                 </div>
