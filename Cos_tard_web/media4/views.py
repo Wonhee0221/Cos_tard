@@ -179,6 +179,7 @@ def update_media_info(request):
             media_info.like_count=i[2]
             media_info.comments_count=i[3]
             media_info.media_url=i[4]
+            media_info.owner_id=i[5]
             media_info.save(force_insert=True)
 
     return JsonResponse({'msg' : 'success'}, safe=False)

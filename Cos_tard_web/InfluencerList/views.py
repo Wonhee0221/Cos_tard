@@ -20,7 +20,7 @@ def index(request):
         )
     context = {'joined_query': joined_query, 'date': date }
 
-    return render(request,'InfluencerList/influencerList.html',context)
+    return render(request,'InfluencerList/InfluencerList.html',context)
 
 
 
