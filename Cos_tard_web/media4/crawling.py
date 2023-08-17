@@ -119,7 +119,7 @@ def crawl_media_info(admin_id, token, username):
         formatted_date = now.strftime('%Y-%m-%d')
 
         media_list = []
-        #ig_id = user_info.get('ig_id')
+        ig_id = user_info.get('ig_id')
         media_data = user_info.get('media').get('data')
         for media in media_data:
             comments_count = media.get('comments_count')
@@ -132,7 +132,8 @@ def crawl_media_info(admin_id, token, username):
                 formatted_date,
                 like_count,
                 comments_count,
-                media_url
+                media_url,
+                ig_id
             ])
         return media_list
 

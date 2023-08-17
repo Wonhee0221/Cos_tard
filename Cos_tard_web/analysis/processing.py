@@ -68,12 +68,8 @@ def follower_graph(ig_id):
     return (follower_trend)
 
 def get_image(ig_id): 
-    media_id = Media_fix.objects.filter(owner_id=ig_id).order_by('-timestamp').values('media_id')[:5]
-    media_id=list(media_id)
-    return (media_id)
+    link = Media_info.objects.filter(owner_id=ig_id).order_by('-date').values('date', 'media_url')[:5]
+    image_link = [link['media_url'] for link in link if link['media_url'] is not None]
 
-
-
-
-
+    return image_link
 
