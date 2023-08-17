@@ -31,6 +31,7 @@
                 height: auto;  /* Automatically adjust the height to maintain the aspect ratio */
                 margin: 10px;  /* Add some spacing between images */
             }
+            
         </style>
     </head>
     <body class="d-flex flex-column">
@@ -287,6 +288,7 @@
 
                             var imageHTML = "피드 미리보기:<br>";
                             for (var i = 0; i < image_link.length; i++) {
+                                if (image_link[i].includes("_video_dashinit.mp4")) {next}
                                 imageHTML += "<img src='" + image_link[i] + "' alt='Instagram Image' class='small-image'>";
                             }
                             $("#feedResult").html(imageHTML);
