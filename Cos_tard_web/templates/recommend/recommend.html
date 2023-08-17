@@ -69,7 +69,15 @@
                         <div class="row gx-5 justify-content-center" style="height: 700px">
                             <div class="col-lg-8 col-xl-6">
 
-                                <h1>recommend html</h1>
+                                <h1>recommend </h1>
+                                <body> 
+                                    {% for user, score in sorted_data %}
+                                    <li>{{ user }} - {{ score }}</li>
+                                    {% endfor %}
+    
+                                    {{context}}
+                                    
+                                    </body>
                                 
                             </div>
                         </div>
