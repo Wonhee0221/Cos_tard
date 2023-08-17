@@ -5,4 +5,4 @@ app_name = 'analysis'
 
 urlpatterns = [
     path('',views.index,name='analysis-page'),
-    path('',views.get_influencer)]
+    path('get_influencer',views.get_influencer)]
