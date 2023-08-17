@@ -8,10 +8,20 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+# Create your views here.
+
+def index_test(request):
+    return render(request,'analysis/index.html')
+
+def index_test_url(request,key): 
+    influencer_list = { '1555054356' : 'leojmakeup'}
+    return render(request,'analysis/index.html',influencer_list)
+
+# Create your views here.
+
 def index(request): 
     return render(request,'analysis/analysis.html')
 
-# Create your views here.
 @csrf_exempt
 def get_influencer(request):
     data = json.loads(request.body)

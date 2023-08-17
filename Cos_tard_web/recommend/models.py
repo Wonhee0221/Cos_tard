@@ -27,3 +27,13 @@ class Comment(models.Model):
     class Meta:
         managed=False
         db_table = "comment"
+
+
+class Combined_caption(models.Model):
+    ig_id = models.CharField(primary_key=True)
+    caption = models.TextField()
+    label = models.CharField()
+
+    class Meta:
+        managed=False
+        db_table = "comment"
