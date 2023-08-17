@@ -32,24 +32,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'home-page' %}">메인</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'about-page' %}">팀소개</a></li>
                             <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'InfluencerList:list-page' %}">리스트</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'recommend:recommend-page' %}">추천</a></li>
                             <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'analysis:analysis-page' %}">분석</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="blog-home.html">블로그 홈</a></li>
-                                    <li><a class="dropdown-item" href="blog-post.html">블로그 포스트</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Portfolio</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
-                                    <li><a class="dropdown-item" href="portfolio-overview.html">포트폴리오 미리보기</a></li>
-                                    <li><a class="dropdown-item" href="portfolio-item.html">포트폴리오 아이템</a></li>
-                                </ul>
-                            </li>
+                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'recommend:recommend-page' %}">추천</a></li>
+                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'about-page' %}">팀소개</a></li>
                         </ul>
                     </div>
                 </div>
