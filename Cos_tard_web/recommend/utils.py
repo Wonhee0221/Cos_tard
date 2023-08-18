@@ -110,13 +110,12 @@ def scoring(ig_id, image, level, info_weight, image_weight):
     engage = cal_engagement(ig_id=ig_id) #인게이지먼트
     # act = activities(ig_id=ig_id)
     # scaled_act = scaler(act, 1, 14, 15, 1)
-    image = imaging(ig_id, image) # 이미지옵션
+    model_image = imaging(ig_id, image) # 이미지옵션
     price = pricing(ig_id, level) # 가격대옵션
     # 화장품분류
     image_c = Comment.objects.filter(ig_id=ig_id).values_list('imagerate').first()[0] # 이미지댓글 비율, 바이럴 증가
-    # 공구, 콜라보마켓, 바이럴 등 프로모션의 방식
     
-    score = (followerslev * 5) + (expert * 10) + (info_c) + (engage * 10) + (image * 100) + price + (image_c * image_weight)
+    score = (followerslev * 5) + (expert * 10) + (info_c * info_weight) + (engage * 10) + (model_image * 100) + price + (image_c * image_weight)
 
     return score
 
