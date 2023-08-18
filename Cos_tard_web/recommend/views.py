@@ -21,25 +21,29 @@ from recommend.utils import *
 
 
 # Create your views here.
-def index(request): 
-    # scores = {}
-    scores = []
-    username = ["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
-            "hamnihouse", "ssinnim", "yu__hyewon", "hyojinc_", "leojmakeup", "2__yun__2", "areumsongee", "makeup_maker_",
-            "r_yuhyeju", "vivamoon", "risabae_art", "yujin_so", "kisy0729", "ponysmakeup"]
+# def index(request): 
+#     # scores = {}
+#     scores = []
+#     username = ["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
+#             "hamnihouse", "ssinnim", "yu__hyewon", "hyojinc_", "leojmakeup", "2__yun__2", "areumsongee", "makeup_maker_",
+#             "r_yuhyeju", "vivamoon", "risabae_art", "yujin_so", "kisy0729", "ponysmakeup"]
 
-    for user in username:
-        id_object = Users_fix.objects.filter(user_id=user).first()
-        ig_ids = id_object.ig_id
-        score = scoring(ig_ids)
-        scores.append(score)
+#     for user in username:
+#         id_object = Users_fix.objects.filter(user_id=user).first()
+#         ig_ids = id_object.ig_id
+#         score = scoring(ig_ids)
+#         scores.append(score)
 
-    print(scores)
+#     print(scores)
 
-    scaled_score = scale_list(scores, 1, 100)
-    context = {
-        'username' : username,
-        'scaled_score': scaled_score
-        }
+#     scaled_score = scale_list(scores, 1, 100)
+#     context = {
+#         'username' : username,
+#         'scaled_score': scaled_score
+#         }
     
-    return render(request,'recommend/recommend.html', context)
+#     return render(request,'recommend/recommend.html', context)
+
+def index(request): 
+    
+ return render(request,'recommend/table.html')
