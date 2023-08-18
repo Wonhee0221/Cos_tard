@@ -34,107 +34,204 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'home-page' %}">메인</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'about-page' %}">팀소개</a></li>
                             <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'InfluencerList:list-page' %}">리스트</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'recommend:recommend-page' %}">추천</a></li>
                             <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'analysis:analysis-page' %}">분석</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="blog-home.html">Blog Home</a></li>
-                                    <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Portfolio</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
-                                    <li><a class="dropdown-item" href="portfolio-overview.html">Portfolio Overview</a></li>
-                                    <li><a class="dropdown-item" href="portfolio-item.html">Portfolio Item</a></li>
-                                </ul>
-                            </li>
+                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'recommend:recommend-page' %}">추천</a></li>
+                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'about-page' %}">팀소개</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
             <!-- Page content-->
-            <section class="py-5 bg-dark">
-                <div class="container px-2">
-                    <!-- Contact form-->
-                    <div class="bg-light rounded-4 py-5 px-4 px-md-5 mb-5">
-                        <div class="text-center mb-5">
-                            <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-person-lines-fill"></i></div>
-                            <h1 class="fw-bolder">인플루언서 리스트</h1>
-                            <p class="lead fw-normal text-muted mb-0">Cos-tard가 수집한 인스타그램 인플루언서 리스트를 살펴보세요</p>
-                            <p class="lead fw-normal text-muted mb-0">* {{date}} 기준</p>
+            <section class="py-5 bg-white">
+                <div class="container px-2 bg-white">
+                    <div class="py-4 px-4 px-md-5 mb-5" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; border:">
+                        <div class="" style="display: flex; justify-content: left; align-items: left; ">
+                            {% comment %} <img src="/static/assets/Influencer_logo/Influencer_logo1.png" alt="" width="300px" height="90px"></img> {% endcomment %}
+                            <div class="custom-text" style="font-size: 24px;" >Influencer</div>
                         </div>
-                        <div class="row gx-5 justify-content-center">
-                            <div class="col-lg-11 col-xl-11">
-                                <table class="table table-responsive-xl col-lg-11 col-xl-11">
-                                    <thead>
-                                        <tr>
-                                            <th>instagram id</th>
-                                            <th>username</th>
-                                            <th>follows_count</th>
-                                            <th>followers_count</th>
-                                            <th>media_count</th>
-                                            <th>website</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for row in joined_query %}
-                                            <tr class="alert2" role="alert2">
-                                                <td>
-                                                    <div class="d-flex2 align-items-center2">
-                                                        <div class="img2 img50x50" style="background-image: url('{% static 'assets/' %}{{ row.user_id }}.jpg');"></div>
-                                                        <div class="pl-3"><span>{{ row.user_id }}</span></div>
-                                                    </div>
-                                                </td>
-                                                <td>{{ row.username }}</td>
-                                                <td>{{ row.follows_count }}</td>
-                                                <td>{{ row.followers_count }}</td>
-                                                <td>{{ row.media_count }}</td>
-                                                <td>
-                                                    <div class="d-flex2 align-items-center2">
-                                                        <div>
-                                                            <a href="https://instagram.com/{{ row.user_id }}" style="margin-right: 5px;"><img src="{% static 'assets/instaLogo.png' %}"></img></a>
-                                                        </div>
-                                                        <div>
-                                                            <a href="{{ row.website }}"><img src="{% static 'assets/linkLogo.png' %}"></a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
+                        <div class="my-3 align-items-center" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center fst-italic " style="font-size: 18px;">정다윤</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/2__yun__2.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">정다윤</div>
+                                    <div class="" style="font-size: 10px;" >@2__yun__2</div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Contact cards-->
-                    <div class="row  row-cols-2 row-cols-lg-4 py-5">
-                        <div class="col">
-                            <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-chat-dots"></i></div>
-                            <div class="h5 mb-2 text-white">Chat with us</div>
-                            <p class="text-muted mb-0">Chat live with one of our support specialists.</p>
-                        </div>
-                        <div class="col">
-                            <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-people"></i></div>
-                            <div class="h5 text-white">Ask the community</div>
-                            <p class="text-muted mb-0">Explore our community forums and communicate with other users.</p>
-                        </div>
-                        <div class="col">
-                            <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-question-circle"></i></div>
-                            <div class="h5 text-white">Support center</div>
-                            <p class="text-muted mb-0">Browse FAQ's and support articles to find solutions.</p>
-                        </div>
-                        <div class="col">
-                            <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-telephone"></i></div>
-                            <div class="h5 text-white">Call us</div>
-                            <p class="text-muted mb-0">Call us during normal business hours at (555) 892-9403.</p>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center fst-italic">아랑</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/a_arang_.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">아랑</div>
+                                    <div class="" style="font-size: 10px;" >@a_arang_</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>아름송이</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/areumsongee.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">아름송이</div>
+                                    <div class="" style="font-size: 10px;" >@areumsongee</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>회사원</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/calarygirl_a.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">회사원</div>
+                                    <div class="" style="font-size: 10px;" >@calarygirl_a</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>김습습</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/doublesoup.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">김습습</div>
+                                    <div class="" style="font-size: 10px;" >@doublesoup</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>민카롱</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/fallininm.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">민카롱</div>
+                                    <div class="" style="font-size: 10px;" >@fallininm</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>햄니</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/hamnihouse.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">햄니</div>
+                                    <div class="" style="font-size: 10px;" >@hamnihouse</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>조효진</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/hyojinc_.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">조효진</div>
+                                    <div class="" style="font-size: 10px;" >@hyojinc_</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>젤라</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/im_jella_.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">젤라</div>
+                                    <div class="" style="font-size: 10px;" >@im_jella_</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>홍영기</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/kisy0729.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">홍영기</div>
+                                    <div class="" style="font-size: 10px;" >@kisy0729</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>라뮤끄</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/lamuqe_magicup.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">라뮤끄</div>
+                                    <div class="" style="font-size: 10px;" >@lamuqe_magicup</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>레오제이</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/leojmakeup.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">레오제이</div>
+                                    <div class="" style="font-size: 10px;" >@leojmakeup</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>상은언니</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/makeup_maker_.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">상은언니</div>
+                                    <div class="" style="font-size: 10px;" >@makeup_maker_</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>포니</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/ponysmakeup.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">포니</div>
+                                    <div class="" style="font-size: 10px;" >@ponysmakeup</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>유혜주</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/r_yuhyeju.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">유혜주</div>
+                                    <div class="" style="font-size: 10px;" >@r_yuhyeju</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>이사배</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/risabae_art.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">이사배</div>
+                                    <div class="" style="font-size: 10px;" >@risabae_art</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>씬님</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/ssinnim.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">씬님</div>
+                                    <div class="" style="font-size: 10px;" >@ssinninm</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>문이</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/vivamoon.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">문이</div>
+                                    <div class="" style="font-size: 10px;" >@vivamoon</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>연두콩</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/yeondukong.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">연두콩</div>
+                                    <div class="" style="font-size: 10px;" >@yeondukong</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>혜원</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/yu__hyewon.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">혜원</div>
+                                    <div class="" style="font-size: 10px;" >@yu__hyewon</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>소유진</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/yujin_so.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">소유진</div>
+                                    <div class="" style="font-size: 10px;" >@yujin_so</div>
+                                </div>
+                            </div>
+                            <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 200px; height: 240px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                                <div class="blur-overlay2 card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>율리</div>
+                                <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                                    <div class="instagramCircle" style="background-image: url('/static/assets/yulri_0i.jpg'), linear-gradient(to right, red, orange);"></div>
+                                    <div class="fw-bolder pt-3" style="font-size: 20px;">율리</div>
+                                    <div class="" style="font-size: 10px;" >@yulri_0i</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
+
             <div class="move_to_top_btn">
                 <a href="#"><i class="bi bi-caret-up-fill"></i></a>
             </div>
