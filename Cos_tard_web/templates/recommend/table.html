@@ -41,7 +41,7 @@
               </div>
             </form>
           </div>
-          <ul class="navbar-nav navbar-nav-right">
+          <ul class="navbar-nav navbar-nav-right ">
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
@@ -174,52 +174,53 @@
         <!-- partial:../../partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
-            <li class="nav-item nav-profile">
-              <a href="#" class="nav-link">
-                <div class="nav-profile-image">
+            <!-- <li class="nav-item nav-profile"> -->
+              <!-- <a href="#" class="nav-link"> -->
+                <!-- <div class="nav-profile-image">
                   <img src="../../static/templates/assets/images/faces/face1.jpg" alt="profile">
-                  <span class="login-status online"></span>
+                  <span class="login-status online"></span> -->
                   <!--change to offline or busy as needed-->
-                </div>
-                <div class="nav-profile-text d-flex flex-column">
+                <!-- </div> -->
+                <!-- <div class="nav-profile-text d-flex flex-column">
                   <span class="font-weight-bold mb-2">David Grey. H</span>
                   <span class="text-secondary text-small">Project Manager</span>
                 </div>
-                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
-              </a>
-            </li>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
+              <!-- </a> -->
+            <!-- </li> -->
             <li class="nav-item">
-              <a class="nav-link" href="../../index.html">
-                <span class="menu-title">Dashboard</span>
+              <a class="nav-link" href="{% url 'home-page' %}">
+                <span class="menu-title">Main Board </span>
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                <span class="menu-title">Basic UI Elements</span>
+                <span class="menu-title">Influencer List</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-crosshairs-gps menu-icon"></i>
               </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/buttons.html">Buttons</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Typography</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'InfluencerList:list-page' %}">Look Around</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Contact</a></li>
                 </ul>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../../pages/icons/mdi.html">
-                <span class="menu-title">Icons</span>
-                <i class="mdi mdi-contacts menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../../pages/forms/basic_elements.html">
-                <span class="menu-title">Forms</span>
+              <a class="nav-link" href="{% url 'analysis:analysis-page' %}">
+                <span class="menu-title">Analysis</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'recommend:recommend-page' %}">
+                <span class="menu-title">Recommend System</span>
+                <i class="mdi mdi-contacts menu-icon"></i>
+              </a>
+            </li>
+            
+            <!-- <li class="nav-item">
               <a class="nav-link" href="../../pages/charts/chartjs.html">
                 <span class="menu-title">Charts</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
@@ -245,23 +246,19 @@
                   <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-404.html"> 404 </a></li>
                   <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-500.html"> 500 </a></li>
                 </ul>
-              </div>
-            </li>
+              </div> -->
+            <!-- </li> -->
             <li class="nav-item sidebar-actions">
               <span class="nav-link">
                 <div class="border-bottom">
-                  <h6 class="font-weight-normal mb-3">Projects</h6>
+                  <h6 class="font-weight-normal mb-3">Team Costard</h6>
                 </div>
-                <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a project</button>
-                <div class="mt-4">
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4">Contact us!</button>
+                <!-- <div class="mt-4">
                   <div class="border-bottom">
                     <p class="text-secondary">Categories</p>
                   </div>
-                  <ul class="gradient-bullet-list mt-4">
-                    <li>Free</li>
-                    <li>Pro</li>
-                  </ul>
-                </div>
+                </div> -->
               </span>
             </li>
           </ul>
@@ -388,7 +385,7 @@
                 <div class="card bg-gradient-info card-img-holder text-white">
                   <div class="card-body">
                     <img src="../../static/templates/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Best Match with Marketing Performance <i class="mdi mdi mdi-chart-line mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-3">Best Match Marketing <i class="mdi mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
                     <h2 class="mb-5">이사배</h2>
                     <h6 class="card-text">82%</h6>
