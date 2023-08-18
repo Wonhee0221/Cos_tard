@@ -44,24 +44,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'home-page' %}">메인</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'about-page' %}">팀소개</a></li>
                             <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'InfluencerList:list-page' %}">리스트</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'recommend:recommend-page' %}">추천</a></li>
                             <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'analysis:analysis-page' %}">분석</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="blog-home.html">Blog Home</a></li>
-                                    <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Portfolio</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
-                                    <li><a class="dropdown-item" href="portfolio-overview.html">Portfolio Overview</a></li>
-                                    <li><a class="dropdown-item" href="portfolio-item.html">Portfolio Item</a></li>
-                                </ul>
-                            </li>
+                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'recommend:recommend-page' %}">추천</a></li>
+                            <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'about-page' %}">팀소개</a></li>
                         </ul>
                     </div>
                 </div>
@@ -104,24 +90,19 @@
                                 <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="searchResults3">
                                     <div id="chart-container-01" class="shadow-lg"><!-- 차트가 이곳에 표시됩니다 --></div>
                               </div>
-                               ======
                                 <!-- 여기서부터 그리드 및 반응형 해야함 -->
                                 <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="">
                                     <div id="chart-container-02" class="shadow-lg"><!-- 차트가 이곳에 표시됩니다 --></div>
-
                                 </div>
                                 <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="" style="padding: 30px;">
                                     <div id="followerResult"><!-- 팔로워 정보가 이곳에 표시됩니다 --></div>
                                 </div>
-
-                               
                                 <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="" style="padding: 30px;">
                                     <div id="feedResult" style="border: 1px solid red;"><!-- 피드 미리보기가 이곳에 표시됩니다 --></div>
                                 </div>
                                 <div class="mt-3 text-center rounded-3 bg-black text-white bg-gradient" id="" style="padding: 30px; display: flex;">
                                     <div id="influencercount_textResult" style="border: 1px solid red; flex: 1;"><!-- 게시글 토픽이 이곳에 표시됩니다 --></div>
                                     <div id="influencercounthashResult" style="border: 1px solid red; flex: 1;"><!-- 해쉬태그 토픽이 이곳에 표시됩니다 --></div>
-
                                 </div>
                             </div>
                         </div>
@@ -170,6 +151,12 @@
                         data: JSON.stringify({
                             influencer_name: influencerName
                         }),
+                        beforeSend: function() {
+                            $('html').css("cursor", "wait"); //마우스 커서를 로딩 중 커서로 변경
+                        },
+                        complete: function() {
+                            $('html').css("cursor", "auto"); //마우스 커서를 원래 기본 커서로 변경
+                        },
                         success: function(data) {
                             console.log(data);
                             var userfix = data.influencer_data;
