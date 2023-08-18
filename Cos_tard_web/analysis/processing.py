@@ -69,7 +69,7 @@ def follower_graph(ig_id):
 
 def get_image(ig_id): 
     link = Media_info.objects.filter(owner_id=ig_id).order_by('-date').values('date', 'media_url')[:5]
-    image_link = [link['media_url'] for link in link if link['media_url'] is not None]
+    image_link = [link['media_url'] for link in link if link['media_url'] is not None and "_video_dashinit.mp4" not in link['media_url']]
 
     return image_link
 
