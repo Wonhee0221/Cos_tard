@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Purple Admin</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../static/templates/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../static/templates/assets/vendors/css/vendor.bundle.base.css">
@@ -17,7 +19,7 @@
     <link rel="stylesheet" href="../../static/templates/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../static/templates/assets/images/favicon.ico" />
-    <script src="../../static/templates/assets/js/chart.js"></script>
+    
   </head>
   <body>
     <div class="container-scroller">
@@ -419,7 +421,9 @@
                   <div class="card-body">
                     <h4 class="card-title">Influencer Content</h4>
                     <p class="card-description"> 산점도: 인플루언서의 메이크업 컨텐츠 비율 vs 팔로워의 손민수댓글비율 </p>
-                    <canvas id="scatterChart" style="height:250px"></canvas>
+                    <div id="radarChartContainer">
+                      <canvas id="radarChart"></canvas>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -470,6 +474,9 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
+
+    
+
     <script src="../../static/templates/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
@@ -478,6 +485,65 @@
     <script src="../../static/templates/assets/js/off-canvas.js"></script>
     <script src="../../static/templates/assets/js/hoverable-collapse.js"></script>
     <script src="../../static/templates/assets/js/misc.js"></script>
+    
+    <script src="../../static/templates/assets/js/chart.js?ver=123"></script>
+    <script>
+      $(function () {
+        var ctx = document.getElementById('radarChart').getContext('2d');
+        var radarChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
+                datasets: [{
+                    label: 'Data Set',
+                    data: [80, 50, 30, 60, 50].map(value => Math.min(value, 100)), // Limit values to 100
+                    backgroundColor: 'rgba(5, 255, 192, 0.2)',
+                    borderColor: 'rgba(75, 255, 192, 1)',
+                    borderWidth: 1
+                },
+                {
+                  label: 'Data Set1',
+                  data: [70, 50, 40, 40, 80].map(value => Math.min(value, 100)), // Limit values to 100
+                  backgroundColor: 'rgba(45, 172, 255, 0.2)',
+                  borderColor: 'rgba(5, 142, 255, 1)',
+                  borderWidth: 1
+                },
+                {
+                  label: 'Data Set2',
+                  data: [70, 30, 60, 40, 50].map(value => Math.min(value, 100)), // Limit values to 100
+                  backgroundColor: 'rgba(75, 255, 192, 0.2)',
+                  borderColor: 'rgba(25, 102, 255, 1)',
+                  borderWidth: 1
+                },
+                {
+                  label: 'Data Set3',
+                  data: [40, 40, 60, 40, 50].map(value => Math.min(value, 100)), // Limit values to 100
+                  backgroundColor: 'rgba(75, 192, 255, 0.4)',
+                  borderColor: 'rgba(25, 255, 192, 1)',
+                  borderWidth: 1
+                },
+                {
+                  label: 'Data Set4',
+                  data: [60, 60, 60, 40, 50].map(value => Math.min(value, 100)), // Limit values to 100
+                  backgroundColor: 'rgba(255, 192, 192, 0.4)',
+                  borderColor: 'rgba(255, 102, 192, 1)',
+                  borderWidth: 1
+                }]
+            },
+            options: {
+                scale: {
+                    ticks: {
+                        beginAtZero: true,
+                        min:10,
+                        max: 100, // Set maximum tick value to 100
+                        stepSize: 10
+                    }
+                }
+            }
+        });
+      });
+      
+    </script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <!-- End custom js for this page -->
