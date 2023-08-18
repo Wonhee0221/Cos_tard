@@ -11,7 +11,7 @@ import json
 # Create your views here.
 
 def index_test(request):
-    ig_id='1555054356'
+    ig_id='17157849559'
     return render(request,'analysis/index.html',{'ig_id':ig_id})
 
 @csrf_exempt

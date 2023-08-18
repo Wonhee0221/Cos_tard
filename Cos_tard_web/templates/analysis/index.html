@@ -20,9 +20,9 @@
     <link rel="shortcut icon" href="../../static/templates/assets/images/favicon.ico" />
     <style>
       .small-image {
-          width: 280px;  /* Adjust the width as needed */
+          width: 210px;  /* Adjust the width as needed */
           height: auto;  /* Automatically adjust the height to maintain the aspect ratio */
-          margin: 0px;  /* Add some spacing between images */
+          margin: 3px;  /* Add some spacing between images */
       }
       
   </style>
@@ -289,7 +289,7 @@
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                   <i class="mdi mdi-home"></i>
                 </span>
-                <span id="userfix.username"></span>
+                <!-- <span id="userfix.username"></span> -->
               </h3>
               <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
@@ -305,10 +305,10 @@
                   <div class="card-body">
                     <h4 class="card-title">Recent Updates</h4>
                     <div class="d-flex mt-4 mb-4 align-items-top">
-                      <img id="profile_img" class="img-mm rounded-circle me-4" alt="image">
+                      <img id="profile_img" class="img-xs rounded-circle me-4-" alt="image">
                       <div class="mb-0 flex-grow">
                         <h5 id="userid" class="me-2 mb-2"></h5>
-                        <p id="biography" class="mb-0 font-weight-light"></p>
+                        <p id="username" class="mb-0 font-weight-light"></p>
                       </div>
                       <div class="ms-auto">
                         <i class="mdi mdi-heart-outline text-muted"></i>
@@ -333,7 +333,7 @@
                             <img src="../../static/templates/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                             <h4 class="font-weight-normal mb-3">Feed <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                             </h4>
-                            <h2 class="mb-5">45,6334</h2>
+                            <h2 class="mb-5" id="media_count"></h2>
                             <h6 class="card-text">Decreased by 10%</h6>
                           </div>
                         </div>
@@ -387,28 +387,73 @@
                 </div>
               </div>
             </div>
-            <div class="row mt-3">
-              <div class="col-12 pe-1">
-              </div>
-            </div>
             <div class="row">
               <div class="col-md-7 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <div class="clearfix">
-                      <h4 class="card-title float-left">Visit And Sales Statistics</h4>
-                      <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
-                    </div>
-                    <canvas id="visit-sale-chart" class="mt-4"></canvas>
+                    <h4 class="card-title">Follower Insight</h4>
+                    <p class="card-description"> 테이블 설명
+                    </p>
+                    <table class="table table-hover">
+                      <tbody>
+                        <tr>
+                          
+                          <td>~의 팔로워는 약 ~명씩 증가하고있어요</td>
+                          <td class="text-danger"> 28.76% <i class="mdi mdi-arrow-down"></i></td>
+                          <td><label class="badge badge-danger">Pending</label></td>
+                        </tr>
+                        <tr>
+                          
+                          <td>~의 팔로워 증가율은 약 ~이에요</td>
+                          <td class="text-danger"> 21.06% <i class="mdi mdi-arrow-down"></i></td>
+                          <td><label class="badge badge-warning">In progress</label></td>
+                        </tr>
+                        <tr>
+                          
+                          <td>팔로워가 ~에 가장 많이 증가했어요</td>
+                          <td class="text-danger"> 35.00% <i class="mdi mdi-arrow-down"></i></td>
+                          <td><label class="badge badge-info">Fixed</label></td>
+                        </tr>
+                        <tr>
+                          
+                          <td>다른 인플루언서보다 팔로워 증가율이 ~해요</td>
+                          <td class="text-success"> 82.00% <i class="mdi mdi-arrow-up"></i></td>
+                          <td><label class="badge badge-success">Completed</label></td>
+                        </tr>
+                        
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
               <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Traffic Sources</h4>
-                    <canvas id="traffic-chart"></canvas>
-                    <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
+                    <h4 class="card-title">2023-08-12</h4>
+                    팔로워가 가장 많이 증가한날의 게시물 보여주기
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-7 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">피드 미리보기</h4>
+                    
+                    <img src="" alt="Instagram Image" class="small-image" id="feed1">
+                    <img src="" alt="Instagram Image" class="small-image" id="feed2">
+                    <img src="" alt="Instagram Image" class="small-image" id="feed3">
+                    <img src="" alt="Instagram Image" class="small-image" id="feed4">
+  
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Bar chart</h4>
+                    <canvas id="barCharttext" style="height: 183px; display: block; width: 366px;" width="549" height="274" class="chartjs-render-monitor"></canvas>
                   </div>
                 </div>
               </div>
@@ -746,13 +791,6 @@
                         success: function(data) {
                           console.log(data);
                           
-                          // var userfix = data.influencer_data;
-                          // var userinfo = data.influencer_data_details;
-                          // var follower_trend= data.follower_trend;
-                          // var image_link= data.image_link;
-                          // var count_text= data.count_text;
-                          // var count_hashtag= data.count_hashtag;
-                      
                           $('#profile_img').attr('src','../static/assets/'+data.influencer_data.userid+'.jpg');
 
                           //user fix
@@ -761,12 +799,37 @@
                           $('#website').text(data.influencer_data.website);
                           $('#biography').text(data.influencer_data.biography);
 
-                          //userinfo
+                          //user info
                           $('#follows_count').text(data.influencer_data_details.follows_count);
                           $('#followers_count').text(data.influencer_data_details.followers_count);
                           $('#media_count').text(data.influencer_data_details.media_count);
 
-                          console.log(data.influencer_data_details.followers_count)
+                          //follower trend
+                          $('#average_growth').text(data.follower_trend.average_growth);
+                          $('#average_average_growth').text(data.follower_trend.average_average_growth);
+                          $('#max_growth_date').text(data.follower_trend.media_count);
+
+                          //image link
+                          $('#feed1').attr('src', data.image_link[0]);
+                          $('#feed2').attr('src', data.image_link[1]);
+                          $('#feed3').attr('src', data.image_link[2]);
+                          $('#feed4').attr('src', data.image_link[3]);
+
+                          //count text
+                          $('#text1_topic').text(data.count_text[0].key);
+                          $('#text2_count').text(data.count_text[0].value);
+                          $('#text2_topic').text(data.count_text[1].key);
+                          $('#text2_count').text(data.count_text[1].value);
+                          $('#text3_topic').text(data.count_text[2].key);
+                          $('#text3_count').text(data.count_text[2].value);
+                          $('#text4_topic').text(data.count_text[3].key);
+                          $('#text4_count').text(data.count_text[3].value);
+                          $('#text5_topic').text(data.count_text[4].key);
+                          $('#text5_count').text(data.count_text[4].value);
+                          
+                          //count hashtag
+
+                          // console.log(data.influencer_data_details.followers_count)
                          
                             // 검색 결과(왼쪽그리드) 띄울때 DOM 객체 이용해서 css 조정
                             // var searchResults1 = document.getElementById('searchResults1');
@@ -842,6 +905,39 @@
                                             }
                                         ]
                                         });
+                            
+                          var textData = {
+                          labels: [data.count_text[0].key, data.count_text[1].key, data.count_text[2].key, data.count_text[3].key, data.count_text[4].key],
+                          datasets: [{
+                  
+                              data: [data.count_text[0].value, data.count_text[1].value, data.count_text[2].value, data.count_text[3].value, data.count_text[4].value], // Your data here
+                              
+                              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                              borderColor: 'rgba(75, 192, 192, 1)',
+                              borderWidth: 0.8
+                            }]
+                        };
+      
+                        // Initialize the chart
+                        var barCharttextCanvas = $("#barCharttext").get(0).getContext("2d");
+                        var barCharttext = new Chart(barCharttextCanvas, {
+                            type: 'bar',
+                            data: textData,
+                            options: {
+                                    scales: {
+                                        y: {
+                                          ticks: {
+                                                display: false // Hide Y-axis tick labels
+                                            }
+                                        }
+                                    },
+                                    plugins: {
+                                        legend: {
+                                            display: false // Hide legend
+                                        }
+                                    }
+                                }
+                        });                
                                 // 검색 결과 그래프 띄울때 DOM 객체 이용해서 css 조정
                                 // document.getElementById('chart-container-02').style.width = "100%";
                                 // document.getElementById('chart-container-02').style.height = "500px";
