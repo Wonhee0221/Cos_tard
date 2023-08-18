@@ -294,9 +294,9 @@
                             $("#feedResult").html(imageHTML);
 
                             var countHTML = "인플루언서 게시글 토픽:<br>";
-                            countHTML += "TOP 1: " + count_text.count_cap1 + "<br>";
-                            countHTML += "TOP 2: " + count_text.count_cap2 + "<br>";
-                            countHTML += "TOP 3: " + count_text.count_cap3 + "<br>";
+                            countHTML += "TOP 1: " + count_text[0].key + "<br>";
+                            countHTML += "TOP 2: " + count_text[1].key + "<br>";
+                            countHTML += "TOP 3: " + count_text[2].key + "<br>";
                             countHTML += "TOP 4: " + count_text.count_cap4 + "<br>";
                             countHTML += "TOP 5: " + count_text.count_cap5;
                             $("#influencercount_textResult").html(countHTML);
