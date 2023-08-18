@@ -26,6 +26,7 @@
       }
       
   </style>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
   </head>
   <body>
     <div class="container-scroller">
@@ -287,7 +288,8 @@
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                   <i class="mdi mdi-home"></i>
-                </span> 누구의 분석 페이지 이냐면요.. {{influencer_name}}
+                </span>
+                <span id="userfix.username"></span>
               </h3>
               <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
@@ -303,13 +305,49 @@
                   <div class="card-body">
                     <h4 class="card-title">Recent Updates</h4>
                     <div class="d-flex mt-4 mb-4 align-items-top">
-                      <img src="{% static 'assets/' %}{{ influencer_name }}.jpg" class="img-mm rounded-circle me-4" alt="image">
+                      <img id="profile_img" class="img-mm rounded-circle me-4" alt="image">
                       <div class="mb-0 flex-grow">
-                        <h5 class="me-2 mb-2">{{influencer_data.userid}} - {{influencer_data.username }}</h5>
-                        <p class="mb-0 font-weight-light"> {{influencer_data.biography}}</p>
+                        <h5 id="userid" class="me-2 mb-2"></h5>
+                        <p id="biography" class="mb-0 font-weight-light"></p>
                       </div>
                       <div class="ms-auto">
                         <i class="mdi mdi-heart-outline text-muted"></i>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4 stretch-card grid-margin">
+                        <div class="card bg-gradient-danger card-img-holder text-white">
+                          <div class="card-body">
+                            <img src="../../static/templates/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                            <h4 class="font-weight-normal mb-3">Followers <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                            </h4>
+                            <h2 class="mb-5" id="followers_count">
+                            </h2>
+                            <h6 class="card-text">Increased by 60%</h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 stretch-card grid-margin">
+                        <div class="card bg-gradient-info card-img-holder text-white">
+                          <div class="card-body">
+                            <img src="../../static/templates/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                            <h4 class="font-weight-normal mb-3">Feed <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                            </h4>
+                            <h2 class="mb-5">45,6334</h2>
+                            <h6 class="card-text">Decreased by 10%</h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 stretch-card grid-margin">
+                        <div class="card bg-gradient-success card-img-holder text-white">
+                          <div class="card-body">
+                            <img src="../../static/templates/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                            <h4 class="font-weight-normal mb-3">Recent Likes <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                            </h4>
+                            <h2 class="mb-5">95,5741</h2>
+                            <h6 class="card-text">Increased by 5%</h6>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="d-flex">
@@ -321,53 +359,36 @@
                         <i class="mdi mdi-clock icon-sm me-2"></i>
                         <span>October 3rd, 2018</span>
                       </div>
+                    </div>                   
                     </div>
-                    <div class="row mt-3">
-                      <div class="col-12 pe-1">
-                        {% for image in image_link %}
-                              <img src="{{ image }}" alt='Instagram Image' class='small-image'>
-                          {% endfor %}
-                      </div>
-                          
-                    </div>                    
-                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="row">
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Line chart</h4>
+                    
+                    <div id = "chart-container-01"></div>
+                     
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Bar chart</h4>
+
+                    <div id = "chart-container-02"></div>
+                    
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-4 stretch-card grid-margin">
-                <div class="card bg-gradient-danger card-img-holder text-white">
-                  <div class="card-body">
-                    <img src="../../static/templates/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Weekly Sales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
-                    </h4>
-                    <h2 class="mb-5">$ 15,0000</h2>
-                    <h6 class="card-text">Increased by 60%</h6>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4 stretch-card grid-margin">
-                <div class="card bg-gradient-info card-img-holder text-white">
-                  <div class="card-body">
-                    <img src="../../static/templates/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Weekly Orders <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
-                    </h4>
-                    <h2 class="mb-5">45,6334</h2>
-                    <h6 class="card-text">Decreased by 10%</h6>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4 stretch-card grid-margin">
-                <div class="card bg-gradient-success card-img-holder text-white">
-                  <div class="card-body">
-                    <img src="../../static/templates/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-right"></i>
-                    </h4>
-                    <h2 class="mb-5">95,5741</h2>
-                    <h6 class="card-text">Increased by 5%</h6>
-                  </div>
-                </div>
+            <div class="row mt-3">
+              <div class="col-12 pe-1">
               </div>
             </div>
             <div class="row">
@@ -694,7 +715,175 @@
 
 
     <script src="../../static/templates/assets/js/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+        
 
+    <script>
+      $(document).ready(function() {
+        //<img src="{{ image }}" alt='Instagram Image' class='small-image'>
+        var ig_id='{{ig_id}}';         
+        $.ajax({
+                        type: "POST",
+                        url: "/analysis/get_influencer_analysis",  
+                        dataType:'json',
+                        contentType:'application/json',
+                        data: JSON.stringify({
+                            ig_id: ig_id
+                        }),
+                        beforeSend : function(){
+                          console.log(window);
+                          var left = innerWidth/2-50;
+                          var top = innerHeight/2-30;
+                          var mainPanelHeight = $('.main-panel').css('height');
+                          console.log(mainPanelHeight);
+                          $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
+                          $('.main-panel').append('<img id="img_progress" src="../static/assets/bouncy_balls.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
+                        },
+                        complete:function(){
+                          $('#img_progress').remove();
+                          $('#blur_panel').remove();
+                        },
+                        success: function(data) {
+                          console.log(data);
+                          
+                          // var userfix = data.influencer_data;
+                          // var userinfo = data.influencer_data_details;
+                          // var follower_trend= data.follower_trend;
+                          // var image_link= data.image_link;
+                          // var count_text= data.count_text;
+                          // var count_hashtag= data.count_hashtag;
+                      
+                          $('#profile_img').attr('src','../static/assets/'+data.influencer_data.userid+'.jpg');
 
+                          //user fix
+                          $('#userid').text(data.influencer_data.userid);
+                          $('#username').text(data.influencer_data.username);
+                          $('#website').text(data.influencer_data.website);
+                          $('#biography').text(data.influencer_data.biography);
+
+                          //userinfo
+                          $('#follows_count').text(data.influencer_data_details.follows_count);
+                          $('#followers_count').text(data.influencer_data_details.followers_count);
+                          $('#media_count').text(data.influencer_data_details.media_count);
+
+                          console.log(data.influencer_data_details.followers_count)
+                         
+                            // 검색 결과(왼쪽그리드) 띄울때 DOM 객체 이용해서 css 조정
+                            // var searchResults1 = document.getElementById('searchResults1');
+                            // searchResults1.style.padding = "30px 70px 30px 70px";
+                            // searchResults1.style.flex = "2";
+                            // searchResults1.style.marginRight = "10px";
+                            // searchResults1.style.backgroundColor = "#9a68af";
+
+                            // // 검색 결과(오른쪽그리드) 띄울때 DOM 객체 이용해서 css 조정
+                            // var searchResults2 = document.getElementById('searchResults2');
+                            // searchResults2.style.padding = "50px";
+                            // searchResults2.style.flex = "1";
+                            // searchResults2.style.backgroundColor = "#9a68af";
+
+                            // 팔로워 추이 그래프
+                            Highcharts.chart('chart-container-01', {
+                                            
+                                            title: {
+                                                text: 'Follower trend August'
+                                            },
+                                            xAxis: {
+                                                // categories: follower_trend.xData
+                                            },
+                                            yAxis: {
+                                                title: {
+                                                    text: 'Total # of followers'
+                                                }
+                                            },
+                                            series: [{
+                                                name: '# of followers',
+                                                data: data.follower_trend.yData
+                                            }]
+                                        });
+
+                                // // 검색 결과 그래프 띄울때 DOM 객체 이용해서 css 조정
+                                // document.getElementById('chart-container-01').style.width = "100%";
+                                // document.getElementById('chart-container-01').style.height = "500px";
+                                // document.getElementById('chart-container-01').style.padding = "50px";
+                            
+
+                            // 팔로워 증가율 그래프
+                            Highcharts.chart('chart-container-02', {
+                                
+                                            title: {
+                                                text: 'Follower increase August'
+                                            },
+                                            xAxis: {
+                                                // categories: data.follower_trend.xData
+                                            },
+                                            yAxis: {
+                                                title: {
+                                                    text: 'Growth rate of followers'
+                                                }
+                                            },
+                                            plotOptions: {
+                                                area: {
+                                                    fillOpacity: 0.2, 
+                                                    threshold: 0,  
+                                                    marker: {
+                                                        enabled: false
+                                                    }
+                                                }},
+                                            series: [{
+                                                name: 'followers increase rate',
+                                                data: data.follower_trend.growth_rates
+                                            },
+                                            {
+                                                name: '비교군 데이터임',
+                                                type : 'area',
+                                                color: 'grey', 
+                                                fillColor: 'rgba(192, 192, 192, 0.2)',
+                                                data: data.follower_trend.growth_rate_average
+                                            }
+                                        ]
+                                        });
+                                // 검색 결과 그래프 띄울때 DOM 객체 이용해서 css 조정
+                                // document.getElementById('chart-container-02').style.width = "100%";
+                                // document.getElementById('chart-container-02').style.height = "500px";
+                                // document.getElementById('chart-container-02').style.padding = "50px";
+
+                            // 여기서부터 정보들 띄우는 차트 밑에 그리드들
+                            // var followerHTML = "팔로워 정보:<br>";
+                            // followerHTML += "팔로워 증가율 평균: " + follower_trend.average_growth.toFixed(3) + "% <br>";
+                            // followerHTML += "대조군 팔로워 증가율 평균: " + follower_trend.average_average_growth.toFixed(3) + "% <br>";
+                            // if (follower_trend.average_growth > follower_trend.average_average_growth) {
+                            //     followerHTML += "다른 인플루언서들 보다 팔로워 증가율이 높습니다! " + "<br>";
+                            // } else {
+                            //     followerHTML += "다른 인플루언서들 보다 팔로워 증가율이 낮습니다.. " + "<br>";
+                            // }
+                            // followerHTML += "팔로워가 가장 많이 증가한 날: " + follower_trend.max_growth_date + "<br>";
+                            // $("#followerResult").html(followerHTML);
+
+                            // var imageHTML = "피드 미리보기:<br>";
+                            // for (var i = 0; i < image_link.length; i++) {
+
+                            //     imageHTML += "<img src='" + image_link[i] + "' alt='Instagram Image' class='small-image'>";
+                            // }
+                            // $("#feedResult").html(imageHTML);
+
+                            // var countHTML = "인플루언서 게시글 토픽:<br>";
+                            // countHTML += "TOP 1: " + count_text.count_cap1 + "<br>";
+                            // countHTML += "TOP 2: " + count_text.count_cap2 + "<br>";
+                            // countHTML += "TOP 3: " + count_text.count_cap3 + "<br>";
+                            // countHTML += "TOP 4: " + count_text.count_cap4 + "<br>";
+                            // countHTML += "TOP 5: " + count_text.count_cap5;
+                            // $("#influencercount_textResult").html(countHTML);
+                            
+                            // var hashHTML = "인플루언서 해쉬태그 토픽:<br>";
+                            // hashHTML += "TOP 1: " + count_hashtag.tags1 + "<br>";
+                            // hashHTML += "TOP 2: " + count_hashtag.tags2 + "<br>";
+                            // hashHTML += "TOP 3: " + count_hashtag.tags3 + "<br>";
+                            // hashHTML += "TOP 4: " + count_hashtag.tags4 + "<br>";
+                            // hashHTML += "TOP 5: " + count_hashtag.tags5;
+                            // $("#influencercounthashResult").html(hashHTML);
+                        }
+                      });
+      });
+    </script>
   </body>
 </html>
