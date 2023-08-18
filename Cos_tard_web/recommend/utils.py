@@ -78,18 +78,19 @@ def scale_list(data_list, new_min, new_max):
     
     return scaled_data
 
-def imaging(ig_id, image):
-    if image == 0:
+def imaging(ig_id, model_value):
+    if model_value in range(1, 5):
+        column_names = ['cute', 'pure', 'gorg', 'sexy']
+        image = Comment.objects.filter(ig_id=ig_id).values_list(column_names[model_value - 1])[0]
+    else:
         return 0
     
-    image = Comment.objects.filter(ig_id=ig_id).values_list(image)[0] #입력받은 이미지 값에 따라 칼럼선택
     imagecomment = Comment.objects.filter(ig_id=ig_id).values_list('imagecomment')[0]
     
     if imagecomment == 0:
         return 0
-
+    
     imageagree = image / imagecomment
-
     return imageagree
 
 def pricing(ig_id, level):
@@ -104,11 +105,11 @@ def pricing(ig_id, level):
 # 판매증대 marketing_value 0
 # 바이럴 marketing_value 1
 
-def marketvalue(marketing_value):
-    if marketing_value==0:
+def marketvalue(market_value):
+    if market_value==0:
         info_weight=5
         viral_weight=1
-    if marketing_value==1:
+    if market_value==1:
         info_weight=1
         viral_weight=5
 
@@ -117,22 +118,24 @@ def marketvalue(marketing_value):
     return marketweight
     
 
+def product_type(product):
+    return 0
 
 
 # def 매개변수로 , image, level, info_weight, image_weight 넣어주기
 
-def scoring(ig_id, image, level, image_weight, marketing_value):
+def scoring(ig_id, model_value, level, image_weight, market_value):
     followerslev = followerslevel(ig_id=ig_id) #팔로워수 단위
     expert = Comment.objects.filter(ig_id=ig_id).values_list('domain').first()[0] #도메인지식 정도
     info_c = Comment.objects.filter(ig_id=ig_id).values_list('inforate').first()[0] #정보댓글 비율, 가중치는 입력받는 것으로. 매출 증대 목표
     image_c = Comment.objects.filter(ig_id=ig_id).values_list('imagerate').first()[0] # 이미지댓글 비율, 바이럴 증가? 아닌듯..바이럴마케팅은 팔로워수/인게이지에 더 가중치를
-    marketweight = marketvalue(marketing_value)
+    marketweight = marketvalue(market_value)
     info_weight = marketweight[0]
     viral_weight = marketweight[1]
     engage = cal_engagement(ig_id=ig_id) #인게이지먼트
     # act = activities(ig_id=ig_id)
     # scaled_act = scaler(act, 1, 14, 15, 1)
-    model_image = imaging(ig_id, image) # 이미지옵션
+    model_image = imaging(ig_id, model_value) # 이미지옵션
     price = pricing(ig_id, level) # 가격대옵션
     # 화장품분류
     

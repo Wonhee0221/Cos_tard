@@ -190,27 +190,27 @@
                 </div>
                 <div class="card-body">
                   <p class="card-description"> Marketing Purpose </p>
-                  <div class="template-demo" id="markeing_group">
+                  <div class="template-demo" id="marketing_group">
                     <button type="button" class="btn btn-outline-danger btn-fw" data-value="0">For Sale</button>
                     <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">For Viral</button>
                   </div>
                 </div>
                 <div class="card-body">
                   <p class="card-description"> Model Image </p>
-                  <div class="template-demo">
-                    <button type="button" class="btn btn-outline-danger btn-fw">Cute</button>
-                    <button type="button" class="btn btn-outline-danger btn-fw">Pure</button>
-                    <button type="button" class="btn btn-outline-danger btn-fw">Gorgeous</button>
-                    <button type="button" class="btn btn-outline-danger btn-fw">Chill</button>
+                  <div class="template-demo" id="model_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">Cute</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="2">Pure</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="3">Gorgeous</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="4">Chill</button>
                   </div>
                 </div>
                 <div class="card-body">
                   <p class="card-description"> Our Brand Product </p>
-                  <div class="template-demo">
-                    <button type="button" class="btn btn-outline-danger btn-fw">Skin Care</button>
-                    <button type="button" class="btn btn-outline-danger btn-fw">Tools</button>
-                    <button type="button" class="btn btn-outline-danger btn-fw">Colors</button>
-                    <button type="button" class="btn btn-outline-danger btn-fw">Body Care</button>
+                  <div class="template-demo" id="product_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">Skin Care</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="2">Tools</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="3">Colors</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="4">Body Care</button>
                   </div>
                 </div>
                 <div class="card-body">
@@ -593,7 +593,13 @@
 
       $('#btn_recommend').click(function(){
         var price_value = $('#price_group .sidebar-btn-active').attr('data-value');
+        var market_value = $('#marketing_group .sidebar-btn-active').attr('data-value');
+        var model_value = $('#model_group .sidebar-btn-active').attr('data-value');
+        var product_value = $('#product_group .sidebar-btn-active').attr('data-value');
         console.log(price_value);
+        console.log(market_value);
+        console.log(model_value);
+        console.log(product_value);
       });
     });
   </script>
