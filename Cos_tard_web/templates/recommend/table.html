@@ -1,10 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+    <title>Cos-tard 인스타그램 인플루언서 추천 시스템</title>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- plugins:css -->
@@ -18,16 +20,16 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../static/templates/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../static/templates/assets/images/favicon.ico" />
-    
+    <link rel="icon" href="{% static 'assets/homepage_icon.jpg' %}" />
+    <script src="../../static/templates/assets/js/chart.js"></script>
   </head>
   <body>
     <div class="container-scroller">
       <!-- partial:../../partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="../../index.html"><img src="../../static/templates/assets/images/logo.svg" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../../static/templates/assets/images/logo-mini.svg" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="{% url 'home-page' %}">Cos-tard</a>
+          <a class="navbar-brand brand-logo-mini" href="{% url 'home-page' %}"><img src="{% static 'assets/homepage_icon.jpg' %}" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -175,95 +177,51 @@
       <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
-          <ul class="nav">
-            <!-- <li class="nav-item nav-profile"> -->
-              <!-- <a href="#" class="nav-link"> -->
-                <!-- <div class="nav-profile-image">
-                  <img src="../../static/templates/assets/images/faces/face1.jpg" alt="profile">
-                  <span class="login-status online"></span> -->
-                  <!--change to offline or busy as needed-->
-                <!-- </div> -->
-                <!-- <div class="nav-profile-text d-flex flex-column">
-                  <span class="font-weight-bold mb-2">David Grey. H</span>
-                  <span class="text-secondary text-small">Project Manager</span>
-                </div>
-                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
-              <!-- </a> -->
-            <!-- </li> -->
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'home-page' %}">
-                <span class="menu-title">Main Board </span>
-                <i class="mdi mdi-home menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                <span class="menu-title">Influencer List</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-              </a>
-              <div class="collapse" id="ui-basic">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="{% url 'InfluencerList:list-page' %}">Look Around</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Contact</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'analysis:analysis-page' %}">
-                <span class="menu-title">Analysis</span>
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'recommend:recommend-page' %}">
-                <span class="menu-title">Recommend System</span>
-                <i class="mdi mdi-contacts menu-icon"></i>
-              </a>
-            </li>
-            
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="../../pages/charts/chartjs.html">
-                <span class="menu-title">Charts</span>
-                <i class="mdi mdi-chart-bar menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../../pages/tables/basic-table.html">
-                <span class="menu-title">Tables</span>
-                <i class="mdi mdi-table-large menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-                <span class="menu-title">Sample Pages</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-medical-bag menu-icon"></i>
-              </a>
-              <div class="collapse" id="general-pages">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="../../pages/samples/blank-page.html"> Blank Page </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Login </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register.html"> Register </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-404.html"> 404 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-500.html"> 500 </a></li>
-                </ul>
-              </div> -->
-            <!-- </li> -->
-            <li class="nav-item sidebar-actions">
-              <span class="nav-link">
-                <div class="border-bottom">
-                  <h6 class="font-weight-normal mb-3">Team Costard</h6>
-                </div>
-                <button class="btn btn-block btn-lg btn-gradient-primary mt-4">Contact us!</button>
-                <!-- <div class="mt-4">
-                  <div class="border-bottom">
-                    <p class="text-secondary">Categories</p>
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Recommend Options </h4>
+                  <p class="card-description"> Price for Campaign </p>
+                  <div class="template-demo" id="price_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="0">High</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">Low</button>
                   </div>
-                </div> -->
-              </span>
-            </li>
-          </ul>
+                </div>
+                <div class="card-body">
+                  <p class="card-description"> Marketing Purpose </p>
+                  <div class="template-demo" id="markeing_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="0">For Sale</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">For Viral</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="card-description"> Model Image </p>
+                  <div class="template-demo">
+                    <button type="button" class="btn btn-outline-danger btn-fw">Cute</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw">Pure</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw">Gorgeous</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw">Chill</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="card-description"> Our Brand Product </p>
+                  <div class="template-demo">
+                    <button type="button" class="btn btn-outline-danger btn-fw">Skin Care</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw">Tools</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw">Colors</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw">Body Care</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="template-demo">
+                    <button id="btn_recommend" type="button" class="btn btn-gradient-danger">Recommend</button>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </nav>
         <!-- partial -->
         <div class="main-panel">
@@ -278,44 +236,7 @@
               </nav>
             </div>
             <div class="row">
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Recommend Options </h4>
-                    <p class="card-description"> Price for Campaign </p>
-                    <div class="template-demo">
-                      <button type="button" class="btn btn-outline-danger btn-fw">High</button>
-                      <button type="button" class="btn btn-outline-danger btn-fw">Low</button>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-description"> Marketing Purpose </p>
-                    <div class="template-demo">
-                      <button type="button" class="btn btn-outline-danger btn-fw">For Sale</button>
-                      <button type="button" class="btn btn-outline-danger btn-fw">For Viral</button>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-description"> Model Image </p>
-                    <div class="template-demo">
-                      <button type="button" class="btn btn-outline-danger btn-fw">Cute</button>
-                      <button type="button" class="btn btn-outline-danger btn-fw">Pure</button>
-                      <button type="button" class="btn btn-outline-danger btn-fw">Gorgeous</button>
-                      <button type="button" class="btn btn-outline-danger btn-fw">Chill</button>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <p class="card-description"> Our Brand Product </p>
-                    <div class="template-demo">
-                      <button type="button" class="btn btn-outline-danger btn-fw">Skin Care</button>
-                      <button type="button" class="btn btn-outline-danger btn-fw">Tools</button>
-                      <button type="button" class="btn btn-outline-danger btn-fw">Colors</button>
-                      <button type="button" class="btn btn-outline-danger btn-fw">Body Care</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 grid-margin stretch-card">
+              <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Recommends Here! </h4>
@@ -642,4 +563,38 @@
     <!-- Custom js for this page -->
     <!-- End custom js for this page -->
   </body>
+  <style>
+    .sidebar .card-body{
+      padding: 20px;
+    }
+
+    .sidebar .btn.btn-fw{
+      min-width: 80px;;
+      width:80px !important;
+      padding: 10px;
+      height:50px;
+      font-size: 14px;
+    }
+
+    .sidebar-btn-active{
+      background-color:#fe7c96;
+      color:#fff;
+    }
+  </style>
+  <script>
+    $(document).ready(function() {
+      $('.sidebar .btn').click(function(){
+        $(this).closest('div').find('.sidebar-btn-active').each(function(){
+          $(this).removeClass('sidebar-btn-active');
+        });
+        $(this).addClass('sidebar-btn-active');
+        $('.sidebar .card-title').click();
+      });
+
+      $('#btn_recommend').click(function(){
+        var price_value = $('#price_group .sidebar-btn-active').attr('data-value');
+        console.log(price_value);
+      });
+    });
+  </script>
 </html>
