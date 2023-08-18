@@ -11,13 +11,50 @@ import json
 # Create your views here.
 
 def index_test(request):
-    return render(request,'analysis/index.html')
+    ig_id='1555054356'
+    return render(request,'analysis/index.html',{'ig_id':ig_id})
 
-def index_test_url(request,key): 
-    influencer_list = { '1555054356' : 'leojmakeup'}
-    return render(request,'analysis/index.html',influencer_list)
+@csrf_exempt
+def get_influencer_analysis(request):
+    data = json.loads(request.body)
+    ig_id = data.get('ig_id')
+
+    influencer = Users_fix.objects.get(ig_id=ig_id)
+    influencer_data = {
+        'userid': influencer.user_id,
+        'username': influencer.username,
+        'website': influencer.website,
+        'biography': influencer.biography,
+    }
+    influencer_details = list(Users_info.objects.filter(ig_id=influencer.ig_id).order_by('-date')[:1].values())[0]
+    influencer_data_details = {
+        'follows_count': influencer_details.get('follows_count'),
+        'followers_count': influencer_details.get('followers_count'),
+        'media_count': influencer_details.get('media_count')
+        # 다른 필요한 정보들도 추가할 수 있음
+    }
+
+    #팔로워 부분
+    follower_trend = follower_graph(influencer.ig_id)
+    image_link = get_image(influencer.ig_id)
+
+    count_text = count_text_token(influencer.ig_id)
+    count_hashtag=count_hashtags(influencer.ig_id)
+
+
+    context = {
+        'influencer_data' : influencer_data,
+        'influencer_data_details' : influencer_data_details,
+        'follower_trend' : follower_trend,
+        'image_link' : image_link,
+        'count_text' : count_text,
+        'count_hashtag' : count_hashtag
+    }
+
+    return JsonResponse(context, safe=False)
 
 # Create your views here.
+
 
 def index(request): 
     return render(request,'analysis/analysis.html')
