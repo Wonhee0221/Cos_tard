@@ -11270,8 +11270,8 @@ background-color: #b1dfbb; }
 }
 
 .instagramCircle {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border: 3px solid transparent;
   border-radius: 50%;
   background-origin: border-box;
@@ -11279,4 +11279,19 @@ background-color: #b1dfbb; }
   background-size: cover;
   background-position: center;
   padding: 1px;
+}
+
+@font-face {
+  font-family: 'IAMAPLAYER';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/IAMAPLAYER.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.custom-text {
+  font-family: 'IAMAPLAYER', sans-serif; /* 웹 폰트 적용 */
+  font-size: 16px;
+  color: #333;
+  border-bottom: 2px solid #333; /* 아래쪽에 2px 두께의 선 생성 */
+  padding-bottom: 4px; /* 선과 텍스트 간격 조절 */
 }
