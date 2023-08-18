@@ -29,6 +29,7 @@ $(function () {
       fill: false
     }]
   };
+   
   var dataDark = {
     labels: ["2013", "2014", "2014", "2015", "2016", "2017"],
     datasets: [{
@@ -457,6 +458,26 @@ $(function () {
     var barChartCanvas = $("#barChart").get(0).getContext("2d");
     // This will get the first returned node in the jQuery collection.
     var barChart = new Chart(barChartCanvas, {
+      type: 'bar',
+      data: data,
+      options: options
+    });
+  }
+
+  if ($("#barChart1").length) {
+    var barChart1Canvas = $("#barChart1").get(0).getContext("2d");
+    // This will get the first returned node in the jQuery collection.
+    var barChart1 = new Chart(barChart1Canvas, {
+      type: 'bar',
+      data: data,
+      options: options
+    });
+  }
+
+  if ($("#barChart2").length) {
+    var barChart2Canvas = $("#barChart2").get(0).getContext("2d");
+    // This will get the first returned node in the jQuery collection.
+    var barChart2 = new Chart(barChart2Canvas, {
       type: 'bar',
       data: data,
       options: options
