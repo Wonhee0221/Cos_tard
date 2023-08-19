@@ -10900,7 +10900,7 @@ html {
   backdrop-filter: blur(30px); /* 블러 효과 */
   opacity: 0; /* 초기에는 보이지 않게 */
   pointer-events: none; /* 이벤트를 막지 않음 */
-  transition: opacity 0.3s; /* 부드러운 페이드 인/아웃 효과를 위한 transition */
+  transition: opacity 0.5s; /* 부드러운 페이드 인/아웃 효과를 위한 transition */
   font-weight: bolder;
   font-size: 22px;
   color: white;
@@ -10912,13 +10912,13 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 흰 배경색 */
+  background-color: rgba(0, 0, 0, 0.8); /* 흰 배경색 */
   opacity: 0; /* 초기에는 보이지 않게 */
-  pointer-events: none; /* 이벤트를 막지 않음 */
   transition: opacity 0.3s; /* 부드러운 페이드 인/아웃 효과를 위한 transition */
   font-weight: bolder;
-  font-size: 30px;
+  font-size: 27px;
   color: white;
+  z-index: 99;
 }
 
 .hoverEffect:hover .blur-overlay {
@@ -10929,6 +10929,11 @@ html {
   opacity: 1; /* hover 상태에서 흐려지는 효과를 나타냄 */
 }
 
+/* hoverEffect 클래스가 적용된 div 요소 위에 마우스 커서가 올라갔을 때 */
+.hoverEffect:hover .blur-overlay2 {
+  transform: scale(1.2); /* 요소를 1.5배 커지도록 함 */
+  transition: transform 0.5s ease; /* 애니메이션 지속 시간과 이징 함수를 설정 */
+}
 
 
 .custom-table {
@@ -11263,16 +11268,8 @@ background-color: #b1dfbb; }
   height:500px;
 }
 
-
-@media(max-width: 767px) {
-  #react {  
-    flex-direction: column;
-  }
-}
-
-
 .small-image {
-  width: 100px;  /* Adjust the width as needed */
+  width: 200px;  /* Adjust the width as needed */
   height: auto;  /* Automatically adjust the height to maintain the aspect ratio */
   margin: 10px;  /* Add some spacing between images */
 }
