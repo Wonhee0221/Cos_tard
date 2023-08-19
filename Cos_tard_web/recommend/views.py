@@ -78,7 +78,7 @@ def recommend(request):
 
     sorted_df = df.sort_values(by='Score', ascending=False)
     print(sorted_df)
-    top5 = sorted_df[0:4].to_dict(orient='records')
+    top5 = sorted_df[0:5].to_dict(orient='records')
     print(top5)
 
     return JsonResponse({'top_influencers': top5})
