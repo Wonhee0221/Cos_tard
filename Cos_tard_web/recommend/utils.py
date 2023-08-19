@@ -79,6 +79,7 @@ def scale_list(data_list, new_min, new_max):
     return scaled_data
 
 def imaging(ig_id, model_value):
+    imageMatch = []
     if model_value in range(1, 5):
         column_names = ['cute', 'pure', 'gorg', 'sexy']
         image = Comment.objects.filter(ig_id=ig_id).values_list(column_names[model_value - 1], flat=True)[0]

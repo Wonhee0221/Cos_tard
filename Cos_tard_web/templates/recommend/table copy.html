@@ -192,12 +192,12 @@
               <div class="collapse show" id="price_group">
                 <ul class="nav flex-column sub-menu">
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="price_rad" value="0">
+                      <input type="radio" class="rad-input" name="price_rad" data-value="0">
                       <div class="rad-design"></div>
                       <div class="rad-text">High</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="price_rad" value="1">
+                      <input type="radio" class="rad-input" name="price_rad" data-value="1">
                       <div class="rad-design"></div>
                       <div class="rad-text">Low</div>
                   </label>
@@ -212,12 +212,12 @@
               <div class="collapse show" id="marketing_group">
                 <ul class="nav flex-column sub-menu">
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="marketing_rad" value="0">
+                      <input type="radio" class="rad-input" name="marketing_rad" data-value="0">
                       <div class="rad-design"></div>
                       <div class="rad-text">For Sale</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="marketing_rad" value="1">
+                      <input type="radio" class="rad-input" name="marketing_rad" data-value="1">
                       <div class="rad-design"></div>
                       <div class="rad-text">For Viral</div>
                   </label>
@@ -232,22 +232,22 @@
               <div class="collapse show" id="model_group">
                 <ul class="nav flex-column sub-menu">
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="model_rad" value="1">
+                      <input type="radio" class="rad-input" name="model_rad" data-value="1">
                       <div class="rad-design"></div>
                       <div class="rad-text">Cute</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="model_rad" value="2">
+                      <input type="radio" class="rad-input" name="model_rad" data-value="2">
                       <div class="rad-design"></div>
                       <div class="rad-text">Pure</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="model_rad" value="3">
+                      <input type="radio" class="rad-input" name="model_rad" data-value="3">
                       <div class="rad-design"></div>
                       <div class="rad-text">Gorgeous</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="model_rad" value="4">
+                      <input type="radio" class="rad-input" name="model_rad" data-value="4">
                       <div class="rad-design"></div>
                       <div class="rad-text">Chill</div>
                   </label>
@@ -262,22 +262,22 @@
               <div class="collapse show" id="product_group">
                 <ul class="nav flex-column sub-menu">
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="product_rad" value="1">
+                      <input type="radio" class="rad-input" name="product_rad" data-value="1">
                       <div class="rad-design"></div>
                       <div class="rad-text">skin care</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="product_rad" value="2">
+                      <input type="radio" class="rad-input" name="product_rad" data-value="2">
                       <div class="rad-design"></div>
                       <div class="rad-text">Tools</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="product_rad" value="3">
+                      <input type="radio" class="rad-input" name="product_rad" data-value="3">
                       <div class="rad-design"></div>
                       <div class="rad-text">colors</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="product_rad" value="4">
+                      <input type="radio" class="rad-input" name="product_rad" data-value="4">
                       <div class="rad-design"></div>
                       <div class="rad-text">body care</div>
                   </label>
@@ -287,6 +287,45 @@
             <li class="nav-item sidebar-actions">
               <button id="btn_recommend" type="button" class="btn btn-block btn-lg btn-gradient-danger">recommend</button>
             </li>
+                {% comment %} <div class="card-body">
+                  <p class="card-description"> Price for Campaign </p>
+                  <div class="template-demo" id="price_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="0">High</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">Low</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="card-description"> Marketing Purpose </p>
+                  <div class="template-demo" id="marketing_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="0">For Sale</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">For Viral</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="card-description"> Model Image </p>
+                  <div class="template-demo" id="model_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">Cute</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="2">Pure</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="3">Gorgeous</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="4">Chill</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="card-description"> Our Brand Product </p>
+                  <div class="template-demo" id="product_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">Skin Care</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="2">Tools</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="3">Colors</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="4">Body Care</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="template-demo">
+                    <button id="btn_recommend" type="button" class="btn btn-gradient-danger">Recommend</button>
+                  </div>
+                </div>
+              </div>
+            </div> {% endcomment %}
           </ul>
         </div>
         <!-- partial -->
@@ -306,19 +345,21 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Recommends Result </h4>
-                      <p class="card-description" style="text-align: center;" id="result"> Now waiting ... </p>
-                      <table id="score-table" class="table table-hover" style="display: none;">
-                          <thead>
-                              <tr>
-                                  <th style="text-align: center;">Profile</th>
-                                  <th style="text-align: center;">Username</th>
-                                  <th style="text-align: center;">Matching</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                      </table>
                   </div>
+                    <div class="card-body">
+                      <p class="card-description" style="text-align: center;" id="result"> Now waiting ... </p>
+                        <table id="score-table" class="table table-hover" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Profile</th>
+                                    <th style="text-align: center;">Username</th>
+                                    <th style="text-align: center;">Matching</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
               </div>
               <div class="page-header">
@@ -450,12 +491,13 @@
       $(document).ready(function() {
         $('#btn_recommend').click(function(){
           console.log('clicked');
-          var price_value = $("input[name='price_rad']:checked").val();
-          var market_value = $("input[name='marketing_rad']:checked").val();
-          var model_value = $("input[name='model_rad']:checked").val();
-          var product_value = $("input[name='product_rad']:checked").val();
+          var selectedValue = $("input[name='rad']:checked").val();
 
-          console.log(model_value);
+          var price_value = $('#price_group').attr('data-value');
+          var market_value = $('#marketing_group').attr('data-value');
+          var model_value = $('#model_group').attr('data-value');
+          var product_value = $('#product_group').attr('data-value');
+          console.log(price_value);
 
           $.ajax({
             url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
@@ -497,27 +539,13 @@
               var usernames = topInfluencers.map(function(influencer) {
                   return influencer.Username;
               });
-              console.log(model_value);
-              $.ajax({
-                url: '/recommend/recommend_result',  // 백엔드의 URL을 지정
-                method: 'POST',  // POST 요청으로 데이터 전송
-                data: {
-                  usernames: usernames
-                },
-                success: function(response) {
-                  console.log('sad');
-                },
-                error:function(error){
-                  console.error(error);
-                }
-              });
             },
             error: function(error) {
                 console.error(error);
             }         
           });
       });
-      });
+
     </script>
   </body>
   <body>

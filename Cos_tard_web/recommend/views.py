@@ -57,7 +57,7 @@ def recommend(request):
         market_value = int(request.POST.get('market'))
         model_value = int(request.POST.get('model'))
         product_value = int(request.POST.get('product'))
-
+    
     scores = []
     username = ["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
             "hamnihouse", "ssinnim", "yu__hyewon", "hyojinc_", "leojmakeup", "2__yun__2", "areumsongee", "makeup_maker_",
@@ -69,25 +69,42 @@ def recommend(request):
         score = scoring(ig_ids, model_value, level=price_value, market_value=market_value)
         scores.append(score)
     
-    print(scores)
     scores = scale_list(scores, 1, 100)
-    print(scores)
 
     data = {'Username': username, 'Score': scores}
     df = pd.DataFrame(data)
 
     sorted_df = df.sort_values(by='Score', ascending=False)
-    print(sorted_df)
     top5 = sorted_df[0:5].to_dict(orient='records')
-    print(top5)
-
+    
     return JsonResponse({'top_influencers': top5})
 
-@csrf_exempt
+
+# def result(request):
+#     if request.method == 'POST':
+#        username = request.POST.get('usernames')
+        
+#     followers = []
+#     engage = []
+#     expert = []
+#     loyalty = []
+
+#     for user in username:
+#         id_object = Users_fix.objects.filter(user_id=user).first()
+#         ig_ids = id_object.ig_id
+#         follower = Users_info.objects.filter(ig_id=ig_ids).order_by('date').values_list('followers_count').first()
+#         followers.append(follower)
+#         eng = cal_engagement(ig_id=ig_ids)
+#         engage.append(eng)
+        
+#     return JsonResponse({'scores': username})
+
+# #test 
+# @csrf_exempt
 def result(request):
    if request.method == 'POST':
-        username = list(request.POST.get('topInfluencers'))
-
-
-
-   return JsonResponse({'scores': username})
+      username = request.POST.get('usernames')
+      imagematch = request.POST.get('image')
+      product = request.POST.get('product')
+      
+      return JsonResponse(username)
