@@ -19,6 +19,7 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../static/templates/assets/css/style.css">
+    <link rel="stylesheet" href="../../static/templates/assets/css/style2.css">
     <!-- End layout styles -->
     <link rel="icon" href="{% static 'assets/homepage_icon.jpg' %}" />
     <script src="../../static/templates/assets/js/chart.js"></script>
@@ -177,12 +178,41 @@
       <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
-          <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="true" aria-controls="ui-basic">
+                <span class="menu-title">Basic UI Elements</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+              </a>
                 <div class="card-body">
                   <h4 class="card-title">Recommend Options </h4>
                   <p class="card-description"> Price for Campaign </p>
+                  <div>
+                    <label class="rad-label">
+                      <input type="radio" class="rad-input" name="rad">
+                      <div class="rad-design"></div>
+                      <div class="rad-text">Air</div>
+                    </label>
+
+                    <label class="rad-label">
+                      <input type="radio" class="rad-input" name="rad">
+                      <div class="rad-design"></div>
+                      <div class="rad-text">Clouds</div>
+                    </label>
+
+                    <label class="rad-label">
+                      <input type="radio" class="rad-input" name="rad">
+                      <div class="rad-design"></div>
+                      <div class="rad-text">Earth</div>
+                    </label>
+
+                    <label class="rad-label">
+                      <input type="radio" class="rad-input" name="rad">
+                      <div class="rad-design"></div>
+                      <div class="rad-text">Water</div>
+                    </label>
+                  </div>
                   <div class="template-demo" id="price_group">
                     <button type="button" class="btn btn-outline-danger btn-fw" data-value="0">High</button>
                     <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">Low</button>
@@ -221,7 +251,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </ul>
         </nav>
         <!-- partial -->
         <div class="main-panel">
@@ -265,9 +295,10 @@
                   <div class="card-body">
                     <h4 class="card-title">Score distribution</h4>
                     <p class="card-description"> *100점 만점 </p>
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
                     <div id="radarChartContainer">
-                      <canvas id="radarChart" style="height:230px"></canvas>
-                  </div>
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -276,8 +307,10 @@
                   <div class="card-body">
                     <h4 class="card-title">Top Influencer</h4>
                     <p class="card-description"> Score description </p>
-                    <canvas id="traffic-chart"></canvas>
-                    <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
+                    <div id="radarChartContainer">
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -285,21 +318,51 @@
               <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title"> 팔로워수 비교</h4>
+                    <h4 class="card-title">Followers</h4>
                     <p class="card-description"> *단위 : 만명</p>
-                      <canvas id="myChart" style="height:230px"></canvas>
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
+                    <div id="radarChartContainer">
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">레이더차트 있으면좋겟다... </h4>
-                    <canvas id="barChart1" style="height:230px"></canvas>
+                    <h4 class="card-title">Engagement</h4>
+                    <p class="card-description">사용자와 게시물 간의 상호작용 수준을 나타내는 지표</p>
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
+                    <div id="radarChartContainer">
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    </div>
                   </div>
                 </div>
               </div>
-
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Model Matching</h4>
+                    <p class="card-description">해당 인플루언서는 이러한 이미지예요:</p>
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
+                    <div id="radarChartContainer">
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Product Matching</h4>
+                    <p class="card-description">해당 인플루언서는 이러한 제품과 협업했어요:</p>
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
+                    <div id="radarChartContainer">
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
               
             </div>
           </div>
@@ -317,22 +380,139 @@
       </div>
       <!-- page-body-wrapper ends -->
     </div>
+  </body>
     <!-- container-scroller -->
     <!-- plugins:js -->
-
-    
-
     <script src="../../static/templates/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="../../static/templates/assets/js/off-canvas.js"></script>
+    <script src="../../static/templates/assets/js/hoverable-collapse.js"></script>
+    <script src="../../static/templates/assets/js/misc.js"></script>
+    <script src="../../static/templates/assets/js/chart.js?ver=123"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../static/templates/assets/js/off-canvas.js"></script>
-    <script src="../../static/templates/assets/js/hoverable-collapse.js"></script>
-    <script src="../../static/templates/assets/js/misc.js"></script>
-    
-    <script src="../../static/templates/assets/js/chart.js?ver=123"></script>
+    <style>
+    .sidebar .card-body{
+      padding: 20px;
+    }
+
+    .sidebar .btn.btn-fw{
+      min-width: 80px;;
+      width:80px !important;
+      padding: 10px;
+      height:50px;
+      font-size: 14px;
+    }
+
+    .sidebar-btn-active{
+      background-color:#fe7c96;
+      color:#fff;
+    }
+    </style>
+    <!-- ajax query -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script>
+    $(document).ready(function() {
+      $('.sidebar .btn').click(function(){
+        $(this).closest('div').find('.sidebar-btn-active').each(function(){
+          $(this).removeClass('sidebar-btn-active');
+        });
+        $(this).addClass('sidebar-btn-active');
+        $('.sidebar .card-title').click();
+      });
+
+      $('#btn_recommend').click(function(){
+        var price_value = $('#price_group .sidebar-btn-active').attr('data-value');
+        var market_value = $('#marketing_group .sidebar-btn-active').attr('data-value');
+        var model_value = $('#model_group .sidebar-btn-active').attr('data-value');
+        var product_value = $('#product_group .sidebar-btn-active').attr('data-value');
+
+        $.ajax({
+          url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
+          method: 'POST',  // POST 요청으로 데이터 전송
+          data: {
+              price: price_value,
+              market: market_value,
+              model: model_value,
+              product: product_value
+          },
+          beforeSend : function(){
+            console.log(window);
+            var left = innerWidth/2-50;
+            var top = innerHeight/2-30;
+            var mainPanelHeight = $('.main-panel').css('height');
+            console.log(mainPanelHeight);
+            $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
+            $('.main-panel').append('<img id="img_progress" src="../static/assets/loading-gif.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
+          },
+          complete:function(){
+            $('#img_progress').remove();
+            $('#blur_panel').remove();
+          },
+          success: function(response) {
+              var resultp = $('#result');
+              resultp.empty();
+              var dataTable = $('#score-table');
+              var topInfluencers = response.top_influencers;
+
+              var str = "";
+              $.each(topInfluencers, function(i, influencer) {
+                  str += "<tr>";
+                  str += '<td class="py-1"><img src=../../static/assets/' + influencer.Username + '.jpg/></td>';
+                  str += '<td>' + influencer.Username + '</td><td>' + influencer.Score + '</td>';
+                  str += '</tr>';
+              });
+              $("#score-table tbody").append(str); // tbody에 데이터 추가
+              $('#score-table').show();
+            var usernames = topInfluencers.map(function(influencer) {
+                return influencer.Username;
+            });
+          },
+          error: function(error) {
+              console.error(error);
+          }         
+        });
+
+        $.ajax({
+          url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
+          method: 'POST',  // POST 요청으로 데이터 전송
+          data: {
+              topInfluencers: JSON.stringify(usernames)
+          },
+          success: function(response){
+            console.log(topInfluencers)
+          }
+        });
+    });
+    </script>
+    <!-- canvas container -->
+  <body>
+    <div id="canvas-container" style="display: none;">
+      <canvas id="myChart"></canvas>
+      <script>
+      function createRadarChart(dataSets) {
+            var labels = ['followers', 'engagement', 'Image matching', 'Product matching', 'Expertised', 'Loyalty'];
+            var ctx = document.getElementById('radarChart').getContext('2d');
+            var radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: dataSets
+                },
+                options: {
+                    scale: {
+                        ticks: {
+                            beginAtZero: true,
+                            min: 10,
+                            max: 100,
+                            stepSize: 10
+                        }
+                    }
+                }
+            });
+        }
       $(function () {
         var labels = ['followers', 'engagement', 'Image matching', 'Product matching', 'Expertised', 'Loyalty'];
         var ctx = document.getElementById('radarChart').getContext('2d');
@@ -389,15 +569,6 @@
         });
       });
     </script>
-    <!DOCTYPE html>
-<html>
-<head>
-    <title>Chart Example</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <canvas id="myChart"></canvas>
-    <input type="number" id="dataInput" placeholder="Enter data">
     <script>
       var ctx = document.getElementById('myChart').getContext('2d');
       var myChart;
@@ -478,105 +649,7 @@
 
           myChart.update();
       });
-  </script>
-</body>
-</html>
-
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <!-- End custom js for this page -->
+    </script>
+    </div>
   </body>
-  <style>
-    .sidebar .card-body{
-      padding: 20px;
-    }
-
-    .sidebar .btn.btn-fw{
-      min-width: 80px;;
-      width:80px !important;
-      padding: 10px;
-      height:50px;
-      font-size: 14px;
-    }
-
-    .sidebar-btn-active{
-      background-color:#fe7c96;
-      color:#fff;
-    }
-  </style>
-  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-  <script>
-    $(document).ready(function() {
-      $('.sidebar .btn').click(function(){
-        $(this).closest('div').find('.sidebar-btn-active').each(function(){
-          $(this).removeClass('sidebar-btn-active');
-        });
-        $(this).addClass('sidebar-btn-active');
-        $('.sidebar .card-title').click();
-      });
-
-      $('#btn_recommend').click(function(){
-        var price_value = $('#price_group .sidebar-btn-active').attr('data-value');
-        var market_value = $('#marketing_group .sidebar-btn-active').attr('data-value');
-        var model_value = $('#model_group .sidebar-btn-active').attr('data-value');
-        var product_value = $('#product_group .sidebar-btn-active').attr('data-value');
-        console.log(price_value);
-        console.log(market_value);
-        console.log(model_value);
-        console.log(product_value);
-
-        $.ajax({
-          url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
-          method: 'POST',  // POST 요청으로 데이터 전송
-          data: {
-              price: price_value,
-              market: market_value,
-              model: model_value,
-              product: product_value
-          },
-          beforeSend : function(){
-            console.log(window);
-            var left = innerWidth/2-50;
-            var top = innerHeight/2-30;
-            var mainPanelHeight = $('.main-panel').css('height');
-            console.log(mainPanelHeight);
-            $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
-            $('.main-panel').append('<img id="img_progress" src="../static/assets/loading-gif.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
-          },
-          complete:function(){
-            $('#img_progress').remove();
-            $('#blur_panel').remove();
-          },
-          success: function(response) {
-              var resultp = $('#result');
-              resultp.empty();
-              var dataTable = $('#score-table');
-              var topInfluencers = response.top_influencers;
-
-              console.log("Top 5 Influencers:");
-              for (var i = 0; i < topInfluencers.length; i++) {
-                  var influencer = topInfluencers[i];
-                  console.log("Username:", influencer.Username, "- Score:", influencer.Score);
-              }
-
-              var str = "";
-              $.each(topInfluencers, function(i, influencer) {
-                  str += "<tr>";
-                  str += '<td class="py-1"><img src=../../static/assets/' + influencer.Username + '.jpg/></td>';
-                  str += '<td>' + influencer.Username + '</td><td>' + influencer.Score + '</td>';
-                  str += '</tr>';
-              });
-              $("#score-table tbody").append(str); // tbody에 데이터 추가
-              $('#score-table').show();
-          },
-          error: function(error) {
-              console.error(error);
-          }
-          
-        });
-
-        
-      });
-    });
-  </script>
 </html>

@@ -82,3 +82,12 @@ def recommend(request):
     print(top5)
 
     return JsonResponse({'top_influencers': top5})
+
+@csrf_exempt
+def result(request):
+   if request.method == 'POST':
+        username = list(request.POST.get('topInfluencers'))
+
+
+
+   return JsonResponse({'scores': username})
