@@ -238,6 +238,7 @@
             <div class="row">
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
+                  <div class="card-body" id="result">This is the result area</div>
                   <div class="card-body">
                     <h4 class="card-title">Recommends Here! </h4>
                     <p class="card-description"> Add class <code>.table-hover</code>
@@ -581,6 +582,7 @@
       color:#fff;
     }
   </style>
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
   <script>
     $(document).ready(function() {
       $('.sidebar .btn').click(function(){
@@ -600,6 +602,33 @@
         console.log(market_value);
         console.log(model_value);
         console.log(product_value);
+
+        $.ajax({
+            url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
+            method: 'POST',  // POST 요청으로 데이터 전송
+            data: {
+                price: price_value,
+                market: market_value,
+                model: model_value,
+                product: product_value
+            },
+            success: function(response) {
+              var resultDiv = $('#result');
+              resultDiv.empty();
+
+              var topInfluencers = response.top_influencers;
+              console.log("Top 5 Influencers:");
+                for (var i = 0; i < topInfluencers.length; i++) {
+                    var influencer = topInfluencers[i];
+                    console.log("Username:", influencer.Username, "- Score:", influencer.Score);
+                }
+
+            },
+            error: function(error) {
+                console.error(error);
+            }
+          });
+        
       });
     });
   </script>

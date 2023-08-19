@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from media4.models import *
 from recommend.models import *
 from recommend.utils import *
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import pandas as pd
 #from .models import Users
 
 # followers = Users_info.objects.order_by('date').values('followers_count')[0]
@@ -20,7 +23,6 @@ from recommend.utils import *
     # context = {'followers' : firstdata}
 
 
-# Create your views here.
 # def index(request): 
 #     # scores = {}
 #     scores = []
@@ -47,3 +49,36 @@ from recommend.utils import *
 def index(request): 
     
  return render(request,'recommend/table.html')
+
+@csrf_exempt
+def recommend(request):
+    if request.method == 'POST':
+        price_value = int(request.POST.get('price'))
+        market_value = int(request.POST.get('market'))
+        model_value = int(request.POST.get('model'))
+        product_value = int(request.POST.get('product'))
+
+    scores = []
+    username = ["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
+            "hamnihouse", "ssinnim", "yu__hyewon", "hyojinc_", "leojmakeup", "2__yun__2", "areumsongee", "makeup_maker_",
+            "r_yuhyeju", "vivamoon", "risabae_art", "yujin_so", "kisy0729", "ponysmakeup"]
+    
+    for user in username:
+        id_object = Users_fix.objects.filter(user_id=user).first()
+        ig_ids = id_object.ig_id
+        score = scoring(ig_ids, model_value, level=price_value, market_value=market_value)
+        scores.append(score)
+    
+    print(scores)
+    scores = scale_list(scores, 1, 100)
+    print(scores)
+
+    data = {'Username': username, 'Score': scores}
+    df = pd.DataFrame(data)
+
+    sorted_df = df.sort_values(by='Score', ascending=False)
+    print(sorted_df)
+    top5 = sorted_df[0:4].to_dict(orient='records')
+    print(top5)
+
+    return JsonResponse({'top_influencers': top5})
