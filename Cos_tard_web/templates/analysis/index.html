@@ -1,10 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>Cos-tard 인스타그램 인플루언서 분석 시스템</title>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -19,8 +20,12 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../static/templates/assets/css/style.css">
-    <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../static/templates/assets/images/favicon.ico" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/homepage_icon.jpg' %}" />
+    <!-- font link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
     <style>
       .small-image {
           width: 130px;  /* Adjust the width as needed */
@@ -31,18 +36,35 @@
         text-decoration: none; /* Remove underline */
         color: black; /* Change link color to black */
     }
-  </style>
+    </style>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
   </head>
   <body>
     <div class="container-scroller">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+        <div class="container px-5">
+            <a class="navbar-brand fw-bolder" href="{% url 'home-page' %}">Cos-tard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'home-page' %}">메인</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'InfluencerList:list-page' %}">리스트</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'analysis:analysis-page2' %}?ig_id=17157849559">분석</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'recommend:recommend-page' %}">추천</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'about-page' %}">팀소개</a></li>
+                </ul>
+            </div>
+        </div>
+      </nav>
+      {% comment %}
       <div class="row p-0 m-0 proBanner" id="proBanner">
         <div class="col-md-12 p-0 m-0">
-            
-          </div>
         </div>
       </div>
+      {% endcomment %}
       <!-- partial:partials/_navbar.html -->
-      <!-- <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <!-- 
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
           <a class="navbar-brand brand-logo" href="index.html"><img src="../static/templates/assets/images/logo.svg" alt="logo" /></a>
           <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../static/templates/assets/images/logo-mini.svg" alt="logo" /></a>
