@@ -220,42 +220,42 @@
                                 document.getElementById('chart-container-01').style.height = "500px";
                                 document.getElementById('chart-container-01').style.padding = "50px";
                             
-
-                            // 팔로워 증가율 그래프
-                            Highcharts.chart('chart-container-02', {
-                                
-                                            title: {
-                                                text: 'Follower increase'
-                                            },
-                                            xAxis: {
-                                                categories: follower_trend.xData
-                                            },
-                                            yAxis: {
-                                                title: {
-                                                    text: 'Growth rate of followers'
-                                                }
-                                            },
-                                            plotOptions: {
-                                                area: {
-                                                    fillOpacity: 0.2, 
-                                                    threshold: 0,  
-                                                    marker: {
-                                                        enabled: false
-                                                    }
-                                                }},
-                                            series: [{
-                                                name: 'followers increase rate',
-                                                data: follower_trend.growth_rates
-                                            },
-                                            {
-                                                name: '비교군 데이터임',
-                                                type : 'area',
-                                                color: 'grey', 
-                                                fillColor: 'rgba(192, 192, 192, 0.2)',
-                                                data: follower_trend.growth_rate_average
+                                Highcharts.chart('chart-container-02', {
+                                    title: {
+                                        text: 'Follower Increase'
+                                    },
+                                    xAxis: {
+                                        categories: follower_trend.xData
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: 'Growth Rate of Followers'
+                                        }
+                                    },
+                                    plotOptions: {
+                                        area: {
+                                            fillOpacity: 0.2, 
+                                            threshold: 0,  
+                                            marker: {
+                                                enabled: false
                                             }
-                                        ]
-                                        });
+                                        }
+                                    },
+                                    series: [
+                                        {
+                                            name: 'Followers Increase Rate',
+                                            data: follower_trend.growth_rates
+                                        },
+                                        {
+                                            name: '비교군 데이터임',
+                                            type: 'area',
+                                            color: 'grey',
+                                            fillColor: 'rgba(192, 192, 192, 0.2)',
+                                            data: follower_trend.growth_rate_average
+                                        }
+                                    ]
+                                });
+                                
                                 // 검색 결과 그래프 띄울때 DOM 객체 이용해서 css 조정
                                 document.getElementById('chart-container-02').style.width = "100%";
                                 document.getElementById('chart-container-02').style.height = "500px";
