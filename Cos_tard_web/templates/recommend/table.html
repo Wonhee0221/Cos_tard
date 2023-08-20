@@ -22,6 +22,7 @@
     <!-- End layout styles -->
     <link rel="icon" href="{% static 'assets/homepage_icon.jpg' %}" />
     <script src="../../static/templates/assets/js/chart.js"></script>
+    
   </head>
   <body>
     <div class="container-scroller">
@@ -342,9 +343,11 @@
                   <div class="card-body">
                     <h4 class="card-title">점수</h4>
                     <p class="card-description"> *100점 만점 </p>
-                    <div id="radarChartContainer">
-                      <canvas id="radarChart" style="height:230px"></canvas>
-                  </div>
+                    <div  style="width: 1000px; height:400px">
+                      <canvas id="radarChart"></canvas>
+                    </div>
+
+                      
                   </div>
                 </div>
               </div>
@@ -411,58 +414,76 @@
     <script src="../../static/templates/assets/js/chart.js?ver=123"></script>
     <script>
       $(function () {
-        var labels = ['팔로워 수', '도달율', '호감도', '수치', '뭘까'];
+        var labels = ['아랑','이사배','조효진','회사원','포니'];
         var ctx = document.getElementById('radarChart').getContext('2d');
         var radarChart = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: labels[0],
-                    data: [80, 50, 30, 60, 50].map(value => Math.min(value, 100)), // Limit values to 100
-                    backgroundColor: 'rgba(5, 255, 192, 0.2)',
-                    borderColor: 'rgba(75, 255, 192, 1)',
-                    borderWidth: 1
-                },
-                {
-                  label: labels[1],
-                  data: [70, 50, 40, 40, 80].map(value => Math.min(value, 100)), // Limit values to 100
-                  backgroundColor: 'rgba(45, 172, 255, 0.2)',
-                  borderColor: 'rgba(5, 142, 255, 1)',
-                  borderWidth: 1
-                },
-                {
-                  label:  labels[2],
-                  data: [70, 30, 60, 40, 50].map(value => Math.min(value, 100)), // Limit values to 100
-                  backgroundColor: 'rgba(75, 255, 192, 0.2)',
-                  borderColor: 'rgba(25, 102, 255, 1)',
-                  borderWidth: 1
-                },
-                {
-                  label: labels[3],
-                  data: [40, 40, 60, 40, 50].map(value => Math.min(value, 100)), // Limit values to 100
-                  backgroundColor: 'rgba(75, 192, 255, 0.4)',
-                  borderColor: 'rgba(25, 255, 192, 1)',
-                  borderWidth: 1
-                },
-                {
-                  label:  labels[4],
-                  data: [60, 60, 60, 40, 50].map(value => Math.min(value, 100)), // Limit values to 100
-                  backgroundColor: 'rgba(255, 192, 192, 0.4)',
-                  borderColor: 'rgba(255, 102, 192, 1)',
-                  borderWidth: 1
-                }]
+          type: 'radar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: labels[0],
+              data: [80, 50, 30, 60, 50].map(value => Math.min(value, 100)),
+              backgroundColor: 'rgba(5, 255, 192, 0.2)',
+              borderColor: 'rgba(75, 255, 192, 1)',
+              borderWidth: 1
             },
-            options: {
-                scale: {
-                    ticks: {
-                        beginAtZero: true,
-                        min:10,
-                        max: 100, // Set maximum tick value to 100
-                        stepSize: 10
-                    }
+            {
+              label: labels[1],
+              data: [70, 50, 40, 40, 80].map(value => Math.min(value, 100)),
+              backgroundColor: 'rgba(45, 172, 255, 0.2)',
+              borderColor: 'rgba(5, 142, 255, 1)',
+              borderWidth: 1
+            },
+            {
+              label: labels[2],
+              data: [70, 30, 60, 40, 50].map(value => Math.min(value, 100)),
+              backgroundColor: 'rgba(75, 255, 192, 0.2)',
+              borderColor: 'rgba(25, 102, 255, 1)',
+              borderWidth: 1
+            },
+            {
+              label: labels[3],
+              data: [40, 40, 60, 40, 50].map(value => Math.min(value, 100)),
+              backgroundColor: 'rgba(75, 192, 255, 0.4)',
+              borderColor: 'rgba(25, 255, 192, 1)',
+              borderWidth: 1
+            },
+            {
+              label: labels[4],
+              data: [60, 60, 60, 40, 50].map(value => Math.min(value, 100)),
+              backgroundColor: 'rgba(255, 192, 192, 0.4)',
+              borderColor: 'rgba(255, 102, 192, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            plugins: {
+              legend: {
+                display: true, // 범례 표시 여부
+                position: 'bottom', // 범례 위치 (top, bottom, left, right 중 선택)
+                labels: {
+                  font: {
+                    size: 14, // 범례 항목 텍스트 크기
+                    weight: 'bold' // 범례 항목 텍스트 두께 (normal, bold, bolder, lighter 등)
+                  },
+                  fontColor: 'black', // 범례 항목 텍스트 색상
+                  usePointStyle: true,
+                  padding: 20 // 범례 항목에 데이터셋 스타일을 사용할지 여부
                 }
+              }
+            },
+            scales: {
+              r: {
+                ticks: {
+                  beginAtZero: true,
+                  min: 10,
+                  max: 100,
+                  stepSize: 10
+                }
+              }
             }
+          }
+          
         });
       });
     </script>

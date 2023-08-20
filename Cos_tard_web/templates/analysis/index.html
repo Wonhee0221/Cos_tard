@@ -790,7 +790,6 @@
                         },
                         success: function(data) {
                           console.log(data);
-                          
                           $('#profile_img').attr('src','../static/assets/'+data.influencer_data.userid+'.jpg');
 
                           //user fix
@@ -872,39 +871,39 @@
 
                             // 팔로워 증가율 그래프
                             Highcharts.chart('chart-container-02', {
-                                
-                                            title: {
-                                                text: 'Follower increase August'
-                                            },
-                                            xAxis: {
-                                                // categories: data.follower_trend.xData
-                                            },
-                                            yAxis: {
-                                                title: {
-                                                    text: 'Growth rate of followers'
-                                                }
-                                            },
-                                            plotOptions: {
-                                                area: {
-                                                    fillOpacity: 0.2, 
-                                                    threshold: 0,  
-                                                    marker: {
-                                                        enabled: false
-                                                    }
-                                                }},
-                                            series: [{
-                                                name: 'followers increase rate',
-                                                data: data.follower_trend.growth_rates
-                                            },
-                                            {
-                                                name: '비교군 데이터임',
-                                                type : 'area',
-                                                color: 'grey', 
-                                                fillColor: 'rgba(192, 192, 192, 0.2)',
-                                                data: data.follower_trend.growth_rate_average
-                                            }
-                                        ]
-                                        });
+                              title: {
+                                text: 'Follower increase August'
+                              },
+                              xAxis: {
+                                // categories: data.follower_trend.xData
+                              },
+                              yAxis: {
+                                title: {
+                                  text: 'Growth rate of followers'
+                                }
+                              },
+                              plotOptions: {
+                                area: {
+                                  fillOpacity: 0.2,
+                                  threshold: 0,
+                                  marker: {
+                                    enabled: false
+                                  }
+                                }
+                              },
+                              series: [{
+                                name: 'followers increase rate',
+                                data: data.follower_trend.growth_rates
+                              },
+                              {
+                                name: '비교군 데이터임',
+                                type: 'area',
+                                color: 'grey',
+                                fillColor: 'rgba(192, 192, 192, 0.2)',
+                                data: data.follower_trend.growth_rate_average
+                              }]
+                            });
+                            
                             
                           var textData = {
                           labels: [data.count_text[0].key, data.count_text[1].key, data.count_text[2].key, data.count_text[3].key, data.count_text[4].key],

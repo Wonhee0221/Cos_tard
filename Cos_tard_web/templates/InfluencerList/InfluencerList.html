@@ -23,6 +23,19 @@
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const personCards = document.querySelectorAll('.person-card');
+        
+                personCards.forEach(personCard => {
+                    personCard.addEventListener('click', function() {
+                        const key = this.getAttribute('id-data');
+                        window.location.href = `/analysis/index.html/${key}`; // 분석 페이지 URL로 이동
+                    });
+                });
+            });
+        </script>
+
     </head>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
@@ -58,7 +71,7 @@
                                     <div class="d-flex justify-content-center pb-3" style="gap: 15px; flex-grow-1">
                                         <div><a href="https://instagram.com/2__yun__2"><i class="bi bi-instagram" style="color: white"></i></a></div>
                                         <div><a href="https://linkbio.co/jungdayun"><i class="bi bi-link-45deg" style="color: white"></i></a></div>
-                                        <div><a href=""><i class="bi bi-clipboard-data" style="color: white"></i></a></div>
+                                        <div class='person-card'; id-data ="336104951"; ><i class="bi bi-clipboard-data" style="color: white"></i></div>
                                     </div>
                                 </div>
                                 <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
@@ -449,4 +462,5 @@
             </div>
         </footer>
     </body>
+    
 </html>
