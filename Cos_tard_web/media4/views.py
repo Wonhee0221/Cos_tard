@@ -104,8 +104,8 @@ def update_media_fix(request):
 
         ##크롤링##
 
-    #admin_id = 17841460966522233
-    #token = "EAALHVkEeHV8BO4wwsy6ZAwa8QYO0FT0MRrO8xxM9029LI5xJFs7iiNSZB3o4rBTnqwZCY1ww1utoRXLp0pqvtVlEXpyNFP0gZAmQExyGDMZC9Kji2obXLmp0O4l0Q98VQda3k3rcUIQCQojxZCbfOwunJD3bUeQjxzNezDY8vjLPOM3ZAVC4I0dsstXSC9PvMCf"
+    # admin_id = 17841460966522233
+    # token = "EAALHVkEeHV8BO4wwsy6ZAwa8QYO0FT0MRrO8xxM9029LI5xJFs7iiNSZB3o4rBTnqwZCY1ww1utoRXLp0pqvtVlEXpyNFP0gZAmQExyGDMZC9Kji2obXLmp0O4l0Q98VQda3k3rcUIQCQojxZCbfOwunJD3bUeQjxzNezDY8vjLPOM3ZAVC4I0dsstXSC9PvMCf"
     
     admin_id = 17841402050732962
     token = "EAAIvJjhX7PgBO9abNiUoqdZBEc9cSUjW1J9Up1ZCMXiBlJNrmYL4rEiZAjPXHKpZCuZAzE9okSwYUgyTAOYKcdI5iTNv0nD7vq5jVXEIO37dtm0YccPtlGdIozP7A0VeVQ6FZCjysZCdETKBqVVqLP0fiLqzpFthXauUsMj8bgJZBTSdG0BDjTLIBW3BToEwbkwZD"
@@ -146,6 +146,7 @@ def update_media_fix(request):
                 hashtags.media_id= j[1]
                 hashtags.tags= ",".join(tag)
                 hashtags.save(force_insert=True)
+                print(tag)
             
             except Exception as e:
                 next

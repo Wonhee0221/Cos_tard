@@ -23,7 +23,7 @@ urlpatterns = [
     path('',views.home_view,name='home-page'),
     path('about/',views.about_view,name='about-page'),
     path('InfluencerList/',include('InfluencerList.urls'),name='list-page'),
-    path('analysis/',include('analysis.urls'),name="analysis-page"),
+    path('analysis/',include('analysis.urls'),name="analysis-page2"),
     path('recommend/',include('recommend.urls'),name='recommend-page'),
     path('media4/',include('media4.urls')),
     path('admin/', admin.site.urls),
