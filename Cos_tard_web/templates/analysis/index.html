@@ -415,7 +415,7 @@
                         <tr>
                           
                           <td>팔로워가</td>
-                          <td style="color:#b66dff" id="max_growth_date"></td>
+                          <td style="color:#b66dff" class="max-growth-date"></td>
                           <td>에 가장 많이 증가했어요</td>
                         </tr>
                       </tbody>
@@ -427,11 +427,10 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">팔로워가 가장 많이 증가했던</h4>
-                    <p id="max_growth_date"></p>
-                    <p id="media_id"></p>
+                    <p class="max-growth-date"></p>
                     <img src="" alt="Instagram Image" class="small-image" id="media_url">
                     <p id="caption"></p>
-
+                   
                   </div>
                 </div>
               </div>
@@ -832,7 +831,7 @@
 
                           //follower trend
                           $('#average_growth').text(data.follower_trend.average_growth);
-                          $('#max_growth_date').text(data.follower_trend.max_growth_date);
+                          $('.max-growth-date').text(data.follower_trend.max_growth_date);
                           var diff = data.follower_trend.diff + "  than yesterday"
                           $('#diffdisplay').text(diff);
                           $('#compare').text(data.follower_trend.compare);
@@ -857,7 +856,7 @@
                           $('#media_id').text(data.media_data.media_id);
                           $('#permalink').text(data.media_data.permalink);
                           $('#media_url').attr('src', data.media_data.media_url);
-
+                          
                           //count text
                           $('#text1_topic').text(data.count_text[0].key);
                           $('#text2_count').text(data.count_text[0].value);

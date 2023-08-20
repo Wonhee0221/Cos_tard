@@ -55,14 +55,14 @@ def get_influencer_analysis(request):
         for x in media_max:
             if str(search_date) in x['timestamp']:
                 media_id = x['media_id']
-                # max_media = Media_fix.objects.get(media_id=media_id)
-                # max_media_info = list(Media_info.objects.filter(media_id=media_id).order_by('-date')[:1].values())[0]
+                max_media = Media_fix.objects.get(media_id=media_id)
+                max_media_info = list(Media_info.objects.filter(media_id=media_id).order_by('-date')[:1].values())[0]
                 media_data = {
                     'timestamp': datePart + " " + timePart,
-                    'media_id': media_id
-                    # 'caption': max_media.caption,
-                    # 'permalink' : max_media.permalink,
-                    # 'media_url' : max_media_info.get('media_url'),  
+                    'media_id': media_id,
+                    'caption': max_media.caption,
+                    'permalink' : max_media.permalink,
+                    'media_url' : max_media_info.get('media_url'),  
                 }
                 break
     except: 
