@@ -21,6 +21,7 @@ class Comment(models.Model):
     cute = models.IntegerField()
     pure = models.IntegerField()
     gorg = models.IntegerField()
+    sexy = models.IntegerField()
     maximage = models.CharField()
     maximagerate = models.FloatField()
 

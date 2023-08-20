@@ -57,8 +57,9 @@ def recommend(request):
         market_value = int(request.POST.get('market'))
         model_value = int(request.POST.get('model'))
         product_value = int(request.POST.get('product'))
-
-    scores = []
+    
+    scores=[]
+    ids=[]
     username = ["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
             "hamnihouse", "ssinnim", "yu__hyewon", "hyojinc_", "leojmakeup", "2__yun__2", "areumsongee", "makeup_maker_",
             "r_yuhyeju", "vivamoon", "risabae_art", "yujin_so", "kisy0729", "ponysmakeup"]
@@ -66,28 +67,43 @@ def recommend(request):
     for user in username:
         id_object = Users_fix.objects.filter(user_id=user).first()
         ig_ids = id_object.ig_id
+        ids.append(ig_ids)
         score = scoring(ig_ids, model_value, level=price_value, market_value=market_value)
         scores.append(score)
     
-    print(scores)
     scores = scale_list(scores, 1, 100)
-    print(scores)
 
-    data = {'Username': username, 'Score': scores}
+    data = { 'id':ids, 'Username': username, 'Score': scores}
     df = pd.DataFrame(data)
 
     sorted_df = df.sort_values(by='Score', ascending=False)
-    print(sorted_df)
-    top5 = sorted_df[0:5].to_dict(orient='records')
-    print(top5)
+    top5 = sorted_df.head(5)
 
-    return JsonResponse({'top_influencers': top5})
+    names = top5['Username'].tolist()
+    ig_id5 = top5['id'].tolist()
+    followers=[]
+    engage=[]
+    experts=[]
+    images=[]
+    for item in ig_id5:
+       followers.append(Users_info.objects.filter(ig_id=item).order_by('date').values_list('followers_count', flat=True).first())
+       eng = round(cal_engagement(item),2)
+       engage.append(eng)
+       experts.append(Comment.objects.filter(ig_id=item).values_list('domain', flat=True).first())
+       images.append(getimage(item, model_value=model_value))
+    
+    # followers=scale_list(followers, 1, 5)
+    engage=scale_line(engage, 3, 5)
+    experts=scale_list(experts, 1, 5)
+    images=scale_list(images, 1, 5)
 
-@csrf_exempt
-def result(request):
-   if request.method == 'POST':
-        username = list(request.POST.get('topInfluencers'))
+    result1 = top5.to_dict(orient='records')
+    result2 = {'name':names, 'follower':followers, 'engage':engage, 'expert':experts, 'image':images}
+
+    context = { 'top_influencers': result1, 'chartdata':result2 }
+
+    return JsonResponse(context)
 
 
-
-   return JsonResponse({'scores': username})
+def error(request):
+   return render(request,'recommend/error-404.html')

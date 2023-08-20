@@ -13,7 +13,7 @@ def cal_engagement(ig_id):
     if followers is None or followers == 0:
         return None # 유효성 검사
 
-    engagement = [(like + comment) / followers for like, comment in zip(likes, comments)]
+    engagement = [(like + comment) / followers * 100 for like, comment in zip(likes, comments)]
     
     avg_engagement = statistics.mean(engagement)
 
@@ -78,6 +78,14 @@ def scale_list(data_list, new_min, new_max):
     
     return scaled_data
 
+def scale_line(data_list, mymax, target):
+    scaled_data=[]
+    for value in data_list:
+        scaled_value = (value / mymax) * target
+        scaled_data.append(scaled_value)
+    
+    return scaled_data
+
 def imaging(ig_id, model_value):
     if model_value in range(1, 5):
         column_names = ['cute', 'pure', 'gorg', 'sexy']
@@ -92,6 +100,16 @@ def imaging(ig_id, model_value):
     
     imageagree = image / imagecomment
     return imageagree
+
+def getimage(ig_id, model_value):
+    if model_value in range(1, 5):
+        column_names = ['cute', 'pure', 'gorg', 'sexy']
+        image = Comment.objects.filter(ig_id=ig_id).values_list(column_names[model_value - 1], flat=True)[0]
+    else:
+        return 0
+    
+    return image
+
 
 def pricing(ig_id, level):
     follower = followerslevel(ig_id=ig_id) #팔로워 수 단위 측정
