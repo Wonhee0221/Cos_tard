@@ -30,8 +30,18 @@ def get_influencer_analysis(request):
     influencer_data_details = {
         'follows_count': influencer_details.get('follows_count'),
         'followers_count': influencer_details.get('followers_count'),
-        'media_count': influencer_details.get('media_count')
+        'media_count': influencer_details.get('media_count'),
+         'date': influencer_details.get('date')
         # 다른 필요한 정보들도 추가할 수 있음
+    }
+
+    media = list(Media_fix.objects.filter(owner_id=influencer.ig_id).order_by('-timestamp')[:1].values())[0]
+    timestamp = media.get('timestamp')
+    datePart = timestamp[:10]
+    timePart = timestamp[11:16]
+    media_data = {
+        'timestamp': datePart + " " + timePart,
+        
     }
 
     #팔로워 부분
@@ -47,8 +57,9 @@ def get_influencer_analysis(request):
         'influencer_data_details' : influencer_data_details,
         'follower_trend' : follower_trend,
         'image_link' : image_link,
-        # 'count_text' : count_text,
-        # 'count_hashtag' : count_hashtag
+        'count_text' : count_text,
+        'count_hashtag' : count_hashtag,
+        'media_data' : media_data
     }
 
     return JsonResponse(context, safe=False)
@@ -75,7 +86,8 @@ def get_influencer(request):
         influencer_data_details = {
             'follows_count': influencer_details.get('follows_count'),
             'followers_count': influencer_details.get('followers_count'),
-            'media_count': influencer_details.get('media_count')
+            'media_count': influencer_details.get('media_count'),
+            'date': influencer_details.get('date')
             # 다른 필요한 정보들도 추가할 수 있음
         }
 
@@ -93,7 +105,8 @@ def get_influencer(request):
             'follower_trend' : follower_trend,
             'image_link' : image_link,
             'count_text' : count_text,
-            'count_hashtag' : count_hashtag
+            'count_hashtag' : count_hashtag,
+            
             }
 
         return JsonResponse(context, safe=False)
