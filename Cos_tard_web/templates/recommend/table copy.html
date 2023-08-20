@@ -23,7 +23,6 @@
     <!-- End layout styles -->
     <link rel="icon" href="{% static 'assets/homepage_icon.jpg' %}" />
     <script src="../../static/templates/assets/js/chart.js"></script>
-    
   </head>
   <body>
     <div class="container-scroller">
@@ -193,12 +192,12 @@
               <div class="collapse show" id="price_group">
                 <ul class="nav flex-column sub-menu">
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="price_rad" value="0">
+                      <input type="radio" class="rad-input" name="price_rad" data-value="0">
                       <div class="rad-design"></div>
                       <div class="rad-text">High</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="price_rad" value="1">
+                      <input type="radio" class="rad-input" name="price_rad" data-value="1">
                       <div class="rad-design"></div>
                       <div class="rad-text">Low</div>
                   </label>
@@ -213,12 +212,12 @@
               <div class="collapse show" id="marketing_group">
                 <ul class="nav flex-column sub-menu">
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="marketing_rad" value="0">
+                      <input type="radio" class="rad-input" name="marketing_rad" data-value="0">
                       <div class="rad-design"></div>
                       <div class="rad-text">For Sale</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="marketing_rad" value="1">
+                      <input type="radio" class="rad-input" name="marketing_rad" data-value="1">
                       <div class="rad-design"></div>
                       <div class="rad-text">For Viral</div>
                   </label>
@@ -233,22 +232,22 @@
               <div class="collapse show" id="model_group">
                 <ul class="nav flex-column sub-menu">
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="model_rad" value="1">
+                      <input type="radio" class="rad-input" name="model_rad" data-value="1">
                       <div class="rad-design"></div>
                       <div class="rad-text">Cute</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="model_rad" value="2">
+                      <input type="radio" class="rad-input" name="model_rad" data-value="2">
                       <div class="rad-design"></div>
                       <div class="rad-text">Pure</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="model_rad" value="3">
+                      <input type="radio" class="rad-input" name="model_rad" data-value="3">
                       <div class="rad-design"></div>
                       <div class="rad-text">Gorgeous</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="model_rad" value="4">
+                      <input type="radio" class="rad-input" name="model_rad" data-value="4">
                       <div class="rad-design"></div>
                       <div class="rad-text">Chill</div>
                   </label>
@@ -263,22 +262,22 @@
               <div class="collapse show" id="product_group">
                 <ul class="nav flex-column sub-menu">
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="product_rad" value="1">
+                      <input type="radio" class="rad-input" name="product_rad" data-value="1">
                       <div class="rad-design"></div>
                       <div class="rad-text">skin care</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="product_rad" value="2">
+                      <input type="radio" class="rad-input" name="product_rad" data-value="2">
                       <div class="rad-design"></div>
                       <div class="rad-text">Tools</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="product_rad" value="3">
+                      <input type="radio" class="rad-input" name="product_rad" data-value="3">
                       <div class="rad-design"></div>
                       <div class="rad-text">colors</div>
                   </label>
                   <label class="rad-label">
-                      <input type="radio" class="rad-input" name="product_rad" value="4">
+                      <input type="radio" class="rad-input" name="product_rad" data-value="4">
                       <div class="rad-design"></div>
                       <div class="rad-text">body care</div>
                   </label>
@@ -288,6 +287,45 @@
             <li class="nav-item sidebar-actions">
               <button id="btn_recommend" type="button" class="btn btn-block btn-lg btn-gradient-danger">recommend</button>
             </li>
+                {% comment %} <div class="card-body">
+                  <p class="card-description"> Price for Campaign </p>
+                  <div class="template-demo" id="price_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="0">High</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">Low</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="card-description"> Marketing Purpose </p>
+                  <div class="template-demo" id="marketing_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="0">For Sale</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">For Viral</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="card-description"> Model Image </p>
+                  <div class="template-demo" id="model_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">Cute</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="2">Pure</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="3">Gorgeous</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="4">Chill</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="card-description"> Our Brand Product </p>
+                  <div class="template-demo" id="product_group">
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="1">Skin Care</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="2">Tools</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="3">Colors</button>
+                    <button type="button" class="btn btn-outline-danger btn-fw" data-value="4">Body Care</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="template-demo">
+                    <button id="btn_recommend" type="button" class="btn btn-gradient-danger">Recommend</button>
+                  </div>
+                </div>
+              </div>
+            </div> {% endcomment %}
           </ul>
         </div>
         <!-- partial -->
@@ -307,19 +345,21 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Recommends Result </h4>
-                      <p class="card-description" style="text-align: center;" id="result"> Nothing now Here </p>
-                      <table id="score-table" class="table table-hover" style="display: none;">
-                          <thead>
-                              <tr>
-                                  <th style="text-align: center;">Profile</th>
-                                  <th style="text-align: center;">Username</th>
-                                  <th style="text-align: center;">Matching</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                      </table>
                   </div>
+                    <div class="card-body">
+                      <p class="card-description" style="text-align: center;" id="result"> Now waiting ... </p>
+                        <table id="score-table" class="table table-hover" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Profile</th>
+                                    <th style="text-align: center;">Username</th>
+                                    <th style="text-align: center;">Matching</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
               </div>
               <div class="page-header">
@@ -329,10 +369,10 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Score distribution</h4>
-                    <p class="card-description"> *5점 만점 </p>
-                    <p id="result1" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
-                    <div id="ChartContainer">
-                      <canvas id="radarChart" style="height:230px; display: none;"></canvas>
+                    <p class="card-description"> *100점 만점 </p>
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
+                    <div id="radarChartContainer">
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -342,14 +382,9 @@
                   <div class="card-body">
                     <h4 class="card-title">Top Influencer</h4>
                     <p class="card-description"> Score description </p>
-                    <p id="result2" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
-                    <div id="profile" class="card-img-top" style="display: flex; justify-content: center; margin-bottom: 20px;">
-                    </div>
-                    <div id="profilename" style="text-align: center;">
-                    </div>
-                    <div id="description" style="margin: 20px;">
-                    </div>
-                    <div id="linkbutton" class="card-img-bottom" style="display: flex; justify-content: center; margin-bottom: 20px;">
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
+                    <div id="radarChartContainer">
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -360,9 +395,9 @@
                   <div class="card-body">
                     <h4 class="card-title">Followers</h4>
                     <p class="card-description"> *단위 : 만명</p>
-                    <p id="result3" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
-                    <div id="ChartContainer">
-                      <canvas id="fbarChart" style="display: none;" style="height:230px"></canvas>
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
+                    <div id="radarChartContainer">
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -372,9 +407,9 @@
                   <div class="card-body">
                     <h4 class="card-title">Engagement</h4>
                     <p class="card-description">사용자와 게시물 간의 상호작용 수준을 나타내는 지표</p>
-                    <p id="result4" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
-                    <div id="ChartContainer">
-                      <canvas id="ebarChart" style="display: none;" style="height:230px"></canvas>
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
+                    <div id="radarChartContainer">
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -384,9 +419,9 @@
                   <div class="card-body">
                     <h4 class="card-title">Model Matching</h4>
                     <p class="card-description">해당 인플루언서는 이러한 이미지예요:</p>
-                    <p id="result5" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
-                    <div id="ChartContainer">
-                      <canvas style="display: none;" style="height:230px"></canvas>
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
+                    <div id="radarChartContainer">
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -396,9 +431,9 @@
                   <div class="card-body">
                     <h4 class="card-title">Product Matching</h4>
                     <p class="card-description">해당 인플루언서는 이러한 제품과 협업했어요:</p>
-                    <p id="result6" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
-                    <div id="ChartContainer">
-                      <canvas style="display: none;" style="height:230px"></canvas>
+                    <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
+                    <div id="radarChartContainer">
+                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -453,80 +488,66 @@
     <!-- ajax query -->
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script>
-    $(document).ready(function() {
-      $('.sidebar .btn').click(function(){
-        $(this).closest('div').find('.sidebar-btn-active').each(function(){
-          $(this).removeClass('sidebar-btn-active');
-        });
-        $(this).addClass('sidebar-btn-active');
-        $('.sidebar .card-title').click();
+      $(document).ready(function() {
+        $('#btn_recommend').click(function(){
+          console.log('clicked');
+          var selectedValue = $("input[name='rad']:checked").val();
+
+          var price_value = $('#price_group').attr('data-value');
+          var market_value = $('#marketing_group').attr('data-value');
+          var model_value = $('#model_group').attr('data-value');
+          var product_value = $('#product_group').attr('data-value');
+          console.log(price_value);
+
+          $.ajax({
+            url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
+            method: 'POST',  // POST 요청으로 데이터 전송
+            data: {
+                price: price_value,
+                market: market_value,
+                model: model_value,
+                product: product_value
+            },
+            beforeSend : function(){
+              console.log(window);
+              var left = innerWidth/2-50;
+              var top = innerHeight/2-30;
+              var mainPanelHeight = $('.main-panel').css('height');
+              console.log(mainPanelHeight);
+              $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
+              $('.main-panel').append('<img id="img_progress" src="../static/assets/loading-gif.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
+            },
+            complete:function(){
+              $('#img_progress').remove();
+              $('#blur_panel').remove();
+            },
+            success: function(response) {
+                var resultp = $('#result');
+                resultp.empty();
+                var dataTable = $('#score-table');
+                var topInfluencers = response.top_influencers;
+
+                var str = "";
+                $.each(topInfluencers, function(i, influencer) {
+                    str += "<tr>";
+                    str += '<td class="py-1"><img src=../../static/assets/' + influencer.Username + '.jpg/></td>';
+                    str += '<td>' + influencer.Username + '</td><td>' + influencer.Score + '</td>';
+                    str += '</tr>';
+                });
+                $("#score-table tbody").append(str); // tbody에 데이터 추가
+                $('#score-table').show();
+              var usernames = topInfluencers.map(function(influencer) {
+                  return influencer.Username;
+              });
+            },
+            error: function(error) {
+                console.error(error);
+            }         
+          });
       });
 
-      $('#btn_recommend').click(function(){
-        var price_value = $('#price_group .sidebar-btn-active').attr('data-value');
-        var market_value = $('#marketing_group .sidebar-btn-active').attr('data-value');
-        var model_value = $('#model_group .sidebar-btn-active').attr('data-value');
-        var product_value = $('#product_group .sidebar-btn-active').attr('data-value');
-
-        $.ajax({
-          url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
-          method: 'POST',  // POST 요청으로 데이터 전송
-          data: {
-              price: price_value,
-              market: market_value,
-              model: model_value,
-              product: product_value
-          },
-          beforeSend : function(){
-            console.log(window);
-            var left = innerWidth/2-50;
-            var top = innerHeight/2-30;
-            var mainPanelHeight = $('.main-panel').css('height');
-            console.log(mainPanelHeight);
-            $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
-            $('.main-panel').append('<img id="img_progress" src="../static/assets/loading-gif.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
-          },
-          complete:function(){
-            $('#img_progress').remove();
-            $('#blur_panel').remove();
-          },
-          success: function(response) {
-              var resultp = $('#result');
-              resultp.empty();
-              var dataTable = $('#score-table');
-              var topInfluencers = response.top_influencers;
-
-              var str = "";
-              $.each(topInfluencers, function(i, influencer) {
-                  str += "<tr>";
-                  str += '<td class="py-1"><img src=../../static/assets/' + influencer.Username + '.jpg/></td>';
-                  str += '<td>' + influencer.Username + '</td><td>' + influencer.Score + '</td>';
-                  str += '</tr>';
-              });
-              $("#score-table tbody").append(str); // tbody에 데이터 추가
-              $('#score-table').show();
-            var usernames = topInfluencers.map(function(influencer) {
-                return influencer.Username;
-            });
-          },
-          error: function(error) {
-              console.error(error);
-          }         
-        });
-
-        $.ajax({
-          url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
-          method: 'POST',  // POST 요청으로 데이터 전송
-          data: {
-              topInfluencers: JSON.stringify(usernames)
-          },
-          success: function(response){
-            console.log(topInfluencers)
-          }
-        });
-    });
     </script>
-    <!-- canvas container -->
+  </body>
   <body>
     <div id="canvas-container" style="display: none;">
       <canvas id="myChart"></canvas>
@@ -543,9 +564,11 @@
                 options: {
                     scale: {
                         ticks: {
-                          stepSize:1
+                            beginAtZero: true,
+                            min: 10,
+                            max: 100,
+                            stepSize: 10
                         }
-                      }
                     }
                 }
             });
@@ -663,19 +686,30 @@
                               display: false
                           },
                           beginAtZero: true
-                        }
                       }
-                    }, //end of options
                   }
-                );
-                $('#ebarChart').show();             
-            },
-            error: function(error) {
-                console.error(error);
-            }         
-          }); //ajax
-        }); //btn click
-      }); //document ready
+              }
+          });
+      }
+
+      createChart();
+
+      document.getElementById('dataInput').addEventListener('input', function() {
+          var newData = [
+              parseInt(document.getElementById('dataInput').value),
+              parseInt(document.getElementById('dataInput').value),
+              parseInt(document.getElementById('dataInput').value),
+              parseInt(document.getElementById('dataInput').value),
+              parseInt(document.getElementById('dataInput').value)
+          ];
+
+          for (var i = 0; i < 5; i++) {
+              myChart.data.followers_data[i] = newData[i];
+          }
+
+          myChart.update();
+      });
     </script>
+    </div>
   </body>
 </html>
