@@ -5714,7 +5714,7 @@ textarea.form-control-lg {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   padding: 1rem 1rem;
-  text-align: center; }
+  }
 
 .card-title {
   margin-bottom: 0.5rem; }
