@@ -81,6 +81,7 @@ def recommend(request):
 
     names = top5['Username'].tolist()
     ig_id5 = top5['id'].tolist()
+    top_ig_id = ig_id5[0]
     followers=[]
     engage=[]
     experts=[]
@@ -100,7 +101,7 @@ def recommend(request):
     result1 = top5.to_dict(orient='records')
     result2 = {'name':names, 'follower':followers, 'engage':engage, 'expert':experts, 'image':images}
 
-    context = { 'top_influencers': result1, 'chartdata':result2 }
+    context = { 'top_influencers': result1, 'chartdata':result2, 'top_ig_id':top_ig_id}
 
     return JsonResponse(context)
 
