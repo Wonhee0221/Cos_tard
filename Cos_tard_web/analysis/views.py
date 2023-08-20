@@ -7,11 +7,13 @@ from analysis.hashtag import *
 import json
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.db.models.functions import TruncDate
+from datetime import datetime
 
 # Create your views here.
 
 def index_test(request):
-    ig_id='17157849559'
+    ig_id = request.GET.get('ig_id')
     return render(request,'analysis/index.html',{'ig_id':ig_id})
 
 @csrf_exempt
@@ -26,7 +28,7 @@ def get_influencer_analysis(request):
         'website': influencer.website,
         'biography': influencer.biography,
     }
-    influencer_details = list(Users_info.objects.filter(ig_id=influencer.ig_id).order_by('-date')[:1].values())[0]
+    influencer_details = list(Users_info.objects.filter(ig_id=ig_id).order_by('-date')[:1].values())[0]
     influencer_data_details = {
         'follows_count': influencer_details.get('follows_count'),
         'followers_count': influencer_details.get('followers_count'),
@@ -35,18 +37,43 @@ def get_influencer_analysis(request):
         # 다른 필요한 정보들도 추가할 수 있음
     }
 
-    media = list(Media_fix.objects.filter(owner_id=influencer.ig_id).order_by('-timestamp')[:1].values())[0]
+    media = list(Media_fix.objects.filter(owner_id=ig_id).order_by('-timestamp')[:1].values())[0]
     timestamp = media.get('timestamp')
     datePart = timestamp[:10]
     timePart = timestamp[11:16]
-    media_data = {
-        'timestamp': datePart + " " + timePart,
-        
-    }
+    timestamp = datePart + " " + timePart
 
     #팔로워 부분
-    follower_trend = follower_graph(influencer.ig_id)
-    image_link = get_image(influencer.ig_id)
+    follower_trend = follower_graph(ig_id)
+
+    #피드미리보기
+    image_link = get_image(ig_id)
+
+    search_date = follower_trend["max_growth_date"]
+    media_max = Media_fix.objects.filter(owner_id=ig_id).order_by('-timestamp').values()[:50]
+    media_data = {
+                'timestamp': timestamp,
+                'media_id': None,
+                'caption': "해당 날짜에 게시물이 없습니다",
+                'permalink' : None,
+                'media_url' : None,  
+            }
+    try: 
+        for x in media_max:
+            if str(search_date) in x['timestamp']:
+                media_id = x['media_id']
+                max_media = Media_fix.objects.get(media_id=media_id)
+                max_media_info = list(Media_info.objects.filter(media_id=media_id).order_by('-date')[:1].values())[0]
+                media_data = {
+                    'timestamp': timestamp,
+                    'media_id': media_id,
+                    'caption': max_media.caption,
+                    'permalink' : max_media.permalink,
+                    'media_url' : max_media_info.get('media_url'),  
+                }
+                break
+    except: 
+       pass
 
     count_text = count_text_token(influencer.ig_id)
     count_hashtag=count_hashtags(influencer.ig_id)
@@ -63,6 +90,17 @@ def get_influencer_analysis(request):
     }
 
     return JsonResponse(context, safe=False)
+
+
+
+
+
+
+
+
+
+
+
 
 # Create your views here.
 
@@ -93,6 +131,8 @@ def get_influencer(request):
 
         #팔로워 부분
         follower_trend = follower_graph(influencer.ig_id)
+        
+
         image_link = get_image(influencer.ig_id)
 
         count_text = count_text_token(influencer.ig_id)

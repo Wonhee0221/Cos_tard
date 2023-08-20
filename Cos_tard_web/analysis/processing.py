@@ -35,7 +35,7 @@ def follower_graph(ig_id):
 
     max_growth = max (growth_rates)
     index = growth_rates.index(max_growth)
-    max_growth_date = xData[index]
+    max_growth_date = xData[index-1]
 
     ##검색한 인플루언서 이외, 비교군##
 
