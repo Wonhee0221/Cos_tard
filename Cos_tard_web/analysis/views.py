@@ -37,44 +37,18 @@ def get_influencer_analysis(request):
         # 다른 필요한 정보들도 추가할 수 있음
     }
 
-    media = list(Media_fix.objects.filter(owner_id=ig_id).order_by('-timestamp')[:1].values())[0]
-    timestamp = media.get('timestamp')
-    datePart = timestamp[:10]
-    timePart = timestamp[11:16]
-    timestamp = datePart + " " + timePart
-
+    
     #팔로워 부분
     follower_trend = follower_graph(ig_id)
 
     #피드미리보기
     image_link = get_image(ig_id)
 
+    #팔로워max피드
     search_date = follower_trend["max_growth_date"]
-    media_max = Media_fix.objects.filter(owner_id=ig_id).order_by('-timestamp').values()[:50]
-    media_data = {
-                'timestamp': timestamp,
-                'media_id': None,
-                'caption': "해당 날짜에 게시물이 없습니다",
-                'permalink' : None,
-                'media_url' : None,  
-            }
-    try: 
-        for x in media_max:
-            if str(search_date) in x['timestamp']:
-                media_id = x['media_id']
-                max_media = Media_fix.objects.get(media_id=media_id)
-                max_media_info = list(Media_info.objects.filter(media_id=media_id).order_by('-date')[:1].values())[0]
-                media_data = {
-                    'timestamp': timestamp,
-                    'media_id': media_id,
-                    'caption': max_media.caption,
-                    'permalink' : max_media.permalink,
-                    'media_url' : max_media_info.get('media_url'),  
-                }
-                break
-    except: 
-       pass
+    media_data = get_media_data(search_date,ig_id)
 
+    #키워드분석
     count_text = count_text_token(influencer.ig_id)
     count_hashtag=count_hashtags(influencer.ig_id)
 
