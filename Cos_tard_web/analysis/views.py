@@ -36,7 +36,7 @@ def get_influencer_analysis(request):
          'date': influencer_details.get('date')
         # 다른 필요한 정보들도 추가할 수 있음
     }
-
+    follower = influencer_details.get('followers_count')
     
     #팔로워 부분
     follower_trend = follower_graph(ig_id)
@@ -44,14 +44,15 @@ def get_influencer_analysis(request):
     #피드미리보기
     image_link = get_image(ig_id)
 
-    #팔로워max피드
-    search_date = follower_trend["max_growth_date"]
-    media_data = get_media_data(search_date,ig_id)
+    #좋아요max피드
+    media_data = get_media_data(ig_id)
 
     #키워드분석
     count_text = count_text_token(influencer.ig_id)
     count_hashtag=count_hashtags(influencer.ig_id)
 
+    statistic = get_statistic(ig_id,follower)
+    ratio = get_ratio(ig_id)
 
     context = {
         'influencer_data' : influencer_data,
@@ -60,7 +61,10 @@ def get_influencer_analysis(request):
         'image_link' : image_link,
         'count_text' : count_text,
         'count_hashtag' : count_hashtag,
-        'media_data' : media_data
+        'media_data' : media_data,
+        'statistic' : statistic,
+        'ratio' : ratio
+
     }
 
     return JsonResponse(context, safe=False)
