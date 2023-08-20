@@ -415,78 +415,82 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script>
     $(document).ready(function() {
-      $('.sidebar .btn').click(function(){
-        $(this).closest('div').find('.sidebar-btn-active').each(function(){
-          $(this).removeClass('sidebar-btn-active');
-        });
-        $(this).addClass('sidebar-btn-active');
-        $('.sidebar .card-title').click();
-      });
-
-      $('#btn_recommend').click(function(){
-        var price_value = $('#price_group .sidebar-btn-active').attr('data-value');
-        var market_value = $('#marketing_group .sidebar-btn-active').attr('data-value');
-        var model_value = $('#model_group .sidebar-btn-active').attr('data-value');
-        var product_value = $('#product_group .sidebar-btn-active').attr('data-value');
-
-        $.ajax({
-          url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
-          method: 'POST',  // POST 요청으로 데이터 전송
-          data: {
-              price: price_value,
-              market: market_value,
-              model: model_value,
-              product: product_value
-          },
-          beforeSend : function(){
-            console.log(window);
-            var left = innerWidth/2-50;
-            var top = innerHeight/2-30;
-            var mainPanelHeight = $('.main-panel').css('height');
-            console.log(mainPanelHeight);
-            $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
-            $('.main-panel').append('<img id="img_progress" src="../static/assets/loading-gif.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
-          },
-          complete:function(){
-            $('#img_progress').remove();
-            $('#blur_panel').remove();
-          },
-          success: function(response) {
-              var resultp = $('#result');
-              resultp.empty();
-              var dataTable = $('#score-table');
-              var topInfluencers = response.top_influencers;
-
-              var str = "";
-              $.each(topInfluencers, function(i, influencer) {
-                  str += "<tr>";
-                  str += '<td class="py-1"><img src=../../static/assets/' + influencer.Username + '.jpg/></td>';
-                  str += '<td>' + influencer.Username + '</td><td>' + influencer.Score + '</td>';
-                  str += '</tr>';
-              });
-              $("#score-table tbody").append(str); // tbody에 데이터 추가
-              $('#score-table').show();
-            var usernames = topInfluencers.map(function(influencer) {
-                return influencer.Username;
+        $('.sidebar .btn').click(function() {
+            $(this).closest('div').find('.sidebar-btn-active').each(function() {
+                $(this).removeClass('sidebar-btn-active');
             });
-          },
-          error: function(error) {
-              console.error(error);
-          }         
+            $(this).addClass('sidebar-btn-active');
+            $('.sidebar .card-title').click();
         });
-
-        $.ajax({
-          url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
-          method: 'POST',  // POST 요청으로 데이터 전송
-          data: {
-              topInfluencers: JSON.stringify(usernames)
-          },
-          success: function(response){
-            console.log(topInfluencers)
-          }
+    
+        $('#btn_recommend').click(function() {
+            var price_value = $('#price_group .sidebar-btn-active').attr('data-value');
+            var market_value = $('#marketing_group .sidebar-btn-active').attr('data-value');
+            var model_value = $('#model_group .sidebar-btn-active').attr('data-value');
+            var product_value = $('#product_group .sidebar-btn-active').attr('data-value');
+    
+            var usernames = [];
+    
+            $.ajax({
+                url: '/recommend/recommend_values',
+                method: 'POST',
+                data: {
+                    price: price_value,
+                    market: market_value,
+                    model: model_value,
+                    product: product_value
+                },
+                beforeSend: function() {
+                    var left = innerWidth / 2 - 50;
+                    var top = innerHeight / 2 - 30;
+                    var mainPanelHeight = $('.main-panel').css('height');
+                    $('.main-panel').append('<div id="blur_panel" style="width:100%;height:' + mainPanelHeight + ';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
+                    $('.main-panel').append('<img id="img_progress" src="../static/assets/loading-gif.gif" style="width:100px;position:absolute;left:' + left + 'px;top:' + top + 'px;z-index:9999;" />');
+                },
+                complete: function() {
+                    $('#img_progress').remove();
+                    $('#blur_panel').remove();
+                },
+                success: function(response) {
+                    var resultp = $('#result');
+                    resultp.empty();
+                    var dataTable = $('#score-table');
+                    var topInfluencers = response.top_influencers;
+    
+                    var str = "";
+                    $.each(topInfluencers, function(i, influencer) {
+                        str += "<tr>";
+                        str += '<td class="py-1"><img src=../../static/assets/' + influencer.Username + '.jpg/></td>';
+                        str += '<td>' + influencer.Username + '</td><td>' + influencer.Score + '</td>';
+                        str += '</tr>';
+                        usernames.push(influencer.Username);
+                    });
+    
+                    $("#score-table tbody").append(str);
+                    $('#score-table').show();
+    
+                    $.ajax({
+                        url: '/recommend/recommend_values',
+                        method: 'POST',
+                        data: {
+                            topInfluencers: JSON.stringify(usernames)
+                        },
+                        success: function(response) {
+                            console.log(topInfluencers);
+                        },
+                        error: function(error) {
+                            console.error(error);
+                        }
+                    });
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
         });
     });
     </script>
+    
     <!-- canvas container -->
   <body>
     <div id="canvas-container" style="display: none;">

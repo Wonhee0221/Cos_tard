@@ -415,7 +415,7 @@
                         <tr>
                           
                           <td>팔로워가</td>
-                          <td style="color:#b66dff" id="max_growth_date"></td>
+                          <td style="color:#b66dff" class="max-growth-date"></td>
                           <td>에 가장 많이 증가했어요</td>
                         </tr>
                       </tbody>
@@ -426,8 +426,11 @@
               <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">2023-08-12</h4>
-                    팔로워가 가장 많이 증가한날의 게시물 보여줄수있을까? 안되면 링크만 걸어야지..
+                    <h4 class="card-title">팔로워가 가장 많이 증가했던</h4>
+                    <p class="max-growth-date"></p>
+                    <img src="" alt="Instagram Image" class="small-image" id="media_url">
+                    <p id="caption"></p>
+                   
                   </div>
                 </div>
               </div>
@@ -800,14 +803,15 @@
                           var mainPanelHeight = $('.main-panel').css('height');
                           console.log(mainPanelHeight);
                           $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
-                          $('.main-panel').append('<img id="img_progress" src="../static/assets/bouncy_balls.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
+                          $('.main-panel').append('<img id="img_progress" src="../static/assets/loading-gif.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
                         },
                         complete:function(){
                           $('#img_progress').remove();
                           $('#blur_panel').remove();
                         },
                         success: function(data) {
-                          console.log(data);
+                          console.log(data.media_data);
+                          
                           $('#profile_img').attr('src','../static/assets/'+data.influencer_data.userid+'.jpg');
 
                           //user fix
@@ -827,7 +831,7 @@
 
                           //follower trend
                           $('#average_growth').text(data.follower_trend.average_growth);
-                          $('#max_growth_date').text(data.follower_trend.max_growth_date);
+                          $('.max-growth-date').text(data.follower_trend.max_growth_date);
                           var diff = data.follower_trend.diff + "  than yesterday"
                           $('#diffdisplay').text(diff);
                           $('#compare').text(data.follower_trend.compare);
@@ -848,10 +852,11 @@
                           //media data
                           var timestamp = "update "+ data.media_data.timestamp;
                           $('#timestampdisplay').text(timestamp);
+                          $('#caption').text(data.media_data.caption);
+                          $('#media_id').text(data.media_data.media_id);
+                          $('#permalink').text(data.media_data.permalink);
+                          $('#media_url').attr('src', data.media_data.media_url);
                           
-
-
-
                           //count text
                           $('#text1_topic').text(data.count_text[0].key);
                           $('#text2_count').text(data.count_text[0].value);
@@ -924,14 +929,14 @@
                             Highcharts.chart('chart-container-02', {
                                 
                                             title: {
-                                                text: 'Follower increase August'
+                                                text: null
                                             },
                                             xAxis: {
                                                 // categories: data.follower_trend.xData
                                             },
                                             yAxis: {
                                                 title: {
-                                                    text: 'Growth rate of followers'
+                                                    text: null
                                                 }
                                             },
                                             plotOptions: {
@@ -944,10 +949,11 @@
                                                 }},
                                             series: [{
                                                 name: 'followers increase rate',
-                                                data: data.follower_trend.growth_rates
+                                                data: data.follower_trend.growth_rates,
+                                                color:'#b66dff' //색..뭐로하지
                                             },
                                             {
-                                                name: '비교군 데이터임',
+                                                name: 'others',
                                                 type : 'area',
                                                 color: 'grey', 
                                                 fillColor: 'rgba(192, 192, 192, 0.2)',
@@ -955,7 +961,6 @@
                                             }
                                         ]
                                         });
-                            
                             
                           var textData = {
                           labels: [data.count_text[0].key, data.count_text[1].key, data.count_text[2].key, data.count_text[3].key, data.count_text[4].key],
