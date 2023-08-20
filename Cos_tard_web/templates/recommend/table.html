@@ -532,6 +532,7 @@
                 var engage = chartData.engage;
                 var expert = chartData.expert;
                 var image = chartData.image;
+                var top_ig_id = response.top_ig_id;
 
                 console.log(names)
                 console.log(followers)
@@ -551,7 +552,8 @@
                 $('#description').show(des);
                 $('#linkbutton').append('<button id="analysisLink" type="button" class="btn btn-gradient-danger btn-rounded btn-fw">Go to Analysis</button>');
                 document.getElementById("analysisLink").addEventListener("click", function() {
-                  window.location.href = "recommend_error"; 
+                  var url = "{% url 'analysis:analysis-page2' %}?ig_id=" + top_ig_id;
+                  window.location.href = url;
                 });
                 $('#linkbutton').show();
 
