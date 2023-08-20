@@ -48,8 +48,8 @@ def get_influencer_analysis(request):
     follower_trend = follower_graph(influencer.ig_id)
     image_link = get_image(influencer.ig_id)
 
-    # count_text = count_text_token(influencer.ig_id)
-    # count_hashtag=count_hashtags(influencer.ig_id)
+    count_text = count_text_token(influencer.ig_id)
+    count_hashtag=count_hashtags(influencer.ig_id)
 
 
     context = {
