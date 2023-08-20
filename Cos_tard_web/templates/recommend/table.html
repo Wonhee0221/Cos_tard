@@ -330,8 +330,8 @@
                     <h4 class="card-title">Score distribution</h4>
                     <p class="card-description"> *100점 만점 </p>
                     <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
-                    <div id="radarChartContainer">
-                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    <div id="ChartContainer">
+                      <canvas id="radarChart" style="height:230px; display: none;"></canvas>
                     </div>
                   </div>
                 </div>
@@ -342,8 +342,8 @@
                     <h4 class="card-title">Top Influencer</h4>
                     <p class="card-description"> Score description </p>
                     <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
-                    <div id="radarChartContainer">
-                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    <div id="ChartContainer">
+                      <canvas style="display: none;" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -355,8 +355,8 @@
                     <h4 class="card-title">Followers</h4>
                     <p class="card-description"> *단위 : 만명</p>
                     <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
-                    <div id="radarChartContainer">
-                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    <div id="ChartContainer">
+                      <canvas style="display: none;" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -367,8 +367,8 @@
                     <h4 class="card-title">Engagement</h4>
                     <p class="card-description">사용자와 게시물 간의 상호작용 수준을 나타내는 지표</p>
                     <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
-                    <div id="radarChartContainer">
-                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    <div id="ChartContainer">
+                      <canvas style="display: none;" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -379,8 +379,8 @@
                     <h4 class="card-title">Model Matching</h4>
                     <p class="card-description">해당 인플루언서는 이러한 이미지예요:</p>
                     <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
-                    <div id="radarChartContainer">
-                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    <div id="ChartContainer">
+                      <canvas style="display: none;" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -391,8 +391,8 @@
                     <h4 class="card-title">Product Matching</h4>
                     <p class="card-description">해당 인플루언서는 이러한 제품과 협업했어요:</p>
                     <p class="card-text text-muted" style="text-align: center;" id="result">Nothing now Here</p>
-                    <div id="radarChartContainer">
-                      <canvas style="display: none;" id="radarChart" style="height:230px"></canvas>
+                    <div id="ChartContainer">
+                      <canvas style="display: none;" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -487,66 +487,103 @@
 
                 var str = "";
                 $.each(topInfluencers, function(i, influencer) {
-                    str += "<tr>";
+                    str += '<tr>';
                     str += '<td class="py-1"><img src=../../static/assets/' + influencer.Username + '.jpg/></td>';
                     str += '<td>' + influencer.Username + '</td><td>' + influencer.Score + '</td>';
                     str += '</tr>';
                 });
-                $("#score-table tbody").append(str); // tbody에 데이터 추가
+                $('#score-table tbody').append(str); // tbody에 데이터 추가
                 $('#score-table').show();
-              var usernames = topInfluencers.map(function(influencer) {
-                  return influencer.Username;
-              });
-              console.log(model_value);
-              $.ajax({
-                url: '/recommend/recommend_result',  // 백엔드의 URL을 지정
-                method: 'POST',  // POST 요청으로 데이터 전송
-                data: {
-                  usernames: usernames
-                },
-                success: function(response) {
-                  console.log('sad');
-                },
-                error:function(error){
-                  console.error(error);
-                }
-              });
+              
+                console.log(response.chartdata)
+                var chartData = response.chartdata
+                console.log(chartData.name)
+
+                var names = chartData.name; 
+                var followers = chartData.follower;
+                var engage = chartData.engage;
+                var expert = chartData.expert;
+                var image = chartData.image;
+
+                console.log(names)
+                console.log(followers)
+                console.log(followers[1])
+
+                var radardata ={
+                  labels: ['followers', 'engagement', 'Expertised', 'Image matching', 'Product matching'],
+                  datasets: [{
+                    label: names[0],
+                    data: [followers[0], engage[0], expert[0], image[0], 0],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    borderWidth: 1
+                  }, {
+                    label: names[1],
+                    data: [followers[1], engage[1], expert[1], image[1], 0],
+                    fill: true,
+                    backgroundColor: 'rgba(182, 109, 255, 0.2)',
+                    borderColor: 'rgba(182, 109, 255, 1)',
+                    borderWidth: 1
+                  }, {
+                    label: names[2],
+                    data: [followers[2], engage[2], expert[2], image[2], 0],
+                    fill: true,
+                    backgroundColor: 'rgba(107, 166, 255, 0.2)',
+                    borderColor: 'rgba(107, 166, 255, 1)',
+                    borderWidth: 1
+                  }, {
+                    label: names[3],
+                    data: [followers[3], engage[3], expert[3], image[3], 0],
+                    fill: true,
+                    backgroundColor: 'rgba(92, 255, 211, 0.2)',
+                    borderColor: 'rgba(92, 255, 211, 1)',
+                    borderWidth: 1
+                  }, {
+                    label: names[4],
+                    data: [followers[4], engage[4], expert[4], image[4], 0],
+                    fill: true,
+                    backgroundColor: 'rgba(244, 141, 103, 0.2)',
+                    borderColor: 'rgba(244, 141, 103, 1)',
+                    borderWidth: 1
+                  }] //end of dataset
+                }; //end of radardata
+                
+                var ctx = document.getElementById('radarChart');
+                var radarChart = new Chart(ctx, {
+                  type:'radar',
+                  data: radardata,
+                  options: {
+                    scales: {
+                      r: {
+                        max:5,
+                        min:0,
+                        ticks: {
+                          stepSize:1
+                        }
+                      }
+                    }
+                  }
+                }); //end of radarChart
+                $('#radarChart').show();
+
+                
             },
             error: function(error) {
                 console.error(error);
             }         
-          });
-      });
-      });
+          }); //ajax
+        }); //btn click
+      }); //document ready
     </script>
   </body>
   <body>
-    <div id="canvas-container" style="display: none;">
-      <canvas id="myChart"></canvas>
-      <script>
-      function createRadarChart(dataSets) {
-            var labels = ['followers', 'engagement', 'Image matching', 'Product matching', 'Expertised', 'Loyalty'];
-            var ctx = document.getElementById('radarChart').getContext('2d');
-            var radarChart = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: labels,
-                    datasets: dataSets
-                },
-                options: {
-                    scale: {
-                        ticks: {
-                            beginAtZero: true,
-                            min: 10,
-                            max: 100,
-                            stepSize: 10
-                        }
-                    }
-                }
-            });
-        }
+
+    {% comment %} <script>
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart;
       $(function () {
-        var labels = ['followers', 'engagement', 'Image matching', 'Product matching', 'Expertised', 'Loyalty'];
+        var labels = ['followers', 'engagement', 'Image matching', 'Product matching', 'Expertised'];
         var ctx = document.getElementById('radarChart').getContext('2d');
         var radarChart = new Chart(ctx, {
             type: 'radar',
@@ -600,10 +637,6 @@
             }
         });
       });
-    </script>
-    <script>
-      var ctx = document.getElementById('myChart').getContext('2d');
-      var myChart;
 
       function createChart(data) {
         var followers_data = [30,50,20,77,100]
@@ -662,9 +695,9 @@
                   }
               }
           });
-      }
+      } {% endcomment %}
 
-      createChart();
+      {% comment %} createChart();
 
       document.getElementById('dataInput').addEventListener('input', function() {
           var newData = [
@@ -681,7 +714,7 @@
 
           myChart.update();
       });
-    </script>
+    </script> {% endcomment %}
     </div>
   </body>
 </html>
