@@ -87,12 +87,13 @@ def recommend(request):
     images=[]
     for item in ig_id5:
        followers.append(Users_info.objects.filter(ig_id=item).order_by('date').values_list('followers_count', flat=True).first())
-       engage.append(cal_engagement(item))
+       eng = round(cal_engagement(item),2)
+       engage.append(eng)
        experts.append(Comment.objects.filter(ig_id=item).values_list('domain', flat=True).first())
        images.append(getimage(item, model_value=model_value))
     
-    followers=scale_list(followers, 1, 5)
-    engage=scale_line(engage, 5, 5)
+    # followers=scale_list(followers, 1, 5)
+    engage=scale_line(engage, 3, 5)
     experts=scale_list(experts, 1, 5)
     images=scale_list(images, 1, 5)
 
@@ -104,24 +105,5 @@ def recommend(request):
     return JsonResponse(context)
 
 
-
-
-# def result(request):
-#     if request.method == 'POST':
-#        username = request.POST.get('usernames')
-        
-#     followers = []
-#     engage = []
-#     expert = []
-#     loyalty = []
-
-#     for user in username:
-#         id_object = Users_fix.objects.filter(user_id=user).first()
-#         ig_ids = id_object.ig_id
-#         follower = Users_info.objects.filter(ig_id=ig_ids).order_by('date').values_list('followers_count').first()
-#         followers.append(follower)
-#         eng = cal_engagement(ig_id=ig_ids)
-#         engage.append(eng)
-        
-#     return JsonResponse({'scores': username})
-
+def error(request):
+   return render(request,'recommend/error-404.html')

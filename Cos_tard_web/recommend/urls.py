@@ -5,5 +5,6 @@ app_name = 'recommend'
 
 urlpatterns = [
     path('',views.index,name='recommend-page'),
-    path('recommend_values', views.recommend)
+    path('recommend_values', views.recommend),
+    path('recommend_error',views.error)
 ]
