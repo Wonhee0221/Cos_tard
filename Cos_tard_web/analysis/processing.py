@@ -96,3 +96,47 @@ def get_image(ig_id):
 
     return image_link
 
+def truncate_string(text, max_length, suffix="..."):
+    if len(text) > max_length:
+        truncated_text = text[:max_length - len(suffix)] + suffix
+        return truncated_text
+    return text
+
+def get_media_data(date,ig_id):
+    media = list(Media_fix.objects.filter(owner_id=ig_id).order_by('-timestamp')[:1].values())[0]
+    timestamp = media.get('timestamp')
+    datePart = timestamp[:10]
+    timePart = timestamp[11:16]
+    timestamp = datePart + " " + timePart
+
+    media_max = Media_fix.objects.filter(owner_id=ig_id).order_by('-timestamp').values()[:50]
+    media_data = {
+                'timestamp': timestamp,
+                'media_id': None,
+                'caption': "해당 날짜에 게시물이 없습니다",
+                'permalink' : None,
+                'media_url' : None,  
+            }
+    try: 
+        for x in media_max:
+            if str(date) in x['timestamp']:
+                media_id = x['media_id']
+                max_media = Media_fix.objects.get(media_id=media_id)
+                max_media_info = list(Media_info.objects.filter(media_id=media_id).order_by('-date')[:1].values())[0]
+                max_length = 100
+                truncated_caption = truncate_string(max_media.caption, max_length)
+
+                media_data = {
+                    'timestamp': timestamp,
+                    'media_id': media_id,
+                    'caption': truncated_caption,
+                    'permalink' : max_media.permalink,
+                    'media_url' : max_media_info.get('media_url'),  
+                }
+                break
+    except: 
+       pass
+
+    return media_data
+
+
