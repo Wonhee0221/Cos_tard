@@ -7,11 +7,13 @@ from analysis.hashtag import *
 import json
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.db.models.functions import TruncDate
+from datetime import datetime
 
 # Create your views here.
 
 def index_test(request):
-    ig_id='17157849559'
+    ig_id = request.GET.get('ig_id')
     return render(request,'analysis/index.html',{'ig_id':ig_id})
 
 @csrf_exempt
@@ -26,7 +28,7 @@ def get_influencer_analysis(request):
         'website': influencer.website,
         'biography': influencer.biography,
     }
-    influencer_details = list(Users_info.objects.filter(ig_id=influencer.ig_id).order_by('-date')[:1].values())[0]
+    influencer_details = list(Users_info.objects.filter(ig_id=ig_id).order_by('-date')[:1].values())[0]
     influencer_data_details = {
         'follows_count': influencer_details.get('follows_count'),
         'followers_count': influencer_details.get('followers_count'),
@@ -35,19 +37,18 @@ def get_influencer_analysis(request):
         # 다른 필요한 정보들도 추가할 수 있음
     }
 
-    media = list(Media_fix.objects.filter(owner_id=influencer.ig_id).order_by('-timestamp')[:1].values())[0]
-    timestamp = media.get('timestamp')
-    datePart = timestamp[:10]
-    timePart = timestamp[11:16]
-    media_data = {
-        'timestamp': datePart + " " + timePart,
-        
-    }
-
+    
     #팔로워 부분
-    follower_trend = follower_graph(influencer.ig_id)
-    image_link = get_image(influencer.ig_id)
+    follower_trend = follower_graph(ig_id)
 
+    #피드미리보기
+    image_link = get_image(ig_id)
+
+    #팔로워max피드
+    search_date = follower_trend["max_growth_date"]
+    media_data = get_media_data(search_date,ig_id)
+
+    #키워드분석
     count_text = count_text_token(influencer.ig_id)
     count_hashtag=count_hashtags(influencer.ig_id)
 
@@ -63,6 +64,17 @@ def get_influencer_analysis(request):
     }
 
     return JsonResponse(context, safe=False)
+
+
+
+
+
+
+
+
+
+
+
 
 # Create your views here.
 
@@ -93,6 +105,8 @@ def get_influencer(request):
 
         #팔로워 부분
         follower_trend = follower_graph(influencer.ig_id)
+        
+
         image_link = get_image(influencer.ig_id)
 
         count_text = count_text_token(influencer.ig_id)
