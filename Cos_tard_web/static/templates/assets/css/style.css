@@ -14461,3 +14461,51 @@ dl {
 
 /*# sourceMappingURL=style.css.map */
 
+.nav-text-ani {
+  /* font-size: 24px;
+  color: transparent;
+  background-image: linear-gradient(135deg, #8a4fff, #5e2c8a);
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition: color 1.0s ease-in-out; */
+  animation: slideIn 1.0s forwards;
+}
+
+/* .nav-text-ani-container:hover .nav-text-ani {
+  color: #8a4fff;
+} */
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  from {
+    transform: translateY(0%);
+    opacity: 0;
+  }
+}
+
+.move_to_top_btn {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  border-radius: 40% 40%;
+  right: 20px;
+  bottom: 40px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  display: none;
+  z-index: 1;
+}
+
+.move_to_top_btn:hover {
+  cursor: pointer;
+}
+
+.move_to_top_btn a {
+  font-weight: bold;
+  line-height: 48px;
+  text-decoration: none;
+  color: white;
+}
