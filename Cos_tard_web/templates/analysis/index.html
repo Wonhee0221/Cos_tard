@@ -668,13 +668,15 @@
                               $('#media-container').append(imageElement);
                           } else {
                               // Create a button that links to the other permalink
-                              var buttonElement = $('<button type="button" class="btn btn-gradient-danger btn-rounded btn-fw">확인하기</button>');
-                              buttonElement.click(function() {
-                                  window.location.href = Permalink; // Navigate to the other permalink
+                              var imageElement = $('<iframe >');
+                              imageElement.attr({
+                                  'src': mediaUrl,
+                                  'alt': 'Instagram Image',
+                                  'frameborder':'0'
                               });
                               
                               // Append the button element to the media-container div
-                              $('#media-container').append(buttonElement);
+                              $('#media-container').append(imageElement );
                           }
 
                           //count text
