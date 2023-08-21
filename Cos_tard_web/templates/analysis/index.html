@@ -668,7 +668,9 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Top used topic</h4>
-                    <canvas id="barCharttext" style="height: 183px" width="549" height="274" ></canvas>
+                    
+                    <canvas id="textbarChart" style="display: none;" style="height:230px"></canvas>
+                  
                   </div>
                 </div>
               </div>
@@ -676,7 +678,9 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Top used #</h4>
-                    <canvas id="barCharttag" style="height: 183px" width="549" height="274" ></canvas>
+
+                    <canvas id="tagbarChart" style="display: none;" style="height:230px"></canvas>
+                  
                   </div>
                 </div>
               </div>
@@ -907,7 +911,8 @@
                                                     marker: {
                                                         enabled: false
                                                     }
-                                                }},
+                                                  }
+                                                },
                                             series: [{
                                                 name: 'followers increase rate',
                                                 data: data.follower_trend.growth_rates,
@@ -919,100 +924,145 @@
                                                 color: 'grey', 
                                                 fillColor: 'rgba(192, 192, 192, 0.2)',
                                                 data: data.follower_trend.growth_rate_average
-                                            }
-                                            ],
+                                            }],
                                             tooltip: {
                                                 enabled: false, // Disable tooltips on hover
                                                 // ... other tooltip configuration ...
-                                            }
+                                              }
                                         });
-                            
-                          var textData = {
-                          labels: [data.count_text[0].key, data.count_text[1].key, data.count_text[2].key, data.count_text[3].key, data.count_text[4].key],
-                          datasets: [{
-                  
-                              data: [data.count_text[0].value, data.count_text[1].value, data.count_text[2].value, data.count_text[3].value, data.count_text[4].value], // Your data here
-                              
-                              // backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                              // borderColor: 'rgba(75, 192, 192, 1)',
-                              // borderWidth: 1
-                            }]
-                        };
-      
-                        // Initialize the chart
-                        var barCharttextCanvas = $("#barCharttext").get(0).getContext("2d");
-                        var barCharttext = new Chart(barCharttextCanvas, {
-                            type: 'bar',
-                            data: textData,
-                            options: {
-                                      scales: {
-                                          x: {
-                                              grid: {
-                                                  display: false // Hide X-axis grid lines
+                                      
+                                         //count text
+                                      var text1_topic = data.count_text[0].key;
+                                      var text1_count = data.count_text[0].value;
+                                      var text2_topic = data.count_text[1].key;
+                                      var text2_count = data.count_text[1].value;
+                                      var text3_topic = data.count_text[2].key;
+                                      var text3_count = data.count_text[2].value;
+                                      var text4_topic = data.count_text[3].key;
+                                      var text4_count = data.count_text[3].value;
+                                      var text5_topic = data.count_text[4].key;
+                                      var text5_count = data.count_text[4].value;
+
+                                      //count hashtag
+                                      var hashtag1_topic = data.count_hashtag[0].key;
+                                      var hashtag1_count = data.count_hashtag[0].value;
+                                      var hashtag2_topic = data.count_hashtag[1].key;
+                                      var hashtag2_count = data.count_hashtag[1].value;
+                                      var hashtag3_topic = data.count_hashtag[2].key;
+                                      var hashtag3_count = data.count_hashtag[2].value;
+                                      var hashtag4_topic = data.count_hashtag[3].key;
+                                      var hashtag4_count = data.count_hashtag[3].value;
+                                      var hashtag5_topic = data.count_hashtag[4].key;
+                                      var hashtag5_count = data.count_hashtag[4].value;
+
+                                      var tagbarChart = new Chart(
+                                          document.getElementById('tagbarChart'), {
+                                            type: 'bar',
+                                            data: {
+                                              labels: ['Hashtags'],
+                                              datasets: [{
+                                                label: hashtag1_topic,
+                                                data: [hashtag1_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                                borderColor: 'rgb(255, 99, 132)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: hashtag2_topic,
+                                                data: [hashtag2_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(182, 109, 255, 0.2)',
+                                                borderColor: 'rgba(182, 109, 255, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: hashtag3_topic,
+                                                data: [hashtag3_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(107, 166, 255, 0.2)',
+                                                borderColor: 'rgba(107, 166, 255, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: hashtag4_topic,
+                                                data: [hashtag4_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(92, 255, 211, 0.2)',
+                                                borderColor: 'rgba(92, 255, 211, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: hashtag5_topic,
+                                                data: [hashtag5_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(244, 141, 103, 0.2)',
+                                                borderColor: 'rgba(244, 141, 103, 1)',
+                                                borderWidth: 1
+                                              }] //end of dataset
+                                            }, //end of data
+                                            options: {
+                                              scales: {
+                                                y: {
+                                                  beginAtZero: true
+                                                }
                                               }
-                                          },
-                                          y: {
-                                              ticks: {
-                                                  display: false // Hide Y-axis tick labels
-                                              },
-                                              grid: {
-                                                  display: false // Hide Y-axis grid lines
+                                            }, //end of options
+                                          }
+                                        );
+                                        $('#tagbarChart').show();
+
+                                        var textbarChart = new Chart(
+                                          document.getElementById('textbarChart'), {
+                                            type: 'bar',
+                                            data: {
+                                              labels: ['Keywords'],
+                                              datasets: [{
+                                                label: text1_topic,
+                                                data: [text1_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                                borderColor: 'rgb(255, 99, 132)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: text2_topic,
+                                                data: [text2_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(182, 109, 255, 0.2)',
+                                                borderColor: 'rgba(182, 109, 255, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: text3_topic,
+                                                data: [text3_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(107, 166, 255, 0.2)',
+                                                borderColor: 'rgba(107, 166, 255, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: text4_topic,
+                                                data: [text4_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(92, 255, 211, 0.2)',
+                                                borderColor: 'rgba(92, 255, 211, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: text5_topic,
+                                                data: [text5_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(244, 141, 103, 0.2)',
+                                                borderColor: 'rgba(244, 141, 103, 1)',
+                                                borderWidth: 1
+                                              }] //end of dataset
+                                            }, //end of data
+                                            options: {
+                                              scales: {
+                                                y: {
+                                                  beginAtZero: true
+                                                }
                                               }
+                                            }, //end of options
                                           }
-                                      },
-                                      plugins: {
-                                          legend: {
-                                              display: false // Hide legend
-                                          }
-                                      }
-                                  }
-                              });
-                        
-                        var tagData = {
-                          labels: [data.count_hashtag[0].key, data.count_hashtag[1].key, data.count_hashtag[2].key, data.count_hashtag[3].key, data.count_hashtag[4].key],
-                          datasets: [{
-                  
-                              data: [data.count_hashtag[0].value, data.count_hashtag[1].value, data.count_hashtag[2].value, data.count_hashtag[3].value, data.count_hashtag[4].value], // Your data here
-                              
-                              // backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                              // borderColor: 'rgba(75, 192, 192, 1)',
-                              // borderWidth: 1
-                            }]
-                        };
+                                        );
+                                        $('#textbarChart').show();
+                          
       
-                        // Initialize the chart
-                        var barCharttagCanvas = $("#barCharttag").get(0).getContext("2d");
-                        var barCharttag = new Chart(barCharttagCanvas, {
-                            type: 'bar',
-                            data: tagData,
-                            options: {
-                                    scales: {
-                                        x: {
-                                            grid: {
-                                                display: false // Hide X-axis grid lines
-                                            }
-                                        },
-                                        y: {
-                                            ticks: {
-                                                display: false // Hide Y-axis tick labels
-                                            },
-                                            grid: {
-                                                display: false // Hide Y-axis grid lines
-                                            }
-                                        }
-                                    },
-                                    plugins: {
-                                        legend: {
-                                            display: false // Hide legend
-                                        }
-                                    }
-                                }
-                            });
-                                                                   
-                                // 검색 결과 그래프 띄울때 DOM 객체 이용해서 css 조정
-                                // document.getElementById('chart-container-02').style.width = "100%";
-                                // document.getElementById('chart-container-02').style.height = "500px";
-                                // document.getElementById('chart-container-02').style.padding = "50px";
+                                        
 
                         var media = data.statistic.media;
                         var like = data.statistic.like;  
