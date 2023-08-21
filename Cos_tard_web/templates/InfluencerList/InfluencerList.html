@@ -23,19 +23,10 @@
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const personCards = document.querySelectorAll('.person-card');
-        
-                personCards.forEach(personCard => {
-                    personCard.addEventListener('click', function() {
-                        const key = this.getAttribute('id-data');
-                        window.location.href = `/analysis/index.html/${key}`; // 분석 페이지 URL로 이동
-                    });
-                });
-            });
-        </script>
-
+        <!-- font link-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
     </head>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">

@@ -1,11 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+
+    <title>Cos-tard 인스타그램 인플루언서 분석 시스템</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../static/templates/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../static/templates/assets/vendors/css/vendor.bundle.base.css">
@@ -16,8 +20,12 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../static/templates/assets/css/style.css">
-    <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../static/templates/assets/images/favicon.ico" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/homepage_icon.jpg' %}" />
+    <!-- font link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
     <style>
       .small-image {
           width: 130px;  /* Adjust the width as needed */
@@ -28,19 +36,35 @@
         text-decoration: none; /* Remove underline */
         color: black; /* Change link color to black */
     }
-  </style>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
+    </style>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
   </head>
   <body>
     <div class="container-scroller">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+        <div class="container px-5">
+            <a class="navbar-brand fw-bolder" href="{% url 'home-page' %}">Cos-tard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'home-page' %}">메인</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'InfluencerList:list-page' %}">리스트</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'analysis:analysis-page2' %}?ig_id=17157849559">분석</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'recommend:recommend-page' %}">추천</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'about-page' %}">팀소개</a></li>
+                </ul>
+            </div>
+        </div>
+      </nav>
+      {% comment %}
       <div class="row p-0 m-0 proBanner" id="proBanner">
         <div class="col-md-12 p-0 m-0">
-            
-          </div>
         </div>
       </div>
+      {% endcomment %}
       <!-- partial:partials/_navbar.html -->
-      <!-- <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <!-- 
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
           <a class="navbar-brand brand-logo" href="index.html"><img src="../static/templates/assets/images/logo.svg" alt="logo" /></a>
           <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../static/templates/assets/images/logo-mini.svg" alt="logo" /></a>
@@ -331,7 +355,7 @@
               </a>
             </li>
             <li class="nav-item nav-profile">
-              <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=1555054356">
+              <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=432834627">
                 <div class="nav-profile-image">
                   <img src="/static/assets/makeup_maker_.jpg" alt="profile">
                 </div>
@@ -523,6 +547,30 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-md-7 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="clearfix">
+                        <h4 class="card-title float-left">Feed Statistics</h4>
+                        <p class="card-description"> *좋아요와 댓글 수는 조정 됐다는걸 뭐라고 표현하지?</p>
+                        <div id="feedchart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+                      </div>
+                      <canvas id="feedchart" class="mt-4"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Media Ratio</h4>
+                      <p class="card-description"> *여기 뭘 써야 옆이랑 비율이 맞음</p>
+                      <canvas id="mediachart"></canvas>
+                      <div id="mediachart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             
             <div class="row">
               <div class="col-lg-6 grid-margin stretch-card">
@@ -559,20 +607,16 @@
                    <table class="table table-hover">
                       <tbody>
                         <tr>
-                          
                           <td>팔로워는 약</td>
-                          <td style="color:#1bcfb4" id="average"></td>
+                          <td id="average"></td>
                           <td>명씩 </i>변하고있어요</td>
-                        
                         </tr>
                         <tr>
-                          
                           <td>증가율 평균은</td>
-                          <td style="color: #fe7c96" id="average_growth"></td>
+                          <td id="average_growth"></td>
                           <td>이에요</td>
                         </tr>
                         <tr>
-                          
                           <td>팔로워가</td>
                           <td style="color:#b66dff" class="max-growth-date"></td>
                           <td>에 가장 많이 증가했어요</td>
@@ -585,9 +629,9 @@
               <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">팔로워가 가장 많이 증가했던</h4>
-                    <p class="max-growth-date"></p>
-                    <img src="" alt="Instagram Image" class="small-image" id="media_url">
+                    <h4 class="card-title">최근 좋아요가 가장 많은 게시물</h4>
+                    <div id="media-container"></div>
+                    <p id="like_count"></p>
                     <p id="caption"></p>
                    
                   </div>
@@ -638,280 +682,6 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-12 grid-margin">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Recent Tickets</h4>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th> Assignee </th>
-                            <th> Subject </th>
-                            <th> Status </th>
-                            <th> Last Update </th>
-                            <th> Tracking ID </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <img src="../../static/templates/assets/images/faces/face1.jpg" class="me-2" alt="image"> David Grey
-                            </td>
-                            <td> Fund is not recieved </td>
-                            <td>
-                              <label class="badge badge-gradient-success">DONE</label>
-                            </td>
-                            <td> Dec 5, 2017 </td>
-                            <td> WD-12345 </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <img src="../../static/templates/assets/images/faces/face2.jpg" class="me-2" alt="image"> Stella Johnson
-                            </td>
-                            <td> High loading time </td>
-                            <td>
-                              <label class="badge badge-gradient-warning">PROGRESS</label>
-                            </td>
-                            <td> Dec 12, 2017 </td>
-                            <td> WD-12346 </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <img src="../../static/templates/assets/images/faces/face3.jpg" class="me-2" alt="image"> Marina Michel
-                            </td>
-                            <td> Website down for one week </td>
-                            <td>
-                              <label class="badge badge-gradient-info">ON HOLD</label>
-                            </td>
-                            <td> Dec 16, 2017 </td>
-                            <td> WD-12347 </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <img src="../../static/templates/assets/images/faces/face4.jpg" class="me-2" alt="image"> John Doe
-                            </td>
-                            <td> Loosing control on server </td>
-                            <td>
-                              <label class="badge badge-gradient-danger">REJECTED</label>
-                            </td>
-                            <td> Dec 3, 2017 </td>
-                            <td> WD-12348 </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="col-md-7 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Project Status</h4>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th> # </th>
-                            <th> Name </th>
-                            <th> Due Date </th>
-                            <th> Progress </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td> 1 </td>
-                            <td> Herman Beck </td>
-                            <td> May 15, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 2 </td>
-                            <td> Messsy Adam </td>
-                            <td> Jul 01, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 3 </td>
-                            <td> John Richards </td>
-                            <td> Apr 12, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 4 </td>
-                            <td> Peter Meggik </td>
-                            <td> May 15, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 5 </td>
-                            <td> Edward </td>
-                            <td> May 03, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 5 </td>
-                            <td> Ronald </td>
-                            <td> Jun 05, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-5 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title text-white">Todo</h4>
-                    <div class="add-items d-flex">
-                      <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?">
-                      <button class="add btn btn-gradient-primary font-weight-bold todo-list-add-btn" id="add-task">Add</button>
-                    </div>
-                    <div class="list-wrapper">
-                      <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Meeting with Alisa </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li class="completed">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox" checked> Call John </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Create invoice </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Print Statements </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li class="completed">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox" checked> Prepare for presentation </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Pick up kids from school </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="page-header">
-              <h3 class="page-title"> Chart-js </h3>
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Charts</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Chart-js</li>
-                </ol>
-              </nav>
-            </div>
-            <div class="row">
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Line chart</h4>
-                    <canvas id="lineChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Bar chart</h4>
-                    <canvas id="barChart" style="height:230px"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Area chart</h4>
-                    <canvas id="areaChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Doughnut chart</h4>
-                    <canvas id="doughnutChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Pie chart</h4>
-                    <canvas id="pieChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Scatter chart</h4>
-                    <canvas id="scatterChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
 
           </div>
           <!-- partial -->
@@ -945,7 +715,6 @@
 
     <script>
       $(document).ready(function() {
-        //<img src="{{ image }}" alt='Instagram Image' class='small-image'>
         var ig_id='{{ig_id}}';         
         $.ajax({
                         type: "POST",
@@ -969,7 +738,7 @@
                           $('#blur_panel').remove();
                         },
                         success: function(data) {
-                          console.log(data.media_data);
+                          console.log(data.ratio);
                           
                           $('#profile_img').attr('src','../static/assets/'+data.influencer_data.userid+'.jpg');
 
@@ -989,12 +758,19 @@
                           $('#date').text(data.influencer_data_details.date);
 
                           //follower trend
-                          $('#average_growth').text(data.follower_trend.average_growth);
                           $('.max-growth-date').text(data.follower_trend.max_growth_date);
                           var diff = data.follower_trend.diff + "  than yesterday"
                           $('#diffdisplay').text(diff);
                           $('#compare').text(data.follower_trend.compare);
                           $('#average').text(data.follower_trend.average);
+                          $('#average_growth').text(data.follower_trend.average_growth);
+                          var positive = data.follower_trend.positive;
+                          if (positive) {
+                              $('#average, #average_growth').css('color', '#1bcfb4');
+                          } else {
+                              $('#average, #average_growth').css('color', '#fe7c96');
+                          }
+
 
                           //image link
                           $('#feed1').attr('src', data.image_link[0]);
@@ -1012,10 +788,37 @@
                           var timestamp = "update "+ data.media_data.timestamp;
                           $('#timestampdisplay').text(timestamp);
                           $('#caption').text(data.media_data.caption);
+                          $('#like_count').text(data.media_data.like_count);
                           $('#media_id').text(data.media_data.media_id);
-                          $('#permalink').text(data.media_data.permalink);
-                          $('#media_url').attr('src', data.media_data.media_url);
                           
+                          var mediaUrl = data.media_data.media_url;
+                          var Permalink = data.media_data.permalink;
+        
+                          // Check if the media URL contains "jpg" (image)
+                          var isImage = mediaUrl && mediaUrl.includes("jpg");
+
+                          if (isImage) {
+                              // Create an image element and set its attributes
+                              var imageElement = $('<img>');
+                              imageElement.attr({
+                                  'src': mediaUrl,
+                                  'alt': 'Instagram Image',
+                                  'class': 'small-image'
+                              });
+                              
+                              // Append the image element to the media-container div
+                              $('#media-container').append(imageElement);
+                          } else {
+                              // Create a button that links to the other permalink
+                              var buttonElement = $('<button type="button" class="btn btn-gradient-danger btn-rounded btn-fw">확인하기</button>');
+                              buttonElement.click(function() {
+                                  window.location.href = Permalink; // Navigate to the other permalink
+                              });
+                              
+                              // Append the button element to the media-container div
+                              $('#media-container').append(buttonElement);
+                          }
+
                           //count text
                           $('#text1_topic').text(data.count_text[0].key);
                           $('#text2_count').text(data.count_text[0].value);
@@ -1039,11 +842,7 @@
                           $('#hashtag4_count').text(data.count_hashtag[3].value);
                           $('#hashtag5_topic').text(data.count_hashtag[4].key);
                           $('#hashtag5_count').text(data.count_hashtag[4].value);
-                          
-                        
-
-                          // console.log(data.influencer_data_details.followers_count)
-                         
+   
                             // 검색 결과(왼쪽그리드) 띄울때 DOM 객체 이용해서 css 조정
                             // var searchResults1 = document.getElementById('searchResults1');
                             // searchResults1.style.padding = "30px 70px 30px 70px";
@@ -1064,7 +863,7 @@
                                                 text: null
                                             },
                                             xAxis: {
-                                              min: 1
+                                              labels: {}
                                             },
                                             yAxis: {
                                                 title: {
@@ -1075,7 +874,11 @@
                                                 name: '# of followers',
                                                 data: data.follower_trend.yData,
                                                 color: '#b66dff' //색 뭐로하지..
-                                            }]
+                                            }],
+                                            tooltip: {
+                                                enabled: false, // Disable tooltips on hover
+                                                // ... other tooltip configuration ...
+                                            }
                                         });
 
                                 // // 검색 결과 그래프 띄울때 DOM 객체 이용해서 css 조정
@@ -1091,7 +894,7 @@
                                                 text: null
                                             },
                                             xAxis: {
-                                              min: 1
+                                              labels: {}
                                             },
                                             yAxis: {
                                                 title: {
@@ -1118,7 +921,11 @@
                                                 fillColor: 'rgba(192, 192, 192, 0.2)',
                                                 data: data.follower_trend.growth_rate_average
                                             }
-                                        ]
+                                            ],
+                                            tooltip: {
+                                                enabled: false, // Disable tooltips on hover
+                                                // ... other tooltip configuration ...
+                                            }
                                         });
                             
                           var textData = {
@@ -1208,42 +1015,214 @@
                                 // document.getElementById('chart-container-02').style.height = "500px";
                                 // document.getElementById('chart-container-02').style.padding = "50px";
 
-                            // 여기서부터 정보들 띄우는 차트 밑에 그리드들
-                            // var followerHTML = "팔로워 정보:<br>";
-                            // followerHTML += "팔로워 증가율 평균: " + follower_trend.average_growth.toFixed(3) + "% <br>";
-                            // followerHTML += "대조군 팔로워 증가율 평균: " + follower_trend.average_average_growth.toFixed(3) + "% <br>";
-                            // if (follower_trend.average_growth > follower_trend.average_average_growth) {
-                            //     followerHTML += "다른 인플루언서들 보다 팔로워 증가율이 높습니다! " + "<br>";
-                            // } else {
-                            //     followerHTML += "다른 인플루언서들 보다 팔로워 증가율이 낮습니다.. " + "<br>";
-                            // }
-                            // followerHTML += "팔로워가 가장 많이 증가한 날: " + follower_trend.max_growth_date + "<br>";
-                            // $("#followerResult").html(followerHTML);
+                        var media = data.statistic.media;
+                        var like = data.statistic.like;  
+                        var comment = data.statistic.comment;  
 
-                            // var imageHTML = "피드 미리보기:<br>";
-                            // for (var i = 0; i < image_link.length; i++) {
+                        Chart.defaults.global.legend.labels.usePointStyle = true;
+                        var ctx = document.getElementById('feedchart').getContext("2d");
 
-                            //     imageHTML += "<img src='" + image_link[i] + "' alt='Instagram Image' class='small-image'>";
-                            // }
-                            // $("#feedResult").html(imageHTML);
+                        var gradientStrokeViolet = ctx.createLinearGradient(0, 0, 0, 181);
+                        gradientStrokeViolet.addColorStop(0, 'rgba(218, 140, 255, 1)');
+                        gradientStrokeViolet.addColorStop(1, 'rgba(154, 85, 255, 1)');
+                        var gradientLegendViolet = 'linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1))';
+                        
+                        var gradientStrokeBlue = ctx.createLinearGradient(0, 0, 0, 360);
+                        gradientStrokeBlue.addColorStop(0, 'rgba(54, 215, 232, 1)');
+                        gradientStrokeBlue.addColorStop(1, 'rgba(177, 148, 250, 1)');
+                        var gradientLegendBlue = 'linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))';
 
-                            // var countHTML = "인플루언서 게시글 토픽:<br>";
-                            // countHTML += "TOP 1: " + count_text.count_cap1 + "<br>";
-                            // countHTML += "TOP 2: " + count_text.count_cap2 + "<br>";
-                            // countHTML += "TOP 3: " + count_text.count_cap3 + "<br>";
-                            // countHTML += "TOP 4: " + count_text.count_cap4 + "<br>";
-                            // countHTML += "TOP 5: " + count_text.count_cap5;
-                            // $("#influencercount_textResult").html(countHTML);
-                            
-                            // var hashHTML = "인플루언서 해쉬태그 토픽:<br>";
-                            // hashHTML += "TOP 1: " + count_hashtag.tags1 + "<br>";
-                            // hashHTML += "TOP 2: " + count_hashtag.tags2 + "<br>";
-                            // hashHTML += "TOP 3: " + count_hashtag.tags3 + "<br>";
-                            // hashHTML += "TOP 4: " + count_hashtag.tags4 + "<br>";
-                            // hashHTML += "TOP 5: " + count_hashtag.tags5;
-                            // $("#influencercounthashResult").html(hashHTML);
+                        var gradientStrokeRed = ctx.createLinearGradient(0, 0, 0, 300);
+                        gradientStrokeRed.addColorStop(0, 'rgba(255, 191, 150, 1)');
+                        gradientStrokeRed.addColorStop(1, 'rgba(254, 112, 150, 1)');
+                        var gradientLegendRed = 'linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))';
+
+                        var feedchart = new Chart(ctx, {
+                          type: 'bar',
+                          data: {
+                              labels: ['AUG', 'SEP', 'OCT', 'NOV', 'DEC', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
+                              datasets: [
+                                {
+                                  label: "Media",
+                                  borderColor: gradientStrokeViolet,
+                                  backgroundColor: gradientStrokeViolet,
+                                  hoverBackgroundColor: gradientStrokeViolet,
+                                  legendColor: gradientLegendViolet,
+                                  pointRadius: 0,
+                                  fill: false,
+                                  borderWidth: 1,
+                                  fill: 'origin',
+                                  data: media
+                                },
+                                {
+                                  label: "Likes",
+                                  borderColor: gradientStrokeRed,
+                                  backgroundColor: gradientStrokeRed,
+                                  hoverBackgroundColor: gradientStrokeRed,
+                                  legendColor: gradientLegendRed,
+                                  pointRadius: 0,
+                                  fill: false,
+                                  borderWidth: 1,
+                                  fill: 'origin',
+                                  data: like
+                                },
+                                {
+                                  label: "comment",
+                                  borderColor: gradientStrokeBlue,
+                                  backgroundColor: gradientStrokeBlue,
+                                  hoverBackgroundColor: gradientStrokeBlue,
+                                  legendColor: gradientLegendBlue,
+                                  pointRadius: 0,
+                                  fill: false,
+                                  borderWidth: 1,
+                                  fill: 'origin',
+                                  data: comment
+                                }
+                            ]
+                          },
+                          options: {
+                            responsive: true,
+                            legend: false,
+                            legendCallback: function(chart) {
+                            var text = []; 
+                            text.push('<ul>'); 
+                            for (var i = 0; i < chart.data.datasets.length; i++) { 
+                                text.push('<li><span class="legend-dots" style="background:' + 
+                                          chart.data.datasets[i].legendColor + 
+                                          '"></span>'); 
+                                if (chart.data.datasets[i].label) { 
+                                    text.push(chart.data.datasets[i].label); 
+                                } 
+                                text.push('</li>'); 
+                            } 
+                            text.push('</ul>'); 
+                            return text.join('');
+                          },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        display: false,
+                                        min: 0,
+                                        stepSize: 20,
+                                        max: 80
+                                    },
+                                    gridLines: {
+                                      drawBorder: false,
+                                      color: 'rgba(235,237,242,1)',
+                                      zeroLineColor: 'rgba(235,237,242,1)'
+                                    }
+                                }],
+                                xAxes: [{
+                                    gridLines: {
+                                      display:false,
+                                      drawBorder: false,
+                                      color: 'rgba(0,0,0,1)',
+                                      zeroLineColor: 'rgba(235,237,242,1)'
+                                    },
+                                    ticks: {
+                                        padding: 20,
+                                        fontColor: "#9c9fa6",
+                                        autoSkip: true,
+                                    },
+                                    barPercentage: 0.5,
+                                    categoryPercentage: 0.5 // Adjust the value as needed
+                                }]
+                              }
+                            },
+                            elements: {
+                              point: {
+                                radius: 0
+                              }
+                            }
+                        })
+                        $("#feedchart-legend").html(feedchart.generateLegend());
+
+                      var reels = data.ratio.null_count;
+                      var image = data.ratio.jpg_count;
+                      var video = data.ratio.mp4_count;
+
+                      var gradientStrokeBlue = ctx.createLinearGradient(0, 0, 0, 181);
+                      gradientStrokeBlue.addColorStop(0, 'rgba(54, 215, 232, 1)');
+                      gradientStrokeBlue.addColorStop(1, 'rgba(177, 148, 250, 1)');
+                      var gradientLegendBlue = 'linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))';
+
+                      var gradientStrokeRed = ctx.createLinearGradient(0, 0, 0, 50);
+                      gradientStrokeRed.addColorStop(0, 'rgba(255, 191, 150, 1)');
+                      gradientStrokeRed.addColorStop(1, 'rgba(254, 112, 150, 1)');
+                      var gradientLegendRed = 'linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))';
+
+                      var gradientStrokeGreen = ctx.createLinearGradient(0, 0, 0, 300);
+                      gradientStrokeGreen.addColorStop(0, 'rgba(6, 185, 157, 1)');
+                      gradientStrokeGreen.addColorStop(1, 'rgba(132, 217, 210, 1)');
+                      var gradientLegendGreen = 'linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))';      
+
+                      var MediaChartData = {
+                        datasets: [{
+                          data: [image, video, reels],
+                          backgroundColor: [
+                            gradientStrokeBlue,
+                            gradientStrokeGreen,
+                            gradientStrokeRed
+                          ],
+                          hoverBackgroundColor: [
+                            gradientStrokeBlue,
+                            gradientStrokeGreen,
+                            gradientStrokeRed
+                          ],
+                          borderColor: [
+                            gradientStrokeBlue,
+                            gradientStrokeGreen,
+                            gradientStrokeRed
+                          ],
+                          legendColor: [
+                            gradientLegendBlue,
+                            gradientLegendGreen,
+                            gradientLegendRed
+                          ]
+                        }],
+                    
+                        // These labels appear in the legend and in the tooltips when hovering different arcs
+                        labels: [
+                          'Image',
+                          'Video',
+                          'Reels',
+                        ]
+                      };
+                      var MediaChartOptions = {
+                        responsive: true,
+                        animation: {
+                          animateScale: true,
+                          animateRotate: true
+                        },
+                        legend: false,
+                        legendCallback: function(chart) {
+                          var text = []; 
+                          text.push('<ul>'); 
+                          for (var i = 0; i < MediaChartData.datasets[0].data.length; i++) { 
+                              text.push('<li><span class="legend-dots" style="background:' + 
+                                MediaChartData.datasets[0].legendColor[i] + 
+                                          '"></span>'); 
+                              if (MediaChartData.labels[i]) { 
+                                  text.push(MediaChartData.labels[i]); 
+                              }
+                              text.push('<span class="float-right">'+" : "+MediaChartData.datasets[0].data[i]+'</span>')
+                              text.push('</li>'); 
+                          } 
+                          text.push('</ul>'); 
+                          return text.join('');
                         }
+                      };
+                      var MediaChartCanvas = $("#mediachart").get(0).getContext("2d");
+                      var MediaChart = new Chart(MediaChartCanvas, {
+                        type: 'doughnut',
+                        data: MediaChartData,
+                        options: MediaChartOptions
                       });
+                      $("#mediachart-legend").html(MediaChart.generateLegend()); 
+                      
+
+                        }          
+          });
       });
     </script>
   </body>
