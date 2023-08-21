@@ -23,6 +23,35 @@
     <!-- End layout styles -->
     <link rel="icon" href="{% static 'assets/homepage_icon.jpg' %}" />
     <script src="../../static/templates/assets/js/chart.js"></script>
+    <style>
+      .instagramCircle1 {
+        width: 100px;
+        height: 100px;
+        border: 3px solid transparent;
+        border-radius: 50%;
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        background-size: cover;
+        background-position: center;
+        padding: 1px;
+      }
+      .profile-pic{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        padding: 3px;
+        background: linear-gradient(45deg, rgb(255, 230, 0), rgb(255, 0, 128) 80%);
+    }
+    
+    .profile-pic img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #fff;
+    }
+    </style>
   </head>
   <body>
     <div class="flex-shrink-0">
@@ -175,17 +204,14 @@
                   <div class="card-body">
                     <h4 class="card-title">Recommends Result </h4>
                       <p class="card-description" style="text-align: center;" id="result"> Nothing now Here </p>
-                      <table id="score-table" class="table table-hover" style="display: none;">
-                          <thead>
-                              <tr>
-                                  <th style="text-align: center;">Profile</th>
-                                  <th style="text-align: center;">Username</th>
-                                  <th style="text-align: center;">Matching</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                      </table>
+                      
+                        <div class="my-3 align-items-center" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+                          <div id="result">                            
+                            <div id="score-list" style="display: none;">
+                              <div></div>
+                            </div>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -377,19 +403,28 @@
               $('#blur_panel').remove();
             },
             success: function(response) {
-                $('#result').empty()
-                var dataTable = $('#score-table');
-                var topInfluencers = response.top_influencers;
-
-                var str = "";
-                $.each(topInfluencers, function(i, influencer) {
-                    str += '<tr>';
-                    str += '<td class="py-1"><img src=../../static/assets/' + influencer.Username + '.jpg/></td>';
-                    str += '<td>' + influencer.Username + '</td><td>' + influencer.Score + '</td>';
-                    str += '</tr>';
-                });
-                $('#score-table tbody').append(str); // tbody에 데이터 추가
-                $('#score-table').show();
+              $('#result').empty();
+              var topInfluencers = response.top_influencers;
+              
+              var str = '<div class="my-3 align-items-center" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">'; // Container for the list
+              
+              $.each(topInfluencers, function(i, influencer) {
+                str += '<div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 160px; height: 200px; justify-content: center; align-items: center; display: flex; flex-direction: column;">';
+                str += '<div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">';
+                str += '<div class="profile-pic"><img src=../../static/assets/' + influencer.Username + '.jpg/></div>';
+                //str += '<div class="instagramCircle1" style="background-image: url(\'/static/assets/' + influencer.Username + '.jpg\'),linear-gradient(to right, red, orange);"></div>';
+                str += '<div class="fw-bolder pt-3" style="font-size: 16px;">'+ influencer.Username +'</div>';
+                str += '<div class="fw-bolder pt-3" style="font-size: 12px;">'+  influencer.Score.toFixed(1) +'<span>%</span></div>';
+                str += '</div>';
+                str += '</div>';
+              });
+              
+        
+              
+              $('#score-list div').append(str); // tbody에 데이터 추가
+              $('#score-list').css('display', 'block'); // score-table을 보이게 한다.
+              
+              
               
                 console.log(response.chartdata)
                 var chartData = response.chartdata
@@ -600,4 +635,5 @@
       }); //document ready
     </script>
   </body>
+
 </html>

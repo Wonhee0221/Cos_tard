@@ -69,7 +69,7 @@ def recommend(request):
         ig_ids = id_object.ig_id
         ids.append(ig_ids)
         score = scoring(ig_ids, model_value, level=price_value, market_value=market_value)
-        scores.append(score)
+        scores.append(round(score, 1))
     
     scores = scale_list(scores, 1, 100)
 
