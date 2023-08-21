@@ -389,6 +389,8 @@
                 var dataTable = $('#score-table');
                 var topInfluencers = response.top_influencers;
 
+                console.log(response.eng)
+
                 var str = "";
                 $.each(topInfluencers, function(i, influencer) {
                     str += '<tr>';
