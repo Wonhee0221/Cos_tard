@@ -23,7 +23,6 @@
     <!-- End layout styles -->
     <link rel="icon" href="{% static 'assets/homepage_icon.jpg' %}" />
     <script src="../../static/templates/assets/js/chart.js"></script>
-    
   </head>
   <body>
     <div class="flex-shrink-0">
@@ -321,48 +320,66 @@
     <!-- ajax query -->
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script>
-    $(document).ready(function() {
-      $('.sidebar .btn').click(function(){
-        $(this).closest('div').find('.sidebar-btn-active').each(function(){
-          $(this).removeClass('sidebar-btn-active');
-        });
-        $(this).addClass('sidebar-btn-active');
-        $('.sidebar .card-title').click();
-      });
+      function scaleArray(dataArray, newMin, newMax) {
+        let minValue = Math.min(...dataArray);
+        let maxValue = Math.max(...dataArray);
+        
+        let scaledArray = [];
+        for (let value of dataArray) {
+            let scaledValue = (value - minValue) / (maxValue - minValue) * (newMax - newMin) + newMin;
+            scaledArray.push(scaledValue);
+        }
+        
+        return scaledArray;
+      }
 
-      $('#btn_recommend').click(function(){
-        var price_value = $('#price_group .sidebar-btn-active').attr('data-value');
-        var market_value = $('#marketing_group .sidebar-btn-active').attr('data-value');
-        var model_value = $('#model_group .sidebar-btn-active').attr('data-value');
-        var product_value = $('#product_group .sidebar-btn-active').attr('data-value');
+      function printMessage(score) {
+        if (score >= 5) {
+            message = '유튜브를 통해서도 영향력 있는 메이크업 컨텐츠를 제공하고 있어요.';
+        } else if (score >= 2.5) {
+            message = '유튜브를 통해서도 메이크업 컨텐츠를 제공하고 있어요.';
+        } else {
+            message = '뷰티 관련 피드로 활발히 활동중이에요.';
+        }
+        return message
+      }
 
-        $.ajax({
-          url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
-          method: 'POST',  // POST 요청으로 데이터 전송
-          data: {
-              price: price_value,
-              market: market_value,
-              model: model_value,
-              product: product_value
-          },
-          beforeSend : function(){
-            console.log(window);
-            var left = innerWidth/2-50;
-            var top = innerHeight/2-30;
-            var mainPanelHeight = $('.main-panel').css('height');
-            console.log(mainPanelHeight);
-            $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
-            $('.main-panel').append('<img id="img_progress" src="../static/assets/loading-gif.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
-          },
-          complete:function(){
-            $('#img_progress').remove();
-            $('#blur_panel').remove();
-          },
-          success: function(response) {
-              var resultp = $('#result');
-              resultp.empty();
-              var dataTable = $('#score-table');
-              var topInfluencers = response.top_influencers;
+      $(document).ready(function() {
+        $('#btn_recommend').click(function(){
+          console.log('clicked');
+          var price_value = $("input[name='price_rad']:checked").val();
+          var market_value = $("input[name='marketing_rad']:checked").val();
+          var model_value = $("input[name='model_rad']:checked").val();
+          var product_value = $("input[name='product_rad']:checked").val();
+
+          console.log(model_value);
+
+          $.ajax({
+            url: '/recommend/recommend_values',  // 백엔드의 URL을 지정
+            method: 'POST',  // POST 요청으로 데이터 전송
+            data: {
+                price: price_value,
+                market: market_value,
+                model: model_value,
+                product: product_value
+            },
+            beforeSend : function(){
+              console.log(window);
+              var left = innerWidth/2-50;
+              var top = innerHeight/2-30;
+              var mainPanelHeight = $('.main-panel').css('height');
+              console.log(mainPanelHeight);
+              $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
+              $('.main-panel').append('<img id="img_progress" src="../static/assets/loading-gif.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
+            },
+            complete:function(){
+              $('#img_progress').remove();
+              $('#blur_panel').remove();
+            },
+            success: function(response) {
+                $('#result').empty()
+                var dataTable = $('#score-table');
+                var topInfluencers = response.top_influencers;
 
                 var str = "";
                 $.each(topInfluencers, function(i, influencer) {
@@ -465,121 +482,108 @@
                         }
                       }
                     }
-                }
-            });
-        }
-      $(function () {
-        var labels = ['followers', 'engagement', 'Image matching', 'Product matching', 'Expertised', 'Loyalty'];
-        var ctx = document.getElementById('radarChart').getContext('2d');
-        var radarChart = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: labels[0],
-                    data: [80, 50, 30, 60, 50].map(value => Math.min(value, 100)), // Limit values to 100
-                    backgroundColor: 'rgba(5, 255, 192, 0.2)',
-                    borderColor: 'rgba(75, 255, 192, 1)',
-                    borderWidth: 1
-                },
-                {
-                  label: labels[1],
-                  data: [70, 50, 40, 40, 80].map(value => Math.min(value, 100)), // Limit values to 100
-                  backgroundColor: 'rgba(45, 172, 255, 0.2)',
-                  borderColor: 'rgba(5, 142, 255, 1)',
-                  borderWidth: 1
-                },
-                {
-                  label:  labels[2],
-                  data: [70, 30, 60, 40, 50].map(value => Math.min(value, 100)), // Limit values to 100
-                  backgroundColor: 'rgba(75, 255, 192, 0.2)',
-                  borderColor: 'rgba(25, 102, 255, 1)',
-                  borderWidth: 1
-                },
-                {
-                  label: labels[3],
-                  data: [40, 40, 60, 40, 50].map(value => Math.min(value, 100)), // Limit values to 100
-                  backgroundColor: 'rgba(75, 192, 255, 0.4)',
-                  borderColor: 'rgba(25, 255, 192, 1)',
-                  borderWidth: 1
-                },
-                {
-                  label:  labels[4],
-                  data: [60, 60, 60, 40, 50].map(value => Math.min(value, 100)), // Limit values to 100
-                  backgroundColor: 'rgba(255, 192, 192, 0.4)',
-                  borderColor: 'rgba(255, 102, 192, 1)',
-                  borderWidth: 1
-                }]
-            },
-            options: {
-                scale: {
-                    ticks: {
-                        beginAtZero: true,
-                        min:10,
-                        max: 100, // Set maximum tick value to 100
-                        stepSize: 10
-                    }
-                }
-            }
-        });
-      });
-    </script>
-    <script>
-      var ctx = document.getElementById('myChart').getContext('2d');
-      var myChart;
+                  }
+                }); //end of radarChart
+                $('#radarChart').show();
 
-      function createChart(data) {
-        var followers_data = [30,50,20,77,100]
-        var Influencer_data = ['아랑','이사배','조효진','회사원','포니']
-          myChart = new Chart(ctx, {
-              type: 'bar',
-              data: {
-                  labels: ['팔로워 수'],
-                  datasets: [
-                      {
-                          label: Influencer_data[0],
-                          data: [followers_data[0]],
-                          backgroundColor: 'rgba(255, 99, 132, 0.4)',
-                          borderColor:'rgba(255,99,132,1)',
-                          borderWidth: 1
-                      },
-                      {
-                          label: Influencer_data[1],
-                          data: [followers_data[1]],
-                          backgroundColor: 'rgba(54, 162, 235, 0.4)',
-                          borderColor:'rgba(54, 162, 235, 1)',
-                          borderWidth: 1
-                      },
-                      {
-                          label:Influencer_data[2],
-                          data: [followers_data[2]],
-                          backgroundColor: 'rgba(255, 206, 86, 0.4)',
-                          borderColor: 'rgba(255, 206, 86, 1)',
-                          borderWidth: 1
-                      },
-                      {
-                          label: Influencer_data[3],
-                          data: [followers_data[3]],
-                          backgroundColor: 'rgba(75, 192, 192, 0.4)',
-                          borderColor: 'rgba(75, 192, 192, 1)',
-                          borderWidth: 1
-                      },
-                      {
-                          label:Influencer_data[4],
-                          data: [followers_data[4]],
-                          backgroundColor: 'rgba(153, 102, 255, 0.4)',
-                          borderColor: 'rgba(153, 102, 255, 1)',
-                          borderWidth: 1
+                var fbarChart = new Chart(
+                  document.getElementById('fbarChart'), {
+                    type: 'bar',
+                    data: {
+                      labels: ['Number of Followers'],
+                      datasets: [{
+                        label: names[0],
+                        data: [followers[0]],
+                        fill: true,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        borderWidth: 1
+                      }, {
+                        label: names[1],
+                        data: [followers[1]],
+                        fill: true,
+                        backgroundColor: 'rgba(182, 109, 255, 0.2)',
+                        borderColor: 'rgba(182, 109, 255, 1)',
+                        borderWidth: 1
+                      }, {
+                        label: names[2],
+                        data: [followers[2]],
+                        fill: true,
+                        backgroundColor: 'rgba(107, 166, 255, 0.2)',
+                        borderColor: 'rgba(107, 166, 255, 1)',
+                        borderWidth: 1
+                      }, {
+                        label: names[3],
+                        data: [followers[3]],
+                        fill: true,
+                        backgroundColor: 'rgba(92, 255, 211, 0.2)',
+                        borderColor: 'rgba(92, 255, 211, 1)',
+                        borderWidth: 1
+                      }, {
+                        label: names[4],
+                        data: [followers[4]],
+                        fill: true,
+                        backgroundColor: 'rgba(244, 141, 103, 0.2)',
+                        borderColor: 'rgba(244, 141, 103, 1)',
+                        borderWidth: 1
+                      }] //end of dataset
+                    }, //end of data
+                    options: {
+                      scales: {
+                        y: {
+                          beginAtZero: true
+                        }
                       }
-                  ]
-              },
-              options: {
-                  scales: {
-                      y: {
-                        display: false,
-                          ticks: {
-                              display: false
-                          },
+                    }, //end of options
+                  }
+                );
+                $('#fbarChart').show();
+                
+                var ebarChart = new Chart(
+                  document.getElementById('ebarChart'), {
+                    type: 'bar',
+                    data: {
+                      labels: ['Engagement'],
+                      datasets: [{
+                        label: names[0],
+                        data: [engage[0]],
+                        fill: true,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        borderWidth: 1
+                      }, {
+                        label: names[1],
+                        data: [engage[1]],
+                        fill: true,
+                        backgroundColor: 'rgba(182, 109, 255, 0.2)',
+                        borderColor: 'rgba(182, 109, 255, 1)',
+                        borderWidth: 1
+                      }, {
+                        label: names[2],
+                        data: [engage[2]],
+                        fill: true,
+                        backgroundColor: 'rgba(107, 166, 255, 0.2)',
+                        borderColor: 'rgba(107, 166, 255, 1)',
+                        borderWidth: 1
+                      }, {
+                        label: names[3],
+                        data: [engage[3]],
+                        fill: true,
+                        backgroundColor: 'rgba(92, 255, 211, 0.2)',
+                        borderColor: 'rgba(92, 255, 211, 1)',
+                        borderWidth: 1
+                      }, {
+                        label: names[4],
+                        data: [engage[4]],
+                        fill: true,
+                        backgroundColor: 'rgba(244, 141, 103, 0.2)',
+                        borderColor: 'rgba(244, 141, 103, 1)',
+                        borderWidth: 1
+                      }] //end of dataset
+                    }, //end of data
+                    options: {
+                      scales: {
+                        y: {
                           beginAtZero: true
                         }
                       }

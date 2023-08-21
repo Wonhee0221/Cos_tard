@@ -36,6 +36,11 @@
         text-decoration: none; /* Remove underline */
         color: black; /* Change link color to black */
     }
+      .media-image {
+        width: 370px; 
+        height: 300px;
+      }
+    
     </style>
     <script src="https://code.highcharts.com/highcharts.js"></script>
   </head>
@@ -493,7 +498,7 @@
                       <img id="profile_img" class="img-lg rounded-circle me-4" alt="image">
                       <div class="mb-0 flex-grow">
                         <h4 id="username" class="me-2 mb-2"></h4>
-                        <h4 class="card-title" id="useriddisplay"></h4>
+                        <h4 class="card-title useriddisplay"></h4>
                         <p id="biography" class="mb-0 font-weight-light"></p>
                         <p id="websitelink" class="mb-0 font-weight-light"></p>
                       </div>
@@ -631,8 +636,9 @@
                   <div class="card-body">
                     <h4 class="card-title">최근 좋아요가 가장 많은 게시물</h4>
                     <div id="media-container"></div>
-                    <p id="like_count"></p>
-                    <p id="caption"></p>
+                    <div style="display: flex;"><p style="margin-right:10px">좋아요 <p id="like_count"></p> 개</p>
+                    </div>
+                      <span class="useriddisplay" ></span><span id="caption"></span>
                    
                   </div>
                 </div>
@@ -745,7 +751,7 @@
                           //user fix
                           $('#userid').text(data.influencer_data.userid);
                           var modifiedUsername = "@" + data.influencer_data.userid;
-                          $('#useriddisplay').text(modifiedUsername);
+                          $('.useriddisplay').text(modifiedUsername);
                           $('#username').text(data.influencer_data.username);  
                           $('#biography').text(data.influencer_data.biography);
                           var website = data.influencer_data.website;
@@ -803,7 +809,7 @@
                               imageElement.attr({
                                   'src': mediaUrl,
                                   'alt': 'Instagram Image',
-                                  'class': 'small-image'
+                                  'class': 'media-image'
                               });
                               
                               // Append the image element to the media-container div
