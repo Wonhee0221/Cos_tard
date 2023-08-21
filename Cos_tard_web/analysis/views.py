@@ -56,7 +56,7 @@ def get_influencer_analysis(request):
 
     #이미지
     image = Comment.objects.get(ig_id=ig_id)
-
+   
     context = {
         'influencer_data' : influencer_data,
         'influencer_data_details' : influencer_data_details,
@@ -66,8 +66,8 @@ def get_influencer_analysis(request):
         'count_hashtag' : count_hashtag,
         'media_data' : media_data,
         'statistic' : statistic,
-        'ratio' : ratio
-
+        'ratio' : ratio,
+        'image': image.maximage,
     }
 
     return JsonResponse(context, safe=False)
