@@ -137,6 +137,7 @@ def get_media_data(ig_id):
                 'like_count' : like_count,
                 'caption': truncated_caption,
                 'permalink' : media_max_detail.permalink,
+                'date': media_max_detail.timestamp[:10],
                 'media_url' : media_url,  
             }
     
@@ -149,10 +150,17 @@ def get_statistic(ig_id,follower):
     like = [data['like_count']/follower*1000 for data in statistics]
     comment = [data['comments_count']/follower*100000 for data in statistics]
 
+    average_like = sum(like) / len(like)
+    average_comment = sum(comment) / len(comment)
+    engagement = (average_like + average_comment)
+
     statistics = {
         'media': media,
         'comment': comment,
-        'like' : like
+        'like' : like,
+        'average_like': average_like,
+        'average_comment': average_comment,
+        'engagement': engagement
     }
     return statistics
 
