@@ -522,8 +522,8 @@
               <div class="col-md-7 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Media Insight</h4>
-                    {% comment %} <p class="card-description"> *피드 평균 수치는 한달 기준</p> {% endcomment %}
+                    <h4 class="card-title">Insight</h4>
+                    <p class="card-description"> *피드 평균 수치는 한달 기준</p>
                    <table class="table table-hover">
                       <tbody>
                         <tr>
@@ -546,13 +546,6 @@
                           <td id="engagement"></td>
                           <td>이에요</td>
                         </tr>
-                        </tbody>
-                    </table>
-                  </div>
-                    <div class="card-body">
-                    <h4 class="card-title">Follower Insight</h4>
-                    <table class="table table-hover">
-                        <tbody>
                         <tr>
                           <td>팔로워는 약</td>
                           <td id="average"></td>
@@ -745,7 +738,7 @@
                           var engagement = data.statistic.engagement / data.influencer_data_details.followers_count;
                           var formattedEngagement = (engagement * 100).toFixed(3); 
                           $('#engagement').text(formattedEngagement + "%");
-                          if (formattedEngagement > 1.922) {
+                          if (formattedEngagement > 1.4) {
                             $('#compareengagement').text("타 인플루언서들 보다 참여율이 높습니다");
                             $('#engagement').css('color', '#1bcfb4');
                           } else {
@@ -1066,7 +1059,7 @@
                         var feedchart = new Chart(ctx, {
                           type: 'bar',
                           data: {
-                              labels: ['AUG', 'SEP', 'OCT', 'NOV', 'DEC', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
+                              labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
                               datasets: [
                                 {
                                   label: "Media",
@@ -1150,8 +1143,8 @@
                                         fontColor: "#9c9fa6",
                                         autoSkip: true,
                                     },
-                                    barPercentage: 0.5,
-                                    categoryPercentage: 0.5 // Adjust the value as needed
+                                    barPercentage: 0.8,
+                                    categoryPercentage: 0.8 // Adjust the value as needed
                                 }]
                               }
                             },
