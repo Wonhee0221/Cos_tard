@@ -233,12 +233,7 @@
           <div class="content-wrapper">
             <div class="page-header">
               <h1 class="page-title"> Recommend System </h1>
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Basic tables</li>
-                </ol>
-              </nav>
+
             </div>
             <div class="row">
               <div class="col-lg-12 grid-margin stretch-card">
@@ -349,7 +344,6 @@
           <footer class="footer">
             <div class="container-fluid d-flex justify-content-between">
               <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright &copy; Cos-tard</span>
-              <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
             </div>
           </footer>
           <!-- partial --> {% endcomment %}
@@ -478,7 +472,7 @@
               var mainPanelHeight = $('.main-panel').css('height');
               console.log(mainPanelHeight);
               $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
-              $('.main-panel').append('<img id="img_progress" src="../static/assets/progress-bar.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
+              $('.main-panel').append('<img id="img_progress" src="../static/assets/bouncy_balls.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
             },
             complete:function(){
               $('#img_progress').remove();
@@ -509,7 +503,7 @@
                 str += '<div class="profile-pic"><img src=../../static/assets/' + influencer.Username + '.jpg/></div>';
                 //str += '<div class="instagramCircle1" style="background-image: url(\'/static/assets/' + influencer.Username + '.jpg\'),linear-gradient(to right, red, orange);"></div>';
                 str += '<div class="fw-bolder pt-3" style="font-size: 16px;">'+ influencer.Username +'</div>';
-                str += '<div class="fw-bolder pt-3" style="font-size: 14px;">'+  influencer.Score.toFixed(1) +'<span>%</span></div>';
+                str += '<div class="fw-bolder pt-3" style="font-size: 15px;">'+  influencer.Score.toFixed(1) +'<span>%</span></div>';
                 str += '</div>';
                 if(i%2==1){
                   $('#score-list .my-3').prepend(str);
