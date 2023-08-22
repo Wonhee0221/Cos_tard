@@ -32,8 +32,6 @@
             }
             .bg-new1 {
                 --bs-prim-rgb: 187, 172, 239;
-                {% comment %} 196, 159, 228; 
-                187, 172, 239; {% endcomment %}
                 --bs-bg-opacity: 1;
                 background-color: rgba(var(--bs-prim-rgb), var(--bs-bg-opacity)) !important;
               }
@@ -91,7 +89,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-                                <img src="{% static 'assets/iphone2.png' %}">
+                                <img id="iphoneImg" src="{% static 'assets/iphone2.png' %}">
                             </div>
                         </div>
                     </div>
@@ -101,8 +99,10 @@
             <section class="py-5" id="features">
                 <div class="container px-5 my-5">
                     <div class="row gx-5">
-                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">"Cos-tard가 제공하는</h2> 
-                                                            <h2 class="fw-bolder mb-0">다양한 기능들"</h2></div>
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+                            <h2 class="fw-bolder mb-0">"Cos-tard가 제공하는</h2> 
+                            <h2 class="fw-bolder mb-0">다양한 기능들"</h2>
+                        </div>
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
                                 <div class="col mb-5 h-100">

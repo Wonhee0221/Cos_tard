@@ -11342,3 +11342,17 @@ span {
     opacity: 1;
   }
 }
+
+#iphoneImg {
+  opacity: 0; /* 이미지를 처음에 투명하게 설정 */
+  animation: iphoneFadeIn 3s ease-in-out forwards; /* fadeIn 애니메이션 적용 */
+}
+
+@keyframes iphoneFadeIn {
+  0% {
+    opacity: 0; /* 0% 지점에서 투명 */
+  }
+  100% {
+    opacity: 1; /* 100% 지점에서 불투명 */
+  }
+}
