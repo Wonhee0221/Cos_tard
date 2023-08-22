@@ -182,7 +182,7 @@ def scoring(ig_id, model_value, level, market_value, product_value):
     engage = round(cal_engagement(ig_id=ig_id),2)
     action = Activity.objects.filter(ig_id=ig_id).values('imgcmt','infocmt','channelsize','contentpower','adratio','lifefeed', 'brandnum','reactfeed','followerfeed').first()
     image = imaging(ig_id, model_value=model_value)
-    market_w = marketvalue(market_value=marketvalue)
+    market_w = marketvalue(market_value=market_value)
 
     expertised = action['channelsize'] * action['contentpower'] + product_type(ig_id=ig_id, product=product_value)
     loyalty = followerslev + engage + (action['imgcmt']/action['lifefeed']) + action['reactfeed']
