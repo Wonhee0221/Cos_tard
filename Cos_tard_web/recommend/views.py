@@ -20,8 +20,8 @@ def recommend(request):
         model_value = int(request.POST.get('model'))
         product_value = int(request.POST.get('product'))
 
-    print(Activity.objects.filter(ig_id=336104951).values('imgcmt','infocmt','channelsize','contentpower','adratio','lifefeed', 'brandnum','reactfeed','followerfeed').first())
-    
+    print(scoring(336104951, 1,1,1,1))
+
     result=[]
 
     username = ["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
@@ -44,22 +44,39 @@ def recommend(request):
     names = top5['Username'].tolist()
     ig_id5 = top5['id'].tolist()
     top_ig_id = ig_id5[0]
-    followers=top5['followerslev']
+    followersnum = top5['followersnum'].tolist()
+    # followers=top5['followerslev']
     engage=top5['engage']
     experts=top5['expertised']
     images=top5['image']
     impact=top5['impact']
+    loyalty=top5['loyalty']
     effect=top5['effect']
     
-    followers=scale_list(followers, 1, 5)
-    engage=scale_line(engage, 3, 5)
-    experts=scale_list(experts, 1, 5)
-    images=scale_list(images, 1, 5)
-    impact=scale_list(impact, 1, 5)
-    effect=scale_list(effect, 1, 5)
+    print(effect)
 
-    result1 = top5.to_dict(orient='records')
-    result2 = {'name':names, 'follower':followers, 'engage':engage, 'expert':experts, 'image':images, 'impact':impact, 'effect':effect}
+    # # followers=scale_list(followers, 1, 5)
+    engage=scale_line(engage, 3, 5)
+    s_experts=scale_list(experts, 0, 5)
+    s_images=scale_list(images, 0, 5)
+    s_impact=scale_list(impact, 0, 5)
+    s_effect=scale_list(effect, 0, 5)
+    s_loyalty=scale_list(loyalty, 0, 5)
+
+    # print(s_effect)
+
+    # # scaled by 0-5
+    # s_experts = rescale_list(experts, old_max=16, new_max=5)
+    # s_loyalty = rescale_list(loyalty, 13, 5)
+    # s_impact = rescale_list(impact, 50, 5)
+    # s_effect = rescale_list(effect, 50, 5)
+    # s_images=scale_list(images, 0, 5)
+    
+    # print(s_impact)
+    # print(s_loyalty)
+
+    result1 = top5.to_dict(orient='records') # top5 score dict
+    result2 = {'name':names, 'followersnum':followersnum , 'engage':engage, 'expert':s_experts, 'image':s_images, 'impact':s_impact, 'effect':s_effect, 'loyalty':s_loyalty} #top5 score detail
 
     brandlist = branding( top_ig_id)
 

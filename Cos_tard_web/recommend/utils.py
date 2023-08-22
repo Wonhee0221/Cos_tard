@@ -60,6 +60,20 @@ def scaler(value, min_value, max_value, new_min, new_max):
     # 결과 반환
     return scaled_value
 
+def rescale(value, old_min, old_max, new_min, new_max):
+    # 이전 범위에서의 비율 계산
+    old_range = old_max - old_min
+    new_range = new_max - new_min
+    scaled_value = ((value - old_min) / old_range) * new_range + new_min
+    return scaled_value
+
+def rescale_list(data_list, old_max, new_max):
+    rate = new_max/old_max
+    scaled_data_list = [(value * rate) for value in data_list]
+    
+    return scaled_data_list
+
+
 def scale_list(data_list, new_min, new_max):
     min_value = min(data_list)
     max_value = max(data_list)
@@ -183,15 +197,18 @@ def scoring(ig_id, model_value, level, market_value, product_value):
     action = Activity.objects.filter(ig_id=ig_id).values('imgcmt','infocmt','channelsize','contentpower','adratio','lifefeed', 'brandnum','reactfeed','followerfeed').first()
     image = imaging(ig_id, model_value=model_value)
     market_w = marketvalue(market_value=market_value)
+    producthist = product_type(ig_id=ig_id, product=product_value)
 
-    expertised = action['channelsize'] * action['contentpower'] + product_type(ig_id=ig_id, product=product_value)
+    expertised = action['channelsize'] * action['contentpower'] + producthist
     loyalty = followerslev + engage + (action['imgcmt']/action['lifefeed']) + action['reactfeed']
     impact = followerslev + action['contentpower'] + action['adratio']
     effect = engage + (action['infocmt']/action['lifefeed']) + action['contentpower'] + action['followerfeed'] + image
+    f = Users_info.objects.filter(ig_id=ig_id).order_by('date').values_list('followers_count', flat=True).first()
 
     score = round((expertised+loyalty+ market_w[1] * impact+ market_w[0] * effect),2)
 
-    result = { 'id':ig_id, 'engage':engage, 'followerslev':followerslev, 'Score': score, 'expertised':expertised, 'loyalty':loyalty, 'impact':impact, 'effect':effect, 'image':image}
+
+    result = { 'id':ig_id, 'followersnum':f, 'engage':engage, 'Score': score, 'expertised':expertised, 'loyalty':loyalty, 'impact':impact, 'effect':effect, 'image':image}
 
     return result
 
