@@ -651,7 +651,11 @@
                       </div>
                       <img src="/static/assets/option.PNG" class="options" alt="">
                   </div>
-                    <div id="media-container"></div>
+                  <div style="text-align: center; height: 250px">
+                    <span style="display: inline-block; vertical-align: middle; line-height: 250px">
+                    <div id="media-container" style="text-align: center; height: 250px;"></div>
+                    </span>
+                  </div>
                     <div class="post-content">
                       <div class="reaction-wrapper">
                           <img src="/static/assets/like.PNG" class="icon" alt="">
@@ -812,6 +816,7 @@
                           
                           var mediaUrl = data.media_data.media_url;
                           var Permalink = data.media_data.permalink;
+
         
                           // Check if the media URL contains "jpg" (image)
                           var isImage = mediaUrl && mediaUrl.includes("jpg");
@@ -828,17 +833,19 @@
                               // Append the image element to the media-container div
                               $('#media-container').append(imageElement);
                           } else {
-                              // Create a button that links to the other permalink
-                              var imageElement = $('<iframe >');
-                              imageElement.attr({
-                                  'src': mediaUrl,
-                                  'alt': 'Instagram Image',
-                                  'frameborder':'0'
-                              });
-                              
-                              // Append the button element to the media-container div
-                              $('#media-container').append(imageElement );
-                          }
+                            // Create a link element that displays "게시글 보러가기"
+                            var linkElement = $('<a>');
+                            linkElement.attr({
+                                'href': Permalink,
+
+                                'target': '_blank'
+                                
+                            });
+                            linkElement.text('게시글 보러가기');
+                    
+                            // Append the link element to the media-container div
+                            $('#media-container').append(linkElement);
+                        }
    
                             // 검색 결과(왼쪽그리드) 띄울때 DOM 객체 이용해서 css 조정
                             // var searchResults1 = document.getElementById('searchResults1');
