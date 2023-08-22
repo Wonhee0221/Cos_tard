@@ -415,34 +415,51 @@
               $('#blur_panel').remove();
             },
             success: function(response) {
-                $('#result').empty()
-                var dataTable = $('#score-table');
-                var topInfluencers = response.top_influencers;
-
-                var str = "";
-                $.each(topInfluencers, function(i, influencer) {
-                    str += '<tr>';
-                    str += '<td class="py-1"><img src=../../static/assets/' + influencer.Username + '.jpg/></td>';
-                    str += '<td>' + influencer.Username + '</td><td>' + influencer.Score + '</td>';
-                    str += '</tr>';
-                });
-                $('#score-table tbody').append(str); // tbody에 데이터 추가
-                $('#score-table').show();
+              $('#result').empty();
+              var topInfluencers = response.top_influencers;
+              
+              var str = '<div class="my-3 align-items-center" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">'; // Container for the list
+              
+              $.each(topInfluencers, function(i, influencer) {
+                str += '<div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 160px; height: 200px; justify-content: center; align-items: center; display: flex; flex-direction: column;">';
+                str += '<div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;"><div class="fw-bolder pb-2">TOP'+(i+1)+'</div>';
+                str += '<div class="profile-pic"><img src=../../static/assets/' + influencer.Username + '.jpg/></div>';
+                //str += '<div class="instagramCircle1" style="background-image: url(\'/static/assets/' + influencer.Username + '.jpg\'),linear-gradient(to right, red, orange);"></div>';
+                str += '<div class="fw-bolder pt-3" style="font-size: 16px;">'+ influencer.Username +'</div>';
+                str += '<div class="fw-bolder pt-3" style="font-size: 12px;">'+  influencer.Score.toFixed(1) +'<span>%</span></div>';
+                str += '</div>';
+                str += '</div>';
+              });
+              
+        
+              
+              $('#score-list div').append(str); // tbody에 데이터 추가
+              $('#score-list').css('display', 'block'); // score-table을 보이게 한다.
+              
+              
               
                 console.log(response.chartdata)
                 var chartData = response.chartdata
                 console.log(chartData.name)
 
                 var names = chartData.name; 
-                var followers = chartData.follower;
+                var followers = chartData.followersnum;
                 var engage = chartData.engage;
-                var expert = chartData.expert;
-                var image = chartData.image;
+                var expert = scaleArray(chartData.expert,0,5);
+                var image = scaleArray(chartData.image,0,5);
+                var impact = scaleArray(chartData.impact,0,5);
+                var effect = scaleArray(chartData.effect,0,5);
+                var loyalty = scaleArray(chartData.loyalty,0,5);
                 var top_ig_id = response.top_ig_id;
 
                 console.log(names)
                 console.log(followers)
                 console.log(followers[1])
+                console.log(impact)
+                console.log(effect)
+                console.log(expert)
+                console.log(image)
+                console.log(loyalty)
 
                 $('#result1').empty()
                 $('#result2').empty()
@@ -464,41 +481,43 @@
                 $('#linkbutton').show();
 
 
-                var scaledFollower = scaleArray(followers, 1, 5)
+                var scaledFollower = scaleArray(followers, 1, 5);
+                              
+                
 
                 var radardata ={
-                  labels: ['followers', 'engagement', 'Expertised', 'Image matching', 'Product matching'],
+                  labels: ['Impact', 'Effect', 'Expertised', 'Image matching', 'Loyalty'],
                   datasets: [{
                     label: names[0],
-                    data: [scaledFollower[0], engage[0], expert[0], image[0], 0],
+                    data: [impact[0], effect[0], expert[0], image[0], loyalty[0]],
                     fill: true,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgb(255, 99, 132)',
                     borderWidth: 1
                   }, {
                     label: names[1],
-                    data: [scaledFollower[1], engage[1], expert[1], image[1], 0],
+                    data: [impact[1], effect[1], expert[1], image[1], loyalty[1]],
                     fill: true,
                     backgroundColor: 'rgba(182, 109, 255, 0.2)',
                     borderColor: 'rgba(182, 109, 255, 1)',
                     borderWidth: 1
                   }, {
                     label: names[2],
-                    data: [scaledFollower[2], engage[2], expert[2], image[2], 0],
+                    data: [impact[2], effect[2], expert[2], image[2], loyalty[2]],
                     fill: true,
                     backgroundColor: 'rgba(107, 166, 255, 0.2)',
                     borderColor: 'rgba(107, 166, 255, 1)',
                     borderWidth: 1
                   }, {
                     label: names[3],
-                    data: [scaledFollower[3], engage[3], expert[3], image[3], 0],
+                    data: [impact[3], effect[3], expert[3], image[3], loyalty[3]],
                     fill: true,
                     backgroundColor: 'rgba(92, 255, 211, 0.2)',
                     borderColor: 'rgba(92, 255, 211, 1)',
                     borderWidth: 1
                   }, {
                     label: names[4],
-                    data: [scaledFollower[4], engage[4], expert[4], image[4], 0],
+                    data: [impact[4], effect[4], expert[4], image[4], loyalty[4]],
                     fill: true,
                     backgroundColor: 'rgba(244, 141, 103, 0.2)',
                     borderColor: 'rgba(244, 141, 103, 1)',
