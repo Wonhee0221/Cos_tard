@@ -34,10 +34,86 @@
           height: auto;  /* Automatically adjust the height to maintain the aspect ratio */
           margin: 3px;  /* Add some spacing between images */
       }
+      .medium-image {
+          width: 100%;
+          height: 250px;
+          object-fit: cover;  
+      }
     #websitelink a {
         text-decoration: none; /* Remove underline */
         color: black; /* Change link color to black */
     }
+   
+      .post-content{
+          width: 100%;
+          padding: 20px;
+      }
+
+      .description{
+          margin: 10px 0;
+          font-size: 14px;
+          line-height: 20px;
+      }
+
+      .description span{
+          font-weight: bold;
+          margin-right: 10px;
+      }
+
+      .post-time{
+          color: rgba(0, 0, 0, 0.5);
+          font-size: 12px;
+      }
+      
+    
+      .reaction-wrapper{
+          width: 100%;
+          height: 50px;
+          display: flex;
+          margin-top: -20px;
+          align-items: center;
+      }
+
+      .reaction-wrapper .icon{
+          height: 25px;
+          margin: 0;
+          margin-right: 20px;
+      }
+
+      .reaction-wrapper .icon.save{
+          margin-left: auto;
+      }
+        .info{
+      width: 100%;
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+  }
+      .info .username{
+        width: auto;
+        font-weight: bold;
+        color: #000;
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .info .options{
+        height: 10px;
+        cursor: pointer;
+    }
+
+    .info .user{
+        display: flex;
+        align-items: center;
+    }
+    iframe {
+      width: 100%;
+      border: none;
+  }
+
+  
     </style>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <!-- move_to_top_btn 제어 로직 js -->
@@ -65,12 +141,7 @@
         <!-- partial:partials/_sidebar.html -->
          <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="menu-title">Dashboard</span>
-                <i class="mdi mdi-home menu-icon"></i>
-              </a>
-            </li>
+            
             <li class="nav-item nav-profile">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=336104951">
                 <div class="nav-profile-image">
@@ -337,11 +408,12 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title" id="useriddisplay"></h4>
+                    
                     <div class="d-flex mt-4 mb-4 align-items-top">
-                      <img id="profile_img" class="img-lg rounded-circle me-4" alt="image">
+                      <img id="profileimg" class="img-lg rounded-circle me-4" alt="image">
                       <div class="mb-0 flex-grow">
                         <h4 id="username" class="me-2 mb-2"></h4>
+                        <h4 class="card-title useriddisplay"></h4>
                         <p id="biography" class="mb-0 font-weight-light"></p>
                         <p id="websitelink" class="mb-0 font-weight-light"></p>
                       </div>
@@ -377,10 +449,10 @@
                         <div class="card bg-gradient-success card-img-holder text-white">
                           <div class="card-body">
                             <img src="../../static/templates/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                            <h4 class="font-weight-normal mb-3">Grade <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                            <h4 class="font-weight-normal mb-3">Image <i class="mdi mdi-diamond mdi-24px float-right"></i>
                             </h4>
-                            <h2 class="mb-5">A+</h2>
-                            <h6 class="card-text">..</h6>
+                            <h2 class="mb-5" id="maximage"></h2>
+                            <h6 class="card-text"></h6>
                           </div>
                         </div>
                       </div>
@@ -401,7 +473,7 @@
                     <div class="card-body">
                       <div class="clearfix">
                         <h4 class="card-title float-left">Feed Statistics</h4>
-                        <p class="card-description"> *좋아요와 댓글 수는 조정 됐다는걸 뭐라고 표현하지?</p>
+                        <p class="card-description"> *총 팔로워 대비 좋아요와 댓글 수</p>
                         <div id="feedchart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
                       </div>
                       <canvas id="feedchart" class="mt-4"></canvas>
@@ -412,7 +484,7 @@
                   <div class="card">
                     <div class="card-body">
                       <h4 class="card-title">Media Ratio</h4>
-                      <p class="card-description"> *여기 뭘 써야 옆이랑 비율이 맞음</p>
+                      <p class="card-description"> *2023-07 기준</p>
                       <canvas id="mediachart"></canvas>
                       <div id="mediachart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
                     </div>
@@ -448,16 +520,34 @@
               <div class="col-md-7 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Follower Insight</h4>
-              
-                      <p id="compare"><i class="mdi mdi-bell-ring-outline"></i></p>
-                    
+                    <h4 class="card-title">Insight</h4>
+                    <p class="card-description"> *피드 평균 수치는 한달 기준</p>
                    <table class="table table-hover">
                       <tbody>
                         <tr>
+                          <td>평균 좋아요 수는</td>
+                          <td style="color:#b66dff" id="average_like"></td>
+                          <td>이에요</td>
+                        </tr>
+                        <tr>
+                          <td>평균 댓글 수는</td>
+                          <td style="color:#b66dff" id="average_comment"></td>
+                          <td>이에요</td>
+                        </tr>
+                        <tr>
+                          <td>평균 게시글 수는</td>
+                          <td style="color:#b66dff" id="average_media"></td>
+                          <td>이에요</td>
+                        </tr>
+                        <tr>
+                          <td>참여 지수는</td>
+                          <td id="engagement"></td>
+                          <td>이에요</td>
+                        </tr>
+                        <tr>
                           <td>팔로워는 약</td>
                           <td id="average"></td>
-                          <td>명씩 </i>변하고있어요</td>
+                          <td>명씩 변하고있어요</td>
                         </tr>
                         <tr>
                           <td>증가율 평균은</td>
@@ -472,16 +562,39 @@
                       </tbody>
                     </table>
                   </div>
+                  <div class="card-body">
+                    <h4 class="card-title">Summary</h4>
+                    <ul class="list-star">
+                      <li class="h5" id="compare"></li>
+                      <li class="h5" id="compareengagement"></li>
+                      
+                    </ul>
+                  </div>
                 </div>
               </div>
               <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">최근 좋아요가 가장 많은 게시물</h4>
+                    <h4 class="card-title">Popular Post</h4>
+                    <div class="info">
+                      <div class="user">
+                        <img id="profileimg2" class="img-xs rounded-circle me-4" alt="image">
+                          <p id="userid"></p>
+                      </div>
+                      <img src="/static/assets/option.PNG" class="options" alt="">
+                  </div>
                     <div id="media-container"></div>
-                    <p id="like_count"></p>
-                    <p id="caption"></p>
-                   
+                    <div class="post-content">
+                      <div class="reaction-wrapper">
+                          <img src="/static/assets/like.PNG" class="icon" alt="">
+                          <img src="/static/assets/comment.PNG" class="icon" alt="">
+                          <img src="/static/assets/send.PNG" class="icon" alt="">
+                          <img src="/static/assets/save.PNG" class="save icon" alt="">
+                      </div>
+                      <p class="likes" id="like_count"></p>
+                      <p class="description" id="caption"><span class="useriddisplay"></span></p>
+                      <p class="post-time" id="mediadate"></p>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -508,24 +621,13 @@
               <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">색상분석</h4>
-                    해야지
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
                     <h4 class="card-title">Top used topic</h4>
-                    <canvas id="barCharttext" style="height: 183px" width="549" height="274" ></canvas>
+                    <canvas id="textbarChart" style="display: none;" style="height:230px"></canvas>
                   </div>
-                </div>
-              </div>
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Top used #</h4>
-                    <canvas id="barCharttag" style="height: 183px" width="549" height="274" ></canvas>
+                    <canvas id="tagbarChart" style="display: none;" style="height:230px"></canvas>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -589,14 +691,16 @@
                           $('#blur_panel').remove();
                         },
                         success: function(data) {
-                          console.log(data.ratio);
+                          console.log(data.media_data.date);
                           
-                          $('#profile_img').attr('src','../static/assets/'+data.influencer_data.userid+'.jpg');
+                          $('#profileimg').attr('src','../static/assets/'+data.influencer_data.userid+'.jpg');
+                          $('#profileimg2').attr('src','../static/assets/'+data.influencer_data.userid+'.jpg');
+                          
 
                           //user fix
                           $('#userid').text(data.influencer_data.userid);
                           var modifiedUsername = "@" + data.influencer_data.userid;
-                          $('#useriddisplay').text(modifiedUsername);
+                          $('.useriddisplay').text(modifiedUsername);
                           $('#username').text(data.influencer_data.username);  
                           $('#biography').text(data.influencer_data.biography);
                           var website = data.influencer_data.website;
@@ -608,6 +712,8 @@
                           $('#media_count').text(data.influencer_data_details.media_count);
                           $('#date').text(data.influencer_data_details.date);
 
+                          $('#maximage').text(data.image);
+                         
                           //follower trend
                           $('.max-growth-date').text(data.follower_trend.max_growth_date);
                           var diff = data.follower_trend.diff + "  than yesterday"
@@ -622,6 +728,22 @@
                               $('#average, #average_growth').css('color', '#fe7c96');
                           }
 
+                          //statistic
+                          $('#average_like').text(data.statistic.average_like);
+                          $('#average_comment').text(data.statistic.average_comment);
+                          $('#average_media').text(data.statistic.average_media);
+
+                          var engagement = data.statistic.engagement / data.influencer_data_details.followers_count;
+                          var formattedEngagement = (engagement * 100).toFixed(3); 
+                          $('#engagement').text(formattedEngagement + "%");
+                          if (formattedEngagement > 1.922) {
+                            $('#compareengagement').text("타 인플루언서들 보다 참여율이 높습니다");
+                            $('#engagement').css('color', '#1bcfb4');
+                          } else {
+                            $('#compareengagement').text("타 인플루언서들 보다 참여율이 낮습니다");
+                            $('#engagement').css('color', '#fe7c96');
+                          }
+                          $('#engagement').text(formattedEngagement + "%");
 
                           //image link
                           $('#feed1').attr('src', data.image_link[0]);
@@ -639,7 +761,9 @@
                           var timestamp = "update "+ data.media_data.timestamp;
                           $('#timestampdisplay').text(timestamp);
                           $('#caption').text(data.media_data.caption);
-                          $('#like_count').text(data.media_data.like_count);
+                          var likecount = data.media_data.like_count + " likes"
+                          $('#like_count').text(likecount);
+                          $('#mediadate').text(data.media_data.date);
                           $('#media_id').text(data.media_data.media_id);
                           
                           var mediaUrl = data.media_data.media_url;
@@ -654,45 +778,23 @@
                               imageElement.attr({
                                   'src': mediaUrl,
                                   'alt': 'Instagram Image',
-                                  'class': 'small-image'
+                                  'class':'medium-image'
                               });
                               
                               // Append the image element to the media-container div
                               $('#media-container').append(imageElement);
                           } else {
                               // Create a button that links to the other permalink
-                              var buttonElement = $('<button type="button" class="btn btn-gradient-danger btn-rounded btn-fw">확인하기</button>');
-                              buttonElement.click(function() {
-                                  window.location.href = Permalink; // Navigate to the other permalink
+                              var imageElement = $('<iframe >');
+                              imageElement.attr({
+                                  'src': mediaUrl,
+                                  'alt': 'Instagram Image',
+                                  'frameborder':'0'
                               });
                               
                               // Append the button element to the media-container div
-                              $('#media-container').append(buttonElement);
+                              $('#media-container').append(imageElement );
                           }
-
-                          //count text
-                          $('#text1_topic').text(data.count_text[0].key);
-                          $('#text2_count').text(data.count_text[0].value);
-                          $('#text2_topic').text(data.count_text[1].key);
-                          $('#text2_count').text(data.count_text[1].value);
-                          $('#text3_topic').text(data.count_text[2].key);
-                          $('#text3_count').text(data.count_text[2].value);
-                          $('#text4_topic').text(data.count_text[3].key);
-                          $('#text4_count').text(data.count_text[3].value);
-                          $('#text5_topic').text(data.count_text[4].key);
-                          $('#text5_count').text(data.count_text[4].value);
-
-                          //count hashtag
-                          $('#hashtag1_topic').text(data.count_hashtag[0].key);
-                          $('#hashtag2_count').text(data.count_hashtag[0].value);
-                          $('#hashtag2_topic').text(data.count_hashtag[1].key);
-                          $('#hashtag2_count').text(data.count_hashtag[1].value);
-                          $('#hashtag3_topic').text(data.count_hashtag[2].key);
-                          $('#hashtag3_count').text(data.count_hashtag[2].value);
-                          $('#hashtag4_topic').text(data.count_hashtag[3].key);
-                          $('#hashtag4_count').text(data.count_hashtag[3].value);
-                          $('#hashtag5_topic').text(data.count_hashtag[4].key);
-                          $('#hashtag5_count').text(data.count_hashtag[4].value);
    
                             // 검색 결과(왼쪽그리드) 띄울때 DOM 객체 이용해서 css 조정
                             // var searchResults1 = document.getElementById('searchResults1');
@@ -759,7 +861,8 @@
                                                     marker: {
                                                         enabled: false
                                                     }
-                                                }},
+                                                  }
+                                                },
                                             series: [{
                                                 name: 'followers increase rate',
                                                 data: data.follower_trend.growth_rates,
@@ -771,100 +874,163 @@
                                                 color: 'grey', 
                                                 fillColor: 'rgba(192, 192, 192, 0.2)',
                                                 data: data.follower_trend.growth_rate_average
-                                            }
-                                            ],
+                                            }],
                                             tooltip: {
                                                 enabled: true, // Disable tooltips on hover
                                                 // ... other tooltip configuration ...
-                                            }
+                                              }
                                         });
-                            
-                          var textData = {
-                          labels: [data.count_text[0].key, data.count_text[1].key, data.count_text[2].key, data.count_text[3].key, data.count_text[4].key],
-                          datasets: [{
-                  
-                              data: [data.count_text[0].value, data.count_text[1].value, data.count_text[2].value, data.count_text[3].value, data.count_text[4].value], // Your data here
-                              
-                              // backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                              // borderColor: 'rgba(75, 192, 192, 1)',
-                              // borderWidth: 1
-                            }]
-                        };
-      
-                        // Initialize the chart
-                        var barCharttextCanvas = $("#barCharttext").get(0).getContext("2d");
-                        var barCharttext = new Chart(barCharttextCanvas, {
-                            type: 'bar',
-                            data: textData,
-                            options: {
-                                      scales: {
-                                          x: {
-                                              grid: {
-                                                  display: false // Hide X-axis grid lines
-                                              }
-                                          },
-                                          y: {
-                                              ticks: {
-                                                  display: false // Hide Y-axis tick labels
+                                      
+                                         //count text
+                                      var text1_topic = data.count_text[0].key;
+                                      var text1_count = data.count_text[0].value;
+                                      var text2_topic = data.count_text[1].key;
+                                      var text2_count = data.count_text[1].value;
+                                      var text3_topic = data.count_text[2].key;
+                                      var text3_count = data.count_text[2].value;
+                                      var text4_topic = data.count_text[3].key;
+                                      var text4_count = data.count_text[3].value;
+                                      var text5_topic = data.count_text[4].key;
+                                      var text5_count = data.count_text[4].value;
+
+                                      //count hashtag
+                                      var hashtag1_topic = data.count_hashtag[0].key;
+                                      var hashtag1_count = data.count_hashtag[0].value;
+                                      var hashtag2_topic = data.count_hashtag[1].key;
+                                      var hashtag2_count = data.count_hashtag[1].value;
+                                      var hashtag3_topic = data.count_hashtag[2].key;
+                                      var hashtag3_count = data.count_hashtag[2].value;
+                                      var hashtag4_topic = data.count_hashtag[3].key;
+                                      var hashtag4_count = data.count_hashtag[3].value;
+                                      var hashtag5_topic = data.count_hashtag[4].key;
+                                      var hashtag5_count = data.count_hashtag[4].value;
+
+                                      var tagbarChart = new Chart(
+                                          document.getElementById('tagbarChart'), {
+                                            type: 'bar',
+                                            data: {
+                                              labels: ['Hashtags'],
+                                              datasets: [{
+                                                label: hashtag1_topic,
+                                                data: [hashtag1_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                                borderColor: 'rgb(255, 99, 132)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: hashtag2_topic,
+                                                data: [hashtag2_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(182, 109, 255, 0.2)',
+                                                borderColor: 'rgba(182, 109, 255, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: hashtag3_topic,
+                                                data: [hashtag3_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(107, 166, 255, 0.2)',
+                                                borderColor: 'rgba(107, 166, 255, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: hashtag4_topic,
+                                                data: [hashtag4_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(92, 255, 211, 0.2)',
+                                                borderColor: 'rgba(92, 255, 211, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: hashtag5_topic,
+                                                data: [hashtag5_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(244, 141, 103, 0.2)',
+                                                borderColor: 'rgba(244, 141, 103, 1)',
+                                                borderWidth: 1
+                                              }] //end of dataset
+                                            }, //end of data
+                                            options: {
+                                              scales: {
+                                                yaxis: {
+                                                beginAtZero: true,
+                                                display: false, // Hide the y-axis labels
+                                                },
                                               },
-                                              grid: {
-                                                  display: false // Hide Y-axis grid lines
-                                              }
+                                              layout: {
+                                                  padding: {
+                                                      left: 10,
+                                                      right: 10,
+                                                      top: 0,
+                                                      bottom: 0
+                                                  }
+                                              },
+                                            }, //end of options
                                           }
-                                      },
-                                      plugins: {
-                                          legend: {
-                                              display: false // Hide legend
+                                        );
+                                        $('#tagbarChart').show();
+
+                                        var textbarChart = new Chart(
+                                          document.getElementById('textbarChart'), {
+                                            type: 'bar',
+                                            data: {
+                                              labels: ['Keywords'],
+                                              datasets: [{
+                                                label: text1_topic,
+                                                data: [text1_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                                borderColor: 'rgb(255, 99, 132)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: text2_topic,
+                                                data: [text2_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(182, 109, 255, 0.2)',
+                                                borderColor: 'rgba(182, 109, 255, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: text3_topic,
+                                                data: [text3_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(107, 166, 255, 0.2)',
+                                                borderColor: 'rgba(107, 166, 255, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: text4_topic,
+                                                data: [text4_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(92, 255, 211, 0.2)',
+                                                borderColor: 'rgba(92, 255, 211, 1)',
+                                                borderWidth: 1
+                                              }, {
+                                                label: text5_topic,
+                                                data: [text5_count],
+                                                fill: true,
+                                                backgroundColor: 'rgba(244, 141, 103, 0.2)',
+                                                borderColor: 'rgba(244, 141, 103, 1)',
+                                                borderWidth: 1
+                                              }] //end of dataset
+                                            }, //end of data
+                                            options: {
+                                              scales: {
+                                                yaxis: {
+                                                    beginAtZero: true,
+                                                    display: false, // Hide the y-axis labels
+                                                },
+                                              },
+                                              layout: {
+                                                  padding: {
+                                                      left: 10,
+                                                      right: 10,
+                                                      top: 0,
+                                                      bottom: 0
+                                                  }
+                                              },
+                                            }, //end of options
                                           }
-                                      }
-                                  }
-                              });
-                        
-                        var tagData = {
-                          labels: [data.count_hashtag[0].key, data.count_hashtag[1].key, data.count_hashtag[2].key, data.count_hashtag[3].key, data.count_hashtag[4].key],
-                          datasets: [{
-                  
-                              data: [data.count_hashtag[0].value, data.count_hashtag[1].value, data.count_hashtag[2].value, data.count_hashtag[3].value, data.count_hashtag[4].value], // Your data here
-                              
-                              // backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                              // borderColor: 'rgba(75, 192, 192, 1)',
-                              // borderWidth: 1
-                            }]
-                        };
+                                        );
+                                        $('#textbarChart').show();
+                          
       
-                        // Initialize the chart
-                        var barCharttagCanvas = $("#barCharttag").get(0).getContext("2d");
-                        var barCharttag = new Chart(barCharttagCanvas, {
-                            type: 'bar',
-                            data: tagData,
-                            options: {
-                                    scales: {
-                                        x: {
-                                            grid: {
-                                                display: false // Hide X-axis grid lines
-                                            }
-                                        },
-                                        y: {
-                                            ticks: {
-                                                display: false // Hide Y-axis tick labels
-                                            },
-                                            grid: {
-                                                display: false // Hide Y-axis grid lines
-                                            }
-                                        }
-                                    },
-                                    plugins: {
-                                        legend: {
-                                            display: false // Hide legend
-                                        }
-                                    }
-                                }
-                            });
-                                                                   
-                                // 검색 결과 그래프 띄울때 DOM 객체 이용해서 css 조정
-                                // document.getElementById('chart-container-02').style.width = "100%";
-                                // document.getElementById('chart-container-02').style.height = "500px";
-                                // document.getElementById('chart-container-02').style.padding = "50px";
+                                        
 
                         var media = data.statistic.media;
                         var like = data.statistic.like;  

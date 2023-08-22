@@ -31,6 +31,7 @@ def recommend(request):
     for user in username:
         id_object = Users_fix.objects.filter(user_id=user).first()
         ig_ids = id_object.ig_id
+
         score = scoring(ig_ids, model_value, level=price_value, market_value=market_value, product_value=product_value)
         score['Username'] = user
         result.append(score)

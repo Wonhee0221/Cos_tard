@@ -4,9 +4,9 @@ from media4.models import *
 from analysis.models import *
 from analysis.processing import *
 from analysis.hashtag import *
+from recommend.models import Comment
 import json
 from django.views.decorators.csrf import csrf_exempt
-import json
 from django.db.models.functions import TruncDate
 from datetime import datetime
 
@@ -54,6 +54,9 @@ def get_influencer_analysis(request):
     statistic = get_statistic(ig_id,follower)
     ratio = get_ratio(ig_id)
 
+    #이미지
+    image = Comment.objects.get(ig_id=ig_id)
+   
     context = {
         'influencer_data' : influencer_data,
         'influencer_data_details' : influencer_data_details,
@@ -63,8 +66,8 @@ def get_influencer_analysis(request):
         'count_hashtag' : count_hashtag,
         'media_data' : media_data,
         'statistic' : statistic,
-        'ratio' : ratio
-
+        'ratio' : ratio,
+        'image': image.maximage,
     }
 
     return JsonResponse(context, safe=False)
