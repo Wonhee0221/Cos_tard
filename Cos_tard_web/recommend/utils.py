@@ -195,5 +195,19 @@ def scoring(ig_id, model_value, level, market_value, product_value):
 
     return result
 
+#협업 브랜드
+def branding(ig_id):
+    try:
+        distinct_brands = Brand.objects.filter(ig_id=ig_id).values('brand').distinct()
+        brand_list = [item['brand'] for item in distinct_brands]
+        if not brand_list:
+            brand_list = []
+        else:
+            brand_list = brand_list[:5]  # Limit the list to maximum 5 items
+    except Brand.DoesNotExist:
+        brand_list = []
+
+    return brand_list
+
 
 

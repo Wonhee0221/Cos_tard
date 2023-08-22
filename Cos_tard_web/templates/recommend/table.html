@@ -331,8 +331,11 @@
                   <div class="card-body">
                     <h4 class="card-title">Product Matching</h4>
                     <p class="card-description">해당 인플루언서는 이러한 제품과 협업했어요:</p>
-                    <p id="result6" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
-                    <div id="ChartContainer">
+                    {% comment %} <p id="result6" class="card-text text-muted" style="text-align: center;">Nothing now Here</p> {% endcomment %}
+                    <ul class="list-ticked" id="brand-list">
+                      <p id="result6" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
+                      <!-- The brand list will be inserted here -->
+                    </ul>
                       <canvas style="display: none;" style="height:230px"></canvas>
                     </div>
                   </div>
@@ -342,14 +345,14 @@
             </div>
           </div>
           <!-- content-wrapper ends -->
-          <!-- partial:../../partials/_footer.html -->
+          {% comment %} <!-- partial:../../partials/_footer.html -->
           <footer class="footer">
             <div class="container-fluid d-flex justify-content-between">
               <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright &copy; Cos-tard</span>
               <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
             </div>
           </footer>
-          <!-- partial -->
+          <!-- partial --> {% endcomment %}
         </div>
         <!-- main-panel ends -->
       </div>
@@ -723,7 +726,24 @@
                     }, //end of options
                   }
                 );
-                $('#ebarChart').show();             
+                $('#ebarChart').show();  
+
+                //brandlist
+                var brandList = response.brandlist;
+                var brandListHtml = '';
+                
+                if (brandList.length > 0) {
+                    for (var i = 0; i < brandList.length; i++) {
+                        brandListHtml += '<li>' + brandList[i] + '</li>';
+                    }
+                } else {
+                    brandListHtml = '<li>No brand data available.</li>';
+                }
+                
+                $('#brand-list').html(brandListHtml);
+                
+                
+            
             },
             error: function(error) {
                 console.error(error);
