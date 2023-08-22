@@ -28,6 +28,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
+    <script src="{% static 'js/svgJs1.js' %}"></script>
+    <script src="{% static 'js/svgJs2.js' %}"></script>
     <style>
       .small-image {
           width: 130px;  /* Adjust the width as needed */
@@ -520,8 +522,8 @@
               <div class="col-md-7 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Insight</h4>
-                    <p class="card-description"> *피드 평균 수치는 한달 기준</p>
+                    <h4 class="card-title">Media Insight</h4>
+                    {% comment %} <p class="card-description"> *피드 평균 수치는 한달 기준</p> {% endcomment %}
                    <table class="table table-hover">
                       <tbody>
                         <tr>
@@ -544,6 +546,13 @@
                           <td id="engagement"></td>
                           <td>이에요</td>
                         </tr>
+                        </tbody>
+                    </table>
+                  </div>
+                    <div class="card-body">
+                    <h4 class="card-title">Follower Insight</h4>
+                    <table class="table table-hover">
+                        <tbody>
                         <tr>
                           <td>팔로워는 약</td>
                           <td id="average"></td>
