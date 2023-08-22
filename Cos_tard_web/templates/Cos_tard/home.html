@@ -30,6 +30,29 @@
             ::-webkit-scrollbar{
                 display: none;
             }
+            .bg-new1 {
+                --bs-prim-rgb: 187, 172, 239;
+                {% comment %} 196, 159, 228; 
+                187, 172, 239; {% endcomment %}
+                --bs-bg-opacity: 1;
+                background-color: rgba(var(--bs-prim-rgb), var(--bs-bg-opacity)) !important;
+              }
+              .bg-new2 {
+                --bs-prim-rgb: 229, 139, 191; 
+                --bs-bg-opacity: 1;
+                background-color: rgba(var(--bs-prim-rgb), var(--bs-bg-opacity)) !important;
+              }
+              .bg-new3 {
+                --bs-prim-rgb: 218, 133, 200; 
+                --bs-bg-opacity: 1;
+                background-color: rgba(var(--bs-prim-rgb), var(--bs-bg-opacity)) !important;
+              }
+              .bg-new4 {
+                --bs-prim-rgb: 192, 167, 235; 
+                --bs-bg-opacity: 1;
+                background-color: rgba(var(--bs-prim-rgb), var(--bs-bg-opacity)) !important;
+              }
+              
         </style>
 
     </head>
@@ -63,7 +86,7 @@
                                     <h1 class="display-5 fw-bolder text-white mb-4" style="font-size: 62px; line-height: 1.5; letter-spacing: -3px;">인플루언서 마케팅의<br>새로운 기준.</h1>
                                     <h2 class="display-5 text-white mb-4" style="font-size: 48px; font-weight: 600;">Cos-tard</h2>
                                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start mt-5">
-                                        <a class="btn btn-danger btn-lg px-4 me-sm-3 fw-bold" href="#features">시작해보기</a>
+                                        <a class="btn btn-outline-light btn-lg px-4 fw-bold" href="#features">시작해보기</a>
                                         <a class="btn btn-outline-light btn-lg px-4 fw-bold" href="{% url 'about-page' %}">Team Cos-tard</a>
                                     </div>
                                 </div>
@@ -79,26 +102,28 @@
             <section class="py-5" id="features">
                 <div class="container px-5 my-5">
                     <div class="row gx-5">
-                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">"Cos-tard가 제공하는 다양한 기능들"</h2></div>
+                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">"Cos-tard가 제공하는</h2> 
+                                                            <h2 class="fw-bolder mb-0">다양한 기능들"</h2></div>
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
                                 <div class="col mb-5 h-100">
-                                    <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-person-lines-fill"></i></div>
-                                    <h2 class="h4"><a id="link" href="{% url 'InfluencerList:list-page' %}">다양한 인스타그램 인플루언서 셋업</a></h2>
+                                    <div class="feature bg-new1 bg-gradient text-white rounded-3 mb-3"><i class="bi bi-person-lines-fill"></i></div>
+                                    <h2 class="h4"><a id="link" href="{% url 'InfluencerList:list-page' %}">인스타그램 인플루언서 셋업</a></h2>
                                     <p class="mb-0">솔루션 제공이 가능한 인플루언서 리스트를 소개합니다.</p>
                                 </div>
-                                <div class="col mb-5 h-100">
-                                    <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-search"></i></div>
-                                    <h2 class="h4"><a id="link" href="{% url 'recommend:recommend-page' %}">제품에 적합한 인플루언서 추천</a></h2>
-                                    <p class="mb-0">마케팅하고자 하는 제품을 입력하면 가장 적합한 인플루언서를 추천해드립니다.</p>
-                                </div>
+                                
                                 <div class="col mb-5 mb-md-0 h-100">
-                                    <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-clipboard-data"></i></div>
-                                    <h2 class="h4"><a id="link" href="{% url 'analysis:analysis-page2' %}?ig_id=17157849559">인플루언서의 특징 시각화</a></h2>
-                                    <p class="mb-0">인플루언서의 키워드와 이미지 및 컬러, 게시하는 컨텐츠의 주된 토픽을 시각화하여 제공해드립니다.</p>
+                                    <div class="feature bg-new2 bg-gradient text-white rounded-3 mb-3"><i class="bi bi-clipboard-data"></i></div>
+                                    <h2 class="h4"><a id="link" href="{% url 'analysis:analysis-page2' %}?ig_id=17157849559">인플루언서 특징 분석</a></h2>
+                                    <p class="mb-0">인플루언서의 활동과 컨텐츠를 통계 분석한 자료를 </br> 시각화하여 제공해드립니다.</p>
+                                </div>
+                                <div class="col mb-5 h-100">
+                                    <div class="feature bg-new4 bg-gradient text-white rounded-3 mb-3"><i class="bi bi-search"></i></div>
+                                    <h2 class="h4"><a id="link" href="{% url 'recommend:recommend-page' %}">제품에 적합한 인플루언서 추천</a></h2>
+                                    <p class="mb-0">마케팅하고자 하는 조건에 가장 적합한 </br> 인플루언서를 추천해드립니다.</p>
                                 </div>
                                 <div class="col h-100">
-                                    <div class="feature bg-danger bg-gradient text-white rounded-3 mb-3"><i class="bi bi-stars"></i></div>
+                                    <div class="feature bg-new3 bg-gradient text-white rounded-3 mb-3"><i class="bi bi-stars"></i></div>
                                     <h2 class="h4"><a id="link" href="{% url 'media4:media4-page' %}">인플루언서 데이터 수집</a></h2>
                                     <p class="mb-0">인플루언서를 입력하시면, 데이터를 수집합니다.</p>
                                 </div>
@@ -141,7 +166,7 @@
                     <div class="row gx-5">
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0 hoverEffect">
-                                <img class="card-img-top" src=" {% static 'assets/featureGridimage1.png' %}" alt="..." />
+                                <img class="card-img-top" src=" {% static 'assets/influencerList.png' %}" alt="..." />
                                 <!-- 추가 요소로 마우스를 올려놓으면 흐려지는 효과를 구현 -->
                                 <div class="blur-overlay card shadow border-0 justify-content-center text-center"><i class="bi bi-person-lines-fill"></i>인플루언서 리스트 보기</div>
                                 <div class="card-body p-4">
@@ -164,13 +189,13 @@
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0 hoverEffect">
-                                <img class="card-img-top" src="{% static 'assets/featureGridImage3.png' %}" alt="..." />
+                                <img class="card-img-top" src="{% static 'assets/analysis.png' %}" alt="..." />
                                 <!-- 추가 요소로 마우스를 올려놓으면 흐려지는 효과를 구현 -->
                                 <div class="blur-overlay card shadow border-0 justify-content-center text-center"><i class="bi bi-clipboard-data"></i>인플루언서 심층 분석</div>
                                 <div class="card-body p-4">
                                     <div class="badge bg-danger bg-gradient rounded-pill mb-2">New!</div>
                                     <a class="text-decoration-none link-dark stretched-link" href="{% url 'analysis:analysis-page2' %}?ig_id=17157849559"><h5 class="card-title mb-3 fw-bold">인플루언서 심층 분석</h5></a>
-                                    <p class="card-text mb-0">어느 한 인플루언서를 심층적으로 분석해보고 싶으신가요? 인플루언서의 주요 피드 토픽, 이미지 컬러, 키워드를 분석하여 보여드립니다!</p>
+                                    <p class="card-text mb-0">어느 한 인플루언서를 심층적으로 분석해보고 싶으신가요? 인플루언서의 활동 통계와 주요 피드 토픽, 키워드를 분석하여 보여드립니다!</p>
                                 </div>
                                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                                     <div class="d-flex align-items-end justify-content-between">
@@ -187,7 +212,7 @@
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0 hoverEffect">
-                                <img class="card-img-top" src="{% static 'assets/featureGridImage2.png' %}" alt="..." />
+                                <img class="card-img-top" src="{% static 'assets/recommend.png' %}" alt="..." />
                                 <!-- 추가 요소로 마우스를 올려놓으면 흐려지는 효과를 구현 -->
                                 <div class="blur-overlay card shadow border-0 justify-content-center text-center"><i class="bi bi-search"></i>프로덕트 & 인플루언서 매칭</div>
                                 <div class="card-body p-4">
