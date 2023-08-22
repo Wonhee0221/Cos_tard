@@ -11334,3 +11334,11 @@ background-color: #b1dfbb; }
   font-style: normal;
 }
 
+span {
+    opacity: 0;
+}
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+}
