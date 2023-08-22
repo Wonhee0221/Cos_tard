@@ -522,60 +522,72 @@
                   <div class="card-body">
                     <h4 class="card-title">Insight</h4>
                     <p class="card-description"> *피드 평균 수치는 한달 기준</p>
-                   <table class="table table-hover">
-                      <tbody>
-                        <tr>
-                          <td>평균 좋아요 수는</td>
-                          <td style="color:#b66dff" id="average_like"></td>
-                          <td>이에요</td>
-                        </tr>
-                        <tr>
-                          <td>평균 댓글 수는</td>
-                          <td style="color:#b66dff" id="average_comment"></td>
-                          <td>이에요</td>
-                        </tr>
-                        <tr>
-                          <td>평균 게시글 수는</td>
-                          <td style="color:#b66dff" id="average_media"></td>
-                          <td>이에요</td>
-                        </tr>
-                        <tr>
-                          <td>참여 지수는</td>
-                          <td id="engagement"></td>
-                          <td>이에요</td>
-                        </tr>
-                        <tr>
-                          <td>팔로워는 약</td>
-                          <td id="average"></td>
-                          <td>명씩 변하고있어요</td>
-                        </tr>
-                        <tr>
-                          <td>증가율 평균은</td>
-                          <td id="average_growth"></td>
-                          <td>이에요</td>
-                        </tr>
-                        <tr>
-                          <td>팔로워가</td>
-                          <td style="color:#b66dff" class="max-growth-date"></td>
-                          <td>에 가장 많이 증가했어요</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="card-body">
-                    <h4 class="card-title">Summary</h4>
-                    <ul class="list-star">
-                      <li class="h5" id="compare"></li>
-                      <li class="h5" id="compareengagement"></li>
+                    
+                    <div class="my-3 align-items-center" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
                       
-                    </ul>
+                      <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width:160px; height:160px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                        <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                          <div class="fw-bolder pt-3" style="font-size:18px;">평균 좋아요 수</div>
+                          <div id="average_like" class="fw-bolder pt-3" style="font-size:30px;"></div>
+                        </div>
+                      </div>
+                      
+                      <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width:160px; height:160px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                        <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                          <div class="fw-bolder pt-3" style="font-size:18px;">평균 댓글 수</div>
+                          <div id="average_comment" class="fw-bolder pt-3" style="font-size:30px;"></div>
+                        </div>
+                      </div>
+                      
+                      <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width:160px; height:160px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                        <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                          <div class="fw-bolder pt-3" style="font-size:18px;">평균 참여지수</div>
+                          <div id="engagement" class="fw-bolder pt-3" style="font-size:30px;"></div>
+                        </div>
+                      </div>
+                      
+                      <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width:160px; height:160px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                        <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                          <div class="fw-bolder pt-3" style="font-size:18px;">팔로워 변화</div>
+                          <div id="average" class="fw-bolder pt-3" style="font-size:30px;"></div>
+                        </div>
+                      </div>
+                      
+                      <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width:160px; height:160px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                        <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                          <div class="fw-bolder pt-3" style="font-size:18px;">팔로워 증가율</div>
+                          <div id="average_growth" class="fw-bolder pt-3" style="font-size:30px;"></div>
+                        </div>
+                      </div>
+                      
+                      <div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width:160px; height:160px; justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                        <div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;">
+                          <div class="fw-bolder pt-3" style="font-size:18px;">가장 많은 증가일</div>
+                          <div id="max_growth_date" class="max-growth-date; fw-bolder pt-3" style="font-size:30px;"></div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    
+                    <div class="card-body">
+                      <h4 class="card-title">Summary</h4>
+                      <ul class="list-star">
+                        <li class="h5" id="compare"></li>
+                        <li class="h5" id="compareengagement"></li>
+                      </ul>
+                    </div>
+                    
                   </div>
                 </div>
               </div>
+              
+
+
               <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Popular Post</h4>
+                    <p class="card-description"> *가장 많은 좋아요 수의 피드</p>
                     <div class="info">
                       <div class="user">
                         <img id="profileimg2" class="img-xs rounded-circle me-4" alt="image">
@@ -599,11 +611,13 @@
                 </div>
               </div>
             </div>
+
             <div class="row">
               <div class="col-md-7 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Feed Preview</h4>
+                    <p class="card-description"> *해당 인플루언서의 인스타그램 피드</p>
                     
                     <img src="" alt="Instagram Image" class="small-image" id="feed1">
                     <img src="" alt="Instagram Image" class="small-image" id="feed2">
@@ -622,11 +636,11 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Top used topic</h4>
-                    <canvas id="textbarChart" style="display: none;" style="height:230px"></canvas>
+                    <canvas id="textbarChart" style="display: none; height:230px; "></canvas>
                   </div>
                   <div class="card-body">
                     <h4 class="card-title">Top used #</h4>
-                    <canvas id="tagbarChart" style="display: none;" style="height:230px"></canvas>
+                    <canvas id="tagbarChart" style="display: none; height:230px;"></canvas>
                     </div>
                   </div>
                 </div>
@@ -719,7 +733,7 @@
                           var diff = data.follower_trend.diff + "  than yesterday"
                           $('#diffdisplay').text(diff);
                           $('#compare').text(data.follower_trend.compare);
-                          $('#average').text(data.follower_trend.average);
+                          $('#average').text(data.follower_trend.average+'명');
                           $('#average_growth').text(data.follower_trend.average_growth);
                           var positive = data.follower_trend.positive;
                           if (positive) {
@@ -729,8 +743,8 @@
                           }
 
                           //statistic
-                          $('#average_like').text(data.statistic.average_like);
-                          $('#average_comment').text(data.statistic.average_comment);
+                          $('#average_like').text(data.statistic.average_like+' 개');
+                          $('#average_comment').text(data.statistic.average_comment+' 개');
                           $('#average_media').text(data.statistic.average_media);
 
                           var engagement = data.statistic.engagement / data.influencer_data_details.followers_count;
@@ -882,152 +896,161 @@
                                         });
                                       
                                          //count text
-                                      var text1_topic = data.count_text[0].key;
-                                      var text1_count = data.count_text[0].value;
-                                      var text2_topic = data.count_text[1].key;
-                                      var text2_count = data.count_text[1].value;
-                                      var text3_topic = data.count_text[2].key;
-                                      var text3_count = data.count_text[2].value;
-                                      var text4_topic = data.count_text[3].key;
-                                      var text4_count = data.count_text[3].value;
-                                      var text5_topic = data.count_text[4].key;
-                                      var text5_count = data.count_text[4].value;
+                            var text1_topic = data.count_text[0].key;
+                            var text1_count = data.count_text[0].value;
+                            var text2_topic = data.count_text[1].key;
+                            var text2_count = data.count_text[1].value;
+                            var text3_topic = data.count_text[2].key;
+                            var text3_count = data.count_text[2].value;
+                            var text4_topic = data.count_text[3].key;
+                            var text4_count = data.count_text[3].value;
+                            var text5_topic = data.count_text[4].key;
+                            var text5_count = data.count_text[4].value;
 
-                                      //count hashtag
-                                      var hashtag1_topic = data.count_hashtag[0].key;
-                                      var hashtag1_count = data.count_hashtag[0].value;
-                                      var hashtag2_topic = data.count_hashtag[1].key;
-                                      var hashtag2_count = data.count_hashtag[1].value;
-                                      var hashtag3_topic = data.count_hashtag[2].key;
-                                      var hashtag3_count = data.count_hashtag[2].value;
-                                      var hashtag4_topic = data.count_hashtag[3].key;
-                                      var hashtag4_count = data.count_hashtag[3].value;
-                                      var hashtag5_topic = data.count_hashtag[4].key;
-                                      var hashtag5_count = data.count_hashtag[4].value;
+                            //count hashtag
+                            var hashtag1_topic = data.count_hashtag[0].key;
+                            var hashtag1_count = data.count_hashtag[0].value;
+                            var hashtag2_topic = data.count_hashtag[1].key;
+                            var hashtag2_count = data.count_hashtag[1].value;
+                            var hashtag3_topic = data.count_hashtag[2].key;
+                            var hashtag3_count = data.count_hashtag[2].value;
+                            var hashtag4_topic = data.count_hashtag[3].key;
+                            var hashtag4_count = data.count_hashtag[3].value;
+                            var hashtag5_topic = data.count_hashtag[4].key;
+                            var hashtag5_count = data.count_hashtag[4].value;
 
-                                      var tagbarChart = new Chart(
-                                          document.getElementById('tagbarChart'), {
-                                            type: 'bar',
-                                            data: {
-                                              labels: ['Hashtags'],
-                                              datasets: [{
-                                                label: hashtag1_topic,
-                                                data: [hashtag1_count],
-                                                fill: true,
-                                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                                borderColor: 'rgb(255, 99, 132)',
-                                                borderWidth: 1
-                                              }, {
-                                                label: hashtag2_topic,
-                                                data: [hashtag2_count],
-                                                fill: true,
-                                                backgroundColor: 'rgba(182, 109, 255, 0.2)',
-                                                borderColor: 'rgba(182, 109, 255, 1)',
-                                                borderWidth: 1
-                                              }, {
-                                                label: hashtag3_topic,
-                                                data: [hashtag3_count],
-                                                fill: true,
-                                                backgroundColor: 'rgba(107, 166, 255, 0.2)',
-                                                borderColor: 'rgba(107, 166, 255, 1)',
-                                                borderWidth: 1
-                                              }, {
-                                                label: hashtag4_topic,
-                                                data: [hashtag4_count],
-                                                fill: true,
-                                                backgroundColor: 'rgba(92, 255, 211, 0.2)',
-                                                borderColor: 'rgba(92, 255, 211, 1)',
-                                                borderWidth: 1
-                                              }, {
-                                                label: hashtag5_topic,
-                                                data: [hashtag5_count],
-                                                fill: true,
-                                                backgroundColor: 'rgba(244, 141, 103, 0.2)',
-                                                borderColor: 'rgba(244, 141, 103, 1)',
-                                                borderWidth: 1
-                                              }] //end of dataset
-                                            }, //end of data
-                                            options: {
-                                              scales: {
-                                                yaxis: {
-                                                beginAtZero: true,
-                                                display: false, // Hide the y-axis labels
-                                                },
-                                              },
-                                              layout: {
-                                                  padding: {
-                                                      left: 10,
-                                                      right: 10,
-                                                      top: 0,
-                                                      bottom: 0
-                                                  }
-                                              },
-                                            }, //end of options
-                                          }
-                                        );
-                                        $('#tagbarChart').show();
+                            var yAxesDisplay = false; // y축 눈금의 숨김 여부를 설정합니다.
 
-                                        var textbarChart = new Chart(
-                                          document.getElementById('textbarChart'), {
-                                            type: 'bar',
-                                            data: {
-                                              labels: ['Keywords'],
-                                              datasets: [{
-                                                label: text1_topic,
-                                                data: [text1_count],
-                                                fill: true,
-                                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                                borderColor: 'rgb(255, 99, 132)',
-                                                borderWidth: 1
-                                              }, {
-                                                label: text2_topic,
-                                                data: [text2_count],
-                                                fill: true,
-                                                backgroundColor: 'rgba(182, 109, 255, 0.2)',
-                                                borderColor: 'rgba(182, 109, 255, 1)',
-                                                borderWidth: 1
-                                              }, {
-                                                label: text3_topic,
-                                                data: [text3_count],
-                                                fill: true,
-                                                backgroundColor: 'rgba(107, 166, 255, 0.2)',
-                                                borderColor: 'rgba(107, 166, 255, 1)',
-                                                borderWidth: 1
-                                              }, {
-                                                label: text4_topic,
-                                                data: [text4_count],
-                                                fill: true,
-                                                backgroundColor: 'rgba(92, 255, 211, 0.2)',
-                                                borderColor: 'rgba(92, 255, 211, 1)',
-                                                borderWidth: 1
-                                              }, {
-                                                label: text5_topic,
-                                                data: [text5_count],
-                                                fill: true,
-                                                backgroundColor: 'rgba(244, 141, 103, 0.2)',
-                                                borderColor: 'rgba(244, 141, 103, 1)',
-                                                borderWidth: 1
-                                              }] //end of dataset
-                                            }, //end of data
-                                            options: {
-                                              scales: {
-                                                yaxis: {
-                                                    beginAtZero: true,
-                                                    display: false, // Hide the y-axis labels
-                                                },
-                                              },
-                                              layout: {
-                                                  padding: {
-                                                      left: 10,
-                                                      right: 10,
-                                                      top: 0,
-                                                      bottom: 0
-                                                  }
-                                              },
-                                            }, //end of options
-                                          }
-                                        );
-                                        $('#textbarChart').show();
+                            var tagbarChart = new Chart(
+                                document.getElementById('tagbarChart'), {
+                                  type: 'bar',
+                                  data: {
+                                    labels: ['Hashtags'],
+                                    datasets: [{
+                                      label: hashtag1_topic,
+                                      data: [hashtag1_count],
+                                      fill: true,
+                                      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                      borderColor: 'rgb(255, 99, 132)',
+                                      borderWidth: 1
+                                    }, {
+                                      label: hashtag2_topic,
+                                      data: [hashtag2_count],
+                                      fill: true,
+                                      backgroundColor: 'rgba(182, 109, 255, 0.2)',
+                                      borderColor: 'rgba(182, 109, 255, 1)',
+                                      borderWidth: 1
+                                    }, {
+                                      label: hashtag3_topic,
+                                      data: [hashtag3_count],
+                                      fill: true,
+                                      backgroundColor: 'rgba(107, 166, 255, 0.2)',
+                                      borderColor: 'rgba(107, 166, 255, 1)',
+                                      borderWidth: 1
+                                    }, {
+                                      label: hashtag4_topic,
+                                      data: [hashtag4_count],
+                                      fill: true,
+                                      backgroundColor: 'rgba(92, 255, 211, 0.2)',
+                                      borderColor: 'rgba(92, 255, 211, 1)',
+                                      borderWidth: 1
+                                    }, {
+                                      label: hashtag5_topic,
+                                      data: [hashtag5_count],
+                                      fill: true,
+                                      backgroundColor: 'rgba(244, 141, 103, 0.2)',
+                                      borderColor: 'rgba(244, 141, 103, 1)',
+                                      borderWidth: 1
+                                    }] //end of dataset
+                                  }, //end of data
+                                  options: {
+                                    scales: {
+                                      y: {
+                                        beginAtZero: true,
+                                        display: yAxesDisplay, // y축 눈금 숨기기
+                                      },
+                                    },
+                                    layout: {
+                                      padding: {
+                                        left: 10,
+                                        right: 10,
+                                        top: 0,
+                                        bottom: 0
+                                      }
+                                    },
+                                  }
+                                }
+                              );
+                              $('#tagbarChart').show();
+
+
+                              var textbarChart = new Chart(
+                                document.getElementById('textbarChart'), {
+                                  type: 'bar',
+                                  data: {
+                                    labels: ['Keywords'],
+                                    datasets: [{
+                                      label: text1_topic,
+                                      data: [text1_count],
+                                      fill: true,
+                                      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                      borderColor: 'rgb(255, 99, 132)',
+                                      borderWidth: 1
+                                    }, {
+                                      label: text2_topic,
+                                      data: [text2_count],
+                                      fill: true,
+                                      backgroundColor: 'rgba(182, 109, 255, 0.2)',
+                                      borderColor: 'rgba(182, 109, 255, 1)',
+                                      borderWidth: 1
+                                    }, {
+                                      label: text3_topic,
+                                      data: [text3_count],
+                                      fill: true,
+                                      backgroundColor: 'rgba(107, 166, 255, 0.2)',
+                                      borderColor: 'rgba(107, 166, 255, 1)',
+                                      borderWidth: 1
+                                    }, {
+                                      label: text4_topic,
+                                      data: [text4_count],
+                                      fill: true,
+                                      backgroundColor: 'rgba(92, 255, 211, 0.2)',
+                                      borderColor: 'rgba(92, 255, 211, 1)',
+                                      borderWidth: 1
+                                    }, {
+                                      label: text5_topic,
+                                      data: [text5_count],
+                                      fill: true,
+                                      backgroundColor: 'rgba(244, 141, 103, 0.2)',
+                                      borderColor: 'rgba(244, 141, 103, 1)',
+                                      borderWidth: 1
+                                    }] //end of dataset
+                                  }, //end of data
+                                  options: {
+                                    scales: {
+                                      y: {
+                                        display: yAxesDisplay,
+                                        ticks: {
+                                          display: yAxesDisplay, // y축 눈금 숨기기
+                                        },
+                                        beginAtZero: true
+                                      },
+                                    },
+                                    layout: {
+                                      padding: {
+                                        left: 10,
+                                        right: 10,
+                                        top: 0,
+                                        bottom: 0
+                                      }
+                                    },
+                                  }
+                                }
+                              );
+                              $('#textbarChart').show();
+
+                              
+                                        
                           
       
                                         
