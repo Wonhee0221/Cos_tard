@@ -28,6 +28,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
+    <script src="{% static 'js/svgJs1.js' %}"></script>
+    <script src="{% static 'js/svgJs2.js' %}"></script>
     <style>
       .small-image {
           width: 130px;  /* Adjust the width as needed */
@@ -123,6 +125,18 @@
       overflow:hidden !important;
     }
 
+    iframe {
+      width: 100%;
+      border: none;
+    }
+      
+    @font-face {
+      font-family: 'NanumSquareNeo-Variable';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+      
     ::-webkit-scrollbar {
       display:none;
     }
@@ -408,13 +422,13 @@
                 </span>
                 <span> Influencer Analysis</span>
               </h3>
-              <nav aria-label="breadcrumb">
+              {% comment %} <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">
                     <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
                   </li>
                 </ul>
-              </nav>
+              </nav> {% endcomment %}
             </div>
             <div class="row">
               <div class="col-12 grid-margin stretch-card">
@@ -424,9 +438,9 @@
                     <div class="d-flex mt-4 mb-4 align-items-top">
                       <img id="profileimg" class="img-lg rounded-circle me-4" alt="image">
                       <div class="mb-0 flex-grow">
-                        <h4 id="username" class="me-2 mb-2"></h4>
+                        <h4 id="username" class="me-2 mb-2" style="font-family: 'NanumSquareNeo-Variable'"></h4>
                         <h4 class="card-title useriddisplay"></h4>
-                        <p id="biography" class="mb-0 font-weight-light"></p>
+                        <p id="biography" class="mb-0 font-weight-light" style="font-family: 'NanumSquareNeo-Variable'"></p>
                         <p id="websitelink" class="mb-0 font-weight-light"></p>
                       </div>
                       <div class="ms-auto">
@@ -485,7 +499,7 @@
                     <div class="card-body">
                       <div class="clearfix">
                         <h4 class="card-title float-left">Feed Statistics</h4>
-                        <p class="card-description"> *총 팔로워 대비 좋아요와 댓글 수</p>
+                        <p class="card-description" style="font-family: 'NanumSquareNeo-Variable'"> *총 팔로워 대비 좋아요와 댓글 수</p>
                         <div id="feedchart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
                       </div>
                       <canvas id="feedchart" class="mt-4"></canvas>
@@ -496,44 +510,19 @@
                   <div class="card">
                     <div class="card-body">
                       <h4 class="card-title">Media Ratio</h4>
-                      <p class="card-description"> *2023-07 기준</p>
+                      <p class="card-description" style="font-family: 'NanumSquareNeo-Variable'"> *2023-07 기준</p>
                       <canvas id="mediachart"></canvas>
                       <div id="mediachart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
                     </div>
                   </div>
                 </div>
               </div>
-            
-            <div class="row">
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">8월 팔로워 추이</h4>
-                    <p class="card-description"> *총 팔로워</p>
-                    
-                    <div id = "chart-container-01"></div>
-                     
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">타 인플루언서 대비</h4>
-                    <p class="card-description"> *팔로워 증감율</p>
-
-                    <div id = "chart-container-02"></div>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="row">
               <div class="col-md-7 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Insight</h4>
-                    <p class="card-description"> *피드 평균 수치는 한달 기준</p>
+                    <h4 class="card-title">Post Insight</h4>
+                    <p class="card-description" style="font-family: 'NanumSquareNeo-Variable'"> *한달 기준</p>
                    <table class="table table-hover">
                       <tbody>
                         <tr>
@@ -556,6 +545,13 @@
                           <td id="engagement"></td>
                           <td>이에요</td>
                         </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                    <div class="card-body">
+                    <h4 class="card-title">Follower Insight</h4>
+                   <table class="table table-hover">
+                      <tbody>
                         <tr>
                           <td>팔로워는 약</td>
                           <td id="average"></td>
@@ -574,13 +570,72 @@
                       </tbody>
                     </table>
                   </div>
+
                   <div class="card-body">
                     <h4 class="card-title">Summary</h4>
                     <ul class="list-star">
-                      <li class="h5" id="compare"></li>
-                      <li class="h5" id="compareengagement"></li>
-                      
+                      <li class="h5" id="compare" style="font-family: 'NanumSquareNeo-Variable'"></li>
+                      <li class="h5" id="compareengagement" style="font-family: 'NanumSquareNeo-Variable'"></li>
                     </ul>
+                </div>
+              </div>
+            </div>  
+              <div class="col-md-5 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Top used topic</h4>
+                    <p class="card-description" style="font-family: 'NanumSquareNeo-Variable'"> *게시글 키워드</p>
+                    <canvas id="textbarChart" style="display: none;" style="height:300px"></canvas>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title">Top used #</h4>
+                    <p class="card-description" style="font-family: 'NanumSquareNeo-Variable'"> *해시태그</p>
+                    <canvas id="tagbarChart" style="display: none;" style="height:300px"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title" style="font-family: 'NanumSquareNeo-Variable'">8월 팔로워 추이</h4>
+                      <p class="card-description" style="font-family: 'NanumSquareNeo-Variable'"> *총 팔로워</p>
+                      
+                      <div id = "chart-container-01"></div>
+                       
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title" style="font-family: 'NanumSquareNeo-Variable'">타 인플루언서 대비</h4>
+                      <p class="card-description" style="font-family: 'NanumSquareNeo-Variable'">*팔로워 증감율</p>
+  
+                      <div id = "chart-container-02"></div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-md-7 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Feed Preview</h4>
+                    <p class="card-description" style="font-family: 'NanumSquareNeo-Variable'"> *최근 게시물 미리보기</p>
+                    
+                    <img src="" alt="Instagram Image" class="small-image" id="feed1">
+                    <img src="" alt="Instagram Image" class="small-image" id="feed2">
+                    <img src="" alt="Instagram Image" class="small-image" id="feed3">
+                    <img src="" alt="Instagram Image" class="small-image" id="feed4">
+                    <img src="" alt="Instagram Image" class="small-image" id="feed5">
+                    <img src="" alt="Instagram Image" class="small-image" id="feed6">
+                    <img src="" alt="Instagram Image" class="small-image" id="feed7">
+                    <img src="" alt="Instagram Image" class="small-image" id="feed8">
+                    <img src="" alt="Instagram Image" class="small-image" id="feed9">
+  
                   </div>
                 </div>
               </div>
@@ -588,6 +643,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Popular Post</h4>
+                    <p class="card-description" style="font-family: 'NanumSquareNeo-Variable'"> *좋아요가 가장 많은 포스트</p>
                     <div class="info">
                       <div class="user">
                         <img id="profileimg2" class="img-xs rounded-circle me-4" alt="image">
@@ -607,39 +663,6 @@
                       <p class="description" id="caption"><span class="useriddisplay"></span></p>
                       <p class="post-time" id="mediadate"></p>
                   </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-7 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Feed Preview</h4>
-                    
-                    <img src="" alt="Instagram Image" class="small-image" id="feed1">
-                    <img src="" alt="Instagram Image" class="small-image" id="feed2">
-                    <img src="" alt="Instagram Image" class="small-image" id="feed3">
-                    <img src="" alt="Instagram Image" class="small-image" id="feed4">
-                    <img src="" alt="Instagram Image" class="small-image" id="feed5">
-                    <img src="" alt="Instagram Image" class="small-image" id="feed6">
-                    <img src="" alt="Instagram Image" class="small-image" id="feed7">
-                    <img src="" alt="Instagram Image" class="small-image" id="feed8">
-                    <img src="" alt="Instagram Image" class="small-image" id="feed9">
-  
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-5 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Top used topic</h4>
-                    <canvas id="textbarChart" style="display: none;" style="height:230px"></canvas>
-                  </div>
-                  <div class="card-body">
-                    <h4 class="card-title">Top used #</h4>
-                    <canvas id="tagbarChart" style="display: none;" style="height:230px"></canvas>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -726,11 +749,14 @@
 
                           //user info
                           $('#follows_count').text(data.influencer_data_details.follows_count);
-                          $('#followers_count').text(data.influencer_data_details.followers_count);
+                          $('#followers_count').text(data.influencer_data_details.followers_count.toLocaleString());
                           $('#media_count').text(data.influencer_data_details.media_count);
                           $('#date').text(data.influencer_data_details.date);
 
-                          $('#maximage').text(data.image);
+                          var imageText = data.image;
+                          imageText = imageText.replace('gorg', 'gorgeous');
+                          $('#maximage').text(imageText);
+
                          
                           //follower trend
                           $('.max-growth-date').text(data.follower_trend.max_growth_date);
@@ -754,7 +780,7 @@
                           var engagement = data.statistic.engagement / data.influencer_data_details.followers_count;
                           var formattedEngagement = (engagement * 100).toFixed(3); 
                           $('#engagement').text(formattedEngagement + "%");
-                          if (formattedEngagement > 1.922) {
+                          if (formattedEngagement > 1.4) {
                             $('#compareengagement').text("타 인플루언서들 보다 참여율이 높습니다");
                             $('#engagement').css('color', '#1bcfb4');
                           } else {
@@ -834,7 +860,11 @@
                                                 text: null
                                             },
                                             xAxis: {
-                                              labels: {}
+                                              categories: data.follower_trend.xData,
+                                              labels: {
+                                                  step: 7, // Display every 4th label
+                                                  rotation: 0 // Rotate the labels to fit if needed
+                                              }
                                             },
                                             yAxis: {
                                                 title: {
@@ -847,7 +877,7 @@
                                                 color: '#b66dff' //색 뭐로하지..
                                             }],
                                             tooltip: {
-                                                enabled: false, // Disable tooltips on hover
+                                                enabled: true, // Disable tooltips on hover
                                                 // ... other tooltip configuration ...
                                             }
                                         });
@@ -865,7 +895,11 @@
                                                 text: null
                                             },
                                             xAxis: {
-                                              labels: {}
+                                              categories: data.follower_trend.xData,
+                                              labels: {
+                                                  step: 7, // Display every 4th label
+                                                  rotation: 0 // Rotate the labels to fit if needed
+                                              }
                                             },
                                             yAxis: {
                                                 title: {
@@ -894,7 +928,7 @@
                                                 data: data.follower_trend.growth_rate_average
                                             }],
                                             tooltip: {
-                                                enabled: false, // Disable tooltips on hover
+                                                enabled: true, // Disable tooltips on hover
                                                 // ... other tooltip configuration ...
                                               }
                                         });
@@ -1075,7 +1109,7 @@
                         var feedchart = new Chart(ctx, {
                           type: 'bar',
                           data: {
-                              labels: ['AUG', 'SEP', 'OCT', 'NOV', 'DEC', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
+                              labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
                               datasets: [
                                 {
                                   label: "Media",
@@ -1159,8 +1193,8 @@
                                         fontColor: "#9c9fa6",
                                         autoSkip: true,
                                     },
-                                    barPercentage: 0.5,
-                                    categoryPercentage: 0.5 // Adjust the value as needed
+                                    barPercentage: 0.8,
+                                    categoryPercentage: 0.8 // Adjust the value as needed
                                 }]
                               }
                             },

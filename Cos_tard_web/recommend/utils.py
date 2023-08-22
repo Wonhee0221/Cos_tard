@@ -2,6 +2,8 @@ from media4.models import *
 from recommend.models import *
 import statistics
 from datetime import datetime, timedelta
+import math
+import pandas as pd
 
 def cal_engagement(ig_id):
     media_ids = list(Media_fix.objects.filter(owner_id=ig_id).values_list('media_id', flat=True))
@@ -21,23 +23,14 @@ def cal_engagement(ig_id):
 
 
 def followerslevel(ig_id):
-    followers = Users_info.objects.filter(ig_id=ig_id).order_by('date').values_list('followers_count').first()
+    followers = Users_info.objects.filter(ig_id=ig_id).order_by('date').values_list('followers_count', flat=True).first()
 
     if followers is None:
         return 0  
-
-    followers_count = followers[0]
     
-    if followers_count >= 1000000:
-        level = 3
-    elif followers_count >= 100000:
-        level = 2
-    elif followers_count >= 10000:
-        level = 1
-    else:
-        level = 0  # 기본 레벨
+    rounded = round(math.log(followers),2)
 
-    return level
+    return rounded
 
 
 def activities(ig_id):
@@ -78,6 +71,14 @@ def scale_list(data_list, new_min, new_max):
     
     return scaled_data
 
+def reverse(value):
+    min_value = 16
+    max_value = 11
+
+    scaled_value = max_value + min_value - value
+
+    return scaled_value
+
 def scale_line(data_list, mymax, target):
     scaled_data=[]
     for value in data_list:
@@ -86,6 +87,7 @@ def scale_line(data_list, mymax, target):
     
     return scaled_data
 
+# model 일치 계산
 def imaging(ig_id, model_value):
     if model_value in range(1, 5):
         column_names = ['cute', 'pure', 'gorg', 'sexy']
@@ -101,6 +103,7 @@ def imaging(ig_id, model_value):
     imageagree = image / imagecomment
     return imageagree
 
+# 특정 이미지 키워드 댓글 개수
 def getimage(ig_id, model_value):
     if model_value in range(1, 5):
         column_names = ['cute', 'pure', 'gorg', 'sexy']
@@ -113,11 +116,11 @@ def getimage(ig_id, model_value):
 
 def pricing(ig_id, level):
     follower = followerslevel(ig_id=ig_id) #팔로워 수 단위 측정
-    if level == 0: #가성비 선택
-        weight = 1 / follower
-        return weight * 20
-    elif level == 1: #가격옵션 미선택
-        return 0
+    if level == 0: #가성비광고 선택
+        follower_price = reverse(follower) + 10
+        return follower_price
+    elif level == 1: #고가광고 선택
+        return follower
 
 
 # 판매증대 marketing_value 0
@@ -125,46 +128,72 @@ def pricing(ig_id, level):
 
 def marketvalue(market_value):
     if market_value==0:
-        info_weight=5
-        viral_weight=1
+        effect_weight=0.5
+        impact_weight=1.5
     if market_value==1:
-        info_weight=1
-        viral_weight=5
+        effect_weight=1.5
+        impact_weight=0.5
     else:
-        info_weight = 1
-        viral_weight = 1
+        effect_weight = 1
+        impact_weight = 1
 
-    marketweight = [info_weight, viral_weight]
+    marketweight = [effect_weight, impact_weight]
 
     return marketweight
     
 
-def product_type(product):
+def product_type(ig_id, product):
+    rows = Brand.objects.filter(ig_id=ig_id).values_list('type',flat=True)
+
+    for row in rows:
+        if product == row:
+            return 1
     return 0
+
+
 
 
 # def 매개변수로 , image, level, info_weight, image_weight 넣어주기
 
-def scoring(ig_id, model_value, level, market_value):
-    followerslev = followerslevel(ig_id=ig_id) #팔로워수 단위
-    expert = Comment.objects.filter(ig_id=ig_id).values_list('domain').first()[0] #도메인지식 정도
-    info_c = Comment.objects.filter(ig_id=ig_id).values_list('inforate').first()[0] #정보댓글 비율, 가중치는 입력받는 것으로. 매출 증대 목표
-    image_c = Comment.objects.filter(ig_id=ig_id).values_list('imagerate').first()[0] # 이미지댓글 비율, 충성도에 영향
-    marketweight = marketvalue(market_value)
-    info_weight = marketweight[0]
-    viral_weight = marketweight[1]
-    engage = cal_engagement(ig_id=ig_id) #인게이지먼트
-    # act = activities(ig_id=ig_id)
-    # scaled_act = scaler(act, 1, 14, 15, 1)
-    model_image = imaging(ig_id, model_value) # 이미지옵션
-    price = pricing(ig_id, level) # 가격대옵션
-    # 화장품분류
+# def scoring(ig_id, model_value, level, market_value):
+#     followerslev = followerslevel(ig_id=ig_id) #팔로워수 단위
+#     expert = Comment.objects.filter(ig_id=ig_id).values_list('domain').first()[0] #도메인지식 정도
+#     info_c = Comment.objects.filter(ig_id=ig_id).values_list('inforate').first()[0] #정보댓글 비율, 가중치는 입력받는 것으로. 매출 증대 목표
+#     image_c = Comment.objects.filter(ig_id=ig_id).values_list('imagerate').first()[0] # 이미지댓글 비율, 충성도에 영향
+#     marketweight = marketvalue(market_value)
+#     info_weight = marketweight[0]
+#     viral_weight = marketweight[1]
+#     engage = cal_engagement(ig_id=ig_id) #인게이지먼트
+#     # act = activities(ig_id=ig_id)
+#     # scaled_act = scaler(act, 1, 14, 15, 1)
+#     model_image = imaging(ig_id, model_value) # 이미지옵션
+#     price = pricing(ig_id, level) # 가격대옵션
+#     # 화장품분류
     
     
-    score = (followerslev * viral_weight) + (expert * 10) + (info_c * info_weight) + (engage * viral_weight) + (model_image * 100) + price + (image_c)
+#     score = (followerslev * viral_weight) + (expert * 10) + (info_c * info_weight) + (engage * viral_weight) + (model_image * 100) + price + (image_c)
 
-    return score
+#     return score
 
+
+
+def scoring(ig_id, model_value, level, market_value, product_value):
+    followerslev = pricing(ig_id=ig_id, level=level)
+    engage = round(cal_engagement(ig_id=ig_id),2)
+    action = Activity.objects.filter(ig_id=ig_id).values('imgcmt','infocmt','channelsize','contentpower','adratio','lifefeed', 'brandnum','reactfeed','followerfeed').first()
+    image = imaging(ig_id, model_value=model_value)
+    market_w = marketvalue(market_value=market_value)
+
+    expertised = action['channelsize'] * action['contentpower'] + product_type(ig_id=ig_id, product=product_value)
+    loyalty = followerslev + engage + (action['imgcmt']/action['lifefeed']) + action['reactfeed']
+    impact = followerslev + action['contentpower'] + action['adratio']
+    effect = engage + (action['infocmt']/action['lifefeed']) + action['contentpower'] + action['followerfeed'] + image
+
+    score = round((expertised+loyalty+ market_w[1] * impact+ market_w[0] * effect),2)
+
+    result = { 'id':ig_id, 'engage':engage, 'followerslev':followerslev, 'Score': score, 'expertised':expertised, 'loyalty':loyalty, 'impact':impact, 'effect':effect, 'image':image}
+
+    return result
 
 
 
