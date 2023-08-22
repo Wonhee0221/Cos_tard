@@ -415,28 +415,19 @@
               $('#blur_panel').remove();
             },
             success: function(response) {
-              $('#result').empty();
-              var topInfluencers = response.top_influencers;
-              
-              var str = '<div class="my-3 align-items-center" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">'; // Container for the list
-              
-              $.each(topInfluencers, function(i, influencer) {
-                str += '<div class="mx-3 mb-3 align-items-center shadow-lg rounded-3 bg-white hoverEffect" style="width: 160px; height: 200px; justify-content: center; align-items: center; display: flex; flex-direction: column;">';
-                str += '<div class="align-items-center" style="display: flex; align-items: center; flex-direction: column;"><div class="fw-bolder pb-2">TOP'+(i+1)+'</div>';
-                str += '<div class="profile-pic"><img src=../../static/assets/' + influencer.Username + '.jpg/></div>';
-                //str += '<div class="instagramCircle1" style="background-image: url(\'/static/assets/' + influencer.Username + '.jpg\'),linear-gradient(to right, red, orange);"></div>';
-                str += '<div class="fw-bolder pt-3" style="font-size: 16px;">'+ influencer.Username +'</div>';
-                str += '<div class="fw-bolder pt-3" style="font-size: 12px;">'+  influencer.Score.toFixed(1) +'<span>%</span></div>';
-                str += '</div>';
-                str += '</div>';
-              });
-              
-        
-              
-              $('#score-list div').append(str); // tbody에 데이터 추가
-              $('#score-list').css('display', 'block'); // score-table을 보이게 한다.
-              
-              
+                $('#result').empty()
+                var dataTable = $('#score-table');
+                var topInfluencers = response.top_influencers;
+
+                var str = "";
+                $.each(topInfluencers, function(i, influencer) {
+                    str += '<tr>';
+                    str += '<td class="py-1"><img src=../../static/assets/' + influencer.Username + '.jpg/></td>';
+                    str += '<td>' + influencer.Username + '</td><td>' + influencer.Score + '</td>';
+                    str += '</tr>';
+                });
+                $('#score-table tbody').append(str); // tbody에 데이터 추가
+                $('#score-table').show();
               
                 console.log(response.chartdata)
                 var chartData = response.chartdata
