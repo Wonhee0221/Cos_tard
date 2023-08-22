@@ -79,8 +79,6 @@ def follower_graph(ig_id):
         compare = "타 인플루언서들 보다 팔로워 증가율이 높습니다!"
     else:
         compare = "타 인플루언서들 보다 팔로워 증가율이 낮습니다"
-    
-    
 
     follower_trend = {
 
@@ -150,16 +148,18 @@ def get_statistic(ig_id,follower):
     like = [data['like_count']/follower*1000 for data in statistics]
     comment = [data['comments_count']/follower*100000 for data in statistics]
 
-    average_like = sum(like) / len(like)
-    average_comment = sum(comment) / len(comment)
-    engagement = (average_like + average_comment)
+    average_media = sum(media) / len(media)
+    average_like = sum([data['like_count'] for data in statistics]) / 12
+    average_comment = sum([data['comments_count'] for data in statistics]) / 12
+    engagement = average_like + average_comment
 
     statistics = {
         'media': media,
         'comment': comment,
         'like' : like,
-        'average_like': average_like,
-        'average_comment': average_comment,
+        'average_media': round(average_media,0),
+        'average_like': round(average_like,0),
+        'average_comment': round(average_comment,0),
         'engagement': engagement
     }
     return statistics

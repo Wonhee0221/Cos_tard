@@ -463,8 +463,8 @@
                             <img src="../../static/templates/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                             <h4 class="font-weight-normal mb-3">Image <i class="mdi mdi-diamond mdi-24px float-right"></i>
                             </h4>
-                            <h2 class="mb-5">A+</h2>
-                            <h6 class="card-text">..</h6>
+                            <h2 class="mb-5" id="maximage"></h2>
+                            <h6 class="card-text"></h6>
                           </div>
                         </div>
                       </div>
@@ -533,9 +533,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Insight</h4>
-              
-                      <p id="compare"><i class="mdi mdi-bell-ring-outline"></i></p>
-                    
+                    <p class="card-description"> *피드 평균 수치는 한달 기준</p>
                    <table class="table table-hover">
                       <tbody>
                         <tr>
@@ -546,6 +544,11 @@
                         <tr>
                           <td>평균 댓글 수는</td>
                           <td style="color:#b66dff" id="average_comment"></td>
+                          <td>이에요</td>
+                        </tr>
+                        <tr>
+                          <td>평균 게시글 수는</td>
+                          <td style="color:#b66dff" id="average_media"></td>
                           <td>이에요</td>
                         </tr>
                         <tr>
@@ -571,6 +574,14 @@
                       </tbody>
                     </table>
                   </div>
+                  <div class="card-body">
+                    <h4 class="card-title">Summary</h4>
+                    <ul class="list-star">
+                      <li class="h5" id="compare"></li>
+                      <li class="h5" id="compareengagement"></li>
+                      
+                    </ul>
+                  </div>
                 </div>
               </div>
               <div class="col-md-5 grid-margin stretch-card">
@@ -582,7 +593,7 @@
                         <img id="profileimg2" class="img-xs rounded-circle me-4" alt="image">
                           <p id="userid"></p>
                       </div>
-                      <img src="img/option.PNG" class="options" alt="">
+                      <img src="/static/assets/option.PNG" class="options" alt="">
                   </div>
                     <div id="media-container"></div>
                     <div class="post-content">
@@ -719,6 +730,8 @@
                           $('#media_count').text(data.influencer_data_details.media_count);
                           $('#date').text(data.influencer_data_details.date);
 
+                          $('#maximage').text(data.image);
+                         
                           //follower trend
                           $('.max-growth-date').text(data.follower_trend.max_growth_date);
                           var diff = data.follower_trend.diff + "  than yesterday"
@@ -736,13 +749,19 @@
                           //statistic
                           $('#average_like').text(data.statistic.average_like);
                           $('#average_comment').text(data.statistic.average_comment);
+                          $('#average_media').text(data.statistic.average_media);
 
                           var engagement = data.statistic.engagement / data.influencer_data_details.followers_count;
                           var formattedEngagement = (engagement * 100).toFixed(3); 
                           $('#engagement').text(formattedEngagement + "%");
-
-
-
+                          if (formattedEngagement > 1.922) {
+                            $('#compareengagement').text("타 인플루언서들 보다 참여율이 높습니다");
+                            $('#engagement').css('color', '#1bcfb4');
+                          } else {
+                            $('#compareengagement').text("타 인플루언서들 보다 참여율이 낮습니다");
+                            $('#engagement').css('color', '#fe7c96');
+                          }
+                          $('#engagement').text(formattedEngagement + "%");
 
                           //image link
                           $('#feed1').attr('src', data.image_link[0]);
@@ -794,30 +813,6 @@
                               // Append the button element to the media-container div
                               $('#media-container').append(imageElement );
                           }
-
-                          //count text
-                          $('#text1_topic').text(data.count_text[0].key);
-                          $('#text2_count').text(data.count_text[0].value);
-                          $('#text2_topic').text(data.count_text[1].key);
-                          $('#text2_count').text(data.count_text[1].value);
-                          $('#text3_topic').text(data.count_text[2].key);
-                          $('#text3_count').text(data.count_text[2].value);
-                          $('#text4_topic').text(data.count_text[3].key);
-                          $('#text4_count').text(data.count_text[3].value);
-                          $('#text5_topic').text(data.count_text[4].key);
-                          $('#text5_count').text(data.count_text[4].value);
-
-                          //count hashtag
-                          $('#hashtag1_topic').text(data.count_hashtag[0].key);
-                          $('#hashtag2_count').text(data.count_hashtag[0].value);
-                          $('#hashtag2_topic').text(data.count_hashtag[1].key);
-                          $('#hashtag2_count').text(data.count_hashtag[1].value);
-                          $('#hashtag3_topic').text(data.count_hashtag[2].key);
-                          $('#hashtag3_count').text(data.count_hashtag[2].value);
-                          $('#hashtag4_topic').text(data.count_hashtag[3].key);
-                          $('#hashtag4_count').text(data.count_hashtag[3].value);
-                          $('#hashtag5_topic').text(data.count_hashtag[4].key);
-                          $('#hashtag5_count').text(data.count_hashtag[4].value);
    
                             // 검색 결과(왼쪽그리드) 띄울때 DOM 객체 이용해서 css 조정
                             // var searchResults1 = document.getElementById('searchResults1');
@@ -972,10 +967,19 @@
                                             }, //end of data
                                             options: {
                                               scales: {
-                                                y: {
-                                                  beginAtZero: true
-                                                }
-                                              }
+                                                yaxis: {
+                                                beginAtZero: true,
+                                                display: false, // Hide the y-axis labels
+                                                },
+                                              },
+                                              layout: {
+                                                  padding: {
+                                                      left: 10,
+                                                      right: 10,
+                                                      top: 0,
+                                                      bottom: 0
+                                                  }
+                                              },
                                             }, //end of options
                                           }
                                         );
@@ -1025,10 +1029,19 @@
                                             }, //end of data
                                             options: {
                                               scales: {
-                                                y: {
-                                                  beginAtZero: true
-                                                }
-                                              }
+                                                yaxis: {
+                                                    beginAtZero: true,
+                                                    display: false, // Hide the y-axis labels
+                                                },
+                                              },
+                                              layout: {
+                                                  padding: {
+                                                      left: 10,
+                                                      right: 10,
+                                                      top: 0,
+                                                      bottom: 0
+                                                  }
+                                              },
                                             }, //end of options
                                           }
                                         );
