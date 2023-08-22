@@ -2770,13 +2770,13 @@ textarea.form-control-lg {
 .btn {
   --bs-btn-padding-x: 0.75rem;
   --bs-btn-padding-y: 0.375rem;
-  --bs-btn-font-family: 'ubuntu-regular', sans-serif;
+  --bs-btn-font-family: 'Ubuntu', 'NanumSquareNeo-Variable';
   --bs-btn-font-size: 1rem;
   --bs-btn-font-weight: 400;
   --bs-btn-line-height: 1.5;
   --bs-btn-color: #212529;
   --bs-btn-bg: transparent;
-  --bs-btn-border-width: 1px;
+  --bs-btn-border-width: 3px;
   --bs-btn-border-color: transparent;
   --bs-btn-border-radius: 0.375rem;
   --bs-btn-hover-border-color: transparent;
@@ -11312,10 +11312,6 @@ background-color: #b1dfbb; }
   animation: slideIn 1.5s forwards;
 }
 
-/* .nav-text-ani-container:hover .nav-text-ani {
-  color: #8a4fff;
-} */
-
 @keyframes slideIn {
   to {
     transform: translateY(0);
@@ -11334,3 +11330,25 @@ background-color: #b1dfbb; }
   font-style: normal;
 }
 
+#typing-effect > span {
+    opacity: 0;
+}
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+}
+
+#iphoneImg {
+  opacity: 0; /* 이미지를 처음에 투명하게 설정 */
+  animation: iphoneFadeIn 3s ease-in-out forwards; /* fadeIn 애니메이션 적용 */
+}
+
+@keyframes iphoneFadeIn {
+  0% {
+    opacity: 0; /* 0% 지점에서 투명 */
+  }
+  100% {
+    opacity: 1; /* 100% 지점에서 불투명 */
+  }
+}

@@ -233,12 +233,7 @@
           <div class="content-wrapper">
             <div class="page-header">
               <h1 class="page-title"> Recommend System </h1>
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Basic tables</li>
-                </ol>
-              </nav>
+
             </div>
             <div class="row">
               <div class="col-lg-12 grid-margin stretch-card">
@@ -349,7 +344,6 @@
           <footer class="footer">
             <div class="container-fluid d-flex justify-content-between">
               <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright &copy; Cos-tard</span>
-              <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
             </div>
           </footer>
           <!-- partial --> {% endcomment %}
@@ -478,7 +472,7 @@
               var mainPanelHeight = $('.main-panel').css('height');
               console.log(mainPanelHeight);
               $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
-              $('.main-panel').append('<img id="img_progress" src="../static/assets/progress-bar.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
+              $('.main-panel').append('<img id="img_progress" src="../static/assets/bouncy_balls.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
             },
             complete:function(){
               $('#img_progress').remove();
@@ -486,7 +480,7 @@
             },
             success: function(response) {
               $('#result').empty();
-              
+
               var topInfluencers = response.top_influencers;
               
               var str = '<div class="my-3 align-items-center" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;"></div>'; // Container for the list
@@ -509,7 +503,7 @@
                 str += '<div class="profile-pic"><img src=../../static/assets/' + influencer.Username + '.jpg/></div>';
                 //str += '<div class="instagramCircle1" style="background-image: url(\'/static/assets/' + influencer.Username + '.jpg\'),linear-gradient(to right, red, orange);"></div>';
                 str += '<div class="fw-bolder pt-3" style="font-size: 16px;">'+ influencer.Username +'</div>';
-                str += '<div class="fw-bolder pt-3" style="font-size: 14px;">'+  influencer.Score.toFixed(1) +'<span>%</span></div>';
+                str += '<div class="fw-bolder pt-3" style="font-size: 15px;">'+  influencer.Score.toFixed(1) +'<span>%</span></div>';
                 str += '</div>';
                 if(i%2==1){
                   $('#score-list .my-3').prepend(str);
@@ -518,10 +512,8 @@
                 }
                 
               });
-              
-        
-              
               $('#profilename').empty();
+
               $('#score-list').css('display', 'block'); // score-table을 보이게 한다.
               
               
@@ -531,15 +523,23 @@
                 console.log(chartData.name)
 
                 var names = chartData.name; 
-                var followers = chartData.follower;
+                var followers = chartData.followersnum;
                 var engage = chartData.engage;
-                var expert = chartData.expert;
-                var image = chartData.image;
+                var expert = scaleArray(chartData.expert,0,5);
+                var image = scaleArray(chartData.image,0,5);
+                var impact = scaleArray(chartData.impact,0,5);
+                var effect = scaleArray(chartData.effect,0,5);
+                var loyalty = scaleArray(chartData.loyalty,0,5);
                 var top_ig_id = response.top_ig_id;
 
                 console.log(names)
                 console.log(followers)
                 console.log(followers[1])
+                console.log(impact)
+                console.log(effect)
+                console.log(expert)
+                console.log(image)
+                console.log(loyalty)
 
                 $('#result1').empty()
                 $('#result2').empty()
@@ -562,41 +562,43 @@
                 $('#linkbutton').show();
 
 
-                var scaledFollower = scaleArray(followers, 1, 5)
+                var scaledFollower = scaleArray(followers, 1, 5);
+                              
+                
 
                 var radardata ={
-                  labels: ['followers', 'engagement', 'Expertised', 'Image matching', 'Product matching'],
+                  labels: ['Impact', 'Effect', 'Expertised', 'Image matching', 'Loyalty'],
                   datasets: [{
                     label: names[0],
-                    data: [scaledFollower[0], engage[0], expert[0], image[0], 0],
+                    data: [impact[0], effect[0], expert[0], image[0], loyalty[0]],
                     fill: true,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgb(255, 99, 132)',
                     borderWidth: 1
                   }, {
                     label: names[1],
-                    data: [scaledFollower[1], engage[1], expert[1], image[1], 0],
+                    data: [impact[1], effect[1], expert[1], image[1], loyalty[1]],
                     fill: true,
                     backgroundColor: 'rgba(182, 109, 255, 0.2)',
                     borderColor: 'rgba(182, 109, 255, 1)',
                     borderWidth: 1
                   }, {
                     label: names[2],
-                    data: [scaledFollower[2], engage[2], expert[2], image[2], 0],
+                    data: [impact[2], effect[2], expert[2], image[2], loyalty[2]],
                     fill: true,
                     backgroundColor: 'rgba(107, 166, 255, 0.2)',
                     borderColor: 'rgba(107, 166, 255, 1)',
                     borderWidth: 1
                   }, {
                     label: names[3],
-                    data: [scaledFollower[3], engage[3], expert[3], image[3], 0],
+                    data: [impact[3], effect[3], expert[3], image[3], loyalty[3]],
                     fill: true,
                     backgroundColor: 'rgba(92, 255, 211, 0.2)',
                     borderColor: 'rgba(92, 255, 211, 1)',
                     borderWidth: 1
                   }, {
                     label: names[4],
-                    data: [scaledFollower[4], engage[4], expert[4], image[4], 0],
+                    data: [impact[4], effect[4], expert[4], image[4], loyalty[4]],
                     fill: true,
                     backgroundColor: 'rgba(244, 141, 103, 0.2)',
                     borderColor: 'rgba(244, 141, 103, 1)',
