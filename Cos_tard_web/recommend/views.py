@@ -61,7 +61,9 @@ def recommend(request):
     result1 = top5.to_dict(orient='records')
     result2 = {'name':names, 'follower':followers, 'engage':engage, 'expert':experts, 'image':images, 'impact':impact, 'effect':effect}
 
-    context = { 'top_influencers': result1, 'chartdata':result2, 'top_ig_id':top_ig_id}
+    brandlist = branding( top_ig_id)
+
+    context = { 'top_influencers': result1, 'chartdata':result2, 'top_ig_id':top_ig_id , 'brandlist': brandlist}
 
     return JsonResponse(context)
 
