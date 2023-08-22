@@ -326,8 +326,11 @@
                   <div class="card-body">
                     <h4 class="card-title">Product Matching</h4>
                     <p class="card-description">해당 인플루언서는 이러한 제품과 협업했어요:</p>
-                    <p id="result6" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
-                    <div id="ChartContainer">
+                    {% comment %} <p id="result6" class="card-text text-muted" style="text-align: center;">Nothing now Here</p> {% endcomment %}
+                    <ul class="list-ticked" id="brand-list">
+                      <p id="result6" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
+                      <!-- The brand list will be inserted here -->
+                    </ul>
                       <canvas style="display: none;" style="height:230px"></canvas>
                     </div>
                   </div>
@@ -337,13 +340,13 @@
             </div>
           </div>
           <!-- content-wrapper ends -->
-          <!-- partial:../../partials/_footer.html -->
+          {% comment %} <!-- partial:../../partials/_footer.html -->
           <footer class="footer">
             <div class="container-fluid d-flex justify-content-between">
               <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright &copy; Cos-tard</span>
             </div>
           </footer>
-          <!-- partial -->
+          <!-- partial --> {% endcomment %}
         </div>
         <!-- main-panel ends -->
       </div>
@@ -477,7 +480,7 @@
             },
             success: function(response) {
               $('#result').empty();
-              
+
               var topInfluencers = response.top_influencers;
               
               var str = '<div class="my-3 align-items-center" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;"></div>'; // Container for the list
@@ -509,10 +512,8 @@
                 }
                 
               });
-              
-        
-              
               $('#profilename').empty();
+
               $('#score-list').css('display', 'block'); // score-table을 보이게 한다.
               
               
@@ -522,15 +523,23 @@
                 console.log(chartData.name)
 
                 var names = chartData.name; 
-                var followers = chartData.follower;
+                var followers = chartData.followersnum;
                 var engage = chartData.engage;
-                var expert = chartData.expert;
-                var image = chartData.image;
+                var expert = scaleArray(chartData.expert,0,5);
+                var image = scaleArray(chartData.image,0,5);
+                var impact = scaleArray(chartData.impact,0,5);
+                var effect = scaleArray(chartData.effect,0,5);
+                var loyalty = scaleArray(chartData.loyalty,0,5);
                 var top_ig_id = response.top_ig_id;
 
                 console.log(names)
                 console.log(followers)
                 console.log(followers[1])
+                console.log(impact)
+                console.log(effect)
+                console.log(expert)
+                console.log(image)
+                console.log(loyalty)
 
                 $('#result1').empty()
                 $('#result2').empty()
@@ -553,41 +562,43 @@
                 $('#linkbutton').show();
 
 
-                var scaledFollower = scaleArray(followers, 1, 5)
+                var scaledFollower = scaleArray(followers, 1, 5);
+                              
+                
 
                 var radardata ={
-                  labels: ['followers', 'engagement', 'Expertised', 'Image matching', 'Product matching'],
+                  labels: ['Impact', 'Effect', 'Expertised', 'Image matching', 'Loyalty'],
                   datasets: [{
                     label: names[0],
-                    data: [scaledFollower[0], engage[0], expert[0], image[0], 0],
+                    data: [impact[0], effect[0], expert[0], image[0], loyalty[0]],
                     fill: true,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgb(255, 99, 132)',
                     borderWidth: 1
                   }, {
                     label: names[1],
-                    data: [scaledFollower[1], engage[1], expert[1], image[1], 0],
+                    data: [impact[1], effect[1], expert[1], image[1], loyalty[1]],
                     fill: true,
                     backgroundColor: 'rgba(182, 109, 255, 0.2)',
                     borderColor: 'rgba(182, 109, 255, 1)',
                     borderWidth: 1
                   }, {
                     label: names[2],
-                    data: [scaledFollower[2], engage[2], expert[2], image[2], 0],
+                    data: [impact[2], effect[2], expert[2], image[2], loyalty[2]],
                     fill: true,
                     backgroundColor: 'rgba(107, 166, 255, 0.2)',
                     borderColor: 'rgba(107, 166, 255, 1)',
                     borderWidth: 1
                   }, {
                     label: names[3],
-                    data: [scaledFollower[3], engage[3], expert[3], image[3], 0],
+                    data: [impact[3], effect[3], expert[3], image[3], loyalty[3]],
                     fill: true,
                     backgroundColor: 'rgba(92, 255, 211, 0.2)',
                     borderColor: 'rgba(92, 255, 211, 1)',
                     borderWidth: 1
                   }, {
                     label: names[4],
-                    data: [scaledFollower[4], engage[4], expert[4], image[4], 0],
+                    data: [impact[4], effect[4], expert[4], image[4], loyalty[4]],
                     fill: true,
                     backgroundColor: 'rgba(244, 141, 103, 0.2)',
                     borderColor: 'rgba(244, 141, 103, 1)',
@@ -717,7 +728,24 @@
                     }, //end of options
                   }
                 );
-                $('#ebarChart').show();             
+                $('#ebarChart').show();  
+
+                //brandlist
+                var brandList = response.brandlist;
+                var brandListHtml = '';
+                
+                if (brandList.length > 0) {
+                    for (var i = 0; i < brandList.length; i++) {
+                        brandListHtml += '<li>' + brandList[i] + '</li>';
+                    }
+                } else {
+                    brandListHtml = '<li>No brand data available.</li>';
+                }
+                
+                $('#brand-list').html(brandListHtml);
+                
+                
+            
             },
             error: function(error) {
                 console.error(error);
