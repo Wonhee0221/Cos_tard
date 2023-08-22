@@ -37,19 +37,19 @@ class Combined_caption(models.Model):
 
     class Meta:
         managed=False
-        db_table = "comment"
+        db_table = "combinedcaption"
 
 
 class Brand(models.Model):
     ig_id = models.CharField(primary_key=True)
     username = models.CharField()
-    type = models.CharField()
+    type = models.IntegerField()
     item = models.CharField()
     brand = models.CharField()
 
     class Meta:
         managed=False
-        db_table = "comment"
+        db_table = "brand"
 
 
 class Activity(models.Model):
@@ -70,4 +70,4 @@ class Activity(models.Model):
 
     class Meta:
         managed=False
-        db_table = "comment"
+        db_table = "activity"

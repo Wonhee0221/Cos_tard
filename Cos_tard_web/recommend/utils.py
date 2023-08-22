@@ -27,8 +27,10 @@ def followerslevel(ig_id):
 
     if followers is None:
         return 0  
+    
+    rounded = round(math.log(followers),2)
 
-    return math.log(followers)
+    return rounded
 
 
 def activities(ig_id):
@@ -69,16 +71,13 @@ def scale_list(data_list, new_min, new_max):
     
     return scaled_data
 
-def reverse(data_list):
-    min_value = min(data_list)
-    max_value = max(data_list)
+def reverse(value):
+    min_value = 16
+    max_value = 11
 
-    scaled_data = []
-    for value in data_list:
-        scaled_value = max_value + min_value - value
-        scaled_data.append(scaled_value)
+    scaled_value = max_value + min_value - value
 
-    return scaled_data
+    return scaled_value
 
 def scale_line(data_list, mymax, target):
     scaled_data=[]
@@ -144,12 +143,13 @@ def marketvalue(market_value):
     
 
 def product_type(ig_id, product):
-    rows = Brand.objects.filter(ig_id=ig_id)
+    rows = Brand.objects.filter(ig_id=ig_id).values_list('type',flat=True)
 
     for row in rows:
-        if product in row.type:
+        if product == row:
             return 1
     return 0
+
 
 
 
@@ -180,15 +180,16 @@ def product_type(ig_id, product):
 def scoring(ig_id, model_value, level, market_value, product_value):
     followerslev = pricing(ig_id=ig_id, level=level)
     engage = round(cal_engagement(ig_id=ig_id),2)
-    action = Activity.objects.filter(ig_id=ig_id).values('imgcmt','infocmt','channelsize','contentpower','adratio','lifefeed', 'brandnum','reactfeed','followerfeed').first()[0]
+    action = Activity.objects.filter(ig_id=ig_id).values('imgcmt','infocmt','channelsize','contentpower','adratio','lifefeed', 'brandnum','reactfeed','followerfeed').first()
     image = imaging(ig_id, model_value=model_value)
+    market_w = marketvalue(market_value=marketvalue)
 
     expertised = action['channelsize'] * action['contentpower'] + product_type(ig_id=ig_id, product=product_value)
-    loyalty = followerslev + engage + (action['imgcmt']/action['lifefeed)']) + action['reactfeed']
+    loyalty = followerslev + engage + (action['imgcmt']/action['lifefeed']) + action['reactfeed']
     impact = followerslev + action['contentpower'] + action['adratio']
-    effect = engage + (action['infocmt']/action['lifefeed)']) + action['contentpower'] + action['followerfeed'] + image
+    effect = engage + (action['infocmt']/action['lifefeed']) + action['contentpower'] + action['followerfeed'] + image
 
-    score = round((expertised+loyalty+ market_value[1] * impact+ market_value[0] * effect),2)
+    score = round((expertised+loyalty+ market_w[1] * impact+ market_w[0] * effect),2)
 
     result = { 'id':ig_id, 'engage':engage, 'followerslev':followerslev, 'Score': score, 'expertised':expertised, 'loyalty':loyalty, 'impact':impact, 'effect':effect, 'image':image}
 

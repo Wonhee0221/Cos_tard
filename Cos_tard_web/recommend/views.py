@@ -19,8 +19,10 @@ def recommend(request):
         market_value = int(request.POST.get('market'))
         model_value = int(request.POST.get('model'))
         product_value = int(request.POST.get('product'))
+
+    print(Activity.objects.filter(ig_id=336104951).values('imgcmt','infocmt','channelsize','contentpower','adratio','lifefeed', 'brandnum','reactfeed','followerfeed').first())
     
-    result=pd.DataFrame()
+    result=[]
 
     username = ["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
             "hamnihouse", "ssinnim", "yu__hyewon", "hyojinc_", "leojmakeup", "2__yun__2", "areumsongee", "makeup_maker_",
@@ -31,9 +33,11 @@ def recommend(request):
         ig_ids = id_object.ig_id
         score = scoring(ig_ids, model_value, level=price_value, market_value=market_value, product_value=product_value)
         score['Username'] = user
-        result.append(score, ignore_index=True)
+        result.append(score)
 
-    sorted_df = score.sort_values(by='Score', ascending=False)
+    result_df = pd.DataFrame(result)
+
+    sorted_df = result_df.sort_values(by='Score', ascending=False)
     top5 = sorted_df.head(5)
 
     names = top5['Username'].tolist()
