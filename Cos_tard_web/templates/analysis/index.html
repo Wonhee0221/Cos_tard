@@ -167,6 +167,11 @@
         <!-- partial:partials/_sidebar.html -->
          <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
+            <li class="nav-item nav-profile" style="padding-top: 20px; padding-bottom: 10px;">
+              <div class="nav-profile-text d-flex flex-column">
+                <h4>Influencer List</h4>
+              </div>
+            </li>
             
             <li class="nav-item nav-profile">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=336104951">
@@ -416,12 +421,9 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title">
-                <span class="page-title-icon bg-gradient-primary text-white me-2">
-                  <i class="mdi mdi-home"></i>
-                </span>
+              <h1 class="page-title">
                 <span> Influencer Analysis</span>
-              </h3>
+              </h1>
               {% comment %} <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">
@@ -434,7 +436,6 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    
                     <div class="d-flex mt-4 mb-4 align-items-top">
                       <img id="profileimg" class="img-lg rounded-circle me-4" alt="image">
                       <div class="mb-0 flex-grow">
@@ -733,6 +734,7 @@
                         },
                         success: function(data) {
                           console.log(data.media_data.date);
+                          
                           
                           $('#profileimg').attr('src','../static/assets/'+data.influencer_data.userid+'.jpg');
                           $('#profileimg2').attr('src','../static/assets/'+data.influencer_data.userid+'.jpg');
