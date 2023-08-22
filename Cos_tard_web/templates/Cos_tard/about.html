@@ -24,11 +24,16 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
+        <style>
+            ::-webkit-scrollbar {
+                display: none;
+            }
+        </style>
     </head>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+            <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #f1f3f5">
                 <div class="container px-5">
                     <a class="navbar-brand fw-bold text-black nav-text-ani" href="{% url 'home-page' %}">Cos-tard</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -44,9 +49,7 @@
                 </div>
             </nav>
             <!-- Header-->
-            <header class="py-5" style="background: #c0392b;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #8e44ad, #c0392b);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #8e44ad, #c0392b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */">
+            <header class="py-5" style="background: #c0392b;  /* fallback for old browsers */ background: -webkit-linear-gradient(to right, #8e44ad, #c0392b);  /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #8e44ad, #c0392b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */">
                 <div class="container px-5">
                     <div class="row justify-content-center">
                         <div class="col-lg-8 col-xxl-6">

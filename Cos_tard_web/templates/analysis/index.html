@@ -39,34 +39,33 @@
           height: 250px;
           object-fit: cover;  
       }
-    #websitelink a {
-        text-decoration: none; /* Remove underline */
-        color: black; /* Change link color to black */
-    }
+      #websitelink a {
+          text-decoration: none; /* Remove underline */
+          color: black; /* Change link color to black */
+      }
    
-      .post-content{
+      .post-content {
           width: 100%;
           padding: 20px;
       }
 
-      .description{
+      .description {
           margin: 10px 0;
           font-size: 14px;
           line-height: 20px;
       }
 
-      .description span{
+      .description span {
           font-weight: bold;
           margin-right: 10px;
       }
 
-      .post-time{
+      .post-time {
           color: rgba(0, 0, 0, 0.5);
           font-size: 12px;
       }
       
-    
-      .reaction-wrapper{
+      .reaction-wrapper {
           width: 100%;
           height: 50px;
           display: flex;
@@ -74,46 +73,59 @@
           align-items: center;
       }
 
-      .reaction-wrapper .icon{
+      .reaction-wrapper .icon {
           height: 25px;
           margin: 0;
           margin-right: 20px;
       }
 
-      .reaction-wrapper .icon.save{
+      .reaction-wrapper .icon.save {
           margin-left: auto;
       }
-        .info{
-      width: 100%;
-      height: 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 20px;
-  }
-      .info .username{
-        width: auto;
-        font-weight: bold;
-        color: #000;
-        font-size: 14px;
-        margin-left: 10px;
+
+      .info {
+          width: 100%;
+          height: 60px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 20px;
+      }
+
+      .info .username {
+          width: auto;
+          font-weight: bold;
+          color: #000;
+          font-size: 14px;
+          margin-left: 10px;
+      }
+
+      .info .options {
+          height: 10px;
+          cursor: pointer;
+      }
+
+      .info .user {
+          display: flex;
+          align-items: center;
+      }
+
+      iframe {
+        width: 100%;
+        border: none;
+      }
+
+    .sidebar,.main-panel {
+      overflow-y:scroll;
+      }
+
+    .container-scroller {
+      overflow:hidden !important;
     }
 
-    .info .options{
-        height: 10px;
-        cursor: pointer;
+    ::-webkit-scrollbar {
+      display:none;
     }
-
-    .info .user{
-        display: flex;
-        align-items: center;
-    }
-    iframe {
-      width: 100%;
-      border: none;
-  }
-
-  
     </style>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <!-- move_to_top_btn 제어 로직 js -->
@@ -121,7 +133,7 @@
   </head>
   <body>
     <div class="container-scroller">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+      <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #f1f3f5">
         <div class="container px-5">
             <a class="navbar-brand fw-bolder text-black nav-text-ani" href="{% url 'home-page' %}">Cos-tard</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -653,10 +665,16 @@
 
     <script src="../../static/templates/assets/js/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-        
-
+      
     <script>
       $(document).ready(function() {
+
+        <!-- 스크롤바 없애는 스크립트 -->
+        var divHeight = window.innerHeight-57;
+        $('#sidebar').css('height',divHeight+'px');
+        $('.main-panel').css('height',divHeight+'px');
+
+
         var ig_id='{{ig_id}}';         
         $.ajax({
                         type: "POST",
