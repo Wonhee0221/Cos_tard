@@ -24,8 +24,6 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
-        <script src="{% static 'js/svgJs1.js' %}"></script>
-        <script src="{% static 'js/svgJs2.js' %}"></script>
         <style>
             ::-webkit-scrollbar{
                 display: none;
@@ -50,7 +48,15 @@
                 --bs-bg-opacity: 1;
                 background-color: rgba(var(--bs-prim-rgb), var(--bs-bg-opacity)) !important;
               }
-              
+              .hidden-btn {
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 4s, visibility 4s;
+              }
+              .visible-btn {
+                opacity: 1;
+                visibility: visible;
+              }
         </style>
     </head>
 
@@ -79,11 +85,17 @@
                         <div class="row gx-5 align-items-center justify-content-center">
                             <div class="col-lg-8 col-xl-7 col-xxl-6">
                                 <div class="text-center text-xl-start">
-                                    <h3 class="text-white" id="typing-effect"><span>&nbsp;까</span><span>불</span><span>지</span><span>마</span><span>,&nbsp;</span><span>1</span><span>등</span><span>은&nbsp;</span><span>우</span><span>리</span><span>꺼</span><span>야.</span></h3>
-                                    <h1 class="display-5 fw-bolder text-white mb-4" style="font-size: 62px; line-height: 1.5; letter-spacing: -3px;"><span>인</span><span>플</span><span>루</span><span>언</span><span>서 </span></span><span>마</span><span>케</span><span>팅</span><span>의<br></span><span>새</span><span>로</span><span>운 </span><span>기</span><span>준.</span></h1>
-                                    <h2 class="display-5 text-white mb-4" style="font-size: 48px; font-weight: 600;"><span>C</span><span>o</span><span>s</span><span>-</span><span>t</span><span>a</span><span>r</span><span>d</span></h2>
-                                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start mt-5">
-                                        <a class="btn btn-outline-light btn-lg px-4 fw-bold" href="#features">시작해보기</a>
+                                    <h3 class="text-white" id="typing-effect">
+                                        <span>&nbsp;까</span><span>불</span><span>지</span><span>마</span><span>,&nbsp;</span><span>1</span><span>등</span><span>은&nbsp;</span><span>우</span><span>리</span><span>꺼</span><span>야.</span>
+                                    </h3>
+                                    <h1 class="display-5 fw-bolder text-white mb-4" style="font-size: 62px; line-height: 1.5; letter-spacing: -3px;" id="typing-effect">
+                                        <span>인</span><span>플</span><span>루</span><span>언</span><span>서 </span></span><span>마</span><span>케</span><span>팅</span><span>의<br></span><span>새</span><span>로</span><span>운 </span><span>기</span><span>준.</span>
+                                    </h1>
+                                    <h2 class="display-5 text-white mb-4" style="font-size: 48px; font-weight: 600;" id="typing-effect">
+                                        <span>C</span><span>o</span><span>s</span><span>-</span><span>t</span><span>a</span><span>r</span><span>d</span>
+                                    </h2>
+                                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start mt-5 hidden-btn" id="fading-button">
+                                        <a  class="btn btn-outline-light btn-lg px-4 fw-bold" href="#features">시작해보기</a>
                                         <a class="btn btn-outline-light btn-lg px-4 fw-bold" href="{% url 'about-page' %}">Team Cos-tard</a>
                                     </div>
                                 </div>
