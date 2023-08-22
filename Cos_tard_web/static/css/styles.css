@@ -2770,13 +2770,13 @@ textarea.form-control-lg {
 .btn {
   --bs-btn-padding-x: 0.75rem;
   --bs-btn-padding-y: 0.375rem;
-  --bs-btn-font-family: 'ubuntu-regular', sans-serif;
+  --bs-btn-font-family: 'Ubuntu', 'NanumSquareNeo-Variable';
   --bs-btn-font-size: 1rem;
   --bs-btn-font-weight: 400;
   --bs-btn-line-height: 1.5;
   --bs-btn-color: #212529;
   --bs-btn-bg: transparent;
-  --bs-btn-border-width: 1px;
+  --bs-btn-border-width: 3px;
   --bs-btn-border-color: transparent;
   --bs-btn-border-radius: 0.375rem;
   --bs-btn-hover-border-color: transparent;
@@ -11312,10 +11312,6 @@ background-color: #b1dfbb; }
   animation: slideIn 1.5s forwards;
 }
 
-/* .nav-text-ani-container:hover .nav-text-ani {
-  color: #8a4fff;
-} */
-
 @keyframes slideIn {
   to {
     transform: translateY(0);
@@ -11334,7 +11330,7 @@ background-color: #b1dfbb; }
   font-style: normal;
 }
 
-span {
+#typing-effect > span {
     opacity: 0;
 }
 @keyframes fade {

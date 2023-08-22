@@ -17,7 +17,6 @@
 
 
 const introText = document.querySelectorAll("span");
-
 window.onload = () => {
   let timer = 100;
   introText.forEach((item) => {
