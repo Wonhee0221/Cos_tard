@@ -78,7 +78,9 @@ def recommend(request):
     result1 = top5.to_dict(orient='records') # top5 score dict
     result2 = {'name':names, 'followersnum':followersnum , 'engage':engage, 'expert':s_experts, 'image':s_images, 'impact':s_impact, 'effect':s_effect, 'loyalty':s_loyalty} #top5 score detail
 
-    context = { 'top_influencers': result1, 'chartdata':result2, 'top_ig_id':top_ig_id}
+    brandlist = branding( top_ig_id)
+
+    context = { 'top_influencers': result1, 'chartdata':result2, 'top_ig_id':top_ig_id , 'brandlist': brandlist}
 
     return JsonResponse(context)
 

@@ -26,63 +26,54 @@
         <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
         <script src="{% static 'js/svgJs1.js' %}"></script>
         <script src="{% static 'js/svgJs2.js' %}"></script>
+        <style>
+            ::-webkit-scrollbar{
+                display: none;
+            }
+        </style>
     </head>
 
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-light">
-                <div class="container px-5">
-                    <a class="navbar-brand fw-bold text-black nav-text-ani" href="{% url 'home-page' %}">Cos-tard</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'home-page' %}">메인</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'InfluencerList:list-page' %}">리스트</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'analysis:analysis-page2' %}?ig_id=17157849559">분석</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'recommend:recommend-page' %}">추천</a></li>
-                            <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'about-page' %}">팀소개</a></li>
-                        </ul>
+            <div style="background-image: url('/static/assets/mainPageImg.jpg'); background-size: cover; background-repeat: no-repeat;">
+                <!-- Navigation-->
+                <nav class="navbar navbar-expand-lg navbar-dark ">
+                    <div class="container px-5">
+                        <a class="navbar-brand fw-bold text-black nav-text-ani text-white" href="{% url 'home-page' %}">Cos-tard</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani text-white" href="{% url 'home-page' %}">메인</a></li>
+                                <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani text-white" href="{% url 'InfluencerList:list-page' %}">리스트</a></li>
+                                <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani text-white" href="{% url 'analysis:analysis-page2' %}?ig_id=17157849559">분석</a></li>
+                                <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani text-white" href="{% url 'recommend:recommend-page' %}">추천</a></li>
+                                <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani text-white" href="{% url 'about-page' %}">팀소개</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
-            <!-- Header-->
-            <!--  svg로 배경하는거 안되서 일단 주석처리 해놓음ㅠ
-            <header class="py-5" style="background-image: url('/static/assets/mainPageImg2.png');">
-                <h1 class="text-white fw-bolder">인플루언서 마케팅의<br>기준이 되다.</h1>
-                <h2 class="text-white fw-bolder">Cos_tard</h2>
-                <div class="container px-5"> 
-                    <div class="row gx-5 align-items-center justify-content-center">
-                        <div class="col-lg-8 col-xl-7 col-xxl-6">
-                            <div class="my-5 text-center text-xl-start">
-                                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <a class="btn btn-danger btn-lg px-4 me-sm-3 fw-bold" href="#features">시작해보기</a>
-                                    <a class="btn btn-outline-light btn-lg px-4 fw-bold" href="{% url 'about-page' %}">Team Cos-tard</a>
+                </nav>
+                <!-- Header-->
+                <header class="py-5" >
+                    <div class="container px-5">
+                        <div class="row gx-5 align-items-center justify-content-center">
+                            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                                <div class="text-center text-xl-start">
+                                    <h3 class="text-white" id="typing-effect"></h3>
+                                    <h1 class="display-5 fw-bolder text-white mb-4" style="font-size: 62px; line-height: 1.5; letter-spacing: -3px;">인플루언서 마케팅의<br>새로운 기준.</h1>
+                                    <h2 class="display-5 text-white mb-4" style="font-size: 48px; font-weight: 600;">Cos-tard</h2>
+                                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start mt-5">
+                                        <a class="btn btn-danger btn-lg px-4 me-sm-3 fw-bold" href="#features">시작해보기</a>
+                                        <a class="btn btn-outline-light btn-lg px-4 fw-bold" href="{% url 'about-page' %}">Team Cos-tard</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"></div>
-                    </div>
-                </div>
-            </header>
-            -->
-            <header class="py-5" style="background-image: url('/static/assets/mainPageImg2-modify.png'); background-size: cover; background-repeat: no-repeat;">
-                <div class="container px-5">
-                    <div class="row gx-5 align-items-center justify-content-center">
-                        <div class="col-lg-8 col-xl-7 col-xxl-6">
-                            <div class=" text-center text-xl-start" style="margin: 200px 0px 205px 0px">
-                                <h1 class="display-5 fw-bolder text-white mb-4" style="font-size: 62px; line-height: 1.5; letter-spacing: -3px;">인플루언서 마케팅의<br>기준이 되다.</h1>
-                                <h2 class="display-5 text-white mb-4" style="font-size: 48px; font-weight: 600;">Cos-tard</h2>
-                                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start mt-5">
-                                    <a class="btn btn-danger btn-lg px-4 me-sm-3 fw-bold" href="#features">시작해보기</a>
-                                    <a class="btn btn-outline-light btn-lg px-4 fw-bold"  href="{% url 'about-page' %}">Team Cos-tard</a>
-                                </div>
+                            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
+                                <img src="{% static 'assets/iphone2.png' %}">
                             </div>
                         </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"></div>
                     </div>
-                </div>
-            </header>
+                </header>
+            </div>
             <!-- Features section-->
             <section class="py-5" id="features">
                 <div class="container px-5 my-5">
