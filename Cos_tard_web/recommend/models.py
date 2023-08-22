@@ -37,4 +37,37 @@ class Combined_caption(models.Model):
 
     class Meta:
         managed=False
-        db_table = "comment"
+        db_table = "combinedcaption"
+
+
+class Brand(models.Model):
+    ig_id = models.CharField(primary_key=True)
+    username = models.CharField()
+    type = models.IntegerField()
+    item = models.CharField()
+    brand = models.CharField()
+
+    class Meta:
+        managed=False
+        db_table = "brand"
+
+
+class Activity(models.Model):
+    ig_id = models.CharField(primary_key=True)
+    username = models.CharField()
+    imgcmt = models.IntegerField()
+    infocmt = models.IntegerField()
+    channelsize = models.IntegerField()
+    contentpower = models.IntegerField()
+    totalfeed = models.IntegerField()
+    adfeed = models.IntegerField()
+    adratio = models.FloatField()
+    lifefeed = models.IntegerField()
+    brandnum = models.IntegerField()
+    reactfeed = models.FloatField()
+    followerfeed = models.FloatField()
+
+
+    class Meta:
+        managed=False
+        db_table = "activity"
