@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content />
         <meta name="author" content />
-        <title>Cos-tard 인스타그램 인플루언서 추천 시스템</title>
+        <title>Cos-tard</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'assets/homepage_icon.jpg' %}" />
         <!-- Bootstrap icons-->
@@ -53,7 +53,7 @@
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #f1f3f5">
+            <nav class="navbar navbar-expand-lg navbar-dark sticky-header" style="background-color: #f1f3f5">
                 <div class="container px-5">
                     <a class="navbar-brand fw-bold text-black nav-text-ani" href="{% url 'home-page' %}">Cos-tard</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -477,5 +477,33 @@
             </div>
         </footer>
     </body>
+    <script>
+        // 스크롤 시 상단바 투명도 변경 + 에니메이션 효과로 부드럽게 전환
+        var header = document.querySelector('.sticky-header'); // 헤더 엘리먼트 선택
+        var isScrolled = false; // 스크롤 여부를 나타내는 변수
     
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 0 && !isScrolled) {
+                // 스크롤 시에만 실행되도록 조건 추가
+                isScrolled = true; // 스크롤 발생 상태로 설정
+                header.style.transition = 'background-color 0.3s, opacity 0.3s'; // 트랜지션 설정
+                header.style.opacity = 0.9; // 투명도 변경
+    
+                // 0.3초 후에 트랜지션 제거
+                setTimeout(function() {
+                    header.style.transition = '';
+                }, 300);
+            } else if (window.scrollY === 0 && isScrolled) {
+                // 다시 스크롤이 상단으로 돌아올 때의 처리
+                isScrolled = false; // 스크롤 미발생 상태로 설정
+                header.style.transition = 'background-color 0.3s, opacity 0.3s'; // 트랜지션 설정
+                header.style.opacity = 1.0; // 투명도 복귀
+    
+                // 0.3초 후에 트랜지션 제거
+                setTimeout(function() {
+                    header.style.transition = '';
+                }, 300);
+            }
+        });
+    </script>
 </html>
