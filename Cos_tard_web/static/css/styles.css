@@ -7789,6 +7789,11 @@ textarea.form-control-lg {
   padding-bottom: 3rem !important;
 }
 
+.py-5-2 {
+  padding-top: 6rem !important;
+  padding-bottom: 3rem !important;
+}
+
 .pt-0 {
   padding-top: 0 !important;
 }
@@ -11351,4 +11356,18 @@ background-color: #b1dfbb; }
   100% {
     opacity: 1; /* 100% 지점에서 불투명 */
   }
+}
+
+#highlight {
+  color: var(--bs-purple);
+}
+
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f1f3f5; /* 원하는 배경색을 설정하세요 */
+  z-index: 1000; /* 다른 요소 위에 표시되도록 z-index를 조절하세요 */
+  /* 추가적인 스타일을 적용하세요 */
 }

@@ -20,6 +20,6 @@ const introText = document.querySelectorAll("span");
 window.onload = () => {
   let timer = 100;
   introText.forEach((item) => {
-    item.style.animation = `fade 500ms ${(timer += 70)}ms forwards`;
+    item.style.animation = `fade 800ms ${(timer += 70)}ms forwards`;
   });
 };
