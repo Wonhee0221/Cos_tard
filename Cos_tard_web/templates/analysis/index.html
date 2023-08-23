@@ -136,6 +136,10 @@
       font-weight: normal;
       font-style: normal;
     }
+
+    .nav-item-active{
+      background-color: #ffdfd863;
+    }
       
     ::-webkit-scrollbar {
       display:none;
@@ -173,7 +177,7 @@
               </div>
             </li>
             
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="336104951">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=336104951">
                 <div class="nav-profile-image">
                   <img src="/static/assets/2__yun__2.jpg" alt="profile">
@@ -404,7 +408,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="17157849559">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=17157849559">
                 <div class="nav-profile-image">
                   <img src="/static/assets/yulri_0i.jpg" alt="profile">
@@ -707,6 +711,11 @@
       
     <script>
       $(document).ready(function() {
+
+        var igId = '{{ig_id}}';
+        $('.nav-item[data-ig-id='+igId+']').addClass('nav-item-active');
+        var offset = $('.nav-item[data-ig-id='+igId+']').offset();
+        $("#sidebar").animate({scrollTop: offset.top},400);
 
         <!-- 스크롤바 없애는 스크립트 -->
         var divHeight = window.innerHeight-57;
