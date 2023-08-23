@@ -4,7 +4,9 @@ import statistics
 from datetime import datetime, timedelta
 import math
 import pandas as pd
+# import xgboost as xgb
 
+# engage 계산
 def cal_engagement(ig_id):
     media_ids = list(Media_fix.objects.filter(owner_id=ig_id).values_list('media_id', flat=True))
     # media_id에 해당하는 like_count 가져오기
@@ -22,6 +24,7 @@ def cal_engagement(ig_id):
     return avg_engagement
 
 
+# followers 스케일링
 def followerslevel(ig_id):
     followers = Users_info.objects.filter(ig_id=ig_id).order_by('date').values_list('followers_count', flat=True).first()
 
@@ -33,23 +36,7 @@ def followerslevel(ig_id):
     return rounded
 
 
-def activities(ig_id):
-    mediatime = Media_fix.objects.filter(owner_id=ig_id).order_by('-timestamp')[:14].values('timestamp')
-
-    date_format = "%Y-%m-%d %H:%M:%S"
-    parsed_dates = [datetime.strptime(item['timestamp'], date_format) for item in mediatime]
-
-    date_intervals = []
-    for i in range(1, len(parsed_dates)):
-        interval = abs((parsed_dates[i].date() - parsed_dates[i - 1].date()).days)
-        date_intervals.append(interval)
-
-    average_interval = sum(date_intervals) / len(date_intervals)
-
-    return average_interval
-
-
-
+# min max 스케일러
 def scaler(value, min_value, max_value, new_min, new_max):
     # 입력된 value를 min_value와 max_value 사이의 비율로 변환
     scaled_value = (value - min_value) / (max_value - min_value)
@@ -60,20 +47,15 @@ def scaler(value, min_value, max_value, new_min, new_max):
     # 결과 반환
     return scaled_value
 
-def rescale(value, old_min, old_max, new_min, new_max):
-    # 이전 범위에서의 비율 계산
-    old_range = old_max - old_min
-    new_range = new_max - new_min
-    scaled_value = ((value - old_min) / old_range) * new_range + new_min
-    return scaled_value
 
+# 리스트 스케일링 
 def rescale_list(data_list, old_max, new_max):
     rate = new_max/old_max
     scaled_data_list = [(value * rate) for value in data_list]
     
     return scaled_data_list
 
-
+# min-max 스케일러 : input: list
 def scale_list(data_list, new_min, new_max):
     min_value = min(data_list)
     max_value = max(data_list)
@@ -85,6 +67,7 @@ def scale_list(data_list, new_min, new_max):
     
     return scaled_data
 
+# follower: 최대치와 최소치 기준으로 역산
 def reverse(value):
     min_value = 16
     max_value = 11
@@ -93,6 +76,7 @@ def reverse(value):
 
     return scaled_value
 
+# mymax: 데이터 관찰값중 max, target: 목표하는 최대치
 def scale_line(data_list, mymax, target):
     scaled_data=[]
     for value in data_list:
@@ -127,7 +111,7 @@ def getimage(ig_id, model_value):
     
     return image
 
-
+# 가격 옵션에 따른 팔로워변수 가중치 조절
 def pricing(ig_id, level):
     follower = followerslevel(ig_id=ig_id) #팔로워 수 단위 측정
     if level == 0: #가성비광고 선택
@@ -139,7 +123,7 @@ def pricing(ig_id, level):
 
 # 판매증대 marketing_value 0
 # 바이럴 marketing_value 1
-
+# 마케팅목적에 따른 가중치 조절
 def marketvalue(market_value):
     if market_value==0:
         effect_weight=0.5
@@ -155,7 +139,7 @@ def marketvalue(market_value):
 
     return marketweight
     
-
+# 광고히스토리 검사
 def product_type(ig_id, product):
     rows = Brand.objects.filter(ig_id=ig_id).values_list('type',flat=True)
 
@@ -166,31 +150,7 @@ def product_type(ig_id, product):
 
 
 
-
-# def 매개변수로 , image, level, info_weight, image_weight 넣어주기
-
-# def scoring(ig_id, model_value, level, market_value):
-#     followerslev = followerslevel(ig_id=ig_id) #팔로워수 단위
-#     expert = Comment.objects.filter(ig_id=ig_id).values_list('domain').first()[0] #도메인지식 정도
-#     info_c = Comment.objects.filter(ig_id=ig_id).values_list('inforate').first()[0] #정보댓글 비율, 가중치는 입력받는 것으로. 매출 증대 목표
-#     image_c = Comment.objects.filter(ig_id=ig_id).values_list('imagerate').first()[0] # 이미지댓글 비율, 충성도에 영향
-#     marketweight = marketvalue(market_value)
-#     info_weight = marketweight[0]
-#     viral_weight = marketweight[1]
-#     engage = cal_engagement(ig_id=ig_id) #인게이지먼트
-#     # act = activities(ig_id=ig_id)
-#     # scaled_act = scaler(act, 1, 14, 15, 1)
-#     model_image = imaging(ig_id, model_value) # 이미지옵션
-#     price = pricing(ig_id, level) # 가격대옵션
-#     # 화장품분류
-    
-    
-#     score = (followerslev * viral_weight) + (expert * 10) + (info_c * info_weight) + (engage * viral_weight) + (model_image * 100) + price + (image_c)
-
-#     return score
-
-
-
+# 최종점수 계산
 def scoring(ig_id, model_value, level, market_value, product_value):
     followerslev = pricing(ig_id=ig_id, level=level)
     engage = round(cal_engagement(ig_id=ig_id),2)
@@ -212,7 +172,7 @@ def scoring(ig_id, model_value, level, market_value, product_value):
 
     return result
 
-#협업 브랜드
+#협업 브랜드 탐색
 def branding(ig_id):
     try:
         distinct_brands = Brand.objects.filter(ig_id=ig_id).values('brand').distinct()
@@ -225,6 +185,4 @@ def branding(ig_id):
         brand_list = []
 
     return brand_list
-
-
 

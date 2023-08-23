@@ -13793,7 +13793,7 @@ dl {
 
 /* Navbar */
 .navbar {
-  font-family: "ubuntu-light", sans-serif;
+  font-family: 'Ubuntu', 'NanumSquareNeo-Variable';
   background: #fff;
   transition: background 0.25s ease;
   -webkit-transition: background 0.25s ease;

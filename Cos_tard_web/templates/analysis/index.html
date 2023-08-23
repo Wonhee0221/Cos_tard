@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Cos-tard 인스타그램 인플루언서 분석 시스템</title>
+    <title>Cos-tard</title>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -147,17 +147,17 @@
   </head>
   <body>
     <div class="container-scroller">
-      <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #f1f3f5">
+      <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #f1f3f5;  height: 56px;">
         <div class="container px-5">
             <a class="navbar-brand fw-bolder text-black nav-text-ani" href="{% url 'home-page' %}">Cos-tard</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'home-page' %}">메인</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'InfluencerList:list-page' %}">리스트</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'analysis:analysis-page2' %}?ig_id=17157849559">분석</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'recommend:recommend-page' %}">추천</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'about-page' %}">팀소개</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'home-page' %}" style="font-family: 'NanumSquareNeo-Variable'; font-size: 16px;">메인</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'InfluencerList:list-page' %}" style="font-family: 'NanumSquareNeo-Variable'; font-size: 16px;">리스트</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'analysis:analysis-page2' %}?ig_id=17157849559" style="font-family: 'NanumSquareNeo-Variable'; font-size: 16px;">분석</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'recommend:recommend-page' %}" style="font-family: 'NanumSquareNeo-Variable'; font-size: 16px;">추천</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold text-black nav-text-ani" href="{% url 'about-page' %}" style="font-family: 'NanumSquareNeo-Variable'; font-size: 16px;">팀소개</a></li>
                 </ul>
             </div>
         </div>
@@ -730,7 +730,7 @@
                           var mainPanelHeight = $('.main-panel').css('height');
                           console.log(mainPanelHeight);
                           $('.main-panel').append('<div id="blur_panel" style="width:100%;height:'+mainPanelHeight+';position:absolute;z-index:999;background-color:black;opacity: 0.5;"></div>');
-                          $('.main-panel').append('<img id="img_progress" src="../static/assets/loading-gif.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
+                          $('.main-panel').append('<img id="img_progress" src="../static/assets/bouncy_balls.gif" style="width:100px;position:absolute;left:'+left+'px;top:'+top+'px;z-index:9999;" />');
                         },
                         complete:function(){
                           $('#img_progress').remove();

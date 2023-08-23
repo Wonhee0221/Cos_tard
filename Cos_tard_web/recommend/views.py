@@ -3,9 +3,12 @@ from django.http import HttpResponse
 from media4.models import *
 from recommend.models import *
 from recommend.utils import *
+from recommend.cloud import *
+from recommend.xgb import *
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import pandas as pd
+
 
 
 def index(request): 
@@ -20,8 +23,6 @@ def recommend(request):
         model_value = int(request.POST.get('model'))
         product_value = int(request.POST.get('product'))
 
-    print(scoring(336104951, 1,1,1,1))
-
     result=[]
 
     username = ["a_arang_", "doublesoup", "calarygirl_a", "yulri_0i", "yeondukong", "lamuqe_magicup", "fallininm", "im_jella_",
@@ -34,7 +35,10 @@ def recommend(request):
 
         score = scoring(ig_ids, model_value, level=price_value, market_value=market_value, product_value=product_value)
         score['Username'] = user
+        pred = [score['expertised'], score['loyalty'], score['impact'], score['effect']]
+        # preob = classifier(pred)
         result.append(score)
+        # result.append(preob)
 
     result_df = pd.DataFrame(result)
 
@@ -78,12 +82,16 @@ def recommend(request):
     result1 = top5.to_dict(orient='records') # top5 score dict
     result2 = {'name':names, 'followersnum':followersnum , 'engage':engage, 'expert':s_experts, 'image':s_images, 'impact':s_impact, 'effect':s_effect, 'loyalty':s_loyalty} #top5 score detail
 
-    brandlist = branding( top_ig_id)
+    brandlist = branding(top_ig_id)
 
-    context = { 'top_influencers': result1, 'chartdata':result2, 'top_ig_id':top_ig_id , 'brandlist': brandlist}
+    clouddata = wordreturn(names[0])
+
+    context = { 'top_influencers': result1, 'chartdata':result2, 'top_ig_id':top_ig_id , 'brandlist': brandlist, 'clouddata':clouddata}
 
     return JsonResponse(context)
 
 
 def error(request):
    return render(request,'recommend/error-404.html')
+
+   
