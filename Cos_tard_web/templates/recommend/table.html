@@ -7,14 +7,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Cos-tard 인스타그램 인플루언서 추천 시스템</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.3/jqcloud.min.css" integrity="sha512-fcdsxZsaS4WFbhPFbrOWXO+IEhXJg/lP6m4vgu8vPgyoTsbYUTD/iesILpk7P+glk9CBnjfPiD5PshTzwfv9ig==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+        
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../static/templates/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../static/templates/assets/vendors/css/vendor.bundle.base.css">    
-    <link rel="stylesheet" type="text/css" href="jqcloud.css" />
+    
+
+
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -30,6 +35,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Ubuntu&display=swap" rel="stylesheet">
+
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../../static/templates/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="../../static/templates/assets/js/off-canvas.js"></script>
+    <script src="../../static/templates/assets/js/hoverable-collapse.js"></script>
+    <script src="../../static/templates/assets/js/misc.js"></script>
+    <script src="../../static/templates/assets/js/chart.js?ver=123"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.3/jqcloud.min.js" integrity="sha512-gZUG2nobmGEaF3G67OVAmD0lQGbkzN5t9tuiOndqzVNiWBLkCo4o6UBkBLkvKfTPWlVBJPI8dvkLJTwcJbKwvw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <style>
       .instagramCircle1 {
         width: 100px;
@@ -90,6 +107,34 @@
 
       ::-webkit-scrollbar {
         display: none;
+      }
+
+      .sidebar .card-body{
+        padding: 20px;
+      }
+  
+      .sidebar .btn.btn-fw{
+        min-width: 80px;;
+        width:80px !important;
+        padding: 10px;
+        height:50px;
+        font-size: 14px;
+      }
+  
+      .sidebar-btn-active{
+        background-color:#fe7c96;
+        color:#fff;
+      }
+  
+      .main-panel{
+        overflow-y:scroll;
+      }
+      .container-fluid{
+        overflow-y:hidden;
+      }
+  
+      ::-webkit-scrollbar{
+        display:none;
       }
     </style>
 
@@ -315,8 +360,8 @@
                   <div class="card-body">
                     <h4 class="card-title">Model Matching</h4>
                     <p class="card-description">해당 인플루언서는 이러한 이미지예요:</p>
-                    <p id="result5" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
-                    <div id="cloud">
+                      <div id="cloud">
+
                     </div>
                   </div>
                 </div>
@@ -355,50 +400,7 @@
       </div>
       <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="../../static/templates/assets/vendors/js/vendor.bundle.base.js"></script>
-    <script src="../../static/templates/assets/js/off-canvas.js"></script>
-    <script src="../../static/templates/assets/js/hoverable-collapse.js"></script>
-    <script src="../../static/templates/assets/js/misc.js"></script>
-    <script src="../../static/templates/assets/js/chart.js?ver=123"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <style>
-    .sidebar .card-body{
-      padding: 20px;
-    }
-
-    .sidebar .btn.btn-fw{
-      min-width: 80px;;
-      width:80px !important;
-      padding: 10px;
-      height:50px;
-      font-size: 14px;
-    }
-
-    .sidebar-btn-active{
-      background-color:#fe7c96;
-      color:#fff;
-    }
-
-    .main-panel{
-      overflow-y:scroll;
-    }
-    .container-fluid{
-      overflow-y:hidden;
-    }
-
-    ::-webkit-scrollbar{
-      display:none;
-    }
-    </style>
-    <!-- ajax query -->
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-    <script src="jqcloud-1.0.4.js"></script>
+    
     <script>
       function scaleArray(dataArray, newMin, newMax) {
         let minValue = Math.min(...dataArray);
@@ -731,9 +733,39 @@
                 $('#ebarChart').show();
 
                 var word = response.clouddata;
-
+                
                 //wordcloud
-                $('#cloud').jQCloud(word);
+                //$('#cloud').jQCloud(word, {
+                  
+                //});
+                console.log(word);
+                console.log($("#cloud"));
+                
+                $("#cloud").jQCloud(word, {
+                  width:400,
+                  height: 300,
+                  shape: 'rectangular',
+                  autoResize: true,
+                  classPattern: null,
+                  colors: ["#003F5D", "#00527C", "#00609C", "#006DB2", "#4E97D1", "#7BB4E3", "#A3CEEF", "#88CDF6", "#BCE6FF"],
+                  fontSize: {
+                     from: 0.1,
+                     to: 0.02
+                  },
+                  afterCloudRender : function(){
+                     //console.log($('#jqcloud1 span.jqcloud-word')) span 목록
+                     $('#jqcloud1 span.jqcloud-word').each(function(idx) {
+                        $(this).on('click',function() { //span 클릭 이벤트
+                           let ketywordID = $(this).prop("id");
+                           let keyword = $(this).text();
+                           let obj = {
+                                 id       : keyword,
+                                 keyword : keyword
+                           }
+                        })
+                     })
+                  }
+               });
 
 
                 //brandlist
