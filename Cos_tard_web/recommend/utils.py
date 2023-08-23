@@ -4,7 +4,7 @@ import statistics
 from datetime import datetime, timedelta
 import math
 import pandas as pd
-import xgboost as xgb
+# import xgboost as xgb
 
 # engage 계산
 def cal_engagement(ig_id):
