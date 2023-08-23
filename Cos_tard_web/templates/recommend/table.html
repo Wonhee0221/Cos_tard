@@ -13,7 +13,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../static/templates/assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../static/templates/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../static/templates/assets/vendors/css/vendor.bundle.base.css">    
+    <link rel="stylesheet" type="text/css" href="jqcloud.css" />
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -315,8 +316,7 @@
                     <h4 class="card-title">Model Matching</h4>
                     <p class="card-description">해당 인플루언서는 이러한 이미지예요:</p>
                     <p id="result5" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
-                    <div id="ChartContainer">
-                      <canvas style="display: none;" style="height:230px"></canvas>
+                    <div id="cloud">
                     </div>
                   </div>
                 </div>
@@ -331,7 +331,6 @@
                       <p id="result6" class="card-text text-muted" style="text-align: center;">Nothing now Here</p>
                       <!-- The brand list will be inserted here -->
                     </ul>
-                      <canvas style="display: none;" style="height:230px"></canvas>
                     </div>
                   </div>
                 </div>
@@ -399,6 +398,7 @@
     </style>
     <!-- ajax query -->
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="jqcloud-1.0.4.js"></script>
     <script>
       function scaleArray(dataArray, newMin, newMax) {
         let minValue = Math.min(...dataArray);
@@ -728,7 +728,13 @@
                     }, //end of options
                   }
                 );
-                $('#ebarChart').show();  
+                $('#ebarChart').show();
+
+                var word = response.clouddata;
+
+                //wordcloud
+                $('#cloud').jQCloud(word);
+
 
                 //brandlist
                 var brandList = response.brandlist;
