@@ -93,7 +93,7 @@
 	  <tr>
     <td rowspan="1">계획</td>
     <td>주제 설정 및 개요서 작성</td>
-    <td style="background-color: yellow;"></td>
+    <td>✅</td>
     <td></td>
     <td></td>
     <td></td>
@@ -102,7 +102,7 @@
   <tr>
     <td rowspan="3">분석</td>
     <td>기존의 유사 서비스에 대한 heuristic evaluation 진행</td>
-    <td bgcolor="yellow;"></td>
+    <td>✅</td>
     <td></td>
     <td></td>
     <td></td>
@@ -111,7 +111,7 @@
   <tr>
     <td>프로토타입 작성</td>
     <td></td>
-    <td></td>
+    <td>✅</td>
     <td></td>
     <td></td>
 	  <td></td>
@@ -119,8 +119,8 @@
   <tr>
     <td>데이터 수집 및 전처리</td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>✅</td>
+    <td>✅</td>
     <td></td>
 	  <td></td>
   </tr>
@@ -129,40 +129,40 @@
     <td>시스템 구성도 작성</td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>✅</td>
+    <td>✅</td>
 	  <td></td>
   </tr>
   <tr>
     <td>데이터베이스구현</td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>✅</td>
+    <td>✅</td>
     <td></td>
   </tr>
   <tr>
     <td>백엔드 구현</td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>✅</td>
+    <td>✅</td>
     <td></td>
   </tr>
     <tr>
     <td>프론트 엔드 구현</td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>✅</td>
+    <td>✅</td>
 	  <td></td>
   </tr>
   <tr>
     <td>딥러닝 모델 구현</td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
+    <td>✅</td>
+    <td>✅</td>
     <td></td>
   </tr>
 
@@ -172,8 +172,8 @@
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
-	  <td></td>
+    <td>✅</td>
+    <td>✅</td>
   </tr>
 	<tr>
     <td rowspan="1">종료</td>
@@ -182,7 +182,7 @@
     <td></td>
     <td></td>
     <td></td>
-	  <td></td>
+    <td>✅</td>
   </tr>
 
 </table>
