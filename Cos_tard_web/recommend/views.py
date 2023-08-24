@@ -35,10 +35,10 @@ def recommend(request):
 
         score = scoring(ig_ids, model_value, level=price_value, market_value=market_value, product_value=product_value)
         score['Username'] = user
-        pred = [score['expertised'], score['loyalty'], score['impact'], score['effect']]
-        # preob = classifier(pred)
+        #pred = [score['expertised'], score['loyalty'], score['impact'], score['effect']]
+        #preob = classifier(pred)
         result.append(score)
-        # result.append(preob)
+        #result.append(preob)
 
     result_df = pd.DataFrame(result)
 
