@@ -713,7 +713,7 @@
         var igId = '{{ig_id}}';
         $('.nav-item[data-ig-id='+igId+']').addClass('nav-item-active');
         var offset = $('.nav-item[data-ig-id='+igId+']').offset();
-        $("#sidebar").animate({scrollTop: offset.top},400);
+        $("#sidebar").animate({scrollTop: offset.top-50},400);
 
         <!-- 스크롤바 없애는 스크립트 -->
         var divHeight = window.innerHeight-57;

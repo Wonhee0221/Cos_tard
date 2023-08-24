@@ -14574,11 +14574,55 @@ dl {
 }
 
 .hoverEffect2:hover {
-  transform: scale(1.25);
-  transition: transform 0.5s ease;
+  animation: scaleUpAnimation2 0.5s ease-in-out forwards;
 }
 
+@keyframes scaleUpAnimation2 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.25);
+  }
+}
+
+.hoverEffect2:not(:hover) {
+  animation: scaleDownAnimation2 0.5s ease-in-out forwards;
+}
+
+@keyframes scaleDownAnimation2 {
+  0% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
 #cloud_word_0:hover, #cloud_word_1:hover, #cloud_word_2:hover, #cloud_word_3:hover, #cloud_word_4:hover, #cloud_word_5:hover, #cloud_word_6:hover, #cloud_word_7:hover, #cloud_word_8:hover, #cloud_word_9:hover, #cloud_word_10:hover {
-  transform: scale(1.4);
-  transition: transform 1.0s ease;
-} 
+  animation: scaleUpAnimation 0.5s ease-in-out forwards;
+  cursor: pointer;
+}
+
+@keyframes scaleUpAnimation {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.4);
+  }
+}
+
+#cloud_word_0:not(:hover), #cloud_word_1:not(:hover), #cloud_word_2:not(:hover), #cloud_word_3:not(:hover), #cloud_word_4:not(:hover), #cloud_word_5:not(:hover), #cloud_word_6:not(:hover), #cloud_word_7:not(:hover), #cloud_word_8:not(:hover), #cloud_word_9:not(:hover), #cloud_word_10:not(:hover) {
+  animation: scaleDownAnimation 0.5s ease-in-out forwards;
+}
+
+@keyframes scaleDownAnimation {
+  0% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
