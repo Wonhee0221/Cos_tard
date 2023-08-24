@@ -76,65 +76,117 @@
 <img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/de3c1e3d-848d-44f4-b2ef-158e73258a48" >
 
 ## 프로젝트 일정
+
 <table>
   <tr>
-    <th>구분</th>
-    <th>내용</th>
+    <th rowspan="2">구분</th>
+    <th rowspan="2">내용</th>
+    <th colspan="5">프로젝트 기간</th>
+  </tr>
+  <tr>
     <th>1주</th>
     <th>2주</th>
     <th>3주</th>
     <th>4주</th>
     <th>5주</th>
   </tr>
-  <tr>
-    <td rowspan="4">계획</td>
+	  <tr>
+    <td rowspan="1">계획</td>
     <td>주제 설정 및 개요서 작성</td>
-    <td colspan="5"></td>
+    <td style="background-color: yellow;"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+	  <td></td>
   </tr>
   <tr>
-    <td>분석 - heuristic evaluation</td>
-    <td colspan="5"></td>
+    <td rowspan="3">분석</td>
+    <td>기존의 유사 서비스에 대한 heuristic evaluation 진행</td>
+    <td style="border: 1px solid black; padding: 8px; text-align: center; background-color: yellow;"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+	  <td></td>
   </tr>
   <tr>
     <td>프로토타입 작성</td>
-    <td colspan="5"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+	  <td></td>
   </tr>
   <tr>
     <td>데이터 수집 및 전처리</td>
-    <td colspan="5"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+	  <td></td>
   </tr>
-  <tr>
-    <td rowspan="6">설계</td>
+	<tr>
+    <td rowspan="5">설계</td>
     <td>시스템 구성도 작성</td>
-    <td colspan="5"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+	  <td></td>
   </tr>
   <tr>
-    <td>데이터베이스 구현</td>
-    <td colspan="5"></td>
+    <td>데이터베이스구현</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>백엔드 구현</td>
-    <td colspan="5"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
-  <tr>
+    <tr>
     <td>프론트 엔드 구현</td>
-    <td colspan="5"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+	  <td></td>
   </tr>
   <tr>
     <td>딥러닝 모델 구현</td>
-    <td colspan="5"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
+
   <tr>
     <td rowspan="1">테스트</td>
-    <td>사전 기능 테스트</td>
-    <td colspan="5"></td>
+    <td>사전기능 테스트</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+	  <td></td>
   </tr>
-  <tr>
+	<tr>
     <td rowspan="1">종료</td>
     <td>제출</td>
-    <td colspan="5"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+	  <td></td>
   </tr>
+
 </table>
+
 
 ## 📁구조📂
 ```
