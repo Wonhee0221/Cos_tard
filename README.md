@@ -229,10 +229,10 @@
 
 |Name|position|organization|
 |-----|-----|-------------|
-|[김영현](https://github.com/dalye09) | 팀장 |성균관대학교 통계학과|
-|권가민 | 팀원 |성균관대학교 통계학과|
-|조민환 | 팀원 |경기대학교 컴퓨터공학과|
-|한원희 | 팀원 |경기대학교 경영정보학과|
+|[김영현](https://github.com/dalye09) | 팀장(CTO & Data Modeler) |성균관대학교 통계학과|
+|[권가민](https://github.com/rkalsrnjs)| 팀원(Data Modeler & Backend Engineer) |성균관대학교 통계학과|
+|[조민환](https://github.com/cm2hcm2h) | 팀원(Frontend & Database Engineer) |경기대학교 컴퓨터공학과|
+|[한원희](https://github.com/Wonhee0221) | 팀원(Backend & Database Engineer) |경기대학교 경영정보학과|
 
 ## Acknowledgement
 ```
