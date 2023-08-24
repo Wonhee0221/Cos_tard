@@ -76,7 +76,7 @@
 ## 💾ERD💾
 <img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/de3c1e3d-848d-44f4-b2ef-158e73258a48" >
 
-## 프로젝트 일정
+## 📅프로젝트 일정
 
 <table>
   <tr>
