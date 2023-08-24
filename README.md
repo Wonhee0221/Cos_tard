@@ -1,5 +1,5 @@
 # KEB 2023(레브웨어_코스메틱) Cos_tard팀
-- 2023 KEB(K-Software-BootCamp) 레브웨어  
+- 2023 KEB(K-Software-BootCamp)2기 레브웨어  
 - 인스타그램 데이터 수집 및 분석을 통한 AI모델 생성과 모델을 활용한 마케팅 분석 서비스 개발
 
 
