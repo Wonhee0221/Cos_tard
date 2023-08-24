@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Cos-tard 인스타그램 인플루언서 분석 시스템</title>
+    <title>Cos-tard</title>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -136,6 +136,10 @@
       font-weight: normal;
       font-style: normal;
     }
+
+    .nav-item-active{
+      background-color: #ffdfd863;
+    }
       
     ::-webkit-scrollbar {
       display:none;
@@ -173,7 +177,7 @@
               </div>
             </li>
             
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="336104951">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=336104951">
                 <div class="nav-profile-image">
                   <img src="/static/assets/2__yun__2.jpg" alt="profile">
@@ -184,7 +188,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="2968116744">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=2968116744">
                 <div class="nav-profile-image">
                   <img src="/static/assets/a_arang_.jpg" alt="profile">
@@ -195,7 +199,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="469003556">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=469003556">
                 <div class="nav-profile-image">
                   <img src="/static/assets/areumsongee.jpg" alt="profile">
@@ -206,7 +210,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="29457331">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=29457331">
                 <div class="nav-profile-image">
                   <img src="/static/assets/calarygirl_a.jpg" alt="profile">
@@ -217,7 +221,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="4475701104">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=4475701104">
                 <div class="nav-profile-image">
                   <img src="/static/assets/doublesoup.jpg" alt="profile">
@@ -228,7 +232,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="1551988066">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=1551988066">
                 <div class="nav-profile-image">
                   <img src="/static/assets/fallininm.jpg" alt="profile">
@@ -239,7 +243,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="1579839464">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=1579839464">
                 <div class="nav-profile-image">
                   <img src="/static/assets/hamnihouse.jpg" alt="profile">
@@ -250,7 +254,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="490239300">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=490239300">
                 <div class="nav-profile-image">
                   <img src="/static/assets/hyojinc_.jpg" alt="profile">
@@ -261,7 +265,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="1483485095">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=1483485095">
                 <div class="nav-profile-image">
                   <img src="/static/assets/im_jella_.jpg" alt="profile">
@@ -272,7 +276,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="1239639319">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=1239639319">
                 <div class="nav-profile-image">
                   <img src="/static/assets/kisy0729.jpg" alt="profile">
@@ -283,7 +287,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="12885734">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=12885734">
                 <div class="nav-profile-image">
                   <img src="/static/assets/lamuqe_magicup.jpg" alt="profile">
@@ -294,7 +298,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="1555054356">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=1555054356">
                 <div class="nav-profile-image">
                   <img src="/static/assets/leojmakeup.jpg" alt="profile">
@@ -305,7 +309,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="432834627">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=432834627">
                 <div class="nav-profile-image">
                   <img src="/static/assets/makeup_maker_.jpg" alt="profile">
@@ -316,7 +320,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="545774776">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=545774776">
                 <div class="nav-profile-image">
                   <img src="/static/assets/ponysmakeup.jpg" alt="profile">
@@ -327,7 +331,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="301432357">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=301432357">
                 <div class="nav-profile-image">
                   <img src="/static/assets/r_yuhyeju.jpg" alt="profile">
@@ -338,7 +342,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="416638723">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=416638723">
                 <div class="nav-profile-image">
                   <img src="/static/assets/risabae_art.jpg" alt="profile">
@@ -349,7 +353,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="1288797716">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=1288797716">
                 <div class="nav-profile-image">
                   <img src="/static/assets/ssinnim.jpg" alt="profile">
@@ -360,7 +364,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="370080040">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=370080040">
                 <div class="nav-profile-image">
                   <img src="/static/assets/vivamoon.jpg" alt="profile">
@@ -371,7 +375,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="477764638">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=477764638">
                 <div class="nav-profile-image">
                   <img src="/static/assets/yeondukong.jpg" alt="profile">
@@ -382,7 +386,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="3750608342">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=3750608342">
                 <div class="nav-profile-image">
                   <img src="/static/assets/yu__hyewon.jpg" alt="profile">
@@ -393,7 +397,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="1244405915">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=1244405915">
                 <div class="nav-profile-image">
                   <img src="/static/assets/yujin_so.jpg" alt="profile">
@@ -404,7 +408,7 @@
               </div>
               </a>
             </li>
-            <li class="nav-item nav-profile">
+            <li class="nav-item nav-profile" data-ig-id="17157849559">
               <a class="nav-link" href="{% url 'analysis:analysis-page2' %}?ig_id=17157849559">
                 <div class="nav-profile-image">
                   <img src="/static/assets/yulri_0i.jpg" alt="profile">
@@ -707,6 +711,11 @@
       
     <script>
       $(document).ready(function() {
+
+        var igId = '{{ig_id}}';
+        $('.nav-item[data-ig-id='+igId+']').addClass('nav-item-active');
+        var offset = $('.nav-item[data-ig-id='+igId+']').offset();
+        $("#sidebar").animate({scrollTop: offset.top},400);
 
         <!-- 스크롤바 없애는 스크립트 -->
         var divHeight = window.innerHeight-57;
