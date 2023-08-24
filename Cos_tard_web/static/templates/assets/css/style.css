@@ -14176,7 +14176,7 @@ dl {
 .sidebar {
   min-height: calc(100vh - 70px);
   background: #ffffff;
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: "ubuntu-regular", 'NanumSquareNeo';
   padding: 0;
   width: 260px;
   z-index: 11;
@@ -14572,3 +14572,13 @@ dl {
   font-weight: normal;
   font-style: normal;
 }
+
+.hoverEffect2:hover {
+  transform: scale(1.25);
+  transition: transform 0.5s ease;
+}
+
+#cloud_word_0:hover, #cloud_word_1:hover, #cloud_word_2:hover, #cloud_word_3:hover, #cloud_word_4:hover, #cloud_word_5:hover, #cloud_word_6:hover, #cloud_word_7:hover, #cloud_word_8:hover, #cloud_word_9:hover, #cloud_word_10:hover {
+  transform: scale(1.4);
+  transition: transform 1.0s ease;
+} 
