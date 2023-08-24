@@ -102,7 +102,7 @@
   <tr>
     <td rowspan="3">분석</td>
     <td>기존의 유사 서비스에 대한 heuristic evaluation 진행</td>
-    <td style="border: 1px solid black; padding: 8px; text-align: center; background-color: yellow;"></td>
+    <td bgcolor="yellow;"></td>
     <td></td>
     <td></td>
     <td></td>
