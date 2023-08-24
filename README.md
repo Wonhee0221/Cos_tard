@@ -41,11 +41,137 @@
 
 </div>
 
-## 🖥웹 사이트
+## 🖥웹 사이트 화면
+### 🏚  HOME Page
 
-<HOME 화면>
-<div>
+<div align=center>
+	<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/92083985-683d-43b4-af70-700547722ed8" width="1000" height="600"/>
+</div>
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/e09e5263-b8bb-4f77-9fbe-87cf8694f3ff" width="600" height="400"/>
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/dec09ad3-5f31-4f20-b1a8-f866a03a5e5f" width="400" height="300"/>
+
+### 📋 Influencer List Page
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/5dc77a02-5152-4219-b052-45b2f97cd301" width="500" height="300"/>
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/ffcd622c-274a-4879-9f1c-fc38f907c909" width="400" height="300"/>
+
+### 📊 Analysis page
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/5c047466-ce56-40c8-8970-8f1313695909" width="330" height="270"/>
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/3e02e7a6-5b67-40f8-b732-fdb56274757e" width="330" height="270"/>
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/f48ebe4f-a25a-402b-a7dd-75292532ec29" width="330" height="270"/>
+
+
+### 👍 Recommended page
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/2a174ba8-423e-4793-9743-44b7d8896f14" width="400" height="300"/>
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/1a58e60a-a725-4095-a30c-cd0e5a2f921b" width="600" height="300"/>
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/ce4945ea-8902-42a3-a596-86ec667eed6e" width="500" height="350"/>
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/252d6e17-e485-407a-8f05-c156a8772e6a" width="500" height="350"/>
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/b408abd9-4814-43c8-9231-e3905f56167a" width="500" height="300"/>
+
+## 🔌시스템 아키텍쳐🖥
+<div align=center>
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/a3a0f66f-202e-4f67-8b04-5bd1d2cd2069" >
 </div>
 
+## 💾ERD💾
+<img src="https://github.com/Wonhee0221/Cos_tard/assets/91041488/de3c1e3d-848d-44f4-b2ef-158e73258a48" >
 
+## 프로젝트 일정
+<table>
+  <tr>
+    <th>구분</th>
+    <th>내용</th>
+    <th>1주</th>
+    <th>2주</th>
+    <th>3주</th>
+    <th>4주</th>
+    <th>5주</th>
+  </tr>
+  <tr>
+    <td rowspan="4">계획</td>
+    <td>주제 설정 및 개요서 작성</td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <td>분석 - heuristic evaluation</td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <td>프로토타입 작성</td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <td>데이터 수집 및 전처리</td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <td rowspan="6">설계</td>
+    <td>시스템 구성도 작성</td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <td>데이터베이스 구현</td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <td>백엔드 구현</td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <td>프론트 엔드 구현</td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <td>딥러닝 모델 구현</td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <td rowspan="1">테스트</td>
+    <td>사전 기능 테스트</td>
+    <td colspan="5"></td>
+  </tr>
+  <tr>
+    <td rowspan="1">종료</td>
+    <td>제출</td>
+    <td colspan="5"></td>
+  </tr>
+</table>
 
+## 📁구조📂
+```
+📦Cos_tard_web  
+ ┣ 📂analysis – 분석 기능을 위한 앱  
+ ┃ ┣ 📜models.py – 정제한 데이터를 DB에 저장하기 위한 모델 선언  
+ ┃ ┣ 📜processing.py – 데이터 분석 기능을 함수로 저장  
+ ┃ ┣ 📜urls.py   
+ ┃ ┣ 📜views.py – DB의 데이터를 선택하여 분석한 결과를 html에 전달  
+  ┣ 📂Cos_tard - 메인 사이트  
+ ┃ ┣ 📜urls.py  
+ ┃ ┣ 📜views.py  
+ ┣ 📂InfluencerList – 인플루언서 리스트 앱  
+ ┃ ┣ 📜urls.py  
+ ┃ ┣ 📜views.py - DB 정보를 html로 전달  
+ ┣ 📂getdata – 데이터 수집 기능을 위한 앱  
+ ┃ ┣ 📜crawling.py - 데이터 수집 코드  
+ ┃ ┣ 📜models.py – 데이터를 DB에 저장하기 위한 모델 선언  
+ ┃ ┣ 📜urls.py  
+ ┃ ┣ 📜views.py  
+ ┣ 📂recommend – 추천 기능을 위한 앱  
+ ┃ ┣ 📜models.py – AI 모델 파일  
+ ┃ ┣ 📜urls.py  
+ ┃ ┣ 📜utils.py – 모델을 통해 인플루언서를 추천하는 알고리즘 저장  
+ ┃ ┣ 📜views.py – DB의 데이터를 처리하고 html로 전달  
+ ┣ 📂static   
+ ┃ ┣ 📂assets – 이미지 파일   
+ ┃ ┣ 📂css  
+ ┃ ┣ 📂js   
+ ┃ ┣ 📂fonts  
+ ┣ 📂templates - html파일 폴더  
+ ┗ 📜manage.py  
+```
+
+## 👩🏻‍🤝‍🧑🏻구성원👬
+### 김영현(팀장) - 성균관대학교 통계학과
+### 권가민 - 성균관대학교 통계학과
+### 조민환 - 경기대학교 컴퓨터공학과
+### 한원희 - 경기대학교 경영정보학과
+### 레브웨어 - 참여기업
