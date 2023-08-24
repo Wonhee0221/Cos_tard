@@ -139,6 +139,7 @@
 
     .nav-item-active{
       background-color: #ffdfd863;
+      box-shadow: 0px 3px 15px;
     }
       
     ::-webkit-scrollbar {
@@ -448,9 +449,6 @@
                         <p id="biography" class="mb-0 font-weight-light" style="font-family: 'NanumSquareNeo-Variable'"></p>
                         <p id="websitelink" class="mb-0 font-weight-light"></p>
                       </div>
-                      <div class="ms-auto">
-                        <i class="mdi mdi-heart-outline text-muted"></i>
-                      </div>
                     </div>
                     <div class="row">
                       <div class="col-md-4 stretch-card grid-margin">
@@ -526,28 +524,28 @@
               <div class="col-md-7 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Post Insight</h4>
+                    <h4 class="card-title">Post Insight<span class="card-description" style="float:right; font-size:13px; padding-top:35px; font-family:'NanumSquareNeo-Variable'; line-height:1.1rem"><span style="float:right">평균치 보다</span><br><span style="float:right">↑<strong style="color:rgb(27, 207, 180);">녹색</strong> ↓<strong style="color:rgb(254, 124, 150)">적색</strong></span><span></h4>
                     <p class="card-description" style="font-family: 'NanumSquareNeo-Variable'"> *한달 기준</p>
                    <table class="table table-hover">
                       <tbody>
                         <tr>
                           <td>평균 좋아요 수는</td>
-                          <td style="color:#b66dff" id="average_like"></td>
+                          <td style="color:#b66dff" id="average_like" class="fw-bold"></td>
                           <td>이에요</td>
                         </tr>
                         <tr>
                           <td>평균 댓글 수는</td>
-                          <td style="color:#b66dff" id="average_comment"></td>
+                          <td style="color:#b66dff" id="average_comment" class="fw-bold"></td>
                           <td>이에요</td>
                         </tr>
                         <tr>
                           <td>평균 게시글 수는</td>
-                          <td style="color:#b66dff" id="average_media"></td>
+                          <td style="color:#b66dff" id="average_media" class="fw-bold"></td>
                           <td>이에요</td>
                         </tr>
                         <tr>
                           <td>참여 지수는</td>
-                          <td id="engagement"></td>
+                          <td id="engagement" class="fw-bold"></td>
                           <td>이에요</td>
                         </tr>
                       </tbody>
@@ -559,17 +557,17 @@
                       <tbody>
                         <tr>
                           <td>팔로워는 약</td>
-                          <td id="average"></td>
+                          <td id="average" class="fw-bold"></td>
                           <td>명씩 변하고있어요</td>
                         </tr>
                         <tr>
                           <td>증가율 평균은</td>
-                          <td id="average_growth"></td>
+                          <td id="average_growth" class="fw-bold"></td>
                           <td>이에요</td>
                         </tr>
                         <tr>
                           <td>팔로워가</td>
-                          <td style="color:#b66dff" class="max-growth-date"></td>
+                          <td style="color:#b66dff" class="max-growth-date fw-bold"></td>
                           <td>에 가장 많이 증가했어요</td>
                         </tr>
                       </tbody>
