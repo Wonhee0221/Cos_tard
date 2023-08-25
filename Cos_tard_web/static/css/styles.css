@@ -10879,17 +10879,17 @@ html {
   color: white;
 }
 
- #link {
+#link {
   text-decoration: none;
   color: black;
   font-weight: bold;
- }
+}
  
- .img50x50 {
+.img50x50 {
   width: 50px;
   height: 50px;
   background-size: cover;
- }
+}
 
 .hoverEffect {
   position: relative;
@@ -10937,8 +10937,29 @@ html {
 
 /* hoverEffect 클래스가 적용된 div 요소 위에 마우스 커서가 올라갔을 때 */
 .hoverEffect:hover > .blur-overlay2 {
-  transform: scale(1.2); /* 요소를 1.5배 커지도록 함 */
-  transition: transform 0.5s ease; /* 애니메이션 지속 시간과 이징 함수를 설정 */
+  animation: zoomIn 0.3s ease forwards;
+}
+
+.hoverEffect:not(:hover) > .blur-overlay2 {
+  animation: zoomOut 0.3s ease forwards;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.0);
+  }
 }
 
 

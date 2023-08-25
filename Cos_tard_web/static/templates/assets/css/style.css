@@ -14176,7 +14176,7 @@ dl {
 .sidebar {
   min-height: calc(100vh - 70px);
   background: #ffffff;
-  font-family: "ubuntu-regular", sans-serif;
+  font-family: "ubuntu-regular", 'NanumSquareNeo';
   padding: 0;
   width: 260px;
   z-index: 11;
@@ -14571,4 +14571,58 @@ dl {
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
+}
+
+.hoverEffect2:hover {
+  animation: scaleUpAnimation2 0.5s ease-in-out forwards;
+}
+
+@keyframes scaleUpAnimation2 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.25);
+  }
+}
+
+.hoverEffect2:not(:hover) {
+  animation: scaleDownAnimation2 0.5s ease-in-out forwards;
+}
+
+@keyframes scaleDownAnimation2 {
+  0% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+#cloud_word_0:hover, #cloud_word_1:hover, #cloud_word_2:hover, #cloud_word_3:hover, #cloud_word_4:hover, #cloud_word_5:hover, #cloud_word_6:hover, #cloud_word_7:hover, #cloud_word_8:hover, #cloud_word_9:hover, #cloud_word_10:hover {
+  animation: scaleUpAnimation 0.5s ease-in-out forwards;
+  cursor: pointer;
+}
+
+@keyframes scaleUpAnimation {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.4);
+  }
+}
+
+#cloud_word_0:not(:hover), #cloud_word_1:not(:hover), #cloud_word_2:not(:hover), #cloud_word_3:not(:hover), #cloud_word_4:not(:hover), #cloud_word_5:not(:hover), #cloud_word_6:not(:hover), #cloud_word_7:not(:hover), #cloud_word_8:not(:hover), #cloud_word_9:not(:hover), #cloud_word_10:not(:hover) {
+  animation: scaleDownAnimation 0.5s ease-in-out forwards;
+}
+
+@keyframes scaleDownAnimation {
+  0% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

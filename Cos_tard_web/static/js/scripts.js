@@ -32,4 +32,3 @@ document.addEventListener("DOMContentLoaded", function() {
       fadingButton.classList.add("visible-btn");
     }, 100); // Adding a slight delay to ensure smooth transition
   });
-  
