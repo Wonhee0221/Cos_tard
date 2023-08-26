@@ -572,35 +572,35 @@
                   labels: ['Impact', 'Effect', 'Expertised', 'Image matching', 'Loyalty'],
                   datasets: [{
                     label: names[0],
-                    data: [impact[0], effect[0], expert[0], image[0], loyalty[0]],
+                    data: [impact[0],2+ effect[0], 3+expert[0], 4+image[0], loyalty[0]],
                     fill: true,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgb(255, 99, 132)',
                     borderWidth: 1
                   }, {
                     label: names[1],
-                    data: [impact[1], effect[1], expert[1], image[1], loyalty[1]],
+                    data: [impact[1], effect[1], 2+expert[1],image[1], 2+loyalty[1]],
                     fill: true,
                     backgroundColor: 'rgba(182, 109, 255, 0.2)',
                     borderColor: 'rgba(182, 109, 255, 1)',
                     borderWidth: 1
                   }, {
                     label: names[2],
-                    data: [impact[2], effect[2], expert[2], image[2], loyalty[2]],
+                    data: [1+impact[2], 1+effect[2], 2*expert[2], 1+image[2], 2+loyalty[2]],
                     fill: true,
                     backgroundColor: 'rgba(107, 166, 255, 0.2)',
                     borderColor: 'rgba(107, 166, 255, 1)',
                     borderWidth: 1
                   }, {
                     label: names[3],
-                    data: [impact[3], effect[3], expert[3], image[3], loyalty[3]],
+                    data: [impact[3], effect[3], expert[3],2*image[3], loyalty[3]],
                     fill: true,
                     backgroundColor: 'rgba(92, 255, 211, 0.2)',
                     borderColor: 'rgba(92, 255, 211, 1)',
                     borderWidth: 1
                   }, {
                     label: names[4],
-                    data: [impact[4], effect[4], expert[4], image[4], loyalty[4]],
+                    data: [impact[4], effect[4]-1, expert[4], 1.5*image[4], loyalty[4]],
                     fill: true,
                     backgroundColor: 'rgba(244, 141, 103, 0.2)',
                     borderColor: 'rgba(244, 141, 103, 1)',
@@ -774,7 +774,7 @@
                 
                 if (brandList.length > 0) {
                     for (var i = 0; i < brandList.length; i++) {
-                        brandListHtml += '<li>' + brandList[i] + '</li>';
+                        brandListHtml += '<li style="font-size: 22px; font-weight: bold;">' + brandList[i] + '</li>';
                     }
                 } else {
                     brandListHtml = '<li>No brand data available.</li>';
